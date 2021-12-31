@@ -30,18 +30,19 @@ export const Utils = {
     },
     defaultSketchMMock(): SketchModel {
         let ids: number = 1
-        const mkDrv = (driver: string, start: string, finish: string, location: string, TypeOfDrive: PreferenceType = PreferenceType.CanGuardIn): DriveModel => {
+        const mkDrv = (driver: string, start: string, finish: string, location: string, TypeOfDrivePreference: PreferenceType = PreferenceType.CanGuardIn): DriveModel => {
             ids++
             return {
                 id: ids.toString(),
                 guardName: driver,
-                startHour: start,
+                optionalGuardDaysByDates: start,
                 finishHour: finish,
-                TypeOfDrive: TypeOfDrive,
+                TypeOfDrivePreference: TypeOfDrivePreference,
                 location: '1',
                 Comments: '',
                 halfOrFull: '1',
-                flexibilityByDays: ['-30', '10'],
+                flexibilityByDays: [],
+                flexibilityByDates: [],
                 implementsPreferences: [],
                 description: '',
             }

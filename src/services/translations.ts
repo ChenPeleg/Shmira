@@ -41,7 +41,7 @@ export const translations = {
     'addLocation': 'הוסף מקום',
     'Start': 'התחלה',
     'Finish': 'סיום',
-    'TypeOfDrive': 'הגבלת שמירה',
+    'TypeOfDrivePreference': 'הגבלת שמירה',
     'Tsamud': 'צמוד',
     'CanGuardIn': 'לא יכול לשמור בתאריכים',
     'CantGuardIn': 'יכול לשמור רק בתאריכים',

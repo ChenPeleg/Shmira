@@ -23,7 +23,7 @@ describe('Vehicle edit  Dialog', () => {
         vehicleName: '1',
         seats: '7',
         kmLimit: '1',
-        startHour: '1',
+        optionalGuardDaysByDates: '1',
         endHour: '1',
         Comments: '1'
     }
@@ -34,7 +34,7 @@ describe('Vehicle edit  Dialog', () => {
             vehicleName: '1',
             seats: '7',
             kmLimit: '1',
-            startHour: '1',
+            optionalGuardDaysByDates: '1',
             endHour: '1',
             Comments: '1'
         }
@@ -80,7 +80,7 @@ describe('Vehicle edit  Dialog', () => {
                     'id': '1',
                     'kmLimit': '1',
                     'seats': '7',
-                    'startHour': '1',
+                    'optionalGuardDaysByDates': '1',
                     'vehicleName': 'rename car'
                 }
             );

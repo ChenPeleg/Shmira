@@ -61,18 +61,19 @@ export interface ShmiraListStore {
 export const defaultPreferenceValues: PreferenceModel = {
     id: '1',
     guardName: '',
-    startHour: '08:00',
+    optionalGuardDaysByDates: '08:00',
     finishHour: '09:00',
-    TypeOfDrive: PreferenceType.CantGuardIn,
+    TypeOfDrivePreference: PreferenceType.CantGuardIn,
     Comments: '',
     halfOrFull: '1',
-    flexibilityByDays: ['-30', '10'],
+    flexibilityByDays: [ ],
+    flexibilityByDates: [ ],
     location: ''
 }
 export const defaultVehicleValues: VehicleModel = {
     id: '1',
     vehicleName: 'רכב',
-    startHour: '08:00',
+    optionalGuardDaysByDates: '08:00',
     endHour: '09:00',
     kmLimit: '',
     seats: '5',

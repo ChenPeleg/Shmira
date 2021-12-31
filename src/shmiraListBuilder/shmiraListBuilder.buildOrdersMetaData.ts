@@ -11,7 +11,7 @@ export const ShmiraListBuilderBuildPreferencesMetaData = (preferences: Preferenc
     const clonedPreferences: PreferenceModel[] = preferences.map((o: PreferenceModel) => CloneUtil.deep(o, 'PreferenceModel'));
 
     const preferencesMeta: PreferenceMetaDataModel[] = clonedPreferences.map((preference: PreferenceModel) => {
-        const start: number = Utils.hourTextToDecimal(preference.startHour);
+        const start: number = Utils.hourTextToDecimal(preference.optionalGuardDaysByDates);
         const finish: number = Utils.hourTextToDecimal(preference.finishHour);
         const length = finish - start;
         const metaPreference: PreferenceMetaDataModel = {
@@ -29,7 +29,7 @@ export const ShmiraListBuilderBuildPreferencesMetaData = (preferences: Preferenc
 
     // Estimate finish hour of non-Tsamud Drives
     preferencesMeta.forEach((metaPreference: PreferenceMetaDataModel) => {
-        const driveType = metaPreference.preference.TypeOfDrive
+        const driveType = metaPreference.preference.TypeOfDrivePreference
         if (driveType === PreferenceType.CanGuardIn) {
             return
         }

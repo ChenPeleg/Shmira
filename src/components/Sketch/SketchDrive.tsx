@@ -42,7 +42,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
             return null
         }
         const prevFinish = Utils.hourTextToDecimal(perviousDrive.finishHour);
-        const thisStart = Utils.hourTextToDecimal(thisDrive.startHour);
+        const thisStart = Utils.hourTextToDecimal(thisDrive.optionalGuardDaysByDates);
         if (prevFinish > thisStart) {
             return perviousDrive
         } else {
@@ -112,8 +112,8 @@ export const SketchDrive = (props: sketchDriveProps) => {
 
                 }}>
                     <Typography dir="ltr"
-                                variant={'subtitle1'}>{drive.startHour}  </Typography>
-                    {drive.TypeOfDrive === PreferenceType.CanGuardIn || drive.TypeOfDrive === PreferenceType.CantGuardIn ?
+                                variant={'subtitle1'}>{drive.optionalGuardDaysByDates}  </Typography>
+                    {drive.TypeOfDrivePreference === PreferenceType.CanGuardIn || drive.TypeOfDrivePreference === PreferenceType.CantGuardIn ?
                         (<><Box sx={{
                             width: '10px',
                             height: '2px',

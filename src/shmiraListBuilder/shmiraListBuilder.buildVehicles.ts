@@ -57,7 +57,7 @@ export const ShmiraListBuilderBuildVehiclesAndUnAssigned = (preferences: Prefere
                 const newDrive: DriveModel = {
                     ...relevantMetaDrive
                         .preference,
-                    startHour: Utils.DecimalTimeToHourText(metaPreference.start),
+                    optionalGuardDaysByDates: Utils.DecimalTimeToHourText(metaPreference.start),
                     finishHour: Utils.DecimalTimeToHourText(metaPreference.finish),
 
                     implementsPreferences: [relevantMetaDrive
@@ -68,7 +68,7 @@ export const ShmiraListBuilderBuildVehiclesAndUnAssigned = (preferences: Prefere
                 const fakePreference: PreferenceModel = {
                     ...relevantMetaDrive
                         .preference,
-                    startHour: Utils.DecimalTimeToHourText(metaPreference.start),
+                    optionalGuardDaysByDates: Utils.DecimalTimeToHourText(metaPreference.start),
 
                     finishHour: Utils.DecimalTimeToHourText(metaPreference.finish),
 

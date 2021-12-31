@@ -3,7 +3,7 @@ export interface VehicleModel {
     vehicleName: string,
     seats: '7' | '5',
     kmLimit: string,
-    startHour: string,
+    optionalGuardDaysByDates: string,
     endHour: string,
     Comments: string
 }

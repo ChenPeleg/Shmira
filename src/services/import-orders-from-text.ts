@@ -76,10 +76,11 @@ const preferencesToPreferenceModel = (preferences: EshbalPreference[]): Preferen
         const appPreference: PreferenceModel = {
             id: idNum.toString(),
             flexibilityByDays: defaultValues.flexibilityByDays,
+            flexibilityByDates : [],
             halfOrFull: '1',
             location: '',
-            TypeOfDrive: null,
-            startHour: convertTimeTo4Digits(ePreference.hour),
+            TypeOfDrivePreference: null,
+            optionalGuardDaysByDates: convertTimeTo4Digits(ePreference.hour),
             Comments: ePreference.text,
             guardName: ePreference.name,
             finishHour: ''
@@ -104,7 +105,7 @@ const searchAnotherTimeInText = (preference: PreferenceModel): { anotherTime: st
     if (matchingArray && matchingArray[0]) {
         matchingArray.forEach(t => {
             const convertedTime = convertTimeTo4Digits(t.toString());
-            if (convertedTime !== preference.startHour) {
+            if (convertedTime !== preference.optionalGuardDaysByDates) {
                 results.anotherTime = convertedTime
             }
         })
@@ -117,7 +118,7 @@ const searchAnotherTimeInText = (preference: PreferenceModel): { anotherTime: st
         if (matchingArray && matchingArray[0]) {
             matchingArray.forEach(t => {
                 const convertedTime = convert2DigitTimeTo4Digits(t.toString());
-                if (convertedTime !== preference.startHour) {
+                if (convertedTime !== preference.optionalGuardDaysByDates) {
                     results.anotherTime = convertedTime
                 }
             })
@@ -181,10 +182,10 @@ const getLocationAndTypeFromComments = (preferences: PreferenceModel[]): Prefere
             preference.location = LocationSearchResult.locationFound.id
         }
         if (LocationSearchResult.typeOfDrive) {
-            preference.TypeOfDrive = LocationSearchResult.typeOfDrive
+            preference.TypeOfDrivePreference = LocationSearchResult.typeOfDrive
         }
         const anotherTimeSearchResults = searchAnotherTimeInText(preference);
-        if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== preference.startHour) {
+        if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== preference.optionalGuardDaysByDates) {
             preference.finishHour = anotherTimeSearchResults.anotherTime
         }
         return preference

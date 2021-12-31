@@ -58,13 +58,13 @@ export const LanguageUtilities = {
             }
 
         }
-        let timeText = preferenceValues?.startHour || '';
-        if (preferenceValues.TypeOfDrive === PreferenceType.CanGuardIn && preferenceValues?.startHour && preferenceValues?.finishHour) {
-            timeText = preferenceValues.startHour + ' - ' + preferenceValues.finishHour;
+        let timeText = preferenceValues?.optionalGuardDaysByDates || '';
+        if (preferenceValues.TypeOfDrivePreference === PreferenceType.CanGuardIn && preferenceValues?.optionalGuardDaysByDates && preferenceValues?.finishHour) {
+            timeText = preferenceValues.optionalGuardDaysByDates + ' - ' + preferenceValues.finishHour;
         }
         let briefText = preferenceValues.guardName;
-        if (preferenceValues.TypeOfDrive && preferenceValues.location) {
-            const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfDrive);
+        if (preferenceValues.TypeOfDrivePreference && preferenceValues.location) {
+            const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfDrivePreference);
             const location = locations.find(l => l.id === preferenceValues.location);
             if (location) {
                 briefText += ' ' + driveTimeLanguage.location + location.name

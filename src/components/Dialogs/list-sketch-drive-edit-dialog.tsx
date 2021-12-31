@@ -86,7 +86,7 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
 
 
             const newSketchData = {...driveChangedData};
-            newSketchData.startHour = Utils.DecimalTimeToHourText(input[0]);
+            newSketchData.optionalGuardDaysByDates = Utils.DecimalTimeToHourText(input[0]);
             newSketchData.finishHour = Utils.DecimalTimeToHourText(input[1]);
             setDriveChangedData(newSketchData);
 
@@ -120,7 +120,7 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
                                     component="legend"><b>{translations.DriveTimes}</b>
                         </Typography>
 
-                        <VerticalHourField input={[driveData.startHour, driveData.finishHour]}
+                        <VerticalHourField input={[driveData.optionalGuardDaysByDates, driveData.finishHour]}
                                            onHoursChange={handleHourChange}
                                            label={translations.Start}/>
 

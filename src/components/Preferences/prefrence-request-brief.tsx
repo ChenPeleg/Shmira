@@ -52,11 +52,11 @@ const useStyles: any = (() => ({
 const preferenceFields: PreferenceModel = new PreferenceFields();
 
 const areDetailsMissing = (preferenceValues: PreferenceModel): boolean => {
-    if (!preferenceValues.TypeOfDrive || !preferenceValues.guardName || !preferenceValues.startHour) {
+    if (!preferenceValues.TypeOfDrivePreference || !preferenceValues.guardName || !preferenceValues.optionalGuardDaysByDates) {
         return true
     }
-    if (preferenceValues.TypeOfDrive === PreferenceType.CanGuardIn) {
-        if (!preferenceValues.finishHour || !preferenceValues.startHour) {
+    if (preferenceValues.TypeOfDrivePreference === PreferenceType.CanGuardIn) {
+        if (!preferenceValues.finishHour || !preferenceValues.optionalGuardDaysByDates) {
             return true
         }
     }
@@ -68,13 +68,13 @@ const buildBriefText = (preferenceValues: PreferenceModel): string => {
     if (!isWithName) {
         return translations.NewPreference
     }
-    let timeText = preferenceValues?.startHour || '';
-    if (preferenceValues.TypeOfDrive === PreferenceType.CanGuardIn && preferenceValues?.startHour && preferenceValues?.finishHour) {
-        timeText = preferenceValues.finishHour + ' - ' + preferenceValues.startHour;
+    let timeText = preferenceValues?.optionalGuardDaysByDates || '';
+    if (preferenceValues.TypeOfDrivePreference === PreferenceType.CanGuardIn && preferenceValues?.optionalGuardDaysByDates && preferenceValues?.finishHour) {
+        timeText = preferenceValues.finishHour + ' - ' + preferenceValues.optionalGuardDaysByDates;
     }
     let briefText = timeText + ' ' + preferenceValues.guardName;
-    if (preferenceValues.TypeOfDrive && preferenceValues.location) {
-        const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfDrive);
+    if (preferenceValues.TypeOfDrivePreference && preferenceValues.location) {
+        const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfDrivePreference);
         const location = allLocations.find(l => l.id === preferenceValues.location);
         if (location) {
             briefText += ' ' + driveTimeLanguage.location + location.name

@@ -114,9 +114,9 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 </Box>
                 <Box sx={selectFieldWrapper}>
                     <Field
-                        name={'TypeOfDrive'}
+                        name={'TypeOfDrivePreference'}
                         component={RenderSelectField}
-                        label={TRL.TypeOfDrive}
+                        label={TRL.TypeOfDrivePreference}
                     >
                         <MenuItem value={PreferenceType.CanGuardIn.toString()}>{TRL.CanGuardIn}</MenuItem>
                         <MenuItem value={PreferenceType.CanAlwaysGuard.toString()}> {TRL.CanAlwaysGuard}</MenuItem>
@@ -138,7 +138,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 {/*<Box*/}
                 {/*    sx={fieldWrapper}*/}
                 {/*>*/}
-                {/*    <Field name={preferenceFields.startHour} component={HourPicker}*/}
+                {/*    <Field name={preferenceFields.optionalGuardDaysByDates} component={HourPicker}*/}
                 {/*           label={driveTimelanguage.timeStart}/>*/}
                 {/*</Box>*/}
                 {/*<Box sx={fieldWrapper}*/}
@@ -206,7 +206,7 @@ export const PrefrenceRequestForm = (formProps: MuiFormPropsModel) => {
 
     const initialValues = preferences.find(preference => preference.id === id);
     // @ts-ignore
-    const [_typeOfDrive, set_typeOfDrive] = useState(initialValues.TypeOfDrive as PreferenceType)
+    const [_typeOfDrive, set_typeOfDrive] = useState(initialValues.TypeOfDrivePreference as PreferenceType)
     let formValues = {...initialValues};
 
 
@@ -226,8 +226,8 @@ export const PrefrenceRequestForm = (formProps: MuiFormPropsModel) => {
                         ...values
                     }
                 })
-                if (values?.TypeOfDrive && values?.TypeOfDrive !== _typeOfDrive) {
-                    set_typeOfDrive(values.TypeOfDrive)
+                if (values?.TypeOfDrivePreference && values?.TypeOfDrivePreference !== _typeOfDrive) {
+                    set_typeOfDrive(values.TypeOfDrivePreference)
                 }
                 return {} // validate(values)
             }}
