@@ -4,7 +4,7 @@ import React from 'react';
 import {render} from '@testing-library/react';
 import {Slider} from '@mui/material';
 import {TextFieldPropertiesModel} from '../../../models/text-field-properties.model';
-import {RenderFlexibilityField} from '../flexibility-field';
+import {RenderFlexibilityField} from '../flex-field';
 
 
 describe('Form Flexibility field ', () => {

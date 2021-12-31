@@ -10,7 +10,7 @@ export interface DriveModel extends PreferenceModel {
     location: string,
     Comments: string,
     halfOrFull: string,
-    flexibility: [string, string],
+    flexibilityByDays: [string, string],
     /**
      * @summary more properties that were not in the original drive
      */

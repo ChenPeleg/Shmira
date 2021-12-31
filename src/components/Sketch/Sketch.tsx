@@ -15,7 +15,7 @@ import {SketchPendingPreferences} from './SketchPendeingOrders';
 
 const MOckDrive = {
     'id': '0',
-    'flexibility': [
+    'flexibilityByDays': [
         '-30',
         '10'
     ],

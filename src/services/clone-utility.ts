@@ -9,13 +9,13 @@ export class CloneUtil {
 
     static deepClonePreference(obj: PreferenceModel): PreferenceModel {
         const cloned: PreferenceModel = {...obj}
-        cloned.flexibility = [...cloned.flexibility]
+        cloned.flexibilityByDays = [...cloned.flexibilityByDays]
         return cloned
     }
 
     static deepCloneDrive(obj: DriveModel): DriveModel {
         const cloned: DriveModel = {...obj}
-        cloned.flexibility = [...cloned.flexibility]
+        cloned.flexibilityByDays = [...cloned.flexibilityByDays]
         return cloned
     }
 
@@ -50,7 +50,7 @@ export class CloneUtil {
             case 'ShmiraListRecord':
                 return CloneUtil.deepCloneShmiraList(obj)
             case 'PreferenceModel':
-                newObj.flexibility = [(newObj).flexibility[0], (newObj).flexibility[1]];
+                newObj.flexibilityByDays = [(newObj).flexibilityByDays[0], (newObj).flexibilityByDays[1]];
         }
         return newObj;
     }

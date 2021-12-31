@@ -9,7 +9,7 @@ export interface PreferenceModel {
     location: string,
     Comments: string,
     halfOrFull: string,
-    flexibility: [string, string]
+    flexibilityByDays:  [string, string]
 }
 
 export class PreferenceFields implements PreferenceModel {
@@ -21,7 +21,7 @@ export class PreferenceFields implements PreferenceModel {
     Comments: string = 'Comments';
     location: string = 'location';
     halfOrFull: string = 'halfOrFull';
-    flexibility: [string, string] = ['flexibility', 'flexibility']
+    flexibilityByDays: [string, string] = ['flexibilityByDays', 'flexibilityByDays']
 
     constructor() {
 

@@ -45,7 +45,7 @@ const mockShmiraList = {
     'preferences': [
         {
             'id': '99',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -59,7 +59,7 @@ const mockShmiraList = {
         },
         {
             'id': '100',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -73,7 +73,7 @@ const mockShmiraList = {
         },
         {
             'id': '101',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -87,7 +87,7 @@ const mockShmiraList = {
         },
         {
             'id': '102',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -101,7 +101,7 @@ const mockShmiraList = {
         },
         {
             'id': '103',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -115,7 +115,7 @@ const mockShmiraList = {
         },
         {
             'id': '104',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -129,7 +129,7 @@ const mockShmiraList = {
         },
         {
             'id': '105',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -143,7 +143,7 @@ const mockShmiraList = {
         },
         {
             'id': '106',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -157,7 +157,7 @@ const mockShmiraList = {
         },
         {
             'id': '107',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -171,7 +171,7 @@ const mockShmiraList = {
         },
         {
             'id': '108',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -185,7 +185,7 @@ const mockShmiraList = {
         },
         {
             'id': '109',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -199,7 +199,7 @@ const mockShmiraList = {
         },
         {
             'id': '110',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -213,7 +213,7 @@ const mockShmiraList = {
         },
         {
             'id': '111',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -227,7 +227,7 @@ const mockShmiraList = {
         },
         {
             'id': '112',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -241,7 +241,7 @@ const mockShmiraList = {
         },
         {
             'id': '113',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -255,7 +255,7 @@ const mockShmiraList = {
         },
         {
             'id': '115',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -269,7 +269,7 @@ const mockShmiraList = {
         },
         {
             'id': '116',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -283,7 +283,7 @@ const mockShmiraList = {
         },
         {
             'id': '117',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -297,7 +297,7 @@ const mockShmiraList = {
         },
         {
             'id': '118',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -311,7 +311,7 @@ const mockShmiraList = {
         },
         {
             'id': '119',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -325,7 +325,7 @@ const mockShmiraList = {
         },
         {
             'id': '120',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -339,7 +339,7 @@ const mockShmiraList = {
         },
         {
             'id': '122',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -353,7 +353,7 @@ const mockShmiraList = {
         },
         {
             'id': '123',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -367,7 +367,7 @@ const mockShmiraList = {
         },
         {
             'id': '124',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -381,7 +381,7 @@ const mockShmiraList = {
         },
         {
             'id': '125',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -395,7 +395,7 @@ const mockShmiraList = {
         },
         {
             'id': '126',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -409,7 +409,7 @@ const mockShmiraList = {
         },
         {
             'id': '127',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -423,7 +423,7 @@ const mockShmiraList = {
         },
         {
             'id': '128',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -437,7 +437,7 @@ const mockShmiraList = {
         },
         {
             'id': '129',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -451,7 +451,7 @@ const mockShmiraList = {
         },
         {
             'id': '130',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],
@@ -465,7 +465,7 @@ const mockShmiraList = {
         },
         {
             'id': '131',
-            'flexibility': [
+            'flexibilityByDays': [
                 '-30',
                 '10'
             ],

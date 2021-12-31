@@ -38,7 +38,7 @@ export const RenderFlexibilityField = (
     convertedInput.value = convertedInput.value.map((v: string) => Utils.convertStrToNum(v))
     return (
         <>
-            <Typography component="legend"><b>{translations.flexibility}: </b>{renderFlexibilityText(input.value)}</Typography>
+            <Typography component="legend"><b>{translations.flexibilityByDays}: </b>{renderFlexibilityText(input.value)}</Typography>
 
             <Box sx={{width: '250px'}}>
 

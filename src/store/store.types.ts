@@ -66,7 +66,7 @@ export const defaultPreferenceValues: PreferenceModel = {
     TypeOfDrive: PreferenceType.CantGuardIn,
     Comments: '',
     halfOrFull: '1',
-    flexibility: ['-30', '10'],
+    flexibilityByDays: ['-30', '10'],
     location: ''
 }
 export const defaultVehicleValues: VehicleModel = {

@@ -69,7 +69,7 @@ export const translations = {
     'Add': 'הוסף',
     'seats': 'מושבים',
     'halfOrFull': 'נוסעים',
-    'flexibility': 'גמישות',
+    'flexibilityByDays': 'גמישות',
     'missingDetails': 'מידע חלקי',
 
     'onePassenger': 'נוסע/ת אחד/ת',

@@ -41,7 +41,7 @@ export const Utils = {
                 location: '1',
                 Comments: '',
                 halfOrFull: '1',
-                flexibility: ['-30', '10'],
+                flexibilityByDays: ['-30', '10'],
                 implementsPreferences: [],
                 description: '',
             }

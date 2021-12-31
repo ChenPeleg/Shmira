@@ -75,7 +75,7 @@ const preferencesToPreferenceModel = (preferences: EshbalPreference[]): Preferen
     let PreferencesApp: PreferenceModel[] = preferences.map((ePreference) => {
         const appPreference: PreferenceModel = {
             id: idNum.toString(),
-            flexibility: defaultValues.flexibility,
+            flexibilityByDays: defaultValues.flexibilityByDays,
             halfOrFull: '1',
             location: '',
             TypeOfDrive: null,

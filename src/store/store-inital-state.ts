@@ -5,7 +5,7 @@ export const defaultShmiraListEshbal: any =
         'preferences': [
             {
                 'id': '99',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -19,7 +19,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '132',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -33,7 +33,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '100',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -47,7 +47,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '101',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -61,7 +61,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '102',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -75,7 +75,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '103',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -89,7 +89,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '104',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -103,7 +103,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '105',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -117,7 +117,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '106',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -131,7 +131,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '107',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -145,7 +145,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '108',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -159,7 +159,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '109',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -173,7 +173,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '110',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -187,7 +187,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '111',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -201,7 +201,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '112',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -215,7 +215,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '113',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -229,7 +229,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '115',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -243,7 +243,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '116',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -257,7 +257,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '117',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -271,7 +271,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '118',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -285,7 +285,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '119',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -299,7 +299,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '120',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -313,7 +313,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '122',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -327,7 +327,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '123',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -341,7 +341,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '124',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -355,7 +355,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '125',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -369,7 +369,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '126',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -383,7 +383,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '127',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -397,7 +397,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '128',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -411,7 +411,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '129',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -425,7 +425,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '130',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -439,7 +439,7 @@ export const defaultShmiraListEshbal: any =
             },
             {
                 'id': '131',
-                'flexibility': [
+                'flexibilityByDays': [
                     '-30',
                     '10'
                 ],
@@ -502,7 +502,7 @@ export const defaultShmiraListEshbal: any =
                         'drives': [
                             {
                                 'id': '6',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -520,7 +520,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '7',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -538,7 +538,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '8',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -556,7 +556,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '9',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -574,7 +574,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '10',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -599,7 +599,7 @@ export const defaultShmiraListEshbal: any =
                         'drives': [
                             {
                                 'id': '11',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -617,7 +617,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '12',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -635,7 +635,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '13',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -653,7 +653,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '14',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -678,7 +678,7 @@ export const defaultShmiraListEshbal: any =
                         'drives': [
                             {
                                 'id': '15',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -696,7 +696,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '16',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -714,7 +714,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '17',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -732,7 +732,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '18',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -750,7 +750,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '19',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -768,7 +768,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '20',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -793,7 +793,7 @@ export const defaultShmiraListEshbal: any =
                         'drives': [
                             {
                                 'id': '21',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -811,7 +811,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '22',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -829,7 +829,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '23',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -847,7 +847,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '24',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -865,7 +865,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '25',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -889,7 +889,7 @@ export const defaultShmiraListEshbal: any =
                 'unassignedPreferences': [
                     {
                         'id': '99',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -903,7 +903,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '103',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -917,7 +917,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '105',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -931,7 +931,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '107',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -945,7 +945,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '111',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -959,7 +959,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '112',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -973,7 +973,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '113',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -987,7 +987,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '118',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1001,7 +1001,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '125',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1015,7 +1015,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '126',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1029,7 +1029,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '130',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1045,7 +1045,7 @@ export const defaultShmiraListEshbal: any =
                 'assignedPreferences': [
                     {
                         'id': '100',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1059,7 +1059,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '101',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1073,7 +1073,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '102',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1087,7 +1087,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '104',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1101,7 +1101,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '106',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1115,7 +1115,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '108',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1129,7 +1129,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '109',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1143,7 +1143,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '110',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1157,7 +1157,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '115',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1171,7 +1171,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '116',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1185,7 +1185,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '117',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1199,7 +1199,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '119',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1213,7 +1213,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '120',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1227,7 +1227,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '122',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1241,7 +1241,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '123',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1255,7 +1255,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '124',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1269,7 +1269,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '127',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1283,7 +1283,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '128',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1297,7 +1297,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '129',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1311,7 +1311,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '131',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1335,7 +1335,7 @@ export const defaultShmiraListEshbal: any =
                         'drives': [
                             {
                                 'id': '6',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1353,7 +1353,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '7',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1371,7 +1371,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '8',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1389,7 +1389,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '9',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1407,7 +1407,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '10',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1432,7 +1432,7 @@ export const defaultShmiraListEshbal: any =
                         'drives': [
                             {
                                 'id': '11',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1450,7 +1450,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '12',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1468,7 +1468,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '13',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1486,7 +1486,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '14',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1511,7 +1511,7 @@ export const defaultShmiraListEshbal: any =
                         'drives': [
                             {
                                 'id': '15',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1529,7 +1529,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '16',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1547,7 +1547,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '17',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1565,7 +1565,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '18',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1583,7 +1583,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '19',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1601,7 +1601,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '20',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1626,7 +1626,7 @@ export const defaultShmiraListEshbal: any =
                         'drives': [
                             {
                                 'id': '21',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1644,7 +1644,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '22',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1662,7 +1662,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '23',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1680,7 +1680,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '24',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1698,7 +1698,7 @@ export const defaultShmiraListEshbal: any =
                             },
                             {
                                 'id': '25',
-                                'flexibility': [
+                                'flexibilityByDays': [
                                     '-30',
                                     '10'
                                 ],
@@ -1722,7 +1722,7 @@ export const defaultShmiraListEshbal: any =
                 'unassignedPreferences': [
                     {
                         'id': '99',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1736,7 +1736,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '132',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1750,7 +1750,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '103',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1764,7 +1764,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '105',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1778,7 +1778,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '107',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1792,7 +1792,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '111',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1806,7 +1806,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '112',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1820,7 +1820,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '113',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1834,7 +1834,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '118',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1848,7 +1848,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '125',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1862,7 +1862,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '126',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1876,7 +1876,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '130',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1892,7 +1892,7 @@ export const defaultShmiraListEshbal: any =
                 'assignedPreferences': [
                     {
                         'id': '100',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1906,7 +1906,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '101',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1920,7 +1920,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '102',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1934,7 +1934,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '104',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1948,7 +1948,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '106',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1962,7 +1962,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '108',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1976,7 +1976,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '109',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -1990,7 +1990,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '110',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2004,7 +2004,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '115',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2018,7 +2018,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '116',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2032,7 +2032,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '117',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2046,7 +2046,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '119',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2060,7 +2060,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '120',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2074,7 +2074,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '122',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2088,7 +2088,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '123',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2102,7 +2102,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '124',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2116,7 +2116,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '127',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2130,7 +2130,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '128',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2144,7 +2144,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '129',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],
@@ -2158,7 +2158,7 @@ export const defaultShmiraListEshbal: any =
                     },
                     {
                         'id': '131',
-                        'flexibility': [
+                        'flexibilityByDays': [
                             '-30',
                             '10'
                         ],

@@ -15,7 +15,7 @@ import {LocationModel} from '../../models/Location.model';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {RenderFullNightField} from '../Form/full-night-field';
-import {RenderFlexibilityField} from '../Form/flexibility-field';
+import {RenderFlexibilityField} from '../Form/flex-field';
 import {RenderSelectFieldAutoComplete} from '../Form/select-field-auto-complete';
 import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
 
@@ -168,9 +168,9 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 />
                 </Box>
                 <Box
-                    sx={advanceFieldWrapper}> <Field name={preferenceFields.flexibility[0]}
+                    sx={advanceFieldWrapper}> <Field name={preferenceFields.flexibilityByDays[0]}
                                                      component={RenderFlexibilityField}
-                                                     label={TRL.flexibility}
+                                                     label={TRL.flexibilityByDays}
                                                      rows={2}
                 />
 
