@@ -86,7 +86,7 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
             }}>
 
                 <Typography
-                    variant={'subtitle1'}>{preference.Comments + ', ' + LanguageUtilities.renderPassengerText(preference.passengers)}  </Typography>
+                    variant={'subtitle1'}>{preference.Comments + ', ' + LanguageUtilities.renderPassengerText(preference.halfOrFull)}  </Typography>
 
             </Box>
 

@@ -52,7 +52,7 @@ const useStyles: any = (() => ({
 const preferenceFields: PreferenceModel = new PreferenceFields();
 
 const areDetailsMissing = (preferenceValues: PreferenceModel): boolean => {
-    if (!preferenceValues.TypeOfDrive || !preferenceValues.driverName || !preferenceValues.startHour) {
+    if (!preferenceValues.TypeOfDrive || !preferenceValues.guardName || !preferenceValues.startHour) {
         return true
     }
     if (preferenceValues.TypeOfDrive === PreferenceType.CanGuardIn) {
@@ -64,7 +64,7 @@ const areDetailsMissing = (preferenceValues: PreferenceModel): boolean => {
 }
 
 const buildBriefText = (preferenceValues: PreferenceModel): string => {
-    const isWithName = preferenceValues.driverName.trim() !== '';
+    const isWithName = preferenceValues.guardName.trim() !== '';
     if (!isWithName) {
         return translations.NewPreference
     }
@@ -72,7 +72,7 @@ const buildBriefText = (preferenceValues: PreferenceModel): string => {
     if (preferenceValues.TypeOfDrive === PreferenceType.CanGuardIn && preferenceValues?.startHour && preferenceValues?.finishHour) {
         timeText = preferenceValues.finishHour + ' - ' + preferenceValues.startHour;
     }
-    let briefText = timeText + ' ' + preferenceValues.driverName;
+    let briefText = timeText + ' ' + preferenceValues.guardName;
     if (preferenceValues.TypeOfDrive && preferenceValues.location) {
         const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfDrive);
         const location = allLocations.find(l => l.id === preferenceValues.location);

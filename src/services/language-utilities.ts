@@ -50,7 +50,7 @@ export const LanguageUtilities = {
     },
 
     buildBriefText(preferenceValues: PreferenceModel | DriveModel, locations: LocationModel[]): { timeText: string, driverAndLocation: string } {
-        const isWithName = preferenceValues.driverName.trim() !== '';
+        const isWithName = preferenceValues.guardName.trim() !== '';
         if (!isWithName) {
             return {
                 timeText: '',
@@ -62,7 +62,7 @@ export const LanguageUtilities = {
         if (preferenceValues.TypeOfDrive === PreferenceType.CanGuardIn && preferenceValues?.startHour && preferenceValues?.finishHour) {
             timeText = preferenceValues.startHour + ' - ' + preferenceValues.finishHour;
         }
-        let briefText = preferenceValues.driverName;
+        let briefText = preferenceValues.guardName;
         if (preferenceValues.TypeOfDrive && preferenceValues.location) {
             const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfDrive);
             const location = locations.find(l => l.id === preferenceValues.location);
@@ -79,9 +79,11 @@ export const LanguageUtilities = {
     },
     renderPassengerText(num: string): string {
         if (num === '1') {
-            return translations.onePassenger
+            return translations.halfNight
+        } else {
+            return translations.fullNight
         }
-        return num.toString() + ' ' + translations.passengers
+
     },
     addLineBreaksToString(str: string, numberOfBR: number = 2): string {
         const br = '\n   ';

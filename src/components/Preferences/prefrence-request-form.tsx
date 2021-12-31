@@ -14,7 +14,7 @@ import {ActionsTypes} from '../../store/types.actions';
 import {LocationModel} from '../../models/Location.model';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
-import {RenderPassengerField} from '../Form/passengers-field';
+import {RenderFullNightField} from '../Form/full-night-field';
 import {RenderFlexibilityField} from '../Form/flexibility-field';
 import {RenderSelectFieldAutoComplete} from '../Form/select-field-auto-complete';
 import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
@@ -107,7 +107,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 <Box
                     sx={fieldWrapperText}
                 >
-                    <Field name={preferenceFields.driverName}
+                    <Field name={preferenceFields.guardName}
                            component={RenderTextField}
                            label={TRL.Name}
                     />
@@ -118,35 +118,37 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                         component={RenderSelectField}
                         label={TRL.TypeOfDrive}
                     >
-                        <MenuItem value={PreferenceType.CanGuardIn.toString()}>{TRL.Tsamud}</MenuItem>
-                        <MenuItem value={PreferenceType.OneWayFrom.toString()}> {TRL.OneWayFrom}</MenuItem>
-                        <MenuItem value={PreferenceType.CantGuardIn.toString()}>{TRL.OneWayTo}</MenuItem>
+                        <MenuItem value={PreferenceType.CanGuardIn.toString()}>{TRL.CanGuardIn}</MenuItem>
+                        <MenuItem value={PreferenceType.CanAlwaysGuard.toString()}> {TRL.CanAlwaysGuard}</MenuItem>
+                        <MenuItem value={PreferenceType.CantGuardIn.toString()}>{TRL.CantGuardIn}</MenuItem>
 
                     </Field>
 
                 </Box>
 
-                <Box sx={selectFieldWrapper}>
+                {/*<Box sx={selectFieldWrapper}>*/}
 
-                    <Field name={preferenceFields.location} component={RenderSelectFieldAutoComplete} label={TRL.Where}
-                           selectoptions={allLocations.map((location: LocationModel) => ({
-                               ...location,
-                               Name: driveTimelanguage.location + location.name
-                           }))}>
+                {/*    <Field name={preferenceFields.location} component={RenderSelectFieldAutoComplete} label={TRL.Where}*/}
+                {/*           selectoptions={allLocations.map((location: LocationModel) => ({*/}
+                {/*               ...location,*/}
+                {/*               Name: driveTimelanguage.location + location.name*/}
+                {/*           }))}>*/}
 
-                    </Field> </Box>
-                <Box
-                    sx={fieldWrapper}
-                >
-                    <Field name={preferenceFields.startHour} component={HourPicker}
-                           label={driveTimelanguage.timeStart}/>
-                </Box>
-                <Box sx={fieldWrapper}
-                >
-                    <Field name={preferenceFields.finishHour} custom={{inActive: typeOfDrive !== PreferenceType.CanGuardIn}} component={HourPicker}
-                           label={driveTimelanguage.timeEnd}/>
-                </Box>
+                {/*    </Field> </Box>*/}
+                {/*<Box*/}
+                {/*    sx={fieldWrapper}*/}
+                {/*>*/}
+                {/*    <Field name={preferenceFields.startHour} component={HourPicker}*/}
+                {/*           label={driveTimelanguage.timeStart}/>*/}
+                {/*</Box>*/}
+                {/*<Box sx={fieldWrapper}*/}
+                {/*>*/}
+                {/*    <Field name={preferenceFields.finishHour} custom={{inActive: typeOfDrive !== PreferenceType.CanGuardIn}} component={HourPicker}*/}
+                {/*           label={driveTimelanguage.timeEnd}/>*/}
+                {/*</Box>*/}
 
+                
+                
                 <Box
                     sx={fieldWrapper}> <Field name={preferenceFields.Comments}
                                               component={RenderTextField}
@@ -158,9 +160,9 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 
 
                 <Box
-                    sx={fieldWrapper}> <Field name={preferenceFields.passengers}
-                                              component={RenderPassengerField}
-                                              label={TRL.passengers}
+                    sx={fieldWrapper}> <Field name={preferenceFields.halfOrFull}
+                                              component={RenderFullNightField}
+                                              label={TRL.halfOrFull}
                                               type={'text'}
                                               rows={2}
                 />

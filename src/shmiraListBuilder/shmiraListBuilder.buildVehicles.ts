@@ -12,7 +12,7 @@ interface OrdMetaScheduleData {
     start: number,
     finish: number,
     id: string,
-    passengers: string
+    halfOrFull: string
 
 }
 
@@ -28,7 +28,7 @@ export const ShmiraListBuilderBuildVehiclesAndUnAssigned = (preferences: Prefere
             start: o.start,
             finish: o.finish,
             id: o.id,
-            passengers: o.preference.passengers
+            halfOrFull: o.preference.halfOrFull
         }
     });
     metaPreferenceScheduleData.sort((a, b) => (a.start > b.start) ? 1 : -1);

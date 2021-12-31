@@ -3,7 +3,7 @@ import {TextFieldPropertiesModel} from '../../models/text-field-properties.model
 import React from 'react';
 import {styled, Theme} from '@mui/system';
 import {Rating, Typography} from '@mui/material';
-import {Person} from '@mui/icons-material';
+import {Nightlight, Person} from '@mui/icons-material';
 import {Utils} from '../../services/utils';
 import {LanguageUtilities} from '../../services/language-utilities';
 
@@ -30,7 +30,7 @@ const StyledRating = styled(Rating)({
     },
 });
 
-export const RenderPassengerField = (
+export const RenderFullNightField = (
     {
         input,
         label,
@@ -57,15 +57,15 @@ export const RenderPassengerField = (
                 // size="large"
                           label={label}
                           sx={rootSx}
-                          max={7}
+                          max={2}
                           onChange={(...args) => {
                               
 
                               input.onChange(...args);
 
                           }}
-                          icon={<Person fontSize="inherit"/>}
-                          emptyIcon={<Person fontSize="inherit"/>}
+                          icon={<Nightlight fontSize="inherit"/>}
+                          emptyIcon={<Nightlight fontSize="inherit"/>}
                           {...convertedInput}
                           {...custom}
             />

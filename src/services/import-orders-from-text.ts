@@ -76,12 +76,12 @@ const preferencesToPreferenceModel = (preferences: EshbalPreference[]): Preferen
         const appPreference: PreferenceModel = {
             id: idNum.toString(),
             flexibility: defaultValues.flexibility,
-            passengers: '1',
+            halfOrFull: '1',
             location: '',
             TypeOfDrive: null,
             startHour: convertTimeTo4Digits(ePreference.hour),
             Comments: ePreference.text,
-            driverName: ePreference.name,
+            guardName: ePreference.name,
             finishHour: ''
         }
         idNum++;

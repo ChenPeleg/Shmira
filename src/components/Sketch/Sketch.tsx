@@ -19,12 +19,12 @@ const MOckDrive = {
         '-30',
         '10'
     ],
-    'passengers': '1',
+    'halfOrFull': '1',
     'location': '6',
     'TypeOfDrive': '2',
     'startHour': '09:45',
     'Comments': 'ורד תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.',
-    'driverName': 'ורד',
+    'guardName': 'ורד',
     'finishHour': '10:00',
     'implementsPreferences': [
         '104'

@@ -3,13 +3,13 @@ import {PreferenceModel} from './Preference.model';
 
 export interface DriveModel extends PreferenceModel {
     id: string,
-    driverName: string,
+    guardName: string,
     startHour: string,
     finishHour: string,
     TypeOfDrive: PreferenceType | null,
     location: string,
     Comments: string,
-    passengers: string,
+    halfOrFull: string,
     flexibility: [string, string],
     /**
      * @summary more properties that were not in the original drive

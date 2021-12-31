@@ -18,7 +18,7 @@ import {defaultShmiraListEshbal} from './store-inital-state';
 const startPreferences: PreferenceModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): PreferenceModel => ({
     ...defaultPreferenceValues,
     id: (index + 1).toString(),
-    driverName: name
+    guardName: name
 }));
 const startVehicles: VehicleModel[] = ['סנאו', 'שלגיה', 'שכור', 'מאזדה'].map((name: string, index: number): VehicleModel => ({
     ...defaultVehicleValues,

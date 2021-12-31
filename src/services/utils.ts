@@ -34,13 +34,13 @@ export const Utils = {
             ids++
             return {
                 id: ids.toString(),
-                driverName: driver,
+                guardName: driver,
                 startHour: start,
                 finishHour: finish,
                 TypeOfDrive: TypeOfDrive,
                 location: '1',
                 Comments: '',
-                passengers: '1',
+                halfOrFull: '1',
                 flexibility: ['-30', '10'],
                 implementsPreferences: [],
                 description: '',

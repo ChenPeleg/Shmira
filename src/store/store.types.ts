@@ -60,12 +60,12 @@ export interface ShmiraListStore {
 
 export const defaultPreferenceValues: PreferenceModel = {
     id: '1',
-    driverName: '',
+    guardName: '',
     startHour: '08:00',
     finishHour: '09:00',
     TypeOfDrive: PreferenceType.CantGuardIn,
     Comments: '',
-    passengers: '1',
+    halfOrFull: '1',
     flexibility: ['-30', '10'],
     location: ''
 }

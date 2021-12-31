@@ -2,25 +2,25 @@ import {PreferenceType} from './PreferenceType.enum';
 
 export interface PreferenceModel {
     id: string,
-    driverName: string,
+    guardName: string,
     startHour: string,
     finishHour: string,
     TypeOfDrive: PreferenceType | null,
     location: string,
     Comments: string,
-    passengers: string,
+    halfOrFull: string,
     flexibility: [string, string]
 }
 
 export class PreferenceFields implements PreferenceModel {
     id: string = 'id';
-    driverName: string = 'driverName';
+    guardName: string = 'guardName';
     startHour: string = 'startHour';
     finishHour: string = 'finishHour';
     TypeOfDrive: PreferenceType | null = null;
     Comments: string = 'Comments';
     location: string = 'location';
-    passengers: string = 'passengers';
+    halfOrFull: string = 'halfOrFull';
     flexibility: [string, string] = ['flexibility', 'flexibility']
 
     constructor() {

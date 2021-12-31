@@ -49,12 +49,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '6',
             'TypeOfDrive': '2',
             'startHour': '08:00',
             'Comments': 'פלג לרקפת  עד 10',
-            'driverName': 'חן פלג',
+            'guardName': 'חן פלג',
             'finishHour': '09:00'
         },
         {
@@ -63,12 +63,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '1',
             'TypeOfDrive': '3',
             'startHour': '07:20',
             'Comments': 'רייצ\'ל לוקחת את ילדי גן דרור לכרמיאל, רוצה להמשיך לתור לרופאה עד 10. ',
-            'driverName': 'רייצ\'ל',
+            'guardName': 'רייצ\'ל',
             'finishHour': '10:10'
         },
         {
@@ -77,12 +77,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '6',
             'TypeOfDrive': '2',
             'startHour': '12:50',
             'Comments': 'רייצ\'ל למרפאה במשגב עד 13:00',
-            'driverName': 'רייצ\'ל',
+            'guardName': 'רייצ\'ל',
             'finishHour': '13:00'
         },
         {
@@ -91,12 +91,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '6',
             'TypeOfDrive': '3',
             'startHour': '19:00',
             'Comments': '',
-            'driverName': 'רייצ\'ל',
+            'guardName': 'רייצ\'ל',
             'finishHour': ''
         },
         {
@@ -105,12 +105,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '3',
             'TypeOfDrive': '2',
             'startHour': '08:30',
             'Comments': 'סתו מבקשת צמוד עד 16:00. לדבר איתי  אם בעיה',
-            'driverName': 'סתו',
+            'guardName': 'סתו',
             'finishHour': '14:00'
         },
         {
@@ -119,12 +119,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '6',
             'TypeOfDrive': '2',
             'startHour': '09:45',
             'Comments': 'ורד תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.',
-            'driverName': 'ורד',
+            'guardName': 'ורד',
             'finishHour': '10:00'
         },
         {
@@ -133,12 +133,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '',
             'TypeOfDrive': '2',
             'startHour': '13:30',
             'Comments': 'אלון לאיסוף שיבולי השמש עד 14:30',
-            'driverName': 'אלון דרור',
+            'guardName': 'אלון דרור',
             'finishHour': '14:30'
         },
         {
@@ -147,12 +147,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '2',
             'TypeOfDrive': '2',
             'startHour': '15:50',
             'Comments': 'אלון לרקפת - יעזור מאוד צמוד עד 17:20',
-            'driverName': 'אלון דרור',
+            'guardName': 'אלון דרור',
             'finishHour': '17:20'
         },
         {
@@ -161,12 +161,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '6',
             'TypeOfDrive': '2',
             'startHour': '16:00',
             'Comments': 'אלון ושקד מקופח כללית משגב אם אין צמוד',
-            'driverName': 'אלון דרור',
+            'guardName': 'אלון דרור',
             'finishHour': '17:00'
         },
         {
@@ -175,12 +175,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '1',
             'TypeOfDrive': '2',
             'startHour': '13:30',
             'Comments': 'ענבר לכרמיאל צמוד עד 15 וחצי ',
-            'driverName': 'ענבר',
+            'guardName': 'ענבר',
             'finishHour': '15:30'
         },
         {
@@ -189,12 +189,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '2',
             'TypeOfDrive': '2',
             'startHour': '16:00',
             'Comments': 'רז מרקפת ',
-            'driverName': 'ענבר',
+            'guardName': 'ענבר',
             'finishHour': '16:30'
         },
         {
@@ -203,12 +203,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '6',
             'TypeOfDrive': '2',
             'startHour': '08:40',
             'Comments': 'ענבר למשגב צמוד עד 10:10 (לא להצמיד בבקשה נסיעות כי יש סיכוי שמתבטל מחר בבוקר ',
-            'driverName': 'ענבר',
+            'guardName': 'ענבר',
             'finishHour': '10:30'
         },
         {
@@ -217,12 +217,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '1',
             'TypeOfDrive': '3',
             'startHour': '08:15',
             'Comments': 'זהר לכרמיאל',
-            'driverName': 'זהר',
+            'guardName': 'זהר',
             'finishHour': ''
         },
         {
@@ -231,12 +231,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '3',
             'TypeOfDrive': '2',
             'startHour': '14:00',
             'Comments': 'זהר בחיפה ורוצה להישאר עד מאוחר  ולחזור ברכב. אם יש נסיעה לעשות איתה חילוף מה טוב. אם לא ואפשר לשריין רכב ואנסה למצוא נהג/ת, גם טוב. ',
-            'driverName': 'זהר',
+            'guardName': 'זהר',
             'finishHour': '20:00'
         },
         {
@@ -245,12 +245,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '',
             'TypeOfDrive': '2',
             'startHour': '14:00',
             'Comments': 'אורי כהן וטל לכנרת עד 19',
-            'driverName': 'טל',
+            'guardName': 'טל',
             'finishHour': '19:00'
         },
         {
@@ -259,12 +259,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '6',
             'TypeOfDrive': '2',
             'startHour': '16:00',
             'Comments': 'עדי יונתן ועמרי לחיסון שפעת במשגב, צמוד עד 17:30 אם אפשר עד אחרי, עדיף עד 19 ואז נעשה עוד משהו',
-            'driverName': 'עדי',
+            'guardName': 'עדי',
             'finishHour': '17:30'
         },
         {
@@ -273,12 +273,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '13',
             'TypeOfDrive': '3',
             'startHour': '08:30',
             'Comments': 'רינת שרון לרכבת כרמיאל / לחיפה (להיות ב-10 בבת גלים) ',
-            'driverName': 'רינת שרון',
+            'guardName': 'רינת שרון',
             'finishHour': '10:10'
         },
         {
@@ -287,12 +287,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '9',
             'TypeOfDrive': '3',
             'startHour': '09:15',
             'Comments': 'אוריאל מאשבל למרכז השיח בחיפה ',
-            'driverName': 'אוריאל',
+            'guardName': 'אוריאל',
             'finishHour': '12:00'
         },
         {
@@ -301,12 +301,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '9',
             'TypeOfDrive': '4',
             'startHour': '14:15',
             'Comments': 'אוריאל ברכב דבר ממרכז השיח בחיפה לאשבל. אם עדיף שאני אסע ברכב אחר וישאיר את רכב דבר בחיפה אז אין בעיה. הוא יכול לשמש את הסידור אחהצ וצריך להגיע ברביעי בבוקר לטבריה או רביד ',
-            'driverName': 'אוריאל',
+            'guardName': 'אוריאל',
             'finishHour': ''
         },
         {
@@ -315,12 +315,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '3',
             'TypeOfDrive': '3',
             'startHour': '07:20',
             'Comments': 'יהל לרקפת, מורן לצומת או אם יש נסיעה לחיפה.',
-            'driverName': 'מורן',
+            'guardName': 'מורן',
             'finishHour': ''
         },
         {
@@ -329,12 +329,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '3',
             'TypeOfDrive': '4',
             'startHour': '14:00',
             'Comments': 'מורן מהצומת, או אם יש סביב 13:00 נסיעה מחיפה',
-            'driverName': 'מורן',
+            'guardName': 'מורן',
             'finishHour': '13:00'
         },
         {
@@ -343,12 +343,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '1',
             'TypeOfDrive': '3',
             'startHour': '18:30',
             'Comments': 'תמה ואמיר שוורץ לכרמיאל עד 22:00. יש סיכוי שיהיה רכב מסידור החלוץ',
-            'driverName': 'תמה',
+            'guardName': 'תמה',
             'finishHour': '22:00'
         },
         {
@@ -357,12 +357,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '6',
             'TypeOfDrive': '2',
             'startHour': '06:15',
             'Comments': 'ב615  ליאור למשגב עד 815',
-            'driverName': 'ליאור דינרמן',
+            'guardName': 'ליאור דינרמן',
             'finishHour': '08:30'
         },
         {
@@ -371,12 +371,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '',
             'TypeOfDrive': '2',
             'startHour': '19:15',
             'Comments': 'ב1915  ליאור לרביד , סביב 2130 ליאור מרביד ',
-            'driverName': 'ליאור דינרמן',
+            'guardName': 'ליאור דינרמן',
             'finishHour': '22:30'
         },
         {
@@ -385,12 +385,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '4',
             'TypeOfDrive': '2',
             'startHour': '14:00',
             'Comments': 'אורי עם  אחד הברלינגו להביא כלב. חוזר עד 17:00 לדבר איתי על בעיות',
-            'driverName': 'אורי',
+            'guardName': 'אורי',
             'finishHour': '17:00'
         },
         {
@@ -399,12 +399,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '4',
             'TypeOfDrive': '2',
             'startHour': '08:45',
             'Comments': 'שירי צמוד לעכו ועפולה עד 15:15. אם בעייתי דברו איתי',
-            'driverName': 'שירי אליאס',
+            'guardName': 'שירי אליאס',
             'finishHour': '15:15'
         },
         {
@@ -413,12 +413,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '5',
             'TypeOfDrive': '3',
             'startHour': '07:30',
             'Comments': 'עומר לתיכון ',
-            'driverName': 'עומר כהן',
+            'guardName': 'עומר כהן',
             'finishHour': ''
         },
         {
@@ -427,12 +427,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '5',
             'TypeOfDrive': '4',
             'startHour': '17:30',
             'Comments': 'עומר רכב מהתיכון לאסוף את נועם וארי מקורות יש גם אופציות נוספות להיות איתי בקשר',
-            'driverName': 'עומר כהן',
+            'guardName': 'עומר כהן',
             'finishHour': ''
         },
         {
@@ -441,12 +441,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '2',
             'TypeOfDrive': '2',
             'startHour': '09:00',
             'Comments': 'עמיר צמוד עד 15 לאזור טבריה',
-            'driverName': 'עמיר',
+            'guardName': 'עמיר',
             'finishHour': '15:00'
         },
         {
@@ -455,12 +455,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '10',
             'TypeOfDrive': '3',
             'startHour': '14:00',
             'Comments': '14:00 אייל מאשבל ליובלים ',
-            'driverName': 'אייל יסוד',
+            'guardName': 'אייל יסוד',
             'finishHour': '14:00'
         },
         {
@@ -469,12 +469,12 @@ const mockShmiraList = {
                 '-30',
                 '10'
             ],
-            'passengers': '1',
+            'halfOrFull': '1',
             'location': '10',
             'TypeOfDrive': '4',
             'startHour': '16:30',
             'Comments': '16:30 אייל מיובלים וממשיך עם הרכב ליובלים ועצמון, עד הלילה גמיש בשעת איסוף, צריך לצאת מיובלים ב20:00 לעצמון. יכול להקפיץ חזרה לאשבל וכו\'',
-            'driverName': 'אייל יסוד',
+            'guardName': 'אייל יסוד',
             'finishHour': '20:00,20:00'
         }
     ],
