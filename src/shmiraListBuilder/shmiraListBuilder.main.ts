@@ -1,13 +1,14 @@
 import {ShmiraListRecord} from '../store/store.types';
 import {SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
 
-import {ShmiraListBuilderBuildPreferencesMetaData} from './shmiraListBuilder.buildPreferencesMetaData';
+
 import {ShmiraListBuilderBuildVehiclesAndUnAssigned} from './shmiraListBuilder.buildVehicles';
 
 import {Utils} from '../services/utils';
 import {PreferenceModel} from '../models/Preference.model';
 import {PreferenceMetaDataModel, ShmiraListBuildSettings} from './models/shmiraList.models';
 import {ShmiraListBuilderTools} from './shmiraList.tools';
+import {ShmiraListBuilderBuildPreferencesMetaData} from './shmiraListBuilder.buildOrdersMetaData';
 
 export const ShmiraListBuilder = (ShmiraList: ShmiraListRecord, buildSettings: any = null): SketchModel => {
     if (ShmiraList === null) {
@@ -34,11 +35,13 @@ export const ShmiraListBuilder = (ShmiraList: ShmiraListRecord, buildSettings: a
     baseSketch.id = newId;
     baseSketch.name = ShmiraListBuilderTools.createSketchName(baseSketch.id);
 
+
+
     return baseSketch
 }
 const mockShmiraList = {
     'id': '5',
-    'Name': 'סידור לסקיצה',
+    'Name': 'רשימת שמירה לסקיצה',
     'preferences': [
         {
             'id': '99',

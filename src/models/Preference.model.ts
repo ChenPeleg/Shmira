@@ -1,11 +1,11 @@
-import {DriveType} from './DriveType.enum';
+import {PreferenceType} from './PreferenceType.enum';
 
 export interface PreferenceModel {
     id: string,
     driverName: string,
     startHour: string,
     finishHour: string,
-    TypeOfDrive: DriveType | null,
+    TypeOfDrive: PreferenceType | null,
     location: string,
     Comments: string,
     passengers: string,
@@ -17,7 +17,7 @@ export class PreferenceFields implements PreferenceModel {
     driverName: string = 'driverName';
     startHour: string = 'startHour';
     finishHour: string = 'finishHour';
-    TypeOfDrive: DriveType | null = null;
+    TypeOfDrive: PreferenceType | null = null;
     Comments: string = 'Comments';
     location: string = 'location';
     passengers: string = 'passengers';

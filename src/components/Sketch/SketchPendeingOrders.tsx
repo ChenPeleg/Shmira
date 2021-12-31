@@ -2,10 +2,11 @@ import React from 'react'
 import {Box} from '@mui/system';
 import {useSelector} from 'react-redux';
 import {Typography} from '@mui/material';
-import {PreferenceModel} from '../../models/Preference.model';
 import {translations} from '../../services/translations';
-import {SketchPendingPreference} from './SketchPendingPreference';
+
 import {ShmiraListStore} from '../../store/store.types';
+import {SketchPendingPreference} from './SketchPendingOrder';
+import {PreferenceModel} from '../../models/Preference.model';
 
 
 interface sketchPendingPreferencesProps {

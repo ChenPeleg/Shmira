@@ -4,13 +4,13 @@ import {useDispatch} from 'react-redux';
 import {Button, Typography} from '@mui/material';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
-import {PreferenceModel} from '../../models/Preference.model';
-import {ActionsTypes} from '../../store/types.actions';
-import {PendingPreferenceMenu} from './pending-preference-menu';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import {PreferenceActionButton} from '../buttons/preference-action-button';
+
 import {translations} from '../../services/translations';
 import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
+import {PendingPreferenceMenu} from './pending-order-menu';
+import {ActionsTypes} from '../../store/types.actions';
+import {PreferenceActionButton} from '../buttons/order-action-button';
+import {PreferenceModel} from '../../models/Preference.model';
 
 
 interface sketchPendingPreferenceProps {
@@ -131,12 +131,12 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
                             onClick={handlePendingPreferenceMenuOpen}
                             variant={'contained'}
                     >&nbsp; {translations.moerActions}
-                        <MoreIcon sx={{
-                            pl: 0,
-                            pr: 0,
-                            mr: 0,
-                            ml: 0
-                        }}/>
+                        {/*<MoreIcon sx={{*/}
+                        {/*    pl: 0,*/}
+                        {/*    pr: 0,*/}
+                        {/*    mr: 0,*/}
+                        {/*    ml: 0*/}
+                        {/*}}/>*/}
                     </Button>
                 </Box>
                 <Box sx={{p: '0.5em'}}>

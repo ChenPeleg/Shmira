@@ -5,7 +5,7 @@ import {Card, Typography} from '@mui/material';
 import {DriveModel} from '../../models/Sketch.model';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
-import {DriveType} from '../../models/DriveType.enum';
+import {PreferenceType} from '../../models/PreferenceType.enum';
 import {Utils} from '../../services/utils';
 import {translations} from '../../services/translations';
 import {Colors, Styles} from '../../hoc/themes';
@@ -113,11 +113,11 @@ export const SketchDrive = (props: sketchDriveProps) => {
                 }}>
                     <Typography dir="ltr"
                                 variant={'subtitle1'}>{drive.startHour}  </Typography>
-                    {drive.TypeOfDrive === DriveType.Tsamud || drive.TypeOfDrive === DriveType.TwoWay ?
+                    {drive.TypeOfDrive === PreferenceType.CanGuardIn || drive.TypeOfDrive === PreferenceType.CantGuardIn ?
                         (<><Box sx={{
                             width: '10px',
                             height: '2px',
-                            bpreferenceBottom: '1px solid black',
+                            borderBottom: '1px solid black',
                             alignSelf: 'center'
                         }}/>
                             <Typography dir="ltr"

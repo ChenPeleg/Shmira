@@ -3,8 +3,9 @@ import {StoreUtils} from './store-utils';
 import {DownloadFile} from '../services/download-file';
 import {Utils} from '../services/utils';
 import {ActionsTypes} from './types.actions';
-import {ImportPreferencesFromText} from '../services/import-preferences-from-text';
+import {ImportPreferencesFromText} from '../services/import-orders-from-text';
 import {PreferenceModel} from '../models/Preference.model';
+
 
 export type ImportReducerFunctions =
     ActionsTypes.EXPORT_ALL |

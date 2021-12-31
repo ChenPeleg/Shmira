@@ -1,6 +1,6 @@
 import {ActionsTypes} from './types.actions'
 import {PreferenceModel} from '../models/Preference.model';
-import {DriveType} from '../models/DriveType.enum';
+import {PreferenceType} from '../models/PreferenceType.enum';
 import {VehicleModel} from '../models/Vehicle.model';
 import {SketchModel} from '../models/Sketch.model';
 import {LocationGroup} from '../models/Location.model';
@@ -63,7 +63,7 @@ export const defaultPreferenceValues: PreferenceModel = {
     driverName: '',
     startHour: '08:00',
     finishHour: '09:00',
-    TypeOfDrive: DriveType.OneWayTo,
+    TypeOfDrive: PreferenceType.CantGuardIn,
     Comments: '',
     passengers: '1',
     flexibility: ['-30', '10'],

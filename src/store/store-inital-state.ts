@@ -1,7 +1,7 @@
 export const defaultShmiraListEshbal: any =
     {
         'id': '5',
-        'Name': 'סידור לסקיצה',
+        'Name': 'רשימת שמירה לסקיצה',
         'preferences': [
             {
                 'id': '99',

@@ -1,4 +1,4 @@
-import {DriveType} from './DriveType.enum';
+import {PreferenceType} from './PreferenceType.enum';
 import {PreferenceModel} from './Preference.model';
 
 export interface DriveModel extends PreferenceModel {
@@ -6,7 +6,7 @@ export interface DriveModel extends PreferenceModel {
     driverName: string,
     startHour: string,
     finishHour: string,
-    TypeOfDrive: DriveType | null,
+    TypeOfDrive: PreferenceType | null,
     location: string,
     Comments: string,
     passengers: string,

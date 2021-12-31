@@ -3,9 +3,9 @@ import {translations} from '../../services/translations';
 import {Box} from '@mui/system';
 import {PrefrenceRequest} from './prefrence-request';
 import {useDispatch, useSelector} from 'react-redux';
-import {PreferenceModel} from '../../models/Preference.model';
 import {ActionsTypes} from '../../store/types.actions';
 import {AddButton} from '../Icons/add-button';
+import {PreferenceModel} from '../../models/Preference.model';
 
 const TRL = translations;
 const useStyles = (() => ({
@@ -14,7 +14,7 @@ const useStyles = (() => ({
         cursor: 'pointer',
         width: '50vw',
 
-        bpreferenceRadius: '15px'
+        borderRadius: '15px'
 
     },
     cardHeader: {

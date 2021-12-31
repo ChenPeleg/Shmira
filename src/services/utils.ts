@@ -1,6 +1,6 @@
 import {hashFunction} from './hash-function';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
-import {DriveType} from '../models/DriveType.enum';
+import {PreferenceType} from '../models/PreferenceType.enum';
 
 
 export const Utils = {
@@ -30,7 +30,7 @@ export const Utils = {
     },
     defaultSketchMMock(): SketchModel {
         let ids: number = 1
-        const mkDrv = (driver: string, start: string, finish: string, location: string, TypeOfDrive: DriveType = DriveType.Tsamud): DriveModel => {
+        const mkDrv = (driver: string, start: string, finish: string, location: string, TypeOfDrive: PreferenceType = PreferenceType.CanGuardIn): DriveModel => {
             ids++
             return {
                 id: ids.toString(),

@@ -1,8 +1,8 @@
 import {IAction, ShmiraListStore} from './store.types';
 import {ActionsTypes} from './types.actions';
 import {SketchModel} from '../models/Sketch.model';
-import {PreferenceModel} from '../models/Preference.model';
 import {StoreUtils} from './store-utils';
+import {PreferenceModel} from '../models/Preference.model';
 
 export type PendingPreferencesReducerFunctions =
     ActionsTypes.CLICKED_PENDING_ORDER
@@ -17,7 +17,7 @@ export type PendingPreferencesReducerFunctions =
     | ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER
 
 
-export const PendingPrefrencesReducer: Record<PendingPreferencesReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
+export const PendingPreferencesReducer: Record<PendingPreferencesReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
     [ActionsTypes.CLICKED_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         if (action.payload.id) {

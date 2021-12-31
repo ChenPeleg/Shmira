@@ -4,10 +4,9 @@ import {Field, Form} from 'react-final-form';
 import {MuiFormPropsModel} from '../../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
 import {HourPicker} from '../Form/hour-picker';
-import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
 import {RenderTextField} from '../Form/text-field';
 import {RenderSelectField} from '../Form/select-field';
-import {DriveType} from '../../models/DriveType.enum';
+import {PreferenceType} from '../../models/PreferenceType.enum';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Button, MenuItem} from '@mui/material';
 import {translations} from '../../services/translations';
@@ -18,6 +17,7 @@ import {LanguageUtilities} from '../../services/language-utilities';
 import {RenderPassengerField} from '../Form/passengers-field';
 import {RenderFlexibilityField} from '../Form/flexibility-field';
 import {RenderSelectFieldAutoComplete} from '../Form/select-field-auto-complete';
+import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
 
 
 const TRL = translations;
@@ -118,9 +118,9 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                         component={RenderSelectField}
                         label={TRL.TypeOfDrive}
                     >
-                        <MenuItem value={DriveType.Tsamud.toString()}>{TRL.Tsamud}</MenuItem>
-                        <MenuItem value={DriveType.OneWayFrom.toString()}> {TRL.OneWayFrom}</MenuItem>
-                        <MenuItem value={DriveType.OneWayTo.toString()}>{TRL.OneWayTo}</MenuItem>
+                        <MenuItem value={PreferenceType.CanGuardIn.toString()}>{TRL.Tsamud}</MenuItem>
+                        <MenuItem value={PreferenceType.OneWayFrom.toString()}> {TRL.OneWayFrom}</MenuItem>
+                        <MenuItem value={PreferenceType.CantGuardIn.toString()}>{TRL.OneWayTo}</MenuItem>
 
                     </Field>
 
@@ -143,7 +143,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 </Box>
                 <Box sx={fieldWrapper}
                 >
-                    <Field name={preferenceFields.finishHour} custom={{inActive: typeOfDrive !== DriveType.Tsamud}} component={HourPicker}
+                    <Field name={preferenceFields.finishHour} custom={{inActive: typeOfDrive !== PreferenceType.CanGuardIn}} component={HourPicker}
                            label={driveTimelanguage.timeEnd}/>
                 </Box>
 
@@ -204,7 +204,7 @@ export const PrefrenceRequestForm = (formProps: MuiFormPropsModel) => {
 
     const initialValues = preferences.find(preference => preference.id === id);
     // @ts-ignore
-    const [_typeOfDrive, set_typeOfDrive] = useState(initialValues.TypeOfDrive as DriveType)
+    const [_typeOfDrive, set_typeOfDrive] = useState(initialValues.TypeOfDrive as PreferenceType)
     let formValues = {...initialValues};
 
 

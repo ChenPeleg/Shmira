@@ -5,13 +5,13 @@ import {Collapse, Divider, Typography} from '@mui/material';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../../models/Sketch.model';
 import {VehicleModel} from '../../models/Vehicle.model';
 import {SketchDrive} from './SketchDrive';
-import {SketchPendingPreferences} from './SketchPendeingPreferences';
 import {ListSketchDriveEditDialog} from '../Dialogs/list-sketch-drive-edit-dialog';
 import {ActionsTypes} from '../../store/types.actions';
 import {ShmiraListStore} from '../../store/store.types';
 import {SketchNoSketchMessage} from './sketch-no-sketch-message';
 
 import {TransitionGroup} from 'react-transition-group';
+import {SketchPendingPreferences} from './SketchPendeingOrders';
 
 const MOckDrive = {
     'id': '0',
@@ -136,7 +136,7 @@ export const Sketch = () => {
                                 </TransitionGroup>
 
                             </Box>
-                            <Divider orientation="vertical" variant={'fullWidth'} sx={{bpreferenceRight: '2px solid black '}} flexItem/>
+                            <Divider orientation="vertical" variant={'fullWidth'} sx={{borderRight: '2px solid black '}} flexItem/>
                         </Box>)
 
 

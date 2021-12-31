@@ -20,10 +20,10 @@ import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action
 import {Utils} from '../../services/utils';
 import {FileUploadType, ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
 import {FileUploadDialog} from '../Dialogs/file-uplaod-dialog';
-import {PreferenceImportDialog} from '../Dialogs/preferences-import-dialog';
 import {ToggleButtons} from '../buttons/toggle-button-group';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {ShmiraListManagementDialog} from '../Dialogs/shmira-list-management-dialog';
+import {PreferenceImportDialog} from '../Dialogs/orders-import-dialog';
 
 
 export const AppNavBar = () => {

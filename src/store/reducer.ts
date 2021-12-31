@@ -9,7 +9,7 @@ import {VehicleReducer} from './vehicle.reducer';
 import {ActionsTypes} from './types.actions';
 import {DisplayReducer} from './display.reducer';
 import {ListSketchReducer} from './list-sketch.reducer';
-import {PendingPrefrencesReducer} from './pendingPrefrences.reducer';
+import {PendingPreferencesReducer} from './pendingPreferencesReducer';
 import {ListSketchNightReducer} from './list-sketch-night.reducer';
 import {LocationGroupReducer} from './locationGroup.reducer';
 import {defaultShmiraListEshbal} from './store-inital-state';
@@ -41,7 +41,7 @@ const defaultInitialState: ShmiraListStore = {
     locationGroupInEdit: null,
     shmiraListCollection: [{
         id: '1',
-        Name: 'סידור גנים',
+        Name: 'רשימת שמירה 2021',
         preferences: [],
         deletedPreferences: [],
         vehicles: [defaultVehicleValues],
@@ -129,7 +129,7 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
         case ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER  :
         case ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER:
 
-            return PendingPrefrencesReducer [action.type](newState, action)
+            return PendingPreferencesReducer [action.type](newState, action)
         case ActionsTypes.DELETE_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE:
         case ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE:

@@ -1,4 +1,4 @@
-import {DriveType} from '../models/DriveType.enum';
+import {PreferenceType} from '../models/PreferenceType.enum';
 import {translations} from './translations';
 import {PreferenceModel} from '../models/Preference.model';
 import {LocationModel} from '../models/Location.model';
@@ -13,27 +13,27 @@ interface driveHourPrefixes {
 }
 
 export const LanguageUtilities = {
-    getPrefixByDriveType(driveType: DriveType | undefined): driveHourPrefixes {
+    getPrefixByDriveType(driveType: PreferenceType | undefined): driveHourPrefixes {
         switch (driveType) {
-            case DriveType.OneWayFrom:
+            case PreferenceType.OneWayFrom:
                 return {
                     timeStart: translations.pickupTime,
                     timeEnd: '',
                     location: translations.fromLocation
                 }
-            case DriveType.OneWayTo:
+            case PreferenceType.CantGuardIn:
                 return {
                     timeStart: translations.exitTime,
                     timeEnd: '',
                     location: translations.toLocation
                 }
-            case DriveType.Tsamud:
+            case PreferenceType.CanGuardIn:
                 return {
                     timeStart: translations.exitTime,
                     timeEnd: translations.returnTime,
                     location: translations.inLocation
                 }
-            case DriveType.TwoWay:
+            case PreferenceType.CantGuardIn:
                 return {
                     timeStart: translations.Start,
                     timeEnd: translations.returnTime,
@@ -59,7 +59,7 @@ export const LanguageUtilities = {
 
         }
         let timeText = preferenceValues?.startHour || '';
-        if (preferenceValues.TypeOfDrive === DriveType.Tsamud && preferenceValues?.startHour && preferenceValues?.finishHour) {
+        if (preferenceValues.TypeOfDrive === PreferenceType.CanGuardIn && preferenceValues?.startHour && preferenceValues?.finishHour) {
             timeText = preferenceValues.startHour + ' - ' + preferenceValues.finishHour;
         }
         let briefText = preferenceValues.driverName;

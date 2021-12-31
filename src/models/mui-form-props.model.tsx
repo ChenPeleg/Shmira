@@ -1,4 +1,4 @@
-import {DriveType} from './DriveType.enum';
+import {PreferenceType} from './PreferenceType.enum';
 
 export interface MuiFormPropsModel {
     handleSubmit: any,
@@ -7,6 +7,6 @@ export interface MuiFormPropsModel {
     submitting: any,
     preferenceId: any,
     isInEdit: boolean,
-    typeOfDrive?: DriveType
+    typeOfDrive?: PreferenceType
 
 }

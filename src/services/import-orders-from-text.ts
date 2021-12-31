@@ -1,5 +1,5 @@
 import {PreferenceModel} from '../models/Preference.model';
-import {DriveType} from '../models/DriveType.enum';
+import {PreferenceType} from '../models/PreferenceType.enum';
 import {defaultPreferenceValues} from '../store/store.types';
 import {locations} from './locations';
 import {LocationModel} from '../models/Location.model';
@@ -126,9 +126,9 @@ const searchAnotherTimeInText = (preference: PreferenceModel): { anotherTime: st
 
     return results
 }
-const searchLocationInText = (text: string): { locationFound: LocationModel | null, typeOfDrive: DriveType | null } => {
+const searchLocationInText = (text: string): { locationFound: LocationModel | null, typeOfDrive: PreferenceType | null } => {
     const allLocations: LocationModel[] = [...locations];
-    const results: { locationFound: LocationModel | null, typeOfDrive: DriveType | null } = {
+    const results: { locationFound: LocationModel | null, typeOfDrive: PreferenceType | null } = {
         locationFound: null,
         typeOfDrive:
             null
@@ -145,17 +145,17 @@ const searchLocationInText = (text: string): { locationFound: LocationModel | nu
         const toPrefixes = [translations.toLocation, translations.toLocationLe];
         const tzamudPrefix = [translations.inLocation];
         if (fromPrefixes.some(pre => text.includes(pre + locName))) {
-            results.typeOfDrive = DriveType.OneWayFrom
+            results.typeOfDrive = PreferenceType.OneWayFrom
         }
         if (toPrefixes.some(pre => text.includes(pre + locName))) {
-            results.typeOfDrive = DriveType.OneWayTo
+            results.typeOfDrive = PreferenceType.CantGuardIn
         }
         if (tzamudPrefix.some(pre => text.includes(pre + locName))) {
-            results.typeOfDrive = DriveType.Tsamud
+            results.typeOfDrive = PreferenceType.CanGuardIn
         }
     }
     if (text.includes(translations.TsamudWord)) {
-        results.typeOfDrive = DriveType.Tsamud
+        results.typeOfDrive = PreferenceType.CanGuardIn
     }
 
     return results

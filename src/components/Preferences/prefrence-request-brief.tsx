@@ -1,13 +1,13 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Typography} from '@mui/material';
 import {translations} from '../../services/translations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {LocationModel} from '../../models/Location.model';
 import {locations} from '../../services/locations';
-import {DriveType} from '../../models/DriveType.enum';
+import {PreferenceType} from '../../models/PreferenceType.enum';
+import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
 
 
 //const TRL = translations;
@@ -55,7 +55,7 @@ const areDetailsMissing = (preferenceValues: PreferenceModel): boolean => {
     if (!preferenceValues.TypeOfDrive || !preferenceValues.driverName || !preferenceValues.startHour) {
         return true
     }
-    if (preferenceValues.TypeOfDrive === DriveType.Tsamud) {
+    if (preferenceValues.TypeOfDrive === PreferenceType.CanGuardIn) {
         if (!preferenceValues.finishHour || !preferenceValues.startHour) {
             return true
         }
@@ -69,7 +69,7 @@ const buildBriefText = (preferenceValues: PreferenceModel): string => {
         return translations.NewPreference
     }
     let timeText = preferenceValues?.startHour || '';
-    if (preferenceValues.TypeOfDrive === DriveType.Tsamud && preferenceValues?.startHour && preferenceValues?.finishHour) {
+    if (preferenceValues.TypeOfDrive === PreferenceType.CanGuardIn && preferenceValues?.startHour && preferenceValues?.finishHour) {
         timeText = preferenceValues.finishHour + ' - ' + preferenceValues.startHour;
     }
     let briefText = timeText + ' ' + preferenceValues.driverName;

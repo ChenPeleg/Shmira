@@ -1,6 +1,6 @@
 import {PreferenceModel} from '../models/Preference.model';
 
-import {DriveType} from '../models/DriveType.enum';
+import {PreferenceType} from '../models/PreferenceType.enum';
 import {locations} from '../services/locations';
 import {CloneUtil} from '../services/clone-utility';
 import {Utils} from '../services/utils';
@@ -30,7 +30,7 @@ export const ShmiraListBuilderBuildPreferencesMetaData = (preferences: Preferenc
     // Estimate finish hour of non-Tsamud Drives
     preferencesMeta.forEach((metaPreference: PreferenceMetaDataModel) => {
         const driveType = metaPreference.preference.TypeOfDrive
-        if (driveType === DriveType.Tsamud) {
+        if (driveType === PreferenceType.CanGuardIn) {
             return
         }
         const locationId = metaPreference.preference.location;
@@ -47,10 +47,10 @@ export const ShmiraListBuilderBuildPreferencesMetaData = (preferences: Preferenc
         }
         const EtaInHours = Utils.minutesToFraction(locationObj.ETA);
         switch (driveType) {
-            case DriveType.OneWayTo:
+            case PreferenceType.CantGuardIn:
                 metaPreference.finish = metaPreference.start + EtaInHours * 2;
                 break;
-            case DriveType.OneWayFrom:
+            case PreferenceType.OneWayFrom:
                 metaPreference.finish = metaPreference.start + EtaInHours;
                 metaPreference.start = metaPreference.start - EtaInHours;
                 break;

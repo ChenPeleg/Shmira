@@ -1,13 +1,10 @@
 import React, {useState} from 'react'
-import {useDispatch} from 'react-redux';
-import {PreferenceModel} from '../../models/Preference.model';
-import {SketchPendingPreferenceBrief} from './SketchPendingPreferenceBrief';
-import {ActionsTypes} from '../../store/types.actions';
+import {useDispatch} from 'react-redux'; import {ActionsTypes} from '../../store/types.actions';
 import {SxProps} from '@mui/system';
 import {Box, Card, Collapse} from '@mui/material';
-import {SketchPendingPreferenceFull} from './SketchPendingPreferenceFull';
-
-
+import {SketchPendingPreferenceFull} from './SketchPendingOrderFull';
+import {SketchPendingPreferenceBrief} from './SketchPendingOrderBrief';
+import {PreferenceModel} from '../../models/Preference.model';
 interface sketchPendingPreferenceProps {
     preference: PreferenceModel,
     isInEdit: boolean

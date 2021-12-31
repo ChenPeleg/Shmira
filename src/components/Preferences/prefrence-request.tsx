@@ -20,7 +20,7 @@ const useStyles = (() => ({
     cardBase: {
         padding: '10px',
         width: '50vw',
-        bpreferenceRadius: '15px',
+        borderRadius: '15px',
     },
     cardHeader: {
         paddingBottom: 0,
