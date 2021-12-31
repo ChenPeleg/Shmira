@@ -1,11 +1,12 @@
 import {DriveModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {VehicleModel} from '../models/Vehicle.model';
-import {OrderMetaDataModel, OrderMetaStatus} from './models/sidurBuilder.models';
+
 import {OrderModel} from '../models/Order.model';
 import {Utils} from '../services/utils';
 import {LanguageUtilities} from '../services/language-utilities';
 import {locations} from '../services/locations';
-import {SidurBuilderTools} from './sidurBuilder.tools';
+import {OrderMetaDataModel, OrderMetaStatus} from './models/shmiraList.models';
+import {ShmiraListBuilderTools} from './shmiraList.tools';
 
 interface OrdMetaScheduleData {
     start: number,
@@ -15,13 +16,13 @@ interface OrdMetaScheduleData {
 
 }
 
-export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataModel[], vehicles: VehicleModel[], buildSettings: any = null): {
+export const ShmiraListBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataModel[], vehicles: VehicleModel[], buildSettings: any = null): {
     vehicleSchedules: VehicleScheduleModel[],
     unassignedOrders: OrderModel[],
     assignedOrders: OrderModel[],
 
 } => {
-    const enumerator = SidurBuilderTools.EnumeratorConstructor();
+    const enumerator = ShmiraListBuilderTools.EnumeratorConstructor();
     const metaOrderScheduleData: OrdMetaScheduleData[] = orders.map((o: OrderMetaDataModel) => {
         return {
             start: o.start,

@@ -9,20 +9,20 @@ import {RenameDialog} from '../rename-dialog';
 import Mock = jest.Mock;
 
 
-describe('Sidur rename import Dialog', () => {
+describe('ShmiraList rename import Dialog', () => {
     let fileDialog: any = null;
     let component: any = null;
     let _baseElement: any = null;
     let store: any;
     let onClose: Mock = jest.fn();
-    const sidurDefaultName = 'name of sidur'
+    const shmiraListDefaultName = 'name of shmiraList'
     beforeEach(async () => {
         onClose = jest.fn();
 
         const middlewares: any = []
         const mockStore = configureStore(middlewares);
         store = mockStore({});
-        fileDialog = (<Provider store={store}><RenameDialog selectedValue={sidurDefaultName} open={true} key={'1'} onClose={onClose}/>
+        fileDialog = (<Provider store={store}><RenameDialog selectedValue={shmiraListDefaultName} open={true} key={'1'} onClose={onClose}/>
         </Provider>);
         component = mount(fileDialog);
 
@@ -41,7 +41,7 @@ describe('Sidur rename import Dialog', () => {
     });
     it('closes dialog on press cancel', async () => {
 
-        component.find('#sidur-rename-cancel-button').hostNodes().first().simulate('click');
+        component.find('#shmiraList-rename-cancel-button').hostNodes().first().simulate('click');
         expect(onClose).toHaveBeenCalledWith(null);
 
 
@@ -49,11 +49,11 @@ describe('Sidur rename import Dialog', () => {
     it('entering value and pressing approve triggers dispatch', async () => {
 
         act(() => {
-            const input = component.find('input#sidur-rename-dialog-text-field');
+            const input = component.find('input#shmiraList-rename-dialog-text-field');
 
-            input.instance().value = 'rename sidur';
-            component.find('#sidur-rename-approve-button').hostNodes().first().simulate('click');
-            expect(onClose).toHaveBeenCalledWith('rename sidur');
+            input.instance().value = 'rename shmiraList';
+            component.find('#shmiraList-rename-approve-button').hostNodes().first().simulate('click');
+            expect(onClose).toHaveBeenCalledWith('rename shmiraList');
 
 
         })

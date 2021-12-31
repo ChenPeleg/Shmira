@@ -46,9 +46,9 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
 
             default:
         }
-        handleSidurMenuClose()
+        handleShmiraListMenuClose()
     };
-    const handleSidurMenuClose = () => {
+    const handleShmiraListMenuClose = () => {
         setPendingOrderAnchorEl(null);
     };
     const handlePendingOrderMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -69,7 +69,7 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
     pendingOrdersActions = [];
     const order = props.order;
     const actionButtonSx: SxProps = {}
-    const isSidurMenuOpen = Boolean(pendingOrderAnchorEl);
+    const isShmiraListMenuOpen = Boolean(pendingOrderAnchorEl);
 
     return ((<Box id={'pending-order'}>
             <Box id={'pending-order-data'} sx={{
@@ -154,8 +154,8 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
 
             </Box>
             <PendingOrderMenu PendingOrderMenuAnchor={pendingOrderAnchorEl} PendingOrderMenuId={pendingOrderMenuId}
-                              isPendingOrderMenuOpen={isSidurMenuOpen}
-                              handlePendingOrderMenuClick={handlePendingOrderMenuClick} handlePendingOrderMenuClose={handleSidurMenuClose}/>
+                              isPendingOrderMenuOpen={isShmiraListMenuOpen}
+                              handlePendingOrderMenuClick={handlePendingOrderMenuClick} handlePendingOrderMenuClose={handleShmiraListMenuClose}/>
         </Box>)
 
     )

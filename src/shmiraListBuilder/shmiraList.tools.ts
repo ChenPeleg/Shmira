@@ -1,6 +1,6 @@
 import {translations} from '../services/translations';
 
-export const SidurBuilderTools = {
+export const ShmiraListBuilderTools = {
 
     createSketchName(id: string): string {
         switch (id) {

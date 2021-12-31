@@ -18,7 +18,7 @@ import {Utils} from '../../services/utils';
 import {OrderActionButton} from '../buttons/order-action-button';
 import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
 import {ActionsTypes} from '../../store/types.actions';
-import {SidurStore} from '../../store/store.types';
+import {ShmiraListStore} from '../../store/store.types';
 
 interface SketchDriveEditDialogProps {
     open: boolean;
@@ -38,7 +38,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     const vehicleId = sketchDriveData.vehicleId
     const driveData = sketchDriveData.drive
     const dispatch = useDispatch();
-    const SketchIdInEdit = useSelector((state: SidurStore) => state.SketchIdInEdit);
+    const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
 

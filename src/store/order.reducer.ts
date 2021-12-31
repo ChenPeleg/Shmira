@@ -1,4 +1,4 @@
-import {AppConstants, defaultOrderValues, IAction, SidurStore} from './store.types';
+import {AppConstants, defaultOrderValues, IAction, ShmiraListStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {Utils} from '../services/utils';
 import {OrderModel} from '../models/Order.model';
@@ -13,8 +13,8 @@ export type OrderReducerFunctions =
     | ActionsTypes.CLONE_ORDER
 
 
-export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
-    [ActionsTypes.ADD_NEW_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+export const OrderReducer: Record<OrderReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
+    [ActionsTypes.ADD_NEW_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const newId = Utils.getNextId(getAllOrdersIDs(state))
         const newOrder: OrderModel = {
@@ -23,11 +23,11 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         }
         newState.orders = [...newState.orders]
         newState.orders.unshift(newOrder);
-        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
+        newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
-    [ActionsTypes.CLONE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLONE_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state};
         newState = updateOrdersWithEditedOrder(newState)
         const cloneOriginId = action.payload.id
@@ -42,18 +42,18 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
             newState.orders = [...newState.orders]
             newState.orders.splice(orderIndex, 0, newOrder)
 
-            newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
+            newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState)
             StoreUtils.HandleReducerSaveToLocalStorage(newState);
         }
 
         return newState
     },
-    [ActionsTypes.UPDATE_ORDER_IN_EDIT]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.UPDATE_ORDER_IN_EDIT]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         newState.dataHolderForCurrentOrderInEdit = action.payload;
         return newState
     },
-    [ActionsTypes.UPDATE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.UPDATE_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const orderId = action.payload.id;
         newState.orders = newState.orders.map(order => {
@@ -64,11 +64,11 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         });
         newState.dataHolderForCurrentOrderInEdit = null;
         newState.orderIdInEdit = null;
-        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
+        newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
-    [ActionsTypes.CLICKED_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLICKED_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const clickedOrderId = action.payload.id;
         newState = updateOrdersWithEditedOrder(newState)
@@ -76,7 +76,7 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         newState.orderIdInEdit = clickedOrderId
         return newState
     },
-    [ActionsTypes.DELETE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.DELETE_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const deleteOrderId = action.payload.id;
         newState.orders = newState.orders.filter(order => deleteOrderId !== order.id)
@@ -86,13 +86,13 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         if (newState.orderIdInEdit === deleteOrderId) {
             newState.orderIdInEdit = null;
         }
-        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
+        newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
 
 }
-const getAllOrdersIDs = (state: SidurStore): string[] => {
+const getAllOrdersIDs = (state: ShmiraListStore): string[] => {
     const ordersIds = state.orders.map(o => o.id);
     const deletedIdsWithWords = state.deletedOrders.map(o => o.id);
     const replaceIdsNames: RegExp = new RegExp(AppConstants.ArchiveIdPrefix + '|' + AppConstants.deleteIdPrefix, 'g');
@@ -100,7 +100,7 @@ const getAllOrdersIDs = (state: SidurStore): string[] => {
     const deletedIds = deletedIdsWithWords.map(o => o.replace(replaceIdsNames, ''))
     return [...deletedIds, ...ordersIds]
 }
-const updateOrdersWithEditedOrder = (state: SidurStore): SidurStore => {
+const updateOrdersWithEditedOrder = (state: ShmiraListStore): ShmiraListStore => {
     const currentOrderId = state?.dataHolderForCurrentOrderInEdit?.id
     if (currentOrderId) {
         state.orders = state.orders.map(order => {

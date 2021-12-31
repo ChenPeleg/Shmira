@@ -4,7 +4,7 @@ export interface SuggestionModel {
     driveId: string | string [];
 }
 
-export interface SidurBuildSettings {
+export interface ShmiraListBuildSettings {
     custom: any
 }
 

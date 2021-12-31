@@ -14,16 +14,16 @@ import {Select, SelectChangeEvent} from '@mui/material';
 import {Edit} from '@mui/icons-material';
 import {ProfileMenu} from './profile-menu';
 import {ActionsTypes} from '../../store/types.actions';
-import {SidurMenu} from './sidur-menu';
-import {SidurActionType} from '../../models/SidurMenuClickActionType.enum';
+import {ShmiraListMenu} from './shmiraList-menu';
+import {ShmiraListActionType} from '../../models/ShmiraListMenuClickActionType.enum';
 import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
 import {Utils} from '../../services/utils';
-import {FileUploadType, SidurRecord, SidurStore} from '../../store/store.types';
+import {FileUploadType, ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
 import {FileUploadDialog} from '../Dialogs/file-uplaod-dialog';
-import {SidurManagementDialog} from '../Dialogs/sidur-management-dialog';
 import {OrderImportDialog} from '../Dialogs/orders-import-dialog';
 import {ToggleButtons} from '../buttons/toggle-button-group';
 import {RenameDialog} from '../Dialogs/rename-dialog';
+import {ShmiraListManagementDialog} from '../Dialogs/shmira-list-management-dialog';
 
 
 export const AppNavBar = () => {
@@ -31,21 +31,21 @@ export const AppNavBar = () => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [RenameOpen, setRenameOpen] = React.useState(false);
     const [UploadOpen, setUploadOpen] = React.useState(false);
-    const [ManageSidurimOpen, setManageSidurimOpen] = React.useState(false);
+    const [ManageShmiraListimOpen, setManageShmiraListimOpen] = React.useState(false);
     const [importOrdersOpen, setImportOrdersOpen] = React.useState(false);
     const [uploadDialogOpen, setUploadDialogOpen] = React.useState(false);
-    const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
+    const [shmiraListMoreAnchorEl, setShmiraListMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
-    const sidurId = useSelector((state: SidurStore) => state.sidurId);
-    const sidurCollection = useSelector((state: SidurStore) => state.sidurCollection);
-    const sidurSelected = sidurCollection.find((sidurRecord: SidurRecord) => sidurRecord.id === sidurId);
-    const nextSidurId = Utils.getNextId(sidurCollection.map(c => c.id));
+    const shmiraListId = useSelector((state: ShmiraListStore) => state.shmiraListId);
+    const shmiraListCollection = useSelector((state: ShmiraListStore) => state.shmiraListCollection);
+    const shmiraListSelected = shmiraListCollection.find((shmiraListRecord: ShmiraListRecord) => shmiraListRecord.id === shmiraListId);
+    const nextShmiraListId = Utils.getNextId(shmiraListCollection.map(c => c.id));
 
-    const sidurName = sidurSelected?.Name || '';
+    const shmiraListName = shmiraListSelected?.Name || '';
 
 
     const isProfileMenuOpen = Boolean(anchorEl);
-    const isSidurMenuOpen = Boolean(sidurMoreAnchorEl);
+    const isShmiraListMenuOpen = Boolean(shmiraListMoreAnchorEl);
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -53,7 +53,7 @@ export const AppNavBar = () => {
 
     const handleRenameClose = (value: string | null) => {
         setRenameOpen(false);
-        const id = sidurId;
+        const id = shmiraListId;
         if (value) {
             dispatch({
                 type: ActionsTypes.RENAME_SIDUR,
@@ -73,44 +73,44 @@ export const AppNavBar = () => {
             })
         }
     };
-    const handleSidurMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SidurActionType) => {
+    const handleShmiraListMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: ShmiraListActionType) => {
 
         switch (clickAction) {
 
-            case SidurActionType.CreateCopy:
+            case ShmiraListActionType.CreateCopy:
                 dispatch({
                     type: ActionsTypes.CLONE_SIDUR,
-                    payload: {id: sidurId}
+                    payload: {id: shmiraListId}
                 })
                 break;
-            case SidurActionType.Archive:
+            case ShmiraListActionType.Archive:
                 dispatch({
                     type: ActionsTypes.ARCHIVE_SIDUR,
-                    payload: {id: sidurId}
+                    payload: {id: shmiraListId}
                 })
                 break;
-            case SidurActionType.Delete:
+            case ShmiraListActionType.Delete:
                 dispatch({
                     type: ActionsTypes.DELETE_SIDUR,
-                    payload: {id: sidurId}
+                    payload: {id: shmiraListId}
                 })
                 break;
-            case SidurActionType.Rename:
+            case ShmiraListActionType.Rename:
                 setRenameOpen(true);
                 break;
-            case SidurActionType.ManageSidurim:
-                setManageSidurimOpen(true);
+            case ShmiraListActionType.ManageShmiraListim:
+                setManageShmiraListimOpen(true);
                 break;
-            case SidurActionType.ImportOrders:
+            case ShmiraListActionType.ImportOrders:
                 setImportOrdersOpen(true);
                 break;
 
             default:
         }
-        handleSidurMenuClose()
+        handleShmiraListMenuClose()
     };
-    const handleSidurMenuClose = () => {
-        setSidurMoreAnchorEl(null);
+    const handleShmiraListMenuClose = () => {
+        setShmiraListMoreAnchorEl(null);
     };
 
     const handleProfileMenuClose = (result: any, action?: ProfileMenuClickActionType) => {
@@ -136,16 +136,16 @@ export const AppNavBar = () => {
                 break;
             default:
         }
-        handleSidurMenuClose();
+        handleShmiraListMenuClose();
     };
 
-    const handleSidurMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setSidurMoreAnchorEl(event.currentTarget);
+    const handleShmiraListMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setShmiraListMoreAnchorEl(event.currentTarget);
     };
-    const handleSidurChanged = (event: any, child: React.ReactNode) => {
+    const handleShmiraListChanged = (event: any, child: React.ReactNode) => {
 
-        const chosenSidur = event.target.value as string;
-        if (chosenSidur === 'NEW') {
+        const chosenShmiraList = event.target.value as string;
+        if (chosenShmiraList === 'NEW') {
             dispatch({
                 type: ActionsTypes.ADD_NEW_SIDUR,
                 payload: null
@@ -153,14 +153,14 @@ export const AppNavBar = () => {
         } else {
             dispatch({
                 type: ActionsTypes.CHOOSE_SIDUR,
-                payload: {id: chosenSidur}
+                payload: {id: chosenShmiraList}
             })
         }
 
 
     }
     const menuId = 'primary-search-account-menu';
-    const sidurMenuId = 'primary-search-account-menu-mobile';
+    const shmiraListMenuId = 'primary-search-account-menu-mobile';
     return (
         <Box dir="rtl"
         >
@@ -194,28 +194,28 @@ export const AppNavBar = () => {
                             }
                         }}
                     >    &nbsp; &nbsp;
-                        {translations.Sidur}
-                        <Select dir={'rtl'} disableUnderline={true} variant={'standard'} value={sidurId}
+                        {translations.ShmiraList}
+                        <Select dir={'rtl'} disableUnderline={true} variant={'standard'} value={shmiraListId}
                                 sx={{
                                     color: 'white',
                                     fontSize: '1.25rem',
                                     fontWeight: 'normal'
                                 }}
                                 onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
-                                    handleSidurChanged(event, child)
+                                    handleShmiraListChanged(event, child)
                                 }}>
                             <MenuItem key={'NEW'}
-                                      value={'NEW'}> &nbsp;&nbsp;<b>{translations.NewSidur}</b> &nbsp;&nbsp;</MenuItem>
-                            {sidurCollection.map((sidurRecord: SidurRecord) => <MenuItem key={sidurRecord.id}
-                                                                                         value={sidurRecord.id}> &nbsp;&nbsp;{sidurRecord.Name} &nbsp;&nbsp;</MenuItem>)}
+                                      value={'NEW'}> &nbsp;&nbsp;<b>{translations.NewShmiraList}</b> &nbsp;&nbsp;</MenuItem>
+                            {shmiraListCollection.map((shmiraListRecord: ShmiraListRecord) => <MenuItem key={shmiraListRecord.id}
+                                                                                         value={shmiraListRecord.id}> &nbsp;&nbsp;{shmiraListRecord.Name} &nbsp;&nbsp;</MenuItem>)}
                         </Select>
                     </Typography>
                     <IconButton
                         size="small"
                         aria-label="show more"
-                        aria-controls={sidurMenuId}
+                        aria-controls={shmiraListMenuId}
                         aria-haspopup="true"
-                        onClick={handleSidurMenuOpen}
+                        onClick={handleShmiraListMenuOpen}
                         color="inherit"
                     >
                         <Edit/>
@@ -255,9 +255,9 @@ export const AppNavBar = () => {
                         <IconButton
                             size="large"
                             aria-label="show more"
-                            aria-controls={sidurMenuId}
+                            aria-controls={shmiraListMenuId}
                             aria-haspopup="true"
-                            onClick={handleSidurMenuOpen}
+                            onClick={handleShmiraListMenuOpen}
                             color="inherit"
                         >
                             <MoreIcon/>
@@ -266,13 +266,13 @@ export const AppNavBar = () => {
                 </Toolbar>
             </AppBar>
 
-            <SidurMenu sidurMoreAnchorEl={sidurMoreAnchorEl} sidurMenuId={sidurMenuId} isSidurMenuOpen={isSidurMenuOpen}
-                       handleSidurMenuClick={handleSidurMenuClick} handleSidurMenuClose={handleSidurMenuClose}/>
+            <ShmiraListMenu shmiraListMoreAnchorEl={shmiraListMoreAnchorEl} shmiraListMenuId={shmiraListMenuId} isShmiraListMenuOpen={isShmiraListMenuOpen}
+                       handleShmiraListMenuClick={handleShmiraListMenuClick} handleShmiraListMenuClose={handleShmiraListMenuClose}/>
             <ProfileMenu menuId={menuId} anchorEl={anchorEl} handleMenuClose={handleProfileMenuClose} isMenuOpen={isProfileMenuOpen}/>
-            <RenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sidurName}/>
+            <RenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={shmiraListName}/>
             <FileUploadDialog open={UploadOpen} onClose={handleUploadClose} selectedValue={''}/>
-            <SidurManagementDialog open={ManageSidurimOpen} onClose={() => {
-                setManageSidurimOpen(false)
+            <ShmiraListManagementDialog open={ManageShmiraListimOpen} onClose={() => {
+                setManageShmiraListimOpen(false)
             }}/>
             <OrderImportDialog open={importOrdersOpen} onClose={() => {
                 setImportOrdersOpen(false)

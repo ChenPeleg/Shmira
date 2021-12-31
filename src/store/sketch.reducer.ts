@@ -1,10 +1,9 @@
 import {ActionsTypes} from './types.actions';
 
 
-import {IAction, SidurRecord, SidurStore} from './store.types';
+import {IAction, ShmiraListRecord, ShmiraListStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {Utils} from '../services/utils';
-import {SidurBuilder} from '../sidurBuilder/sidurBuilder.main';
 import {SketchModel} from '../models/Sketch.model';
 import {CloneUtil} from '../services/clone-utility';
 import {translations} from '../services/translations';
@@ -17,34 +16,34 @@ export type SketchReducerFunctions =
     | ActionsTypes.CLONE_SKETCH;
 
 
-export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
-    [ActionsTypes.NEW_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
+export const SketchReducer: Record<SketchReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
+    [ActionsTypes.NEW_SKETCH]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         if (!newState.sketches) {
             newState.sketches = [];
         }
         const newId = Utils.getNextId(newState.sketches.map(v => v.id));
-        const chosenSidurObj: SidurRecord | undefined = newState.sidurCollection.find((record: SidurRecord) => record.id === newState.sidurId);
-        if (chosenSidurObj !== undefined) {
-            const deconstructedSidur = {...chosenSidurObj};
-            deconstructedSidur.orders = newState.orders;
-            deconstructedSidur.sketches = newState.sketches;
-            deconstructedSidur.vehicles = newState.vehicles;
-            const newSketch = SidurBuilder(deconstructedSidur);
-            newSketch.id = newId;
-            if (!newState.sketches) {
-                newState.sketches = [];
-            }
-            newState.sketches.push(newSketch);
-            newState.SketchIdInEdit = newId;
+        const chosenShmiraListObj: ShmiraListRecord | undefined = newState.shmiraListCollection.find((record: ShmiraListRecord) => record.id === newState.shmiraListId);
+        if (chosenShmiraListObj !== undefined) {
+            // const deconstructedShmiraList = {...chosenShmiraListObj};
+            // deconstructedShmiraList.orders = newState.orders;
+            // deconstructedShmiraList.sketches = newState.sketches;
+            // deconstructedShmiraList.vehicles = newState.vehicles;
+            // const newSketch = ShmiraListBuilder(deconstructedShmiraList);
+            // newSketch.id = newId;
+            // if (!newState.sketches) {
+            //     newState.sketches = [];
+            // }
+            // newState.sketches.push(newSketch);
+            // newState.SketchIdInEdit = newId;
         }
 
 
-        newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
+        newState = StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
-    [ActionsTypes.CHOOSE_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CHOOSE_SKETCH]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const chosenSketchId = action.payload.id;
         const previousSketchId = newState.SketchIdInEdit;
@@ -58,10 +57,10 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
             if (previousSketchObj !== undefined) {
                 const NewPreviousSketchObj = {...previousSketchObj};
             }
-            const thisSidurInCollection: SidurRecord | undefined = newState.sidurCollection.find((sidur: SidurRecord) => sidur.id === newState.sidurId);
+            const thisShmiraListInCollection: ShmiraListRecord | undefined = newState.shmiraListCollection.find((shmiraList: ShmiraListRecord) => shmiraList.id === newState.shmiraListId);
 
-            if (thisSidurInCollection) {
-                thisSidurInCollection.chosenSketch = chosenSketchId;
+            if (thisShmiraListInCollection) {
+                thisShmiraListInCollection.chosenSketch = chosenSketchId;
             }
 
 
@@ -69,9 +68,9 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
         return newState
 
     },
-    [ActionsTypes.RENAME_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.RENAME_SKETCH]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
-        const sketchId = action.payload.id// newState.sidurId;
+        const sketchId = action.payload.id// newState.shmiraListId;
         const newName = action.payload.value;
         if (!newName) {
             return newState
@@ -85,19 +84,19 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
                 return sketch
             }
         });
-        newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
+        newState = StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         return newState
     },
-    [ActionsTypes.DELETE_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.DELETE_SKETCH]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
-        const sketchToDelete = action.payload.id// newState.sidurId;
+        const sketchToDelete = action.payload.id// newState.shmiraListId;
         let posOfDeletedSketch = -1;
         let deletedSketch: SketchModel | undefined = newState.sketches.find(s => s.id === sketchToDelete);
         if (deletedSketch) {
             posOfDeletedSketch = newState.sketches.indexOf(deletedSketch);
             deletedSketch = {...deletedSketch};
             deletedSketch.id = 'Del' + deletedSketch.id;
-            // newState.sidurArchive.push(deletedSketch);
+            // newState.shmiraListArchive.push(deletedSketch);
         }
 
         newState.sketches = newState.sketches.filter(s => s.id !== sketchToDelete);
@@ -112,13 +111,13 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
             newState.SketchIdInEdit = ''
         }
 
-        newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
+        newState = StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         return newState
 
     },
-    [ActionsTypes.CLONE_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLONE_SKETCH]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
-        const sketchIdToClone = action.payload.id;// newState.sidurId;
+        const sketchIdToClone = action.payload.id;// newState.shmiraListId;
         let sketchForCloning: SketchModel | undefined = newState.sketches.find(s => s.id === sketchIdToClone);
 
         if (sketchForCloning) {
@@ -129,9 +128,9 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
             newState.sketches = newState.sketches.map(c => c);
             newState.sketches.push(newSketch);
             newState.SketchIdInEdit = newSketchId;
-            // newState = setChosenSidur(newState, newSketch);
+            // newState = setChosenShmiraList(newState, newSketch);
         }
-        newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
+        newState = StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         return newState
 
     },
@@ -139,7 +138,7 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
 
 }
  
-const getAllSketchesIDs = (state: SidurStore): string[] => {
+const getAllSketchesIDs = (state: ShmiraListStore): string[] => {
     const sketchesIds = state.sketches.map(o => o.id);
 
     return [...sketchesIds]

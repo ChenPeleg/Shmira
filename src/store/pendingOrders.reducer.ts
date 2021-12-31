@@ -1,4 +1,4 @@
-import {IAction, SidurStore} from './store.types';
+import {IAction, ShmiraListStore} from './store.types';
 import {ActionsTypes} from './types.actions';
 import {SketchModel} from '../models/Sketch.model';
 import {OrderModel} from '../models/Order.model';
@@ -17,8 +17,8 @@ export type PendingOrdersReducerFunctions =
     | ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER
 
 
-export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
-    [ActionsTypes.CLICKED_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
+    [ActionsTypes.CLICKED_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         if (action.payload.id) {
             newState.pendingOrderIdInEdit = action.payload.id;
@@ -26,7 +26,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
 
         return newState
     },
-    [ActionsTypes.CLICKED_CLOSE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLICKED_CLOSE_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
 
         newState.pendingOrderIdInEdit = null;
@@ -35,7 +35,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
         return newState
     },
 
-    [ActionsTypes.CLICKED_REMOVE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLICKED_REMOVE_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const orderToRemoveId = action.payload.id
         const SketchIdInEdit = state.SketchIdInEdit
@@ -58,36 +58,36 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
             }
             newState.pendingOrderIdInEdit = null;
         }
-        StoreUtils.updateSidurRecordWithSketchChanges(newState)
+        StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         return newState
     },
-    [ActionsTypes.CLICKED_MERGE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLICKED_MERGE_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         return newState
     },
-    [ActionsTypes.CLICKED_SPLIT_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLICKED_SPLIT_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         return newState
     },
-    [ActionsTypes.CLICKED_CHANGE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLICKED_CHANGE_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         return newState
     },
-    [ActionsTypes.CLICKED_CHANGE_TIME_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLICKED_CHANGE_TIME_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
 
         return newState
     },
-    [ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         return newState
     },
-    [ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         return newState
     },
     [ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER]:
-        (state: SidurStore, action: IAction): SidurStore => {
+        (state: ShmiraListStore, action: IAction): ShmiraListStore => {
             let newState = {...state}
             return newState
         },

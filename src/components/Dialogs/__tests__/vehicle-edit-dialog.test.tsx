@@ -17,7 +17,7 @@ describe('Vehicle edit  Dialog', () => {
     let store: any;
     let onClose: Mock = jest.fn();
     let onDelete: Mock = jest.fn();
-    const sidurDefaultName = 'Shilgia'
+    const shmiraListDefaultName = 'Shilgia'
     const mockVehicleData: VehicleModel = {
         id: '1',
         vehicleName: '1',

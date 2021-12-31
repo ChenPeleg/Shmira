@@ -38,7 +38,7 @@ export const RenameDialog = (props: RenameProps) => {
                     <TextField
                         autoFocus
                         margin="dense"
-                        id={'sidur-rename-dialog-text-field'}
+                        id={'shmiraList-rename-dialog-text-field'}
                         label={translations.NewName}
                         type="text"
                         fullWidth
@@ -53,8 +53,8 @@ export const RenameDialog = (props: RenameProps) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button id={'sidur-rename-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
-                    <Button id={'sidur-rename-approve-button'} onClick={handleCloseRename}>{translations.Approve}</Button>
+                    <Button id={'shmiraList-rename-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
+                    <Button id={'shmiraList-rename-approve-button'} onClick={handleCloseRename}>{translations.Approve}</Button>
                 </DialogActions>
             </Dialog>
         </div>

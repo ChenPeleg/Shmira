@@ -1,7 +1,7 @@
 import {OrderModel} from '../models/Order.model';
-import {defaultOrderValues, defaultVehicleValues, IAction, SessionModel, SidurStore} from './store.types';
+import {defaultOrderValues, defaultVehicleValues, IAction, SessionModel, ShmiraListStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
-import {SidurReducer} from './sidur.reducer';
+import {ShmiraListReducer} from './shmiraList.reducer';
 import {OrderReducer} from './order.reducer';
 import {ImportExportReducer} from './import-export.reducer';
 import {VehicleModel} from '../models/Vehicle.model';
@@ -12,7 +12,7 @@ import {SketchReducer} from './sketch.reducer';
 import {PendingOrdersReducer} from './pendingOrders.reducer';
 import {SketchDriveReducer} from './sketch-drive.reducer';
 import {LocationGroupReducer} from './locationGroup.reducer';
-import {defaultSidurEshbal} from './store-inital-state';
+import {defaultShmiraListEshbal} from './store-inital-state';
 
 
 const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
@@ -36,10 +36,10 @@ const sessionState: SessionModel = {
 
 }
 // @ts-ignore
-const defaultInitialState: SidurStore = {
-    sidurArchive: [],
+const defaultInitialState: ShmiraListStore = {
+    shmiraListArchive: [],
     locationGroupInEdit: null,
-    sidurCollection: [{
+    shmiraListCollection: [{
         id: '1',
         Name: 'סידור גנים',
         orders: [],
@@ -48,10 +48,10 @@ const defaultInitialState: SidurStore = {
         sketches: [],
         chosenSketch: '',
         locationGroup: null
-    }, defaultSidurEshbal
+    }, defaultShmiraListEshbal
 
     ],
-    sidurId: '1',
+    shmiraListId: '1',
     orders: startOrders,
     vehicles: startVehicles,
     orderIdInEdit: '1',
@@ -67,10 +67,10 @@ const defaultInitialState: SidurStore = {
 
 }
 
-const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore
+const stateFromLocalStorage: ShmiraListStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore
 const initialState = stateFromLocalStorage || defaultInitialState;
 
-const reducer = (state: SidurStore = initialState, action: IAction) => {
+const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
     let newState = {
         ...state
     }
@@ -85,7 +85,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.MOVE_TO_ACTIVE_SIDUR:
         case  ActionsTypes.DELETE_FOREVER_SIDUR:
 
-            return SidurReducer[action.type](newState, action)
+            return ShmiraListReducer[action.type](newState, action)
 
         case ActionsTypes.CLICKED_ORDER:
         case ActionsTypes.UPDATE_ORDER:

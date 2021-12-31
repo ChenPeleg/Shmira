@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import {translations} from '../../services/translations';
-import {SidurStore} from '../../store/store.types';
+import {ShmiraListStore} from '../../store/store.types';
 import {useDispatch, useSelector} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
 import {LocationsEdit} from './locations-edit';
@@ -49,7 +49,7 @@ const a11yProps = (index: number) => {
 
 
 export const LocationsEditTabs = () => {
-    const locationTabSelectedAsString: string = useSelector((state: SidurStore) => state.currentSessionState.LocationGroupTabOpen || '1');
+    const locationTabSelectedAsString: string = useSelector((state: ShmiraListStore) => state.currentSessionState.LocationGroupTabOpen || '1');
     const locationTabSelected = +locationTabSelectedAsString;
     const dispatch = useDispatch()
 

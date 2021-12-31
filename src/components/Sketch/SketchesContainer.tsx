@@ -5,7 +5,7 @@ import {Button, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {translations} from '../../services/translations';
 import {SketchModel} from '../../models/Sketch.model';
 import {ActionsTypes} from '../../store/types.actions';
-import {SidurStore} from '../../store/store.types';
+import {ShmiraListStore} from '../../store/store.types';
 import {SketchActionType} from '../../models/SketchMenuClickActionType.enum';
 import {SketchMenu} from './sketch-menu';
 import {Edit} from '@mui/icons-material';
@@ -17,7 +17,7 @@ import {RenameDialog} from '../Dialogs/rename-dialog';
 
 export const SketchesContainer = () => {
     const dispatch = useDispatch();
-    const SketchIdInEdit = useSelector((state: SidurStore) => state.SketchIdInEdit);
+    const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
 
     const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =

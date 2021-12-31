@@ -1,4 +1,4 @@
-export const defaultSidurEshbal: any =
+export const defaultShmiraListEshbal: any =
     {
         'id': '5',
         'Name': 'סידור לסקיצה',

@@ -1,7 +1,7 @@
 import {ActionsTypes} from './types.actions';
 
 
-import {IAction, SidurStore} from './store.types';
+import {IAction, ShmiraListStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {Utils} from '../services/utils';
 import {VehicleModel} from '../models/Vehicle.model';
@@ -12,8 +12,8 @@ export type VehicleReducerFunctions =
     | ActionsTypes.NEW_VEHICLE
 
 
-export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
-    [ActionsTypes.NEW_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
+export const VehicleReducer: Record<VehicleReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
+    [ActionsTypes.NEW_VEHICLE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const newId = Utils.getNextId(state.vehicles.map(v => v.id));
 
@@ -28,12 +28,12 @@ export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore,
         newState.vehicles = [...newState.vehicles, newVehicle]
 
 
-        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState);
+        newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState);
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
 
-    [ActionsTypes.UPDATE_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.UPDATE_VEHICLE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state};
         const updateVehicle: VehicleModel = action.payload.value;
         if (updateVehicle) {
@@ -55,18 +55,18 @@ export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore,
             });
 
         }
-        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
+        newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
 
-    [ActionsTypes.DELETE_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.DELETE_VEHICLE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const deleteVehiclerId = action.payload.id;
         newState.vehicles = newState.vehicles.filter(vehicle => deleteVehiclerId !== vehicle.id)
 
 
-        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
+        newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },

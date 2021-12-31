@@ -1,14 +1,14 @@
-export enum SidurActionType {
+export enum ShmiraListActionType {
     Rename = 1,
     Delete = 2,
-    ManageSidurim = 3,
+    ManageShmiraListim = 3,
     CreateCopy = 4,
     Archive = 5,
     CreateNew = 6,
     ImportOrders = 7
 }
 
-export enum SidurManagementActionType {
+export enum ShmiraListManagementActionType {
     Rename = 1,
     MoveToTrash = 2,
     MoveToArchive = 3,

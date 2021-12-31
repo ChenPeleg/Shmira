@@ -1,4 +1,4 @@
-import {defaultOrderValues, IAction, SidurStore} from './store.types';
+import {defaultOrderValues, IAction, ShmiraListStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {OrderModel} from '../models/Order.model';
 import {ActionsTypes} from './types.actions';
@@ -10,8 +10,8 @@ export type LocationReducerFunctions =
     | ActionsTypes.DELETE_LOCATION
 
 
-export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
-    [ActionsTypes.NEW_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
+export const LocationReducer: Record<LocationReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
+    [ActionsTypes.NEW_LOCATION]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
@@ -25,7 +25,7 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
-    [ActionsTypes.DELETE_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.DELETE_LOCATION]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
@@ -39,7 +39,7 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
-    [ActionsTypes.UPDATE_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.UPDATE_LOCATION]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);

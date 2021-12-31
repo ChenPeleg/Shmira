@@ -12,7 +12,7 @@ export type IAction = {
     payload: any | { value: any }
 }
 
-export interface SidurRecord {
+export interface ShmiraListRecord {
     id: string,
     Name: string,
     orders: OrderModel[];
@@ -37,16 +37,16 @@ export interface SessionModel {
     dataHolderForCurrentOrderInEdit: null | OrderModel
 }
 
-export interface SidurStore {
-    sidurCollection: SidurRecord[];
-    sidurArchive: SidurRecord[];
+export interface ShmiraListStore {
+    shmiraListCollection: ShmiraListRecord[];
+    shmiraListArchive: ShmiraListRecord[];
     orders: OrderModel[];
     vehicles: VehicleModel[];
     deletedOrders: OrderModel[];
     defaultOrderValues: OrderModel,
     displaySetting: DisplaySettings,
     sketches: SketchModel[];
-    sidurId: string;
+    shmiraListId: string;
     LocationGroups: null | LocationGroup[];
     currentSessionState: SessionModel;
     // Move to Session state
@@ -94,6 +94,6 @@ export interface SaveDataModel {
     userId: string,
     userName: string,
     timeStamp: string,
-    savedStore: SidurStore,
+    savedStore: ShmiraListStore,
     hash: string
 }

@@ -1,4 +1,4 @@
-import {FileUploadType, IAction, SaveDataModel, SidurStore} from './store.types';
+import {FileUploadType, IAction, SaveDataModel, ShmiraListStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {DownloadFile} from '../services/download-file';
 import {Utils} from '../services/utils';
@@ -11,16 +11,16 @@ export type ImportReducerFunctions =
     ActionsTypes.IMPORT_FILE_UPLOADED |
     ActionsTypes.IMPORT_ORDERS_AS_TEXT
 
-export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
-    [ActionsTypes.EXPORT_ALL]: (state: SidurStore, action: IAction): SidurStore => {
+export const ImportExportReducer: Record<ImportReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
+    [ActionsTypes.EXPORT_ALL]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
-        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState);
+        newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState);
         const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(newState)
-        DownloadFile('sidur.json', JSON.stringify(saveObj))
+        DownloadFile('shmiraList.json', JSON.stringify(saveObj))
         return newState
 
     },
-    [ActionsTypes.IMPORT_FILE_UPLOADED]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.IMPORT_FILE_UPLOADED]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const uploadType: FileUploadType = action.payload.uploadType;
         const fileAsString: string = action.payload.fileAsString;
@@ -49,7 +49,7 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
 
 
     },
-    [ActionsTypes.IMPORT_ORDERS_AS_TEXT]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.IMPORT_ORDERS_AS_TEXT]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const importedOrders: string = action.payload.importedOrders;
         const modeledImportedOrders: OrderModel[] = ImportOrdersFromText(importedOrders);

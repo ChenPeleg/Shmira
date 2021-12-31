@@ -8,7 +8,7 @@ import {SketchDrive} from './SketchDrive';
 import {SketchPendingOrders} from './SketchPendeingOrders';
 import {SketchDriveEditDialog} from '../Dialogs/sketch-drive-edit-dialog';
 import {ActionsTypes} from '../../store/types.actions';
-import {SidurStore} from '../../store/store.types';
+import {ShmiraListStore} from '../../store/store.types';
 import {SketchNoSketchMessage} from './sketch-no-sketch-message';
 
 import {TransitionGroup} from 'react-transition-group';
@@ -35,7 +35,7 @@ const MOckDrive = {
 export const Sketch = () => {
     const dispatch = useDispatch()
 
-    const SketchIdInEdit = useSelector((state: SidurStore) => state.SketchIdInEdit);
+    const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
 
     const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);

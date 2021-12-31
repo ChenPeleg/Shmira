@@ -5,7 +5,7 @@ import {Typography} from '@mui/material';
 import {OrderModel} from '../../models/Order.model';
 import {translations} from '../../services/translations';
 import {SketchPendingOrder} from './SketchPendingOrder';
-import {SidurStore} from '../../store/store.types';
+import {ShmiraListStore} from '../../store/store.types';
 
 
 interface sketchPendingOrdersProps {
@@ -15,7 +15,7 @@ interface sketchPendingOrdersProps {
 
 export const SketchPendingOrders = (props: sketchPendingOrdersProps) => {
  
-    const pendingOrderInEdit = useSelector((state: SidurStore) => state.pendingOrderIdInEdit);
+    const pendingOrderInEdit = useSelector((state: ShmiraListStore) => state.pendingOrderIdInEdit);
 
     return (<Box id={'pending-order-container'} sx={{
             m: '0.2em',

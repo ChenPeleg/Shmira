@@ -7,11 +7,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {translations} from '../../services/translations';
 import {Box, Tooltip} from '@mui/material';
-import {AppConstants, SidurRecord, SidurStore} from '../../store/store.types';
+import {AppConstants, ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
 import {useDispatch, useSelector} from 'react-redux';
 import IconButton from '@mui/material/IconButton';
 import {Archive, Delete, DeleteForever, Edit, Unarchive} from '@mui/icons-material';
-import {SidurManagementActionType} from '../../models/SidurMenuClickActionType.enum';
+import {ShmiraListManagementActionType} from '../../models/ShmiraListMenuClickActionType.enum';
 import {SxProps} from '@mui/system';
 import {Styles} from '../../hoc/themes';
 import {red} from '@mui/material/colors';
@@ -24,57 +24,57 @@ interface FileUploadProps {
 
 }
 
-export const SidurManagementDialog = (props: FileUploadProps) => {
+export const ShmiraListManagementDialog = (props: FileUploadProps) => {
     const {
         onClose,
         open
     } = props;
-    const sidurArchive: SidurRecord[] = useSelector((state: SidurStore) => state.sidurArchive);
-    const sidurCollection: SidurRecord[] = useSelector((state: SidurStore) => state.sidurCollection);
+    const shmiraListArchive: ShmiraListRecord[] = useSelector((state: ShmiraListStore) => state.shmiraListArchive);
+    const shmiraListCollection: ShmiraListRecord[] = useSelector((state: ShmiraListStore) => state.shmiraListCollection);
     const dispatch = useDispatch()
 
     const handleCloseCancel = () => {
         onClose();
     };
-    const handleActionClick = (event: any, props: { action: SidurManagementActionType, sidurId: string }) => {
+    const handleActionClick = (event: any, props: { action: ShmiraListManagementActionType, shmiraListId: string }) => {
         switch (props.action) {
-            case SidurManagementActionType.DeleteForever:
+            case ShmiraListManagementActionType.DeleteForever:
                 dispatch({
                     type: ActionsTypes.DELETE_FOREVER_SIDUR,
-                    payload: {id: props.sidurId}
+                    payload: {id: props.shmiraListId}
                 })
                 break;
-            case SidurManagementActionType.MoveToArchive:
+            case ShmiraListManagementActionType.MoveToArchive:
                 dispatch({
                     type: ActionsTypes.ARCHIVE_SIDUR,
-                    payload: {id: props.sidurId}
+                    payload: {id: props.shmiraListId}
                 })
                 break;
-            case SidurManagementActionType.MoveToTrash:
+            case ShmiraListManagementActionType.MoveToTrash:
                 dispatch({
                     type: ActionsTypes.DELETE_SIDUR,
-                    payload: {id: props.sidurId}
+                    payload: {id: props.shmiraListId}
                 })
                 break;
-            case SidurManagementActionType.Rename:
+            case ShmiraListManagementActionType.Rename:
                 // dispatch({
                 //     type: ActionTypes.ARCHIVE_SIDUR,
-                //     payload: {id: props.sidurId}
+                //     payload: {id: props.shmiraListId}
                 // })
                 break;
-            case SidurManagementActionType.MoveToActive:
+            case ShmiraListManagementActionType.MoveToActive:
                 dispatch({
                     type: ActionsTypes.MOVE_TO_ACTIVE_SIDUR,
-                    payload: {id: props.sidurId}
+                    payload: {id: props.shmiraListId}
                 })
                 break;
         }
     }
-    const ActionButton = (props: { action: SidurManagementActionType, sidurId: string }) => {
+    const ActionButton = (props: { action: ShmiraListManagementActionType, shmiraListId: string }) => {
 
-        const buttonBuilder = (action: SidurManagementActionType): { text: string, icon: ReactNode } | null => {
+        const buttonBuilder = (action: ShmiraListManagementActionType): { text: string, icon: ReactNode } | null => {
             switch (action) {
-                case SidurManagementActionType.DeleteForever:
+                case ShmiraListManagementActionType.DeleteForever:
                     return {
                         text: translations.DeleteForever,
                         icon: (<DeleteForever sx={{
@@ -82,22 +82,22 @@ export const SidurManagementDialog = (props: FileUploadProps) => {
                             color: red
                         }}/>)
                     }
-                case SidurManagementActionType.MoveToArchive:
+                case ShmiraListManagementActionType.MoveToArchive:
                     return {
                         text: translations.Archive,
                         icon: (<Archive sx={Styles.smallIcons}/>)
                     }
-                case SidurManagementActionType.MoveToTrash:
+                case ShmiraListManagementActionType.MoveToTrash:
                     return {
                         text: translations.MoveToTrash,
                         icon: (<Delete sx={Styles.smallIcons}/>)
                     }
-                case SidurManagementActionType.Rename:
+                case ShmiraListManagementActionType.Rename:
                     return {
                         text: translations.Rename,
                         icon: (<Edit sx={Styles.smallIcons}/>)
                     }
-                case SidurManagementActionType.MoveToActive:
+                case ShmiraListManagementActionType.MoveToActive:
                     return {
                         text: translations.MoveToActive,
                         icon: (<Unarchive sx={Styles.smallIcons}/>)
@@ -144,7 +144,7 @@ export const SidurManagementDialog = (props: FileUploadProps) => {
         fontWeight: 'bold',
         mb: '15px'
     }
-    const oneSidurSx: SxProps = {
+    const oneShmiraListSx: SxProps = {
         minWidth: '20vw',
         display: 'flex',
         alignItems: 'start',
@@ -166,34 +166,34 @@ export const SidurManagementDialog = (props: FileUploadProps) => {
                         justifyContent: 'space-between'
                     }}>
                         <Box sx={listBoxSx}>
-                            <Box sx={headerSx}>{translations.ActiveSidurim}</Box>
-                            {sidurCollection.map((sidur: SidurRecord, index: number) => (
-                                <Box sx={oneSidurSx} key={index}> {sidur.Name}
-                                    <ActionButton sidurId={sidur.id} action={SidurManagementActionType.MoveToArchive}/>
-                                    <ActionButton sidurId={sidur.id} action={SidurManagementActionType.MoveToTrash}/>
-                                    <ActionButton sidurId={sidur.id} action={SidurManagementActionType.Rename}/>
+                            <Box sx={headerSx}>{translations.ActiveShmiraListim}</Box>
+                            {shmiraListCollection.map((shmiraList: ShmiraListRecord, index: number) => (
+                                <Box sx={oneShmiraListSx} key={index}> {shmiraList.Name}
+                                    <ActionButton shmiraListId={shmiraList.id} action={ShmiraListManagementActionType.MoveToArchive}/>
+                                    <ActionButton shmiraListId={shmiraList.id} action={ShmiraListManagementActionType.MoveToTrash}/>
+                                    <ActionButton shmiraListId={shmiraList.id} action={ShmiraListManagementActionType.Rename}/>
                                 </Box>))}
                         </Box>
                         <DividingLine/>
                         <Box sx={listBoxSx}>
                             <Box sx={headerSx}>{translations.inArchive}</Box>
 
-                            {sidurArchive.filter((s: SidurRecord) => s.id.includes(AppConstants.ArchiveIdPrefix)).map((sidur: SidurRecord, index: number) => (
-                                <Box sx={oneSidurSx} key={index}>  {sidur.Name}
-                                    <ActionButton sidurId={sidur.id} action={SidurManagementActionType.MoveToActive}/>
-                                    <ActionButton sidurId={sidur.id} action={SidurManagementActionType.MoveToTrash}/>
-                                    <ActionButton sidurId={sidur.id} action={SidurManagementActionType.Rename}/>
+                            {shmiraListArchive.filter((s: ShmiraListRecord) => s.id.includes(AppConstants.ArchiveIdPrefix)).map((shmiraList: ShmiraListRecord, index: number) => (
+                                <Box sx={oneShmiraListSx} key={index}>  {shmiraList.Name}
+                                    <ActionButton shmiraListId={shmiraList.id} action={ShmiraListManagementActionType.MoveToActive}/>
+                                    <ActionButton shmiraListId={shmiraList.id} action={ShmiraListManagementActionType.MoveToTrash}/>
+                                    <ActionButton shmiraListId={shmiraList.id} action={ShmiraListManagementActionType.Rename}/>
                                 </Box>))}
 
                         </Box>
                         <DividingLine/>
                         <Box sx={listBoxSx}>
                             <Box sx={headerSx}>{translations.Trash}</Box>
-                            {sidurArchive.filter((s: SidurRecord) => s.id.includes(AppConstants.deleteIdPrefix)).map((sidur: SidurRecord, index: number) => (
-                                <Box sx={oneSidurSx} key={index}> {sidur.Name}<ActionButton sidurId={sidur.id}
-                                                                                            action={SidurManagementActionType.MoveToActive}/>
-                                    <ActionButton sidurId={sidur.id}
-                                                  action={SidurManagementActionType.DeleteForever}/> </Box>))}
+                            {shmiraListArchive.filter((s: ShmiraListRecord) => s.id.includes(AppConstants.deleteIdPrefix)).map((shmiraList: ShmiraListRecord, index: number) => (
+                                <Box sx={oneShmiraListSx} key={index}> {shmiraList.Name}<ActionButton shmiraListId={shmiraList.id}
+                                                                                            action={ShmiraListManagementActionType.MoveToActive}/>
+                                    <ActionButton shmiraListId={shmiraList.id}
+                                                  action={ShmiraListManagementActionType.DeleteForever}/> </Box>))}
                         </Box>
 
 

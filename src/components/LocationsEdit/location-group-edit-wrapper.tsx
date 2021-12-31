@@ -3,7 +3,7 @@ import {Box, Button, IconButton, MenuItem, Select, SelectChangeEvent, Typography
 import {useDispatch, useSelector} from 'react-redux';
 import {Edit} from '@mui/icons-material';
 import {RenameDialog} from '../Dialogs/rename-dialog';
-import {SidurStore} from '../../store/store.types';
+import {ShmiraListStore} from '../../store/store.types';
 import {ActionsTypes} from '../../store/types.actions';
 import {translations} from '../../services/translations';
 import {LocationGroup} from '../../models/Location.model';
@@ -14,7 +14,7 @@ import {LocationsEditTabs} from './location-group-edit-tabs';
 
 export const LocationGroupEditWrapper = () => {
     const dispatch = useDispatch();
-    const locationGroupInEditId = useSelector((state: SidurStore) => state.locationGroupInEdit);
+    const locationGroupInEditId = useSelector((state: ShmiraListStore) => state.locationGroupInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
 
     const [locationGroupMoreAnchorEl, setLocationGroupMoreAnchorEl] =

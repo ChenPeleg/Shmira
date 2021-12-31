@@ -1,4 +1,4 @@
-import {AppConstants, SaveDataModel, SidurRecord, SidurStore} from './store.types';
+import {AppConstants, SaveDataModel, ShmiraListRecord, ShmiraListStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {hashFunction} from '../services/hash-function';
 import {CloneUtil} from '../services/clone-utility';
@@ -9,33 +9,33 @@ export const StoreUtils = {
         const replaceIdsNames: RegExp = new RegExp(AppConstants.ArchiveIdPrefix + '|' + AppConstants.deleteIdPrefix, 'g');
         return id.replace(replaceIdsNames, '')
     },
-    HandleReducerSaveToLocalStorage: (state: SidurStore): void => {
+    HandleReducerSaveToLocalStorage: (state: ShmiraListStore): void => {
         const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(state, 'chen', 'chen')
         SaveLoadService.saveToLocalStorage(saveObj);
     },
 
-    UpdateSidurCollectionWithCurrenSidur: (state: SidurStore): SidurRecord[] => {
+    UpdateShmiraListCollectionWithCurrenShmiraList: (state: ShmiraListStore): ShmiraListRecord[] => {
         const newState = {...state}
-        const sidurId = newState.sidurId;
+        const shmiraListId = newState.shmiraListId;
         const updatedOrders = newState.orders.map(o => ({...o}));
         const updatedVehicles = newState.vehicles.map(o => ({...o}));
         const updatedDeletedOrders = newState.deletedOrders.map(o => ({...o}));
         const updatedSketches = newState.sketches.map(o => ({...o}))
-        newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
-            if (sidur.id === sidurId) {
-                const updatedSidur = {...sidur};
-                updatedSidur.orders = updatedOrders;
-                updatedSidur.vehicles = updatedVehicles;
-                updatedSidur.sketches = updatedSketches;
-                updatedSidur.deletedOrders = updatedDeletedOrders;
-                return updatedSidur
+        newState.shmiraListCollection = newState.shmiraListCollection.map((shmiraList: ShmiraListRecord) => {
+            if (shmiraList.id === shmiraListId) {
+                const updatedShmiraList = {...shmiraList};
+                updatedShmiraList.orders = updatedOrders;
+                updatedShmiraList.vehicles = updatedVehicles;
+                updatedShmiraList.sketches = updatedSketches;
+                updatedShmiraList.deletedOrders = updatedDeletedOrders;
+                return updatedShmiraList
             } else {
-                return sidur
+                return shmiraList
             }
         });
-        return newState.sidurCollection
+        return newState.shmiraListCollection
     },
-    buildSaveDataModel: (state: SidurStore, userName: string = 'chen', userId: string = 'chen'): SaveDataModel => {
+    buildSaveDataModel: (state: ShmiraListStore, userName: string = 'chen', userId: string = 'chen'): SaveDataModel => {
         const hash = hashFunction(JSON.stringify(state))
         return {
             userName: 'chen',
@@ -46,13 +46,13 @@ export const StoreUtils = {
         }
 
     },
-    updateSidurRecordWithSketchChanges(state: SidurStore): SidurStore {
+    updateShmiraListRecordWithSketchChanges(state: ShmiraListStore): ShmiraListStore {
         const newState = {...state};
-        const thisSidurInCollection: SidurRecord | undefined = newState.sidurCollection.find((sidur: SidurRecord) => sidur.id === newState.sidurId);
+        const thisShmiraListInCollection: ShmiraListRecord | undefined = newState.shmiraListCollection.find((shmiraList: ShmiraListRecord) => shmiraList.id === newState.shmiraListId);
 
 
-        if (thisSidurInCollection) {
-            thisSidurInCollection.sketches = newState.sketches.map(s => CloneUtil.deepCloneSketch(s))
+        if (thisShmiraListInCollection) {
+            thisShmiraListInCollection.sketches = newState.sketches.map(s => CloneUtil.deepCloneSketch(s))
         }
 
         return newState

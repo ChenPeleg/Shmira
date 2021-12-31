@@ -1,19 +1,21 @@
-import {SidurRecord} from '../store/store.types';
+import {ShmiraListRecord} from '../store/store.types';
 import {SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
-import {OrderMetaDataModel, SidurBuildSettings} from './models/sidurBuilder.models';
-import {SidurBuilderBuildOrdersMetaData} from './sidurBuilder.buildOrdersMetaData';
-import {SidurBuilderBuildVehiclesAndUnAssigned} from './sidurBuilder.buildVehicles';
-import {SidurBuilderTools} from './sidurBuilder.tools';
+
+import {ShmiraListBuilderBuildOrdersMetaData} from './shmiraListBuilder.buildOrdersMetaData';
+import {ShmiraListBuilderBuildVehiclesAndUnAssigned} from './shmiraListBuilder.buildVehicles';
+
 import {Utils} from '../services/utils';
 import {OrderModel} from '../models/Order.model';
+import {OrderMetaDataModel, ShmiraListBuildSettings} from './models/shmiraList.models';
+import {ShmiraListBuilderTools} from './shmiraList.tools';
 
-export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): SketchModel => {
-    if (Sidur === null) {
-        Sidur = mockSidur as any;
+export const ShmiraListBuilder = (ShmiraList: ShmiraListRecord, buildSettings: any = null): SketchModel => {
+    if (ShmiraList === null) {
+        ShmiraList = mockShmiraList as any;
     }
-    const settings: SidurBuildSettings = {custom: null}
-    const ordersMetaData: OrderMetaDataModel[] = SidurBuilderBuildOrdersMetaData(Sidur.orders, settings)
-    const BuildResult = SidurBuilderBuildVehiclesAndUnAssigned(ordersMetaData, Sidur.vehicles, settings);
+    const settings: ShmiraListBuildSettings = {custom: null}
+    const ordersMetaData: OrderMetaDataModel[] = ShmiraListBuilderBuildOrdersMetaData(ShmiraList.orders, settings)
+    const BuildResult = ShmiraListBuilderBuildVehiclesAndUnAssigned(ordersMetaData, ShmiraList.vehicles, settings);
     const initialVehicles: VehicleScheduleModel [] = BuildResult.vehicleSchedules;
     const unassignedOrders: OrderModel [] = BuildResult.unassignedOrders;
     const assignedOrders: OrderModel [] = BuildResult.assignedOrders;
@@ -28,13 +30,13 @@ export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): Ske
         assignedOrders: assignedOrders
     };
 
-    const newId = Utils.getNextId(Sidur.sketches.map(v => v.id));
+    const newId = Utils.getNextId(ShmiraList.sketches.map(v => v.id));
     baseSketch.id = newId;
-    baseSketch.name = SidurBuilderTools.createSketchName(baseSketch.id);
+    baseSketch.name = ShmiraListBuilderTools.createSketchName(baseSketch.id);
 
     return baseSketch
 }
-const mockSidur = {
+const mockShmiraList = {
     'id': '5',
     'Name': 'סידור לסקיצה',
     'orders': [

@@ -1,7 +1,7 @@
 import {ActionsTypes} from './types.actions';
 
 
-import {IAction, SidurRecord, SidurStore} from './store.types';
+import {IAction, ShmiraListRecord, ShmiraListStore} from './store.types';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {CloneUtil} from '../services/clone-utility';
 import {OrderModel} from '../models/Order.model';
@@ -11,9 +11,9 @@ export type SketchDriveReducerFunctions = ActionsTypes.DELETE_SKETCH_DRIVE
                                           | ActionsTypes.UPDATE_SKETCH_DRIVE | ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE
 
 
-export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
+export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
 
-    [ActionsTypes.UPDATE_SKETCH_DRIVE]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.UPDATE_SKETCH_DRIVE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const sketchDriveChanged: DriveModel = action.payload.value
         const SketchIdInEdit = newState.SketchIdInEdit;
@@ -39,7 +39,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
     },
 
-    [ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
 
         const sketchDriveChangedId: string = action.payload.sketchDriveId
@@ -75,11 +75,11 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
 
         }
-        StoreUtils.updateSidurRecordWithSketchChanges(newState)
+        StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         return newState
 
     },
-    [ActionsTypes.DELETE_SKETCH_DRIVE]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.DELETE_SKETCH_DRIVE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const sketchDriveToDelete: DriveModel = action.payload.value
         const SketchIdInEdit = newState.SketchIdInEdit;
@@ -103,20 +103,20 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
 
         }
-        StoreUtils.updateSidurRecordWithSketchChanges(newState)
+        StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         return newState
 
     },
 
 
 }
-const updateSidurRecordWithSketchChanges = (state: SidurStore): SidurStore => {
+const updateShmiraListRecordWithSketchChanges = (state: ShmiraListStore): ShmiraListStore => {
     const newState = {...state};
-    const thisSidurInCollection: SidurRecord | undefined = newState.sidurCollection.find((sidur: SidurRecord) => sidur.id === newState.sidurId);
+    const thisShmiraListInCollection: ShmiraListRecord | undefined = newState.shmiraListCollection.find((shmiraList: ShmiraListRecord) => shmiraList.id === newState.shmiraListId);
 
 
-    if (thisSidurInCollection) {
-        thisSidurInCollection.sketches = newState.sketches.map(s => CloneUtil.deepCloneSketch(s))
+    if (thisShmiraListInCollection) {
+        thisShmiraListInCollection.sketches = newState.sketches.map(s => CloneUtil.deepCloneSketch(s))
     }
 
     return newState
@@ -124,7 +124,7 @@ const updateSidurRecordWithSketchChanges = (state: SidurStore): SidurStore => {
 }
 
 
-const getVehicleIdFromDriveId = (state: SidurStore, driveId: string): string => {
+const getVehicleIdFromDriveId = (state: ShmiraListStore, driveId: string): string => {
     const SketchIdInEdit = state.SketchIdInEdit
     const sketchObj: SketchModel | undefined = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
     const vehicleSchedules = sketchObj?.vehicleSchedules || [];
