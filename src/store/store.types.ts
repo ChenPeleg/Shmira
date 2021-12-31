@@ -1,5 +1,5 @@
 import {ActionsTypes} from './types.actions'
-import {OrderModel} from '../models/Order.model';
+import {PreferenceModel} from '../models/Preference.model';
 import {DriveType} from '../models/DriveType.enum';
 import {VehicleModel} from '../models/Vehicle.model';
 import {SketchModel} from '../models/Sketch.model';
@@ -15,50 +15,50 @@ export type IAction = {
 export interface ShmiraListRecord {
     id: string,
     Name: string,
-    orders: OrderModel[];
+    preferences: PreferenceModel[];
     vehicles: VehicleModel[];
-    deletedOrders: OrderModel[];
-    defaultOrderValues?: OrderModel,
+    deletedPreferences: PreferenceModel[];
+    defaultPreferenceValues?: PreferenceModel,
     sketches: SketchModel[],
     chosenSketch: string,
     locationGroup: LocationGroup | null
 }
 
 export interface DisplaySettings {
-    view: 'orders' | 'sketch' | 'locationsView'
+    view: 'preferences' | 'sketch' | 'locationsView'
 }
 
 export interface SessionModel {
     locationGroupInEdit: null | string;
-    orderIdInEdit: null | string;
-    pendingOrderIdInEdit: null | string;
+    preferenceIdInEdit: null | string;
+    pendingPreferenceIdInEdit: null | string;
     SketchIdInEdit: null | string;
     LocationGroupTabOpen: null | string;
-    dataHolderForCurrentOrderInEdit: null | OrderModel
+    dataHolderForCurrentPreferenceInEdit: null | PreferenceModel
 }
 
 export interface ShmiraListStore {
     shmiraListCollection: ShmiraListRecord[];
     shmiraListArchive: ShmiraListRecord[];
-    orders: OrderModel[];
+    preferences: PreferenceModel[];
     vehicles: VehicleModel[];
-    deletedOrders: OrderModel[];
-    defaultOrderValues: OrderModel,
+    deletedPreferences: PreferenceModel[];
+    defaultPreferenceValues: PreferenceModel,
     displaySetting: DisplaySettings,
     sketches: SketchModel[];
     shmiraListId: string;
     LocationGroups: null | LocationGroup[];
     currentSessionState: SessionModel;
     // Move to Session state
-    dataHolderForCurrentOrderInEdit: OrderModel | null;
+    dataHolderForCurrentPreferenceInEdit: PreferenceModel | null;
     locationGroupInEdit: null | string;
-    orderIdInEdit: null | string;
-    pendingOrderIdInEdit: null | string;
+    preferenceIdInEdit: null | string;
+    pendingPreferenceIdInEdit: null | string;
     SketchIdInEdit: null | string;
 
 }
 
-export const defaultOrderValues: OrderModel = {
+export const defaultPreferenceValues: PreferenceModel = {
     id: '1',
     driverName: '',
     startHour: '08:00',

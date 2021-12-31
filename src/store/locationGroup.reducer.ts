@@ -72,10 +72,10 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             newState.currentSessionState = {
                 LocationGroupTabOpen: null,
                 SketchIdInEdit: null,
-                dataHolderForCurrentOrderInEdit: null,
+                dataHolderForCurrentPreferenceInEdit: null,
                 locationGroupInEdit: null,
-                orderIdInEdit: null,
-                pendingOrderIdInEdit: null
+                preferenceIdInEdit: null,
+                pendingPreferenceIdInEdit: null
             };
         }
         newState.currentSessionState = {...newState.currentSessionState};

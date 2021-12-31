@@ -12,10 +12,10 @@ import {SxProps} from '@mui/system';
 import {Delete} from '@mui/icons-material';
 import {DriveModel, SketchModel} from '../../models/Sketch.model';
 import {VerticalHourField} from '../buttons/vertical-hour-field';
-import {OrderModel} from '../../models/Order.model';
+import {PreferenceModel} from '../../models/Preference.model';
 import {useDispatch, useSelector} from 'react-redux';
 import {Utils} from '../../services/utils';
-import {OrderActionButton} from '../buttons/order-action-button';
+import {PreferenceActionButton} from '../buttons/preference-action-button';
 import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
 import {ActionsTypes} from '../../store/types.actions';
 import {ShmiraListStore} from '../../store/store.types';
@@ -28,7 +28,7 @@ interface SketchDriveEditDialogProps {
     onClose: (vehicleUpdate: DriveModel | null) => void;
 }
 
-export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
+export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     const {
         onClose,
         onDelete,
@@ -42,7 +42,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
 
-    const sketchOrders = sketchInEdit?.assignedOrders || [];
+    const sketchPreferences = sketchInEdit?.assignedPreferences || [];
     const [driveChangedData, setDriveChangedData] = useState<DriveModel>({...driveData});
 
 
@@ -67,17 +67,17 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         
         onDelete(sketchDriveDataForDelete);
     };
-    const addToPendingClickHandler = (event: Event, orderId: string) => {
+    const addToPendingClickHandler = (event: Event, preferenceId: string) => {
 
         dispatch({
             type: ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE,
             payload: {
-                orderId,
+                preferenceId,
                 sketchDriveId: driveData.id
             }
         })
         const newDrive = {...driveChangedData};
-        newDrive.implementsOrders = newDrive.implementsOrders.filter(o => o !== orderId);
+        newDrive.implementsPreferences = newDrive.implementsPreferences.filter(o => o !== preferenceId);
         setDriveChangedData(newDrive)
     }
     const handleHourChange =
@@ -91,7 +91,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
 
 
         }
-    const implementedOrders = sketchOrders.filter((o: OrderModel) => driveChangedData.implementsOrders.includes(o.id))
+    const implementedPreferences = sketchPreferences.filter((o: PreferenceModel) => driveChangedData.implementsPreferences.includes(o.id))
 
     return (
 
@@ -154,26 +154,26 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                             />
                         </Box>
                         <Typography align={'center'} sx={{mt: '1em'}}
-                                    component="legend"><b> {implementedOrders.length === 0 ? (translations.none + ' ') : null} {
+                                    component="legend"><b> {implementedPreferences.length === 0 ? (translations.none + ' ') : null} {
                             translations
-                                .connectedOrders
+                                .connectedPreferences
                         }</b>
                         </Typography>
-                        <Box id={'connected-orders'}>
-                            {implementedOrders.map((order: OrderModel, i: number) => (
+                        <Box id={'connected-preferences'}>
+                            {implementedPreferences.map((preference: PreferenceModel, i: number) => (
                                 <Card key={i} sx={{
                                     display: 'flex',
                                     flexDirection: 'column',
                                     p: '1em'
                                 }}>
                                     <Box sx={{pb: '0.5em'}}>
-                                        {order.Comments}
+                                        {preference.Comments}
                                     </Box>
 
-                                    <OrderActionButton sx={{width: '100%'}} size={'small'}
+                                    <PreferenceActionButton sx={{width: '100%'}} size={'small'}
                                                        actionType={SketchEditActionEnum.AddToPending}
                                                        text={'      ' + translations.SketchActionAddToPending}
-                                                       actionClickHandler={(event: any) => addToPendingClickHandler(event, order.id)}/>
+                                                       actionClickHandler={(event: any) => addToPendingClickHandler(event, preference.id)}/>
 
                                 </Card>))}
                         </Box>

@@ -58,10 +58,10 @@ export const ShmiraListMenu = (props: shmiraListMenuProps) => {
                 <Archive/> &nbsp;
                 {translations.Archive}
             </MenuItem>
-            <MenuItem onClick={(e) => handleShmiraListMenuClick(e, ShmiraListActionType.ImportOrders)}>
+            <MenuItem onClick={(e) => handleShmiraListMenuClick(e, ShmiraListActionType.ImportPreferences)}>
 
                 <ImportContacts/>&nbsp;
-                {translations.ImportOrders}
+                {translations.ImportPreferences}
             </MenuItem>
             <MenuItem onClick={(e) => handleShmiraListMenuClick(e, ShmiraListActionType.ManageShmiraListim)}>
 

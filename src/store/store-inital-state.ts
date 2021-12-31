@@ -2,7 +2,7 @@ export const defaultShmiraListEshbal: any =
     {
         'id': '5',
         'Name': 'סידור לסקיצה',
-        'orders': [
+        'preferences': [
             {
                 'id': '99',
                 'flexibility': [
@@ -452,7 +452,7 @@ export const defaultShmiraListEshbal: any =
                 'finishHour': '20:00,20:00'
             }
         ],
-        'deletedOrders': [],
+        'deletedPreferences': [],
         'vehicles': [
             {
                 'id': '1',
@@ -513,7 +513,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'ב615  ליאור למשגב עד 815',
                                 'driverName': 'ליאור דינרמן',
                                 'finishHour': '08:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '123'
                                 ],
                                 'description': 'ליאור דינרמן במשגב'
@@ -531,7 +531,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'ענבר למשגב צמוד עד 10:10 (לא להצמיד בבקשה נסיעות כי יש סיכוי שמתבטל מחר בבוקר ',
                                 'driverName': 'ענבר',
                                 'finishHour': '10:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '110'
                                 ],
                                 'description': 'ענבר במשגב'
@@ -549,7 +549,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'רייצ\'ל למרפאה במשגב עד 13:00',
                                 'driverName': 'רייצ\'ל',
                                 'finishHour': '14:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '101'
                                 ],
                                 'description': 'רייצ\'ל במשגב'
@@ -567,7 +567,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'אלון לרקפת - יעזור מאוד צמוד עד 17:20',
                                 'driverName': 'אלון דרור',
                                 'finishHour': '17:20',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '106'
                                 ],
                                 'description': 'אלון דרור ברקפת'
@@ -585,7 +585,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'תמה ואמיר שוורץ לכרמיאל עד 22:00. יש סיכוי שיהיה רכב מסידור החלוץ',
                                 'driverName': 'תמה',
                                 'finishHour': '19:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '122'
                                 ],
                                 'description': 'תמה  אל  כרמיאל'
@@ -610,7 +610,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'יהל לרקפת, מורן לצומת או אם יש נסיעה לחיפה.',
                                 'driverName': 'מורן',
                                 'finishHour': '09:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '119'
                                 ],
                                 'description': 'מורן  אל  חיפה'
@@ -628,7 +628,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'עמיר צמוד עד 15 לאזור טבריה',
                                 'driverName': 'עמיר',
                                 'finishHour': '15:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '129'
                                 ],
                                 'description': 'עמיר ברקפת'
@@ -646,7 +646,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': '16:30 אייל מיובלים וממשיך עם הרכב ליובלים ועצמון, עד הלילה גמיש בשעת איסוף, צריך לצאת מיובלים ב20:00 לעצמון. יכול להקפיץ חזרה לאשבל וכו\'',
                                 'driverName': 'אייל יסוד',
                                 'finishHour': '17:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '131'
                                 ],
                                 'description': 'אייל יסוד מיובלים'
@@ -664,7 +664,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': '',
                                 'driverName': 'רייצ\'ל',
                                 'finishHour': '20:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '102'
                                 ],
                                 'description': 'רייצ\'ל  אל  משגב'
@@ -689,7 +689,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'רייצ\'ל לוקחת את ילדי גן דרור לכרמיאל, רוצה להמשיך לתור לרופאה עד 10. ',
                                 'driverName': 'רייצ\'ל',
                                 'finishHour': '08:20',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '100'
                                 ],
                                 'description': 'רייצ\'ל  אל  כרמיאל'
@@ -707,7 +707,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'רינת שרון לרכבת כרמיאל / לחיפה (להיות ב-10 בבת גלים) ',
                                 'driverName': 'רינת שרון',
                                 'finishHour': '09:20',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '116'
                                 ],
                                 'description': 'רינת שרון  אל  רכבת כרמיאל'
@@ -725,7 +725,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'ורד תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.',
                                 'driverName': 'ורד',
                                 'finishHour': '11:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '104'
                                 ],
                                 'description': 'ורד במשגב'
@@ -743,7 +743,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'מורן מהצומת, או אם יש סביב 13:00 נסיעה מחיפה',
                                 'driverName': 'מורן',
                                 'finishHour': '14:50',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '120'
                                 ],
                                 'description': 'מורן מחיפה'
@@ -761,7 +761,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'עדי יונתן ועמרי לחיסון שפעת במשגב, צמוד עד 17:30 אם אפשר עד אחרי, עדיף עד 19 ואז נעשה עוד משהו',
                                 'driverName': 'עדי',
                                 'finishHour': '17:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '115'
                                 ],
                                 'description': 'עדי במשגב'
@@ -779,7 +779,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'ב1915  ליאור לרביד , סביב 2130 ליאור מרביד ',
                                 'driverName': 'ליאור דינרמן',
                                 'finishHour': '22:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '124'
                                 ],
                                 'description': 'ליאור דינרמן באחר'
@@ -804,7 +804,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'עומר לתיכון ',
                                 'driverName': 'עומר כהן',
                                 'finishHour': '09:10',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '127'
                                 ],
                                 'description': 'עומר כהן  אל  חברתי'
@@ -822,7 +822,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'אוריאל מאשבל למרכז השיח בחיפה ',
                                 'driverName': 'אוריאל',
                                 'finishHour': '10:15',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '117'
                                 ],
                                 'description': 'אוריאל  אל  מרכז'
@@ -840,7 +840,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'ענבר לכרמיאל צמוד עד 15 וחצי ',
                                 'driverName': 'ענבר',
                                 'finishHour': '15:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '108'
                                 ],
                                 'description': 'ענבר בכרמיאל'
@@ -858,7 +858,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'רז מרקפת ',
                                 'driverName': 'ענבר',
                                 'finishHour': '16:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '109'
                                 ],
                                 'description': 'ענבר ברקפת'
@@ -876,7 +876,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'עומר רכב מהתיכון לאסוף את נועם וארי מקורות יש גם אופציות נוספות להיות איתי בקשר',
                                 'driverName': 'עומר כהן',
                                 'finishHour': '18:20',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '128'
                                 ],
                                 'description': 'עומר כהן מחברתי'
@@ -886,7 +886,7 @@ export const defaultShmiraListEshbal: any =
                     }
                 ],
                 'Comments': '',
-                'unassignedOrders': [
+                'unassignedPreferences': [
                     {
                         'id': '99',
                         'flexibility': [
@@ -1042,7 +1042,7 @@ export const defaultShmiraListEshbal: any =
                         'finishHour': '14:00,14:00'
                     }
                 ],
-                'assignedOrders': [
+                'assignedPreferences': [
                     {
                         'id': '100',
                         'flexibility': [
@@ -1346,7 +1346,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'ב615  ליאור למשגב עד 815',
                                 'driverName': 'ליאור דינרמן',
                                 'finishHour': '08:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '123'
                                 ],
                                 'description': 'ליאור דינרמן במשגב'
@@ -1364,7 +1364,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'ענבר למשגב צמוד עד 10:10 (לא להצמיד בבקשה נסיעות כי יש סיכוי שמתבטל מחר בבוקר ',
                                 'driverName': 'ענבר',
                                 'finishHour': '10:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '110'
                                 ],
                                 'description': 'ענבר במשגב'
@@ -1382,7 +1382,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'רייצ\'ל למרפאה במשגב עד 13:00',
                                 'driverName': 'רייצ\'ל',
                                 'finishHour': '14:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '101'
                                 ],
                                 'description': 'רייצ\'ל במשגב'
@@ -1400,7 +1400,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'אלון לרקפת - יעזור מאוד צמוד עד 17:20',
                                 'driverName': 'אלון דרור',
                                 'finishHour': '17:20',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '106'
                                 ],
                                 'description': 'אלון דרור ברקפת'
@@ -1418,7 +1418,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'תמה ואמיר שוורץ לכרמיאל עד 22:00. יש סיכוי שיהיה רכב מסידור החלוץ',
                                 'driverName': 'תמה',
                                 'finishHour': '19:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '122'
                                 ],
                                 'description': 'תמה  אל  כרמיאל'
@@ -1443,7 +1443,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'יהל לרקפת, מורן לצומת או אם יש נסיעה לחיפה.',
                                 'driverName': 'מורן',
                                 'finishHour': '09:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '119'
                                 ],
                                 'description': 'מורן  אל  חיפה'
@@ -1461,7 +1461,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'עמיר צמוד עד 15 לאזור טבריה',
                                 'driverName': 'עמיר',
                                 'finishHour': '15:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '129'
                                 ],
                                 'description': 'עמיר ברקפת'
@@ -1479,7 +1479,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': '16:30 אייל מיובלים וממשיך עם הרכב ליובלים ועצמון, עד הלילה גמיש בשעת איסוף, צריך לצאת מיובלים ב20:00 לעצמון. יכול להקפיץ חזרה לאשבל וכו\'',
                                 'driverName': 'אייל יסוד',
                                 'finishHour': '17:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '131'
                                 ],
                                 'description': 'אייל יסוד מיובלים'
@@ -1497,7 +1497,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': '',
                                 'driverName': 'רייצ\'ל',
                                 'finishHour': '20:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '102'
                                 ],
                                 'description': 'רייצ\'ל  אל  משגב'
@@ -1522,7 +1522,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'רייצ\'ל לוקחת את ילדי גן דרור לכרמיאל, רוצה להמשיך לתור לרופאה עד 10. ',
                                 'driverName': 'רייצ\'ל',
                                 'finishHour': '08:20',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '100'
                                 ],
                                 'description': 'רייצ\'ל  אל  כרמיאל'
@@ -1540,7 +1540,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'רינת שרון לרכבת כרמיאל / לחיפה (להיות ב-10 בבת גלים) ',
                                 'driverName': 'רינת שרון',
                                 'finishHour': '09:20',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '116'
                                 ],
                                 'description': 'רינת שרון  אל  רכבת כרמיאל'
@@ -1558,7 +1558,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'ורד תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.',
                                 'driverName': 'ורד',
                                 'finishHour': '11:00',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '104'
                                 ],
                                 'description': 'ורד במשגב'
@@ -1576,7 +1576,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'מורן מהצומת, או אם יש סביב 13:00 נסיעה מחיפה',
                                 'driverName': 'מורן',
                                 'finishHour': '14:50',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '120'
                                 ],
                                 'description': 'מורן מחיפה'
@@ -1594,7 +1594,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'עדי יונתן ועמרי לחיסון שפעת במשגב, צמוד עד 17:30 אם אפשר עד אחרי, עדיף עד 19 ואז נעשה עוד משהו',
                                 'driverName': 'עדי',
                                 'finishHour': '17:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '115'
                                 ],
                                 'description': 'עדי במשגב'
@@ -1612,7 +1612,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'ב1915  ליאור לרביד , סביב 2130 ליאור מרביד ',
                                 'driverName': 'ליאור דינרמן',
                                 'finishHour': '22:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '124'
                                 ],
                                 'description': 'ליאור דינרמן באחר'
@@ -1637,7 +1637,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'עומר לתיכון ',
                                 'driverName': 'עומר כהן',
                                 'finishHour': '09:10',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '127'
                                 ],
                                 'description': 'עומר כהן  אל  חברתי'
@@ -1655,7 +1655,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'אוריאל מאשבל למרכז השיח בחיפה ',
                                 'driverName': 'אוריאל',
                                 'finishHour': '10:15',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '117'
                                 ],
                                 'description': 'אוריאל  אל  מרכז'
@@ -1673,7 +1673,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'ענבר לכרמיאל צמוד עד 15 וחצי ',
                                 'driverName': 'ענבר',
                                 'finishHour': '15:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '108'
                                 ],
                                 'description': 'ענבר בכרמיאל'
@@ -1691,7 +1691,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'רז מרקפת ',
                                 'driverName': 'ענבר',
                                 'finishHour': '16:30',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '109'
                                 ],
                                 'description': 'ענבר ברקפת'
@@ -1709,7 +1709,7 @@ export const defaultShmiraListEshbal: any =
                                 'Comments': 'עומר רכב מהתיכון לאסוף את נועם וארי מקורות יש גם אופציות נוספות להיות איתי בקשר',
                                 'driverName': 'עומר כהן',
                                 'finishHour': '18:20',
-                                'implementsOrders': [
+                                'implementsPreferences': [
                                     '128'
                                 ],
                                 'description': 'עומר כהן מחברתי'
@@ -1719,7 +1719,7 @@ export const defaultShmiraListEshbal: any =
                     }
                 ],
                 'Comments': '',
-                'unassignedOrders': [
+                'unassignedPreferences': [
                     {
                         'id': '99',
                         'flexibility': [
@@ -1889,7 +1889,7 @@ export const defaultShmiraListEshbal: any =
                         'finishHour': '14:00,14:00'
                     }
                 ],
-                'assignedOrders': [
+                'assignedPreferences': [
                     {
                         'id': '100',
                         'flexibility': [
@@ -2174,5 +2174,5 @@ export const defaultShmiraListEshbal: any =
             }
         ],
         'chosenSketch': '2',
-        'defaultOrderValues': {}
+        'defaultPreferenceValues': {}
     }

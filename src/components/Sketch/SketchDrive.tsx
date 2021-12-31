@@ -117,7 +117,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
                         (<><Box sx={{
                             width: '10px',
                             height: '2px',
-                            borderBottom: '1px solid black',
+                            bpreferenceBottom: '1px solid black',
                             alignSelf: 'center'
                         }}/>
                             <Typography dir="ltr"

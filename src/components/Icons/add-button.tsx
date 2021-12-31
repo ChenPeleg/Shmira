@@ -17,8 +17,8 @@ export const AddButton = (props: AddButtonProps) => {
     return (
 
         <Box>
-            <Button id={'add-order-button'} variant="contained" onClick={props.addClickHandler} aria-label="add" size="large">
-                <Add/> {translations.AddOrder}
+            <Button id={'add-preference-button'} variant="contained" onClick={props.addClickHandler} aria-label="add" size="large">
+                <Add/> {translations.AddPreference}
             </Button>
 
         </Box>

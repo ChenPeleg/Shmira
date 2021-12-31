@@ -1,6 +1,6 @@
-import {defaultOrderValues, IAction, ShmiraListStore} from './store.types';
+import {defaultPreferenceValues, IAction, ShmiraListStore} from './store.types';
 import {StoreUtils} from './store-utils';
-import {OrderModel} from '../models/Order.model';
+import {PreferenceModel} from '../models/Preference.model';
 import {ActionsTypes} from './types.actions';
 import {LocationGroup} from '../models/Location.model';
 
@@ -16,9 +16,9 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: ShmiraLis
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         
-        const newId = '1';// Utils.getNextId(getAllOrdersIDs(state))
-        const newOrder: OrderModel = {
-            ...defaultOrderValues,
+        const newId = '1';// Utils.getNextId(getAllPreferencesIDs(state))
+        const newPreference: PreferenceModel = {
+            ...defaultPreferenceValues,
             id: newId
         }
 
@@ -30,9 +30,9 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: ShmiraLis
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
 
-        const newId = '1';// Utils.getNextId(getAllOrdersIDs(state))
-        const newOrder: OrderModel = {
-            ...defaultOrderValues,
+        const newId = '1';// Utils.getNextId(getAllPreferencesIDs(state))
+        const newPreference: PreferenceModel = {
+            ...defaultPreferenceValues,
             id: newId
         }
 
@@ -44,9 +44,9 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: ShmiraLis
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
 
-        const newId = '1';// Utils.getNextId(getAllOrdersIDs(state))
-        const newOrder: OrderModel = {
-            ...defaultOrderValues,
+        const newId = '1';// Utils.getNextId(getAllPreferencesIDs(state))
+        const newPreference: PreferenceModel = {
+            ...defaultPreferenceValues,
             id: newId
         }
 

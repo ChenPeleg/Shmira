@@ -1,9 +1,9 @@
 import React from 'react'
 import {translations} from '../../services/translations';
 import {Box} from '@mui/system';
-import {OrderCar} from './order-car';
+import {PrefrenceRequest} from './prefrence-request';
 import {useDispatch, useSelector} from 'react-redux';
-import {OrderModel} from '../../models/Order.model';
+import {PreferenceModel} from '../../models/Preference.model';
 import {ActionsTypes} from '../../store/types.actions';
 import {AddButton} from '../Icons/add-button';
 
@@ -14,7 +14,7 @@ const useStyles = (() => ({
         cursor: 'pointer',
         width: '50vw',
 
-        borderRadius: '15px'
+        bpreferenceRadius: '15px'
 
     },
     cardHeader: {
@@ -26,10 +26,10 @@ const useStyles = (() => ({
     }
 }))
 
-export const Orders = () => {
+export const Preferences = () => {
     const dispatch = useDispatch()
-    const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
-    const orderIdInEdit = useSelector((state: { orderIdInEdit: string | null }) => state.orderIdInEdit);
+    const preferences = useSelector((state: { preferences: PreferenceModel[] }) => state.preferences);
+    const preferenceIdInEdit = useSelector((state: { preferenceIdInEdit: string | null }) => state.preferenceIdInEdit);
     const classes = useStyles();
     const addClickHandler = (event: any) => {
         dispatch({
@@ -51,8 +51,8 @@ export const Orders = () => {
                 <AddButton addClickHandler={addClickHandler}/>
             </Box>
             <Box>
-                {orders.map((o) => (
-                    <OrderCar orderId={o.id} key={o.id} isInEdit={orderIdInEdit === o.id}/>
+                {preferences.map((o) => (
+                    <PrefrenceRequest preferenceId={o.id} key={o.id} isInEdit={preferenceIdInEdit === o.id}/>
                 ))}
 
             </Box>

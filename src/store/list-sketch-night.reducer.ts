@@ -4,14 +4,14 @@ import {ActionsTypes} from './types.actions';
 import {IAction, ShmiraListRecord, ShmiraListStore} from './store.types';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {CloneUtil} from '../services/clone-utility';
-import {OrderModel} from '../models/Order.model';
+import {PreferenceModel} from '../models/Preference.model';
 import {StoreUtils} from './store-utils';
 
 export type SketchDriveReducerFunctions = ActionsTypes.DELETE_SKETCH_DRIVE
                                           | ActionsTypes.UPDATE_SKETCH_DRIVE | ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE
 
 
-export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
+export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
 
     [ActionsTypes.UPDATE_SKETCH_DRIVE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
@@ -43,7 +43,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Shm
         let newState = {...state}
 
         const sketchDriveChangedId: string = action.payload.sketchDriveId
-        const orderIdToRemove: string = action.payload.orderId
+        const preferenceIdToRemove: string = action.payload.preferenceId
         const SketchIdInEdit = newState.SketchIdInEdit;
 
 
@@ -56,7 +56,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Shm
                 relevantVehicle.drives = relevantVehicle.drives.map((d: DriveModel) => {
                     if (d.id === sketchDriveChangedId) {
                         const newDrive = {...d};
-                        newDrive.implementsOrders = (newDrive.implementsOrders).filter(ord => ord !== orderIdToRemove)
+                        newDrive.implementsPreferences = (newDrive.implementsPreferences).filter(ord => ord !== preferenceIdToRemove)
 
                         return newDrive
                     } else {
@@ -64,11 +64,11 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Shm
                     }
                 })
             }
-            let OrderToMoveToUnassinged: OrderModel | undefined = sketchObj.assignedOrders.find(o => o.id === orderIdToRemove);
-            if (OrderToMoveToUnassinged) {
-                sketchObj.assignedOrders = sketchObj.assignedOrders.filter(o => o.id !== orderIdToRemove);
-                sketchObj.unassignedOrders = [...sketchObj.unassignedOrders];
-                sketchObj.unassignedOrders.push(OrderToMoveToUnassinged);
+            let PreferenceToMoveToUnassinged: PreferenceModel | undefined = sketchObj.assignedPreferences.find(o => o.id === preferenceIdToRemove);
+            if (PreferenceToMoveToUnassinged) {
+                sketchObj.assignedPreferences = sketchObj.assignedPreferences.filter(o => o.id !== preferenceIdToRemove);
+                sketchObj.unassignedPreferences = [...sketchObj.unassignedPreferences];
+                sketchObj.unassignedPreferences.push(PreferenceToMoveToUnassinged);
 
 
             }

@@ -1,7 +1,7 @@
 import {DriveType} from './DriveType.enum';
-import {OrderModel} from './Order.model';
+import {PreferenceModel} from './Preference.model';
 
-export interface DriveModel extends OrderModel {
+export interface DriveModel extends PreferenceModel {
     id: string,
     driverName: string,
     startHour: string,
@@ -14,7 +14,7 @@ export interface DriveModel extends OrderModel {
     /**
      * @summary more properties that were not in the original drive
      */
-    implementsOrders: string [],
+    implementsPreferences: string [],
     description: string,
     
 }
@@ -30,8 +30,8 @@ export interface SketchModel {
     id: string,
     name: string,
     vehicleSchedules: VehicleScheduleModel[],
-    unassignedOrders: OrderModel[],
-    assignedOrders: OrderModel[],
+    unassignedPreferences: PreferenceModel[],
+    assignedPreferences: PreferenceModel[],
     Comments: string,
     suggestions?: any,
 }

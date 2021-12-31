@@ -1,6 +1,6 @@
-import {OrderModel} from '../models/Order.model';
+import {PreferenceModel} from '../models/Preference.model';
 import {DriveType} from '../models/DriveType.enum';
-import {defaultOrderValues} from '../store/store.types';
+import {defaultPreferenceValues} from '../store/store.types';
 import {locations} from './locations';
 import {LocationModel} from '../models/Location.model';
 import {translations} from './translations';
@@ -33,7 +33,7 @@ const stringValue = `חותמת זמן\tשם\tנסיעה 1 - שעת הנסיע�
 \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t`
 const NewRowToken = 'New_row_';
 
-interface EshbalOrder {
+interface EshbalPreference {
     name: string,
     hour: string,
     text: string
@@ -48,55 +48,55 @@ const DetectFormRows = (completeText: string): string => {
     let finalText = completeText.replace(/\n((0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4})/g, NewRowToken + '\$1');
     return finalText;
 }
-const rowsToEshbalOrders = (rows: string [][]): EshbalOrder[] => {
-    let Eorders: EshbalOrder[] = [];
+const rowsToEshbalPreferences = (rows: string [][]): EshbalPreference[] => {
+    let Epreferences: EshbalPreference[] = [];
     rows.forEach((row: string[], index: number) => {
         if (row[1].length > 1 && index > 0) {
             let name = row[1];
             for (let c = 2; c < 8; c += 2) {
                 if (row[c].length > 1) {
-                    const newRide: EshbalOrder = {
+                    const newRide: EshbalPreference = {
                         name: name,
                         hour: row[c],
                         text: row[c + 1],
                     }
-                    Eorders.push(newRide);
+                    Epreferences.push(newRide);
 
                 }
             }
         }
     })
-    return Eorders
+    return Epreferences
 }
 
-const ordersToOrderModel = (orders: EshbalOrder[]): OrderModel[] => {
+const preferencesToPreferenceModel = (preferences: EshbalPreference[]): PreferenceModel[] => {
     let idNum = 99;
-    const defaultValues: OrderModel = {...defaultOrderValues}
-    let OrdersApp: OrderModel[] = orders.map((eOrder) => {
-        const appOrder: OrderModel = {
+    const defaultValues: PreferenceModel = {...defaultPreferenceValues}
+    let PreferencesApp: PreferenceModel[] = preferences.map((ePreference) => {
+        const appPreference: PreferenceModel = {
             id: idNum.toString(),
             flexibility: defaultValues.flexibility,
             passengers: '1',
             location: '',
             TypeOfDrive: null,
-            startHour: convertTimeTo4Digits(eOrder.hour),
-            Comments: eOrder.text,
-            driverName: eOrder.name,
+            startHour: convertTimeTo4Digits(ePreference.hour),
+            Comments: ePreference.text,
+            driverName: ePreference.name,
             finishHour: ''
         }
         idNum++;
-        return appOrder;
+        return appPreference;
     })
 
-    return OrdersApp;
+    return PreferencesApp;
 }
 /**
  * @description Searches for Time (number in hour pattern in the text, if the returned number is not equal to start hour, returns them
- * @param {OrderModel} order
+ * @param {PreferenceModel} preference
  * @returns {{anotherTime: string | null}}
  */
-const searchAnotherTimeInText = (order: OrderModel): { anotherTime: string | null } => {
-    const text = order.Comments;
+const searchAnotherTimeInText = (preference: PreferenceModel): { anotherTime: string | null } => {
+    const text = preference.Comments;
     const results: { anotherTime: string | null } = {anotherTime: null}
     const matchingTime = text.matchAll(/(\d{1,2}:\d\d)/g);
     const matchingArray = Array.from(matchingTime)
@@ -104,7 +104,7 @@ const searchAnotherTimeInText = (order: OrderModel): { anotherTime: string | nul
     if (matchingArray && matchingArray[0]) {
         matchingArray.forEach(t => {
             const convertedTime = convertTimeTo4Digits(t.toString());
-            if (convertedTime !== order.startHour) {
+            if (convertedTime !== preference.startHour) {
                 results.anotherTime = convertedTime
             }
         })
@@ -117,7 +117,7 @@ const searchAnotherTimeInText = (order: OrderModel): { anotherTime: string | nul
         if (matchingArray && matchingArray[0]) {
             matchingArray.forEach(t => {
                 const convertedTime = convert2DigitTimeTo4Digits(t.toString());
-                if (convertedTime !== order.startHour) {
+                if (convertedTime !== preference.startHour) {
                     results.anotherTime = convertedTime
                 }
             })
@@ -174,32 +174,32 @@ const convert2DigitTimeTo4Digits = (time: string): string => {
         return time
     }
 }
-const getLocationAndTypeFromComments = (orders: OrderModel[]): OrderModel[] => {
-    orders.map(order => {
-        const LocationSearchResult = searchLocationInText(order.Comments);
+const getLocationAndTypeFromComments = (preferences: PreferenceModel[]): PreferenceModel[] => {
+    preferences.map(preference => {
+        const LocationSearchResult = searchLocationInText(preference.Comments);
         if (LocationSearchResult.locationFound) {
-            order.location = LocationSearchResult.locationFound.id
+            preference.location = LocationSearchResult.locationFound.id
         }
         if (LocationSearchResult.typeOfDrive) {
-            order.TypeOfDrive = LocationSearchResult.typeOfDrive
+            preference.TypeOfDrive = LocationSearchResult.typeOfDrive
         }
-        const anotherTimeSearchResults = searchAnotherTimeInText(order);
-        if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== order.startHour) {
-            order.finishHour = anotherTimeSearchResults.anotherTime
+        const anotherTimeSearchResults = searchAnotherTimeInText(preference);
+        if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== preference.startHour) {
+            preference.finishHour = anotherTimeSearchResults.anotherTime
         }
-        return order
+        return preference
     })
-    return orders
+    return preferences
 }
-export const ImportOrdersFromText = (text: string): OrderModel[] => {
+export const ImportPreferencesFromText = (text: string): PreferenceModel[] => {
     // text = stringValue;
     const rowsWithoutUserLineBreaks = DetectFormRows(text)
     const rows = stringIntoRows(rowsWithoutUserLineBreaks);
     const rowsWithColumns = rows.map(r => r.split(/\t/g));
-    const orders: EshbalOrder[] = rowsToEshbalOrders(rowsWithColumns);
-    let appOrders: OrderModel[] = ordersToOrderModel(orders)
+    const preferences: EshbalPreference[] = rowsToEshbalPreferences(rowsWithColumns);
+    let appPreferences: PreferenceModel[] = preferencesToPreferenceModel(preferences)
     //TODO - AD 19 Ad 6
-    return getLocationAndTypeFromComments(appOrders);
+    return getLocationAndTypeFromComments(appPreferences);
 
 
 }

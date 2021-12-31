@@ -17,13 +17,13 @@ describe('Add Button', () => {
     it('only one button', () => {
         expect(addButton.children()).toHaveLength(1);
     });
-    it('only have text  AddOrder', () => {
+    it('only have text  AddPreference', () => {
         // expect(addButton.children()).toHaveLength(1);
-        expect(addButton.text().includes(translations.AddOrder)).toBe(true);
+        expect(addButton.text().includes(translations.AddPreference)).toBe(true);
     });
     it('click triggers click handler', () => {
 
-        addButton.find('#add-order-button').simulate('click');
+        addButton.find('#add-preference-button').simulate('click');
         expect(clickMock).toHaveBeenCalled()
     });
 

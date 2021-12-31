@@ -17,17 +17,17 @@ export const StoreUtils = {
     UpdateShmiraListCollectionWithCurrenShmiraList: (state: ShmiraListStore): ShmiraListRecord[] => {
         const newState = {...state}
         const shmiraListId = newState.shmiraListId;
-        const updatedOrders = newState.orders.map(o => ({...o}));
+        const updatedPreferences = newState.preferences.map(o => ({...o}));
         const updatedVehicles = newState.vehicles.map(o => ({...o}));
-        const updatedDeletedOrders = newState.deletedOrders.map(o => ({...o}));
+        const updatedDeletedPreferences = newState.deletedPreferences.map(o => ({...o}));
         const updatedSketches = newState.sketches.map(o => ({...o}))
         newState.shmiraListCollection = newState.shmiraListCollection.map((shmiraList: ShmiraListRecord) => {
             if (shmiraList.id === shmiraListId) {
                 const updatedShmiraList = {...shmiraList};
-                updatedShmiraList.orders = updatedOrders;
+                updatedShmiraList.preferences = updatedPreferences;
                 updatedShmiraList.vehicles = updatedVehicles;
                 updatedShmiraList.sketches = updatedSketches;
-                updatedShmiraList.deletedOrders = updatedDeletedOrders;
+                updatedShmiraList.deletedPreferences = updatedDeletedPreferences;
                 return updatedShmiraList
             } else {
                 return shmiraList

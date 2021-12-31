@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 
-import {OrderCarForm} from './order-car-form';
+import {PrefrenceRequestForm} from './prefrence-request-form';
 import {translations} from '../../services/translations';
 import {Box, Card, Collapse} from '@mui/material';
-import {OrderCarBrief} from './order-car-brief';
+import {PrefrenceRequestBrief} from './prefrence-request-brief';
 import {SxProps} from '@mui/system';
 import {useDispatch} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
@@ -12,7 +12,7 @@ import {CloneButton} from '../buttons/clone-button';
 
 
 type AppProps = {
-    orderId: string;
+    preferenceId: string;
     isInEdit: boolean;
 };
 const TRL = translations;
@@ -20,7 +20,7 @@ const useStyles = (() => ({
     cardBase: {
         padding: '10px',
         width: '50vw',
-        borderRadius: '15px',
+        bpreferenceRadius: '15px',
     },
     cardHeader: {
         paddingBottom: 0,
@@ -36,7 +36,7 @@ const useStyles = (() => ({
 
 }))
 
-export const OrderCar = (props: AppProps) => {
+export const PrefrenceRequest = (props: AppProps) => {
     const classes = useStyles();
     const [inHover, setInHover] = useState(false);
     const onMouseOver = () => {
@@ -50,7 +50,7 @@ export const OrderCar = (props: AppProps) => {
         dispatch({
             type: ActionsTypes.CLICKED_ORDER,
             payload: {
-                id: props.orderId
+                id: props.preferenceId
             }
         })
     }
@@ -59,7 +59,7 @@ export const OrderCar = (props: AppProps) => {
         dispatch({
             type: ActionsTypes.DELETE_ORDER,
             payload: {
-                id: props.orderId
+                id: props.preferenceId
             }
         })
 
@@ -69,12 +69,12 @@ export const OrderCar = (props: AppProps) => {
         dispatch({
             type: ActionsTypes.CLONE_ORDER,
             payload: {
-                id: props.orderId
+                id: props.preferenceId
             }
         })
 
     }
-    const briefOrderStyle: SxProps = props.isInEdit ? {} : {
+    const briefPreferenceStyle: SxProps = props.isInEdit ? {} : {
         cursor: 'pointer',
         bgcolor: {
             transition: ' ease-in-out 100ms',
@@ -89,7 +89,7 @@ export const OrderCar = (props: AppProps) => {
                 <Card onMouseOver={onMouseOver}
                       onMouseOut={onMouseOut} elevation={inHover ? 7 : 2} sx={{
                     ...classes.cardBase,
-                    ...briefOrderStyle
+                    ...briefPreferenceStyle
                 }} onClick={(event: any) => !props.isInEdit ? cardClickHandler(event) : null}>
                     <div tabIndex={0}>
                         <Box sx={{
@@ -98,7 +98,7 @@ export const OrderCar = (props: AppProps) => {
                             flexDirection: 'row',
                             justifyContent: 'space-between'
                         }}>
-                            <OrderCarBrief isInEdit={props.isInEdit} sx={{...classes.cardBase}} orderId={props.orderId}/>
+                            <PrefrenceRequestBrief isInEdit={props.isInEdit} sx={{...classes.cardBase}} preferenceId={props.preferenceId}/>
                             <Box sx={{
                                 display: 'flex',
                                 flexDirection: 'row'
@@ -114,13 +114,13 @@ export const OrderCar = (props: AppProps) => {
                         {/*    <CardHeader sx={{*/}
                         {/*    ...classes*/}
                         {/*        .cardHeader*/}
-                        {/*}} title={TRL.Order}/>*/}
+                        {/*}} title={TRL.Preference}/>*/}
                     </> : null}
 
                     <Collapse in={props.isInEdit} unmountOnExit>
 
-                        <OrderCarForm isInEdit={props.isInEdit} orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'}
-                                      submitting={'d'}/>
+                        <PrefrenceRequestForm isInEdit={props.isInEdit} preferenceId={props.preferenceId} handleSubmit={'d'} pristine={'b'} reset={'c'}
+                                              submitting={'d'}/>
 
                     </Collapse>
 

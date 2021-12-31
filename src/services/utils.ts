@@ -42,7 +42,7 @@ export const Utils = {
                 Comments: '',
                 passengers: '1',
                 flexibility: ['-30', '10'],
-                implementsOrders: [],
+                implementsPreferences: [],
                 description: '',
             }
 
@@ -74,8 +74,8 @@ export const Utils = {
             id: '1',
             Comments: '',
             name: 'סידור בשני רכבים',
-            unassignedOrders: [],
-            assignedOrders: [],
+            unassignedPreferences: [],
+            assignedPreferences: [],
         }
     },
     hourTextToDecimal(hourText: string): number {

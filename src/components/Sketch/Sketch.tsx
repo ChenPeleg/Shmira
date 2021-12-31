@@ -5,8 +5,8 @@ import {Collapse, Divider, Typography} from '@mui/material';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../../models/Sketch.model';
 import {VehicleModel} from '../../models/Vehicle.model';
 import {SketchDrive} from './SketchDrive';
-import {SketchPendingOrders} from './SketchPendeingOrders';
-import {SketchDriveEditDialog} from '../Dialogs/sketch-drive-edit-dialog';
+import {SketchPendingPreferences} from './SketchPendeingPreferences';
+import {ListSketchDriveEditDialog} from '../Dialogs/list-sketch-drive-edit-dialog';
 import {ActionsTypes} from '../../store/types.actions';
 import {ShmiraListStore} from '../../store/store.types';
 import {SketchNoSketchMessage} from './sketch-no-sketch-message';
@@ -26,7 +26,7 @@ const MOckDrive = {
     'Comments': 'ורד תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.',
     'driverName': 'ורד',
     'finishHour': '10:00',
-    'implementsOrders': [
+    'implementsPreferences': [
         '104'
     ],
     'description': ''
@@ -106,7 +106,7 @@ export const Sketch = () => {
                     justifyContent: 'center',
                     minWidth: '30vw',
                 }}>
-                    <SketchPendingOrders pendingOrders={sketchInEdit.unassignedOrders}/>
+                    <SketchPendingPreferences pendingPreferences={sketchInEdit.unassignedPreferences}/>
 
 
                     {sketchInEdit.vehicleSchedules.map((vehicleTimeTable: VehicleScheduleModel, i: number) => {
@@ -136,7 +136,7 @@ export const Sketch = () => {
                                 </TransitionGroup>
 
                             </Box>
-                            <Divider orientation="vertical" variant={'fullWidth'} sx={{borderRight: '2px solid black '}} flexItem/>
+                            <Divider orientation="vertical" variant={'fullWidth'} sx={{bpreferenceRight: '2px solid black '}} flexItem/>
                         </Box>)
 
 
@@ -144,9 +144,9 @@ export const Sketch = () => {
 
                 </Box>
                 {chosenDrive ?
-                    <SketchDriveEditDialog vehicleId={'1'} open={sketchDriveEditOpen} onClose={handleSketchDriveEditClose}
-                                           sketchDriveData={chosenDrive}
-                                           onDelete={handleSketchDriveEditDelete}/> : null}
+                    <ListSketchDriveEditDialog vehicleId={'1'} open={sketchDriveEditOpen} onClose={handleSketchDriveEditClose}
+                                               sketchDriveData={chosenDrive}
+                                               onDelete={handleSketchDriveEditDelete}/> : null}
 
 
             </Box>) : <SketchNoSketchMessage/>)

@@ -1,4 +1,4 @@
-import {OrderModel} from '../../models/Order.model';
+import {PreferenceModel} from '../../models/Preference.model';
 
 export interface SuggestionModel {
     driveId: string | string [];
@@ -8,19 +8,19 @@ export interface ShmiraListBuildSettings {
     custom: any
 }
 
-export enum OrderMetaStatus {
+export enum PreferenceMetaStatus {
     None = 0,
     Approved = 1,
     Pending = 2,
 }
 
-export interface OrderMetaDataModel {
+export interface PreferenceMetaDataModel {
     id: string
-    order: OrderModel,
+    preference: PreferenceModel,
     start: number
     finish: number,
     length: number,
-    status: OrderMetaStatus
+    status: PreferenceMetaStatus
 }
 
 export const BuilderConstants: Object = {

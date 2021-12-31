@@ -1,11 +1,11 @@
 import {DriveModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {VehicleModel} from '../models/Vehicle.model';
 
-import {OrderModel} from '../models/Order.model';
+import {PreferenceModel} from '../models/Preference.model';
 import {Utils} from '../services/utils';
 import {LanguageUtilities} from '../services/language-utilities';
 import {locations} from '../services/locations';
-import {OrderMetaDataModel, OrderMetaStatus} from './models/shmiraList.models';
+import {PreferenceMetaDataModel, PreferenceMetaStatus} from './models/shmiraList.models';
 import {ShmiraListBuilderTools} from './shmiraList.tools';
 
 interface OrdMetaScheduleData {
@@ -16,22 +16,22 @@ interface OrdMetaScheduleData {
 
 }
 
-export const ShmiraListBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataModel[], vehicles: VehicleModel[], buildSettings: any = null): {
+export const ShmiraListBuilderBuildVehiclesAndUnAssigned = (preferences: PreferenceMetaDataModel[], vehicles: VehicleModel[], buildSettings: any = null): {
     vehicleSchedules: VehicleScheduleModel[],
-    unassignedOrders: OrderModel[],
-    assignedOrders: OrderModel[],
+    unassignedPreferences: PreferenceModel[],
+    assignedPreferences: PreferenceModel[],
 
 } => {
     const enumerator = ShmiraListBuilderTools.EnumeratorConstructor();
-    const metaOrderScheduleData: OrdMetaScheduleData[] = orders.map((o: OrderMetaDataModel) => {
+    const metaPreferenceScheduleData: OrdMetaScheduleData[] = preferences.map((o: PreferenceMetaDataModel) => {
         return {
             start: o.start,
             finish: o.finish,
             id: o.id,
-            passengers: o.order.passengers
+            passengers: o.preference.passengers
         }
     });
-    metaOrderScheduleData.sort((a, b) => (a.start > b.start) ? 1 : -1);
+    metaPreferenceScheduleData.sort((a, b) => (a.start > b.start) ? 1 : -1);
 
     let vehicleScheduleId = 0;
     const vehicleSchedules: VehicleScheduleModel [] = vehicles.map((vehicle: VehicleModel) => {
@@ -46,50 +46,50 @@ export const ShmiraListBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDat
     })
     vehicleSchedules.forEach((schedule: VehicleScheduleModel) => {
         let currentHour: number = 0.1;
-        metaOrderScheduleData.forEach(metaOrder => {
-            if (metaOrder.start > currentHour) {
-                const relevantMetaDrive: OrderMetaDataModel | undefined = orders.find(meta => meta.id === metaOrder.id)
-                if (!relevantMetaDrive || relevantMetaDrive.status === OrderMetaStatus.Approved) {
+        metaPreferenceScheduleData.forEach(metaPreference => {
+            if (metaPreference.start > currentHour) {
+                const relevantMetaDrive: PreferenceMetaDataModel | undefined = preferences.find(meta => meta.id === metaPreference.id)
+                if (!relevantMetaDrive || relevantMetaDrive.status === PreferenceMetaStatus.Approved) {
                     return
                 }
-                currentHour = metaOrder.finish;
+                currentHour = metaPreference.finish;
 
                 const newDrive: DriveModel = {
                     ...relevantMetaDrive
-                        .order,
-                    startHour: Utils.DecimalTimeToHourText(metaOrder.start),
-                    finishHour: Utils.DecimalTimeToHourText(metaOrder.finish),
+                        .preference,
+                    startHour: Utils.DecimalTimeToHourText(metaPreference.start),
+                    finishHour: Utils.DecimalTimeToHourText(metaPreference.finish),
 
-                    implementsOrders: [relevantMetaDrive
-                        .order.id],
+                    implementsPreferences: [relevantMetaDrive
+                        .preference.id],
                     description: '',
                     id: enumerator.getStrId(),
                 }
-                const fakeOrder: OrderModel = {
+                const fakePreference: PreferenceModel = {
                     ...relevantMetaDrive
-                        .order,
-                    startHour: Utils.DecimalTimeToHourText(metaOrder.start),
+                        .preference,
+                    startHour: Utils.DecimalTimeToHourText(metaPreference.start),
 
-                    finishHour: Utils.DecimalTimeToHourText(metaOrder.finish),
+                    finishHour: Utils.DecimalTimeToHourText(metaPreference.finish),
 
 
                 }
-                newDrive.description = LanguageUtilities.buildBriefText(fakeOrder, locations).driverAndLocation;
+                newDrive.description = LanguageUtilities.buildBriefText(fakePreference, locations).driverAndLocation;
 
 
                 schedule.drives.push(newDrive);
-                relevantMetaDrive.status = OrderMetaStatus.Approved;
+                relevantMetaDrive.status = PreferenceMetaStatus.Approved;
 
 
             }
         })
     })
-    const unassignedOrders: OrderModel[] = orders.filter(o => o.status === OrderMetaStatus.None).map(o => o.order);
+    const unassignedPreferences: PreferenceModel[] = preferences.filter(o => o.status === PreferenceMetaStatus.None).map(o => o.preference);
 
-    const assignedOrders: OrderModel[] = orders.filter(o => o.status !== OrderMetaStatus.None).map(o => o.order);
+    const assignedPreferences: PreferenceModel[] = preferences.filter(o => o.status !== PreferenceMetaStatus.None).map(o => o.preference);
     return {
         vehicleSchedules,
-        unassignedOrders,
-        assignedOrders
+        unassignedPreferences,
+        assignedPreferences
     }
 }

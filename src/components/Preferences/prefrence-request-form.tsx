@@ -4,7 +4,7 @@ import {Field, Form} from 'react-final-form';
 import {MuiFormPropsModel} from '../../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
 import {HourPicker} from '../Form/hour-picker';
-import {OrderFields, OrderModel} from '../../models/Order.model';
+import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
 import {RenderTextField} from '../Form/text-field';
 import {RenderSelectField} from '../Form/select-field';
 import {DriveType} from '../../models/DriveType.enum';
@@ -67,7 +67,7 @@ const fieldWrapperText = {
     maxWidth: '150px'
 };
 const allLocations: LocationModel[] = locations.map(o => ({...o}))
-const orderFields: OrderModel = new OrderFields();
+const preferenceFields: PreferenceModel = new PreferenceFields();
 
 const Divider = () => (<Box sx={{
     width: '10px',
@@ -107,7 +107,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 <Box
                     sx={fieldWrapperText}
                 >
-                    <Field name={orderFields.driverName}
+                    <Field name={preferenceFields.driverName}
                            component={RenderTextField}
                            label={TRL.Name}
                     />
@@ -128,7 +128,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 
                 <Box sx={selectFieldWrapper}>
 
-                    <Field name={orderFields.location} component={RenderSelectFieldAutoComplete} label={TRL.Where}
+                    <Field name={preferenceFields.location} component={RenderSelectFieldAutoComplete} label={TRL.Where}
                            selectoptions={allLocations.map((location: LocationModel) => ({
                                ...location,
                                Name: driveTimelanguage.location + location.name
@@ -138,17 +138,17 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 <Box
                     sx={fieldWrapper}
                 >
-                    <Field name={orderFields.startHour} component={HourPicker}
+                    <Field name={preferenceFields.startHour} component={HourPicker}
                            label={driveTimelanguage.timeStart}/>
                 </Box>
                 <Box sx={fieldWrapper}
                 >
-                    <Field name={orderFields.finishHour} custom={{inActive: typeOfDrive !== DriveType.Tsamud}} component={HourPicker}
+                    <Field name={preferenceFields.finishHour} custom={{inActive: typeOfDrive !== DriveType.Tsamud}} component={HourPicker}
                            label={driveTimelanguage.timeEnd}/>
                 </Box>
 
                 <Box
-                    sx={fieldWrapper}> <Field name={orderFields.Comments}
+                    sx={fieldWrapper}> <Field name={preferenceFields.Comments}
                                               component={RenderTextField}
                                               label={TRL.Comments}
                     // multiLine={true}
@@ -158,7 +158,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 
 
                 <Box
-                    sx={fieldWrapper}> <Field name={orderFields.passengers}
+                    sx={fieldWrapper}> <Field name={preferenceFields.passengers}
                                               component={RenderPassengerField}
                                               label={TRL.passengers}
                                               type={'text'}
@@ -166,7 +166,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 />
                 </Box>
                 <Box
-                    sx={advanceFieldWrapper}> <Field name={orderFields.flexibility[0]}
+                    sx={advanceFieldWrapper}> <Field name={preferenceFields.flexibility[0]}
                                                      component={RenderFlexibilityField}
                                                      label={TRL.flexibility}
                                                      rows={2}
@@ -195,14 +195,14 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     );
 };
 
-export const OrderCarForm = (formProps: MuiFormPropsModel) => {
+export const PrefrenceRequestForm = (formProps: MuiFormPropsModel) => {
 
     const dispatch = useDispatch();
 
-    const id = formProps.orderId;
-    const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
+    const id = formProps.preferenceId;
+    const preferences = useSelector((state: { preferences: PreferenceModel[] }) => state.preferences);
 
-    const initialValues = orders.find(order => order.id === id);
+    const initialValues = preferences.find(preference => preference.id === id);
     // @ts-ignore
     const [_typeOfDrive, set_typeOfDrive] = useState(initialValues.TypeOfDrive as DriveType)
     let formValues = {...initialValues};

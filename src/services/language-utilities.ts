@@ -1,6 +1,6 @@
 import {DriveType} from '../models/DriveType.enum';
 import {translations} from './translations';
-import {OrderModel} from '../models/Order.model';
+import {PreferenceModel} from '../models/Preference.model';
 import {LocationModel} from '../models/Location.model';
 import {DriveModel} from '../models/Sketch.model';
 import {SketchEditActionEnum} from '../models/SketchEditAction.enum';
@@ -49,23 +49,23 @@ export const LanguageUtilities = {
 
     },
 
-    buildBriefText(orderValues: OrderModel | DriveModel, locations: LocationModel[]): { timeText: string, driverAndLocation: string } {
-        const isWithName = orderValues.driverName.trim() !== '';
+    buildBriefText(preferenceValues: PreferenceModel | DriveModel, locations: LocationModel[]): { timeText: string, driverAndLocation: string } {
+        const isWithName = preferenceValues.driverName.trim() !== '';
         if (!isWithName) {
             return {
                 timeText: '',
-                driverAndLocation: translations.NewOrder
+                driverAndLocation: translations.NewPreference
             }
 
         }
-        let timeText = orderValues?.startHour || '';
-        if (orderValues.TypeOfDrive === DriveType.Tsamud && orderValues?.startHour && orderValues?.finishHour) {
-            timeText = orderValues.startHour + ' - ' + orderValues.finishHour;
+        let timeText = preferenceValues?.startHour || '';
+        if (preferenceValues.TypeOfDrive === DriveType.Tsamud && preferenceValues?.startHour && preferenceValues?.finishHour) {
+            timeText = preferenceValues.startHour + ' - ' + preferenceValues.finishHour;
         }
-        let briefText = orderValues.driverName;
-        if (orderValues.TypeOfDrive && orderValues.location) {
-            const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(orderValues.TypeOfDrive);
-            const location = locations.find(l => l.id === orderValues.location);
+        let briefText = preferenceValues.driverName;
+        if (preferenceValues.TypeOfDrive && preferenceValues.location) {
+            const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfDrive);
+            const location = locations.find(l => l.id === preferenceValues.location);
             if (location) {
                 briefText += ' ' + driveTimeLanguage.location + location.name
             }

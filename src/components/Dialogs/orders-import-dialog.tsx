@@ -18,7 +18,7 @@ interface FileUploadProps {
 
 }
 
-export const OrderImportDialog = (props: FileUploadProps) => {
+export const PreferenceImportDialog = (props: FileUploadProps) => {
     const {
         onClose,
         open
@@ -28,14 +28,14 @@ export const OrderImportDialog = (props: FileUploadProps) => {
     const handleCloseCancel = () => {
         onClose();
     };
-    const handleCloseImportOrder = () => {
+    const handleCloseImportPreference = () => {
 
 
         if (valueRef.current.value && valueRef.current.value.length) {
 
             dispatch({
                 type: ActionsTypes.IMPORT_ORDERS_AS_TEXT,
-                payload: {importedOrders: valueRef.current.value}
+                payload: {importedPreferences: valueRef.current.value}
             })
         }
         onClose();
@@ -46,14 +46,14 @@ export const OrderImportDialog = (props: FileUploadProps) => {
     return (
         <div>
             <Dialog open={open} onClose={handleCloseCancel}>
-                <DialogTitle> {translations.ImportOrders}</DialogTitle>
+                <DialogTitle> {translations.ImportPreferences}</DialogTitle>
                 <Box>
                     {/*<DialogContentText> {translations.PastHere}</DialogContentText>*/}
                 </Box>
 
                 <Typography/>
                 <DialogContent>
-                    <TextField id={'import-orders-dialog-text-field'}
+                    <TextField id={'import-preferences-dialog-text-field'}
                                autoFocus
                                sx={{
                                    width:
@@ -73,9 +73,9 @@ export const OrderImportDialog = (props: FileUploadProps) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button id={'orders-import-cancel-button'}
+                    <Button id={'preferences-import-cancel-button'}
                             onClick={handleCloseCancel}>{translations.Finish}</Button>
-                    <Button id={'orders-import-approve-button'} onClick={handleCloseImportOrder}>{translations.Approve}</Button>
+                    <Button id={'preferences-import-approve-button'} onClick={handleCloseImportPreference}>{translations.Approve}</Button>
                 </DialogActions>
             </Dialog>
         </div>

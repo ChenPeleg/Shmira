@@ -4,25 +4,25 @@ import {useDispatch} from 'react-redux';
 import {Typography} from '@mui/material';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
-import {OrderModel} from '../../models/Order.model';
+import {PreferenceModel} from '../../models/Preference.model';
 
 
-interface sketchPendingOrderProps {
-    order: OrderModel,
+interface sketchPendingPreferenceProps {
+    preference: PreferenceModel,
     isInEdit: boolean
 }
 
 const getLocationFromId = (locationId: string): string | null => {
     return locations.find(v => v.id === locationId)?.name || locationId
 }
-const timeText = (drive: OrderModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
-const driverAndLocation = (drive: OrderModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
-export const SketchPendingOrderBrief = (props: sketchPendingOrderProps) => {
+const timeText = (drive: PreferenceModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
+const driverAndLocation = (drive: PreferenceModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
+export const SketchPendingPreferenceBrief = (props: sketchPendingPreferenceProps) => {
     const dispatch = useDispatch();
-    const order = props.order;
+    const preference = props.preference;
 
 
-    return ((<Box id={'pending-order'}>
+    return ((<Box id={'pending-preference'}>
 
 
             <Box id={'drive-description'}>
@@ -31,7 +31,7 @@ export const SketchPendingOrderBrief = (props: sketchPendingOrderProps) => {
                     height: '10px'
                 }}/>
                 <Typography
-                    variant={'subtitle1'}>{timeText(order) + ' ' + driverAndLocation(order)}  </Typography>
+                    variant={'subtitle1'}>{timeText(preference) + ' ' + driverAndLocation(preference)}  </Typography>
 
             </Box>
 

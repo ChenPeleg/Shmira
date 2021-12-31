@@ -1,6 +1,6 @@
 import {ActionsTypes} from './types.actions';
 import {AppConstants, defaultVehicleValues, IAction, ShmiraListRecord, ShmiraListStore} from './store.types';
-import {OrderModel} from '../models/Order.model';
+import {PreferenceModel} from '../models/Preference.model';
 import {Utils} from '../services/utils';
 import {translations} from '../services/translations';
 import {StoreUtils} from './store-utils';
@@ -19,8 +19,8 @@ export type ShmiraListReducerFunctions =
 const DefaultShmiraList: ShmiraListRecord = {
     id: '1',
     Name: 'הסידור החדש שלי',
-    orders: [],
-    deletedOrders: [],
+    preferences: [],
+    deletedPreferences: [],
     vehicles: [defaultVehicleValues],
     sketches: [],
     chosenSketch: '',
@@ -42,10 +42,10 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
             const previousShmiraListObj: ShmiraListRecord | undefined = newState.shmiraListCollection.find((record: ShmiraListRecord) => record.id === previousShmiraListId);
             if (previousShmiraListObj !== undefined) {
                 const NewPreviousShmiraListObj = {...previousShmiraListObj};
-                NewPreviousShmiraListObj.orders = newState.orders.map(o => ({
+                NewPreviousShmiraListObj.preferences = newState.preferences.map(o => ({
                     ...o
                 }));
-                NewPreviousShmiraListObj.deletedOrders = newState.deletedOrders.map(o => ({
+                NewPreviousShmiraListObj.deletedPreferences = newState.deletedPreferences.map(o => ({
                     ...o
                 }));
                 NewPreviousShmiraListObj.sketches = newState.sketches.map(o => ({
@@ -55,11 +55,11 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
                     ...o
                 }));
 
-                NewPreviousShmiraListObj.defaultOrderValues = {
+                NewPreviousShmiraListObj.defaultPreferenceValues = {
                     ...
                         NewPreviousShmiraListObj
-                            .defaultOrderValues
-                } as OrderModel;
+                            .defaultPreferenceValues
+                } as PreferenceModel;
                 newState.shmiraListCollection = newState.shmiraListCollection.map((shmiraList: ShmiraListRecord) => {
                     if (shmiraList.id === previousShmiraListId) {
                         return NewPreviousShmiraListObj
@@ -170,10 +170,10 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
         const newShmiraList: ShmiraListRecord = {
             id: newShmiraListId,
             Name: translations.ShmiraList + ' ' + newShmiraListId,
-            orders: [],
-            deletedOrders: [],
+            preferences: [],
+            deletedPreferences: [],
             vehicles: [defaultVehicleValues],
-            defaultOrderValues: newState.defaultOrderValues,
+            defaultPreferenceValues: newState.defaultPreferenceValues,
             sketches: [],
             chosenSketch: '',
             locationGroup: null,
@@ -230,12 +230,12 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
 const setChosenShmiraList = (state: ShmiraListStore, chosenShmiraList: ShmiraListRecord): ShmiraListStore => {
     const newState = {...state};
 
-    newState.orders = chosenShmiraList?.orders.map(o => ({...o})) || []
+    newState.preferences = chosenShmiraList?.preferences.map(o => ({...o})) || []
     newState.vehicles = chosenShmiraList?.vehicles.map(o => ({...o})) || []
-    newState.deletedOrders = chosenShmiraList?.deletedOrders?.map(o => ({...o})) || [];
+    newState.deletedPreferences = chosenShmiraList?.deletedPreferences?.map(o => ({...o})) || [];
     newState.sketches = chosenShmiraList?.sketches?.map(o => ({...o})) || [];
-    newState.orderIdInEdit = null;
-    newState.dataHolderForCurrentOrderInEdit = null;
+    newState.preferenceIdInEdit = null;
+    newState.dataHolderForCurrentPreferenceInEdit = null;
     return newState
 
 }

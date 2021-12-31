@@ -5,7 +5,7 @@ export enum ShmiraListActionType {
     CreateCopy = 4,
     Archive = 5,
     CreateNew = 6,
-    ImportOrders = 7
+    ImportPreferences = 7
 }
 
 export enum ShmiraListManagementActionType {

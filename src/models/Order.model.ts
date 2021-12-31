@@ -1,6 +1,6 @@
 import {DriveType} from './DriveType.enum';
 
-export interface OrderModel {
+export interface PreferenceModel {
     id: string,
     driverName: string,
     startHour: string,
@@ -12,7 +12,7 @@ export interface OrderModel {
     flexibility: [string, string]
 }
 
-export class OrderFields implements OrderModel {
+export class PreferenceFields implements PreferenceModel {
     id: string = 'id';
     driverName: string = 'driverName';
     startHour: string = 'startHour';

@@ -6,42 +6,42 @@ import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
 import {Icons} from '../Icons/icons';
 
 
-interface PendingOrderMenuProps {
-    PendingOrderMenuAnchor: Element | ((element: Element) => Element) | null | undefined;
-    PendingOrderMenuId: string,
-    isPendingOrderMenuOpen: boolean,
-    handlePendingOrderMenuClick: (event: React.MouseEvent<HTMLElement>, action: SketchEditActionEnum) => void
-    handlePendingOrderMenuClose: () => void
+interface PendingPreferenceMenuProps {
+    PendingPreferenceMenuAnchor: Element | ((element: Element) => Element) | null | undefined;
+    PendingPreferenceMenuId: string,
+    isPendingPreferenceMenuOpen: boolean,
+    handlePendingPreferenceMenuClick: (event: React.MouseEvent<HTMLElement>, action: SketchEditActionEnum) => void
+    handlePendingPreferenceMenuClose: () => void
 }
 
-export const PendingOrderMenu = (props: PendingOrderMenuProps) => {
+export const PendingPreferenceMenu = (props: PendingPreferenceMenuProps) => {
     const {
-        PendingOrderMenuAnchor,
-        PendingOrderMenuId,
-        isPendingOrderMenuOpen,
-        handlePendingOrderMenuClick,
-        handlePendingOrderMenuClose
+        PendingPreferenceMenuAnchor,
+        PendingPreferenceMenuId,
+        isPendingPreferenceMenuOpen,
+        handlePendingPreferenceMenuClick,
+        handlePendingPreferenceMenuClose
     } = props;
 
-    let pendingOrdersActions: { action: SketchEditActionEnum, name: string, icon: string } [] = LanguageUtilities.buildSketchEditActionsArray();
+    let pendingPreferencesActions: { action: SketchEditActionEnum, name: string, icon: string } [] = LanguageUtilities.buildSketchEditActionsArray();
 
     return (
         <Menu
-            anchorEl={PendingOrderMenuAnchor}
+            anchorEl={PendingPreferenceMenuAnchor}
             anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
             }}
-            id={PendingOrderMenuId}
+            id={PendingPreferenceMenuId}
             keepMounted
             transformOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
             }}
-            open={isPendingOrderMenuOpen}
-            onClose={handlePendingOrderMenuClose}
+            open={isPendingPreferenceMenuOpen}
+            onClose={handlePendingPreferenceMenuClose}
         >
-            {pendingOrdersActions.map((item, i: number) => <MenuItem key={i} onClick={(e) => handlePendingOrderMenuClick(e, item.action)}>
+            {pendingPreferencesActions.map((item, i: number) => <MenuItem key={i} onClick={(e) => handlePendingPreferenceMenuClick(e, item.action)}>
                 {Icons[item.icon] as React.ReactElement} &nbsp;
                 {item.name}
             </MenuItem>)}

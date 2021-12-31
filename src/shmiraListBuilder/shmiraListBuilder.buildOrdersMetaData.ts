@@ -1,39 +1,39 @@
-import {OrderModel} from '../models/Order.model';
+import {PreferenceModel} from '../models/Preference.model';
 
 import {DriveType} from '../models/DriveType.enum';
 import {locations} from '../services/locations';
 import {CloneUtil} from '../services/clone-utility';
 import {Utils} from '../services/utils';
-import {OrderMetaDataModel, OrderMetaStatus} from './models/shmiraList.models';
+import {PreferenceMetaDataModel, PreferenceMetaStatus} from './models/shmiraList.models';
 
-export const ShmiraListBuilderBuildOrdersMetaData = (orders: OrderModel[], buildSettings: any = null): OrderMetaDataModel[] => {
+export const ShmiraListBuilderBuildPreferencesMetaData = (preferences: PreferenceModel[], buildSettings: any = null): PreferenceMetaDataModel[] => {
     let idCount: number = 1;
-    const clonedOrders: OrderModel[] = orders.map((o: OrderModel) => CloneUtil.deep(o, 'OrderModel'));
+    const clonedPreferences: PreferenceModel[] = preferences.map((o: PreferenceModel) => CloneUtil.deep(o, 'PreferenceModel'));
 
-    const ordersMeta: OrderMetaDataModel[] = clonedOrders.map((order: OrderModel) => {
-        const start: number = Utils.hourTextToDecimal(order.startHour);
-        const finish: number = Utils.hourTextToDecimal(order.finishHour);
+    const preferencesMeta: PreferenceMetaDataModel[] = clonedPreferences.map((preference: PreferenceModel) => {
+        const start: number = Utils.hourTextToDecimal(preference.startHour);
+        const finish: number = Utils.hourTextToDecimal(preference.finishHour);
         const length = finish - start;
-        const metaOrder: OrderMetaDataModel = {
+        const metaPreference: PreferenceMetaDataModel = {
             id: idCount.toString(),
-            order: {...order},
+            preference: {...preference},
             finish: finish,
             start: start,
             length: length,
-            status: OrderMetaStatus.None
+            status: PreferenceMetaStatus.None
         }
         idCount++;
 
-        return metaOrder
+        return metaPreference
     })
 
     // Estimate finish hour of non-Tsamud Drives
-    ordersMeta.forEach((metaOrder: OrderMetaDataModel) => {
-        const driveType = metaOrder.order.TypeOfDrive
+    preferencesMeta.forEach((metaPreference: PreferenceMetaDataModel) => {
+        const driveType = metaPreference.preference.TypeOfDrive
         if (driveType === DriveType.Tsamud) {
             return
         }
-        const locationId = metaOrder.order.location;
+        const locationId = metaPreference.preference.location;
         let locationObj = locations.find(l => l.id === locationId);
         if (!locationObj) {
             locationObj = locations.find(l => l.name === 'Other') ||
@@ -48,20 +48,20 @@ export const ShmiraListBuilderBuildOrdersMetaData = (orders: OrderModel[], build
         const EtaInHours = Utils.minutesToFraction(locationObj.ETA);
         switch (driveType) {
             case DriveType.OneWayTo:
-                metaOrder.finish = metaOrder.start + EtaInHours * 2;
+                metaPreference.finish = metaPreference.start + EtaInHours * 2;
                 break;
             case DriveType.OneWayFrom:
-                metaOrder.finish = metaOrder.start + EtaInHours;
-                metaOrder.start = metaOrder.start - EtaInHours;
+                metaPreference.finish = metaPreference.start + EtaInHours;
+                metaPreference.start = metaPreference.start - EtaInHours;
                 break;
         }
         ;
-        metaOrder.length = metaOrder.finish - metaOrder.start;
+        metaPreference.length = metaPreference.finish - metaPreference.start;
 
 
     })
 
-    return ordersMeta
+    return preferencesMeta
 }
 
 

@@ -127,7 +127,7 @@ export const ShmiraListManagementDialog = (props: FileUploadProps) => {
         (
 
             <Box sx={{
-                borderBottom: 'solid grey 1px',
+                bpreferenceBottom: 'solid grey 1px',
                 margin: '20px 5px',
                 width: '100%',
                 height: '5px',

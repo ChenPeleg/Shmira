@@ -31,7 +31,7 @@ export const ToggleButtons = () => {
 
             onChange={handleChange}
         >
-            <ToggleButton sx={{color: 'white'}} value={'orders'}> {translations.Orders} </ToggleButton>
+            <ToggleButton sx={{color: 'white'}} value={'preferences'}> {translations.Preferences} </ToggleButton>
             <ToggleButton sx={{color: 'white'}} value={'sketch'}>{translations.Sketch}</ToggleButton>
             <ToggleButton sx={{color: 'white'}} value={'locationsView'}>{translations.Locations}</ToggleButton>
         </ToggleButtonGroup>

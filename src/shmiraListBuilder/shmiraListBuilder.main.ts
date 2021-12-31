@@ -1,12 +1,12 @@
 import {ShmiraListRecord} from '../store/store.types';
 import {SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
 
-import {ShmiraListBuilderBuildOrdersMetaData} from './shmiraListBuilder.buildOrdersMetaData';
+import {ShmiraListBuilderBuildPreferencesMetaData} from './shmiraListBuilder.buildPreferencesMetaData';
 import {ShmiraListBuilderBuildVehiclesAndUnAssigned} from './shmiraListBuilder.buildVehicles';
 
 import {Utils} from '../services/utils';
-import {OrderModel} from '../models/Order.model';
-import {OrderMetaDataModel, ShmiraListBuildSettings} from './models/shmiraList.models';
+import {PreferenceModel} from '../models/Preference.model';
+import {PreferenceMetaDataModel, ShmiraListBuildSettings} from './models/shmiraList.models';
 import {ShmiraListBuilderTools} from './shmiraList.tools';
 
 export const ShmiraListBuilder = (ShmiraList: ShmiraListRecord, buildSettings: any = null): SketchModel => {
@@ -14,11 +14,11 @@ export const ShmiraListBuilder = (ShmiraList: ShmiraListRecord, buildSettings: a
         ShmiraList = mockShmiraList as any;
     }
     const settings: ShmiraListBuildSettings = {custom: null}
-    const ordersMetaData: OrderMetaDataModel[] = ShmiraListBuilderBuildOrdersMetaData(ShmiraList.orders, settings)
-    const BuildResult = ShmiraListBuilderBuildVehiclesAndUnAssigned(ordersMetaData, ShmiraList.vehicles, settings);
+    const preferencesMetaData: PreferenceMetaDataModel[] = ShmiraListBuilderBuildPreferencesMetaData(ShmiraList.preferences, settings)
+    const BuildResult = ShmiraListBuilderBuildVehiclesAndUnAssigned(preferencesMetaData, ShmiraList.vehicles, settings);
     const initialVehicles: VehicleScheduleModel [] = BuildResult.vehicleSchedules;
-    const unassignedOrders: OrderModel [] = BuildResult.unassignedOrders;
-    const assignedOrders: OrderModel [] = BuildResult.assignedOrders;
+    const unassignedPreferences: PreferenceModel [] = BuildResult.unassignedPreferences;
+    const assignedPreferences: PreferenceModel [] = BuildResult.assignedPreferences;
 
 
     const baseSketch: SketchModel = {
@@ -26,8 +26,8 @@ export const ShmiraListBuilder = (ShmiraList: ShmiraListRecord, buildSettings: a
         name: 'first sketch',
         vehicleSchedules: initialVehicles,
         Comments: '',
-        unassignedOrders: unassignedOrders,
-        assignedOrders: assignedOrders
+        unassignedPreferences: unassignedPreferences,
+        assignedPreferences: assignedPreferences
     };
 
     const newId = Utils.getNextId(ShmiraList.sketches.map(v => v.id));
@@ -39,7 +39,7 @@ export const ShmiraListBuilder = (ShmiraList: ShmiraListRecord, buildSettings: a
 const mockShmiraList = {
     'id': '5',
     'Name': 'סידור לסקיצה',
-    'orders': [
+    'preferences': [
         {
             'id': '99',
             'flexibility': [
@@ -475,7 +475,7 @@ const mockShmiraList = {
             'finishHour': '20:00,20:00'
         }
     ],
-    'deletedOrders': [],
+    'deletedPreferences': [],
     'vehicles': [
         {
             'id': '1',

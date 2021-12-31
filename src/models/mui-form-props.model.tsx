@@ -5,7 +5,7 @@ export interface MuiFormPropsModel {
     pristine: any,
     reset: any,
     submitting: any,
-    orderId: any,
+    preferenceId: any,
     isInEdit: boolean,
     typeOfDrive?: DriveType
 

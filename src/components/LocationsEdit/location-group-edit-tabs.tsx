@@ -64,8 +64,8 @@ export const LocationsEditTabs = () => {
     return (
         <Box sx={{width: '100%'}}>
             <Box sx={{
-                borderBottom: 1,
-                borderColor: 'divider'
+                bpreferenceBottom: 1,
+                bpreferenceColor: 'divider'
             }}>
                 <Tabs value={locationTabSelected} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label={translations.Locations} {...a11yProps(0)} />

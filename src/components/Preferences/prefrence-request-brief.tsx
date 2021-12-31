@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {OrderFields, OrderModel} from '../../models/Order.model';
+import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Typography} from '@mui/material';
 import {translations} from '../../services/translations';
@@ -13,7 +13,7 @@ import {DriveType} from '../../models/DriveType.enum';
 //const TRL = translations;
 
 type AppProps = {
-    orderId: string;
+    preferenceId: string;
     sx: SxProps,
     isInEdit: boolean
 };
@@ -49,33 +49,33 @@ const useStyles: any = (() => ({
         fontSize: '14px'
     }
 }))
-const orderFields: OrderModel = new OrderFields();
+const preferenceFields: PreferenceModel = new PreferenceFields();
 
-const areDetailsMissing = (orderValues: OrderModel): boolean => {
-    if (!orderValues.TypeOfDrive || !orderValues.driverName || !orderValues.startHour) {
+const areDetailsMissing = (preferenceValues: PreferenceModel): boolean => {
+    if (!preferenceValues.TypeOfDrive || !preferenceValues.driverName || !preferenceValues.startHour) {
         return true
     }
-    if (orderValues.TypeOfDrive === DriveType.Tsamud) {
-        if (!orderValues.finishHour || !orderValues.startHour) {
+    if (preferenceValues.TypeOfDrive === DriveType.Tsamud) {
+        if (!preferenceValues.finishHour || !preferenceValues.startHour) {
             return true
         }
     }
     return false
 }
 
-const buildBriefText = (orderValues: OrderModel): string => {
-    const isWithName = orderValues.driverName.trim() !== '';
+const buildBriefText = (preferenceValues: PreferenceModel): string => {
+    const isWithName = preferenceValues.driverName.trim() !== '';
     if (!isWithName) {
-        return translations.NewOrder
+        return translations.NewPreference
     }
-    let timeText = orderValues?.startHour || '';
-    if (orderValues.TypeOfDrive === DriveType.Tsamud && orderValues?.startHour && orderValues?.finishHour) {
-        timeText = orderValues.finishHour + ' - ' + orderValues.startHour;
+    let timeText = preferenceValues?.startHour || '';
+    if (preferenceValues.TypeOfDrive === DriveType.Tsamud && preferenceValues?.startHour && preferenceValues?.finishHour) {
+        timeText = preferenceValues.finishHour + ' - ' + preferenceValues.startHour;
     }
-    let briefText = timeText + ' ' + orderValues.driverName;
-    if (orderValues.TypeOfDrive && orderValues.location) {
-        const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(orderValues.TypeOfDrive);
-        const location = allLocations.find(l => l.id === orderValues.location);
+    let briefText = timeText + ' ' + preferenceValues.driverName;
+    if (preferenceValues.TypeOfDrive && preferenceValues.location) {
+        const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfDrive);
+        const location = allLocations.find(l => l.id === preferenceValues.location);
         if (location) {
             briefText += ' ' + driveTimeLanguage.location + location.name
         }
@@ -84,12 +84,12 @@ const buildBriefText = (orderValues: OrderModel): string => {
 
     return briefText
 }
-export const OrderCarBrief = (props: AppProps) => {
-    const id = props.orderId;
-    const orderValues = useSelector((state: { orders: OrderModel[] }) => {
-        return state.orders.find(order => order.id === id) as OrderModel;
+export const PrefrenceRequestBrief = (props: AppProps) => {
+    const id = props.preferenceId;
+    const preferenceValues = useSelector((state: { preferences: PreferenceModel[] }) => {
+        return state.preferences.find(preference => preference.id === id) as PreferenceModel;
     });
-    const missingDetailsShown: boolean = areDetailsMissing(orderValues) && !props.isInEdit;
+    const missingDetailsShown: boolean = areDetailsMissing(preferenceValues) && !props.isInEdit;
 
 
     return (
@@ -101,7 +101,7 @@ export const OrderCarBrief = (props: AppProps) => {
             alignItems: 'start'
         }}>
             <Typography fontWeight={props.isInEdit ? 'bold' : 'initial'} fontSize={'large'} padding={'initial'}>
-                {buildBriefText(orderValues)}
+                {buildBriefText(preferenceValues)}
             </Typography>
             <Typography fontSize={'large'} color={'red'} padding={'initial'}>  &nbsp;
                 {missingDetailsShown ? ' (' + translations.missingDetails + ') ' : null}

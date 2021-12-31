@@ -16,7 +16,7 @@ export type SketchReducerFunctions =
     | ActionsTypes.CLONE_SKETCH;
 
 
-export const SketchReducer: Record<SketchReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
+export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
     [ActionsTypes.NEW_SKETCH]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         if (!newState.sketches) {
@@ -26,7 +26,7 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: ShmiraListSto
         const chosenShmiraListObj: ShmiraListRecord | undefined = newState.shmiraListCollection.find((record: ShmiraListRecord) => record.id === newState.shmiraListId);
         if (chosenShmiraListObj !== undefined) {
             // const deconstructedShmiraList = {...chosenShmiraListObj};
-            // deconstructedShmiraList.orders = newState.orders;
+            // deconstructedShmiraList.preferences = newState.preferences;
             // deconstructedShmiraList.sketches = newState.sketches;
             // deconstructedShmiraList.vehicles = newState.vehicles;
             // const newSketch = ShmiraListBuilder(deconstructedShmiraList);

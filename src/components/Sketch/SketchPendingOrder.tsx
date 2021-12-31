@@ -1,19 +1,19 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux';
-import {OrderModel} from '../../models/Order.model';
-import {SketchPendingOrderBrief} from './SketchPendingOrderBrief';
+import {PreferenceModel} from '../../models/Preference.model';
+import {SketchPendingPreferenceBrief} from './SketchPendingPreferenceBrief';
 import {ActionsTypes} from '../../store/types.actions';
 import {SxProps} from '@mui/system';
 import {Box, Card, Collapse} from '@mui/material';
-import {SketchPendingOrderFull} from './SketchPendingOrderFull';
+import {SketchPendingPreferenceFull} from './SketchPendingPreferenceFull';
 
 
-interface sketchPendingOrderProps {
-    order: OrderModel,
+interface sketchPendingPreferenceProps {
+    preference: PreferenceModel,
     isInEdit: boolean
 }
 
-export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
+export const SketchPendingPreference = (props: sketchPendingPreferenceProps) => {
 
     const [inHover, setInHover] = useState(false);
     const onMouseOver = () => {
@@ -27,13 +27,13 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
         dispatch({
             type: ActionsTypes.CLICKED_PENDING_ORDER,
             payload: {
-                id: props.order.id
+                id: props.preference.id
             }
         })
     }
 
 
-    const briefOrderStyle: SxProps = props.isInEdit ? {} : {
+    const briefPreferenceStyle: SxProps = props.isInEdit ? {} : {
         cursor: 'pointer',
         bgcolor: {
             transition: ' ease-in-out 100ms',
@@ -41,7 +41,7 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
 
 
     }
-    const order = props.order;
+    const preference = props.preference;
     return (<>
             <Box sx={{display: 'flex'}}>
                 <Card onMouseOver={onMouseOver}
@@ -74,7 +74,7 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
                                 ml: '0.6em',
                                 mt: '0'
                             }}>
-                                <SketchPendingOrderBrief isInEdit={props.isInEdit} order={props.order}/>
+                                <SketchPendingPreferenceBrief isInEdit={props.isInEdit} preference={props.preference}/>
 
 
                             </Box>
@@ -83,7 +83,7 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
 
                         <Collapse in={props.isInEdit} unmountOnExit>
 
-                            <SketchPendingOrderFull isInEdit={props.isInEdit} order={order}/>
+                            <SketchPendingPreferenceFull isInEdit={props.isInEdit} preference={preference}/>
 
                         </Collapse>
                     </Box>

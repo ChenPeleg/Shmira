@@ -35,7 +35,7 @@ describe('File Upload Dialog', () => {
     })
     it('click triggers click handler', async () => {
 
-        // component.find('#add-order-button').simulate('click');
+        // component.find('#add-preference-button').simulate('click');
         //  expect(onClose).toHaveBeenCalled()
     });
 

@@ -20,7 +20,7 @@ import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action
 import {Utils} from '../../services/utils';
 import {FileUploadType, ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
 import {FileUploadDialog} from '../Dialogs/file-uplaod-dialog';
-import {OrderImportDialog} from '../Dialogs/orders-import-dialog';
+import {PreferenceImportDialog} from '../Dialogs/preferences-import-dialog';
 import {ToggleButtons} from '../buttons/toggle-button-group';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {ShmiraListManagementDialog} from '../Dialogs/shmira-list-management-dialog';
@@ -32,7 +32,7 @@ export const AppNavBar = () => {
     const [RenameOpen, setRenameOpen] = React.useState(false);
     const [UploadOpen, setUploadOpen] = React.useState(false);
     const [ManageShmiraListimOpen, setManageShmiraListimOpen] = React.useState(false);
-    const [importOrdersOpen, setImportOrdersOpen] = React.useState(false);
+    const [importPreferencesOpen, setImportPreferencesOpen] = React.useState(false);
     const [uploadDialogOpen, setUploadDialogOpen] = React.useState(false);
     const [shmiraListMoreAnchorEl, setShmiraListMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
@@ -101,8 +101,8 @@ export const AppNavBar = () => {
             case ShmiraListActionType.ManageShmiraListim:
                 setManageShmiraListimOpen(true);
                 break;
-            case ShmiraListActionType.ImportOrders:
-                setImportOrdersOpen(true);
+            case ShmiraListActionType.ImportPreferences:
+                setImportPreferencesOpen(true);
                 break;
 
             default:
@@ -274,8 +274,8 @@ export const AppNavBar = () => {
             <ShmiraListManagementDialog open={ManageShmiraListimOpen} onClose={() => {
                 setManageShmiraListimOpen(false)
             }}/>
-            <OrderImportDialog open={importOrdersOpen} onClose={() => {
-                setImportOrdersOpen(false)
+            <PreferenceImportDialog open={importPreferencesOpen} onClose={() => {
+                setImportPreferencesOpen(false)
             }}/>
 
         </Box>

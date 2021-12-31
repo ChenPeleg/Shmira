@@ -2,22 +2,22 @@ import React from 'react'
 import {Box} from '@mui/system';
 import {useSelector} from 'react-redux';
 import {Typography} from '@mui/material';
-import {OrderModel} from '../../models/Order.model';
+import {PreferenceModel} from '../../models/Preference.model';
 import {translations} from '../../services/translations';
-import {SketchPendingOrder} from './SketchPendingOrder';
+import {SketchPendingPreference} from './SketchPendingPreference';
 import {ShmiraListStore} from '../../store/store.types';
 
 
-interface sketchPendingOrdersProps {
-    pendingOrders: OrderModel[],
+interface sketchPendingPreferencesProps {
+    pendingPreferences: PreferenceModel[],
 }
 
 
-export const SketchPendingOrders = (props: sketchPendingOrdersProps) => {
+export const SketchPendingPreferences = (props: sketchPendingPreferencesProps) => {
  
-    const pendingOrderInEdit = useSelector((state: ShmiraListStore) => state.pendingOrderIdInEdit);
+    const pendingPreferenceInEdit = useSelector((state: ShmiraListStore) => state.pendingPreferenceIdInEdit);
 
-    return (<Box id={'pending-order-container'} sx={{
+    return (<Box id={'pending-preference-container'} sx={{
             m: '0.2em',
             mb: '0.3em',
             minHeight: '10vh',
@@ -27,10 +27,10 @@ export const SketchPendingOrders = (props: sketchPendingOrdersProps) => {
             alignItems: 'stretch',
             justifyContent: 'start',
         }}>
-            <Typography variant={'h6'}> {translations.PendingOrders} </Typography>
+            <Typography variant={'h6'}> {translations.PendingPreferences} </Typography>
 
-            {(props.pendingOrders || []).map((order: OrderModel) => {
-                return <SketchPendingOrder isInEdit={pendingOrderInEdit === order.id} key={order.id} order={order}/>
+            {(props.pendingPreferences || []).map((preference: PreferenceModel) => {
+                return <SketchPendingPreference isInEdit={pendingPreferenceInEdit === preference.id} key={preference.id} preference={preference}/>
             })}
         </Box>
 

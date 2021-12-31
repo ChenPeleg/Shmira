@@ -1,22 +1,22 @@
-import {OrderModel} from '../models/Order.model';
-import {defaultOrderValues, defaultVehicleValues, IAction, SessionModel, ShmiraListStore} from './store.types';
+import {PreferenceModel} from '../models/Preference.model';
+import {defaultPreferenceValues, defaultVehicleValues, IAction, SessionModel, ShmiraListStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {ShmiraListReducer} from './shmiraList.reducer';
-import {OrderReducer} from './order.reducer';
+import {PreferenceReducer} from './preferenceReducer';
 import {ImportExportReducer} from './import-export.reducer';
 import {VehicleModel} from '../models/Vehicle.model';
 import {VehicleReducer} from './vehicle.reducer';
 import {ActionsTypes} from './types.actions';
 import {DisplayReducer} from './display.reducer';
-import {SketchReducer} from './sketch.reducer';
-import {PendingOrdersReducer} from './pendingOrders.reducer';
-import {SketchDriveReducer} from './sketch-drive.reducer';
+import {ListSketchReducer} from './list-sketch.reducer';
+import {PendingPrefrencesReducer} from './pendingPrefrences.reducer';
+import {ListSketchNightReducer} from './list-sketch-night.reducer';
 import {LocationGroupReducer} from './locationGroup.reducer';
 import {defaultShmiraListEshbal} from './store-inital-state';
 
 
-const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
-    ...defaultOrderValues,
+const startPreferences: PreferenceModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): PreferenceModel => ({
+    ...defaultPreferenceValues,
     id: (index + 1).toString(),
     driverName: name
 }));
@@ -30,9 +30,9 @@ const sessionState: SessionModel = {
     LocationGroupTabOpen: null,
     SketchIdInEdit: null,
     locationGroupInEdit: null,
-    orderIdInEdit: null,
-    pendingOrderIdInEdit: null,
-    dataHolderForCurrentOrderInEdit: null
+    preferenceIdInEdit: null,
+    pendingPreferenceIdInEdit: null,
+    dataHolderForCurrentPreferenceInEdit: null
 
 }
 // @ts-ignore
@@ -42,8 +42,8 @@ const defaultInitialState: ShmiraListStore = {
     shmiraListCollection: [{
         id: '1',
         Name: 'סידור גנים',
-        orders: [],
-        deletedOrders: [],
+        preferences: [],
+        deletedPreferences: [],
         vehicles: [defaultVehicleValues],
         sketches: [],
         chosenSketch: '',
@@ -52,16 +52,16 @@ const defaultInitialState: ShmiraListStore = {
 
     ],
     shmiraListId: '1',
-    orders: startOrders,
+    preferences: startPreferences,
     vehicles: startVehicles,
-    orderIdInEdit: '1',
-    dataHolderForCurrentOrderInEdit: startOrders[0] || null,
-    deletedOrders: [],
-    defaultOrderValues: {...defaultOrderValues},
+    preferenceIdInEdit: '1',
+    dataHolderForCurrentPreferenceInEdit: startPreferences[0] || null,
+    deletedPreferences: [],
+    defaultPreferenceValues: {...defaultPreferenceValues},
     sketches: [],
     displaySetting: {view: 'locationsView'},
     SketchIdInEdit: null,
-    pendingOrderIdInEdit: null,
+    pendingPreferenceIdInEdit: null,
     currentSessionState: sessionState,
     LocationGroups: []
 
@@ -94,7 +94,7 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
         case ActionsTypes.ADD_NEW_ORDER:
         case ActionsTypes.CLONE_ORDER:
 
-            return OrderReducer[action.type](newState, action)
+            return PreferenceReducer[action.type](newState, action)
 
         case ActionsTypes.EXPORT_ALL:
         case ActionsTypes.IMPORT_FILE_UPLOADED:
@@ -116,7 +116,7 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
         case  ActionsTypes.CLONE_SKETCH:
         case ActionsTypes.RENAME_SKETCH:
         case ActionsTypes.DELETE_SKETCH:
-            return SketchReducer [action.type](newState, action)
+            return ListSketchReducer [action.type](newState, action)
 
         case ActionsTypes.CLICKED_PENDING_ORDER:
         case ActionsTypes.CLICKED_CLOSE_PENDING_ORDER:
@@ -129,11 +129,11 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
         case ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER  :
         case ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER:
 
-            return PendingOrdersReducer [action.type](newState, action)
+            return PendingPrefrencesReducer [action.type](newState, action)
         case ActionsTypes.DELETE_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE:
         case ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE:
-            return SketchDriveReducer [action.type](newState, action);
+            return ListSketchNightReducer [action.type](newState, action);
 
         case   ActionsTypes.UPDATE_LOCATION_GROUP :
         case  ActionsTypes.DELETE_LOCATION_GROUP :

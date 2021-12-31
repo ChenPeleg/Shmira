@@ -1,5 +1,5 @@
 export enum ActionsTypes {
-    /* Orders */
+    /* Preferences */
 
     UPDATE_ORDER = 'UPDATE_ORDER',
     UPDATE_ORDER_IN_EDIT = 'UPDATE_ORDER_IN_EDIT',
@@ -46,7 +46,7 @@ export enum ActionsTypes {
     DELETE_SKETCH_DRIVE = 'DELETE_SKETCH_DRIVE',
     REMOVE_ORDER_FROM_SKETCH_DRIVE = 'REMOVE_ORDER_FROM_SKETCH_DRIVE',
 
-    /*pending Orders */
+    /*pending Preferences */
     CLICKED_PENDING_ORDER = 'CLICKED_PENDING_ORDER',
     CLICKED_CLOSE_PENDING_ORDER = 'CLICKED_CLOSE_PENDING_ORDER',
 

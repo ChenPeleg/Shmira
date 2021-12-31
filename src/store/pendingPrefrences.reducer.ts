@@ -1,10 +1,10 @@
 import {IAction, ShmiraListStore} from './store.types';
 import {ActionsTypes} from './types.actions';
 import {SketchModel} from '../models/Sketch.model';
-import {OrderModel} from '../models/Order.model';
+import {PreferenceModel} from '../models/Preference.model';
 import {StoreUtils} from './store-utils';
 
-export type PendingOrdersReducerFunctions =
+export type PendingPreferencesReducerFunctions =
     ActionsTypes.CLICKED_PENDING_ORDER
     | ActionsTypes.CLICKED_CLOSE_PENDING_ORDER
     | ActionsTypes.CLICKED_REMOVE_PENDING_ORDER
@@ -17,11 +17,11 @@ export type PendingOrdersReducerFunctions =
     | ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER
 
 
-export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
+export const PendingPrefrencesReducer: Record<PendingPreferencesReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
     [ActionsTypes.CLICKED_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         if (action.payload.id) {
-            newState.pendingOrderIdInEdit = action.payload.id;
+            newState.pendingPreferenceIdInEdit = action.payload.id;
         }
 
         return newState
@@ -29,7 +29,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
     [ActionsTypes.CLICKED_CLOSE_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
 
-        newState.pendingOrderIdInEdit = null;
+        newState.pendingPreferenceIdInEdit = null;
 
 
         return newState
@@ -37,17 +37,17 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
 
     [ActionsTypes.CLICKED_REMOVE_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
-        const orderToRemoveId = action.payload.id
+        const preferenceToRemoveId = action.payload.id
         const SketchIdInEdit = state.SketchIdInEdit
 
         const sketchObj: SketchModel | undefined = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
         if (sketchObj) {
-            const orderToRemove: OrderModel | undefined = sketchObj.unassignedOrders.find(o => o.id === orderToRemoveId);
-            if (orderToRemove) {
-                sketchObj.assignedOrders = [...sketchObj.assignedOrders]
-                sketchObj.assignedOrders.push(orderToRemove);
-                sketchObj.unassignedOrders = [...sketchObj.unassignedOrders];
-                sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter(o => o.id !== orderToRemoveId);
+            const preferenceToRemove: PreferenceModel | undefined = sketchObj.unassignedPreferences.find(o => o.id === preferenceToRemoveId);
+            if (preferenceToRemove) {
+                sketchObj.assignedPreferences = [...sketchObj.assignedPreferences]
+                sketchObj.assignedPreferences.push(preferenceToRemove);
+                sketchObj.unassignedPreferences = [...sketchObj.unassignedPreferences];
+                sketchObj.unassignedPreferences = sketchObj.unassignedPreferences.filter(o => o.id !== preferenceToRemoveId);
                 newState.sketches = newState.sketches.map((sketch: SketchModel) => {
                     if (sketch.id === SketchIdInEdit) {
                         return {...sketchObj}
@@ -56,7 +56,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
                     }
                 });
             }
-            newState.pendingOrderIdInEdit = null;
+            newState.pendingPreferenceIdInEdit = null;
         }
         StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         return newState

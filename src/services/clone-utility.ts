@@ -1,5 +1,5 @@
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
-import {OrderModel} from '../models/Order.model';
+import {PreferenceModel} from '../models/Preference.model';
 import {ShmiraListRecord} from '../store/store.types';
 
 
@@ -7,8 +7,8 @@ export class CloneUtil {
     constructor() {
     }
 
-    static deepCloneOrder(obj: OrderModel): OrderModel {
-        const cloned: OrderModel = {...obj}
+    static deepClonePreference(obj: PreferenceModel): PreferenceModel {
+        const cloned: PreferenceModel = {...obj}
         cloned.flexibility = [...cloned.flexibility]
         return cloned
     }
@@ -27,10 +27,10 @@ export class CloneUtil {
 
     static deepCloneShmiraList(shmiraList: ShmiraListRecord): ShmiraListRecord {
         const clonedShmiraList = {...shmiraList}
-        clonedShmiraList.orders = clonedShmiraList.orders.map(o => (CloneUtil.deepCloneOrder(o)));
-        clonedShmiraList.deletedOrders = clonedShmiraList.deletedOrders.map(o => (CloneUtil.deepCloneOrder(o)));
+        clonedShmiraList.preferences = clonedShmiraList.preferences.map(o => (CloneUtil.deepClonePreference(o)));
+        clonedShmiraList.deletedPreferences = clonedShmiraList.deletedPreferences.map(o => (CloneUtil.deepClonePreference(o)));
         clonedShmiraList.sketches = clonedShmiraList.sketches.map(o => (CloneUtil.deepCloneSketch(o)));
-        clonedShmiraList.defaultOrderValues = clonedShmiraList.defaultOrderValues ? {...clonedShmiraList.defaultOrderValues} : undefined
+        clonedShmiraList.defaultPreferenceValues = clonedShmiraList.defaultPreferenceValues ? {...clonedShmiraList.defaultPreferenceValues} : undefined
         return clonedShmiraList
     }
 
@@ -39,8 +39,8 @@ export class CloneUtil {
         return {...obj}
     }
 
-    public static deep(obj: ShmiraListRecord, name: 'ShmiraListRecord'): OrderModel ;
-    public static deep(obj: OrderModel, name: 'OrderModel'): OrderModel ;
+    public static deep(obj: ShmiraListRecord, name: 'ShmiraListRecord'): PreferenceModel ;
+    public static deep(obj: PreferenceModel, name: 'PreferenceModel'): PreferenceModel ;
     public static deep(obj: SketchModel, name: 'SketchModel'): SketchModel ;
     public static deep(obj: any, name: string,): any {
         const newObj = {...obj}
@@ -49,7 +49,7 @@ export class CloneUtil {
                 return CloneUtil.deepCloneSketch(obj)
             case 'ShmiraListRecord':
                 return CloneUtil.deepCloneShmiraList(obj)
-            case 'OrderModel':
+            case 'PreferenceModel':
                 newObj.flexibility = [(newObj).flexibility[0], (newObj).flexibility[1]];
         }
         return newObj;

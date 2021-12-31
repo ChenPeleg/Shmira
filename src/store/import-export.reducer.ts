@@ -3,8 +3,8 @@ import {StoreUtils} from './store-utils';
 import {DownloadFile} from '../services/download-file';
 import {Utils} from '../services/utils';
 import {ActionsTypes} from './types.actions';
-import {ImportOrdersFromText} from '../services/import-orders-from-text';
-import {OrderModel} from '../models/Order.model';
+import {ImportPreferencesFromText} from '../services/import-preferences-from-text';
+import {PreferenceModel} from '../models/Preference.model';
 
 export type ImportReducerFunctions =
     ActionsTypes.EXPORT_ALL |
@@ -51,9 +51,9 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: ShmiraL
     },
     [ActionsTypes.IMPORT_ORDERS_AS_TEXT]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
-        const importedOrders: string = action.payload.importedOrders;
-        const modeledImportedOrders: OrderModel[] = ImportOrdersFromText(importedOrders);
-        newState.orders = newState.orders.concat(modeledImportedOrders)
+        const importedPreferences: string = action.payload.importedPreferences;
+        const modeledImportedPreferences: PreferenceModel[] = ImportPreferencesFromText(importedPreferences);
+        newState.preferences = newState.preferences.concat(modeledImportedPreferences)
         // try {
         //
         //

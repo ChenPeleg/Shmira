@@ -15,22 +15,22 @@ export const DisplayReducer: Record<DisplayReducerFunctions, (state: ShmiraListS
 
 
 }
-const getAllOrdersIDs = (state: ShmiraListStore): string[] => {
-    const ordersIds = state.orders.map(o => o.id);
-    const deletedIdsWithWords = state.deletedOrders.map(o => o.id);
+const getAllPreferencesIDs = (state: ShmiraListStore): string[] => {
+    const preferencesIds = state.preferences.map(o => o.id);
+    const deletedIdsWithWords = state.deletedPreferences.map(o => o.id);
     const replaceIdsNames: RegExp = new RegExp(AppConstants.ArchiveIdPrefix + '|' + AppConstants.deleteIdPrefix, 'g');
     ;
     const deletedIds = deletedIdsWithWords.map(o => o.replace(replaceIdsNames, ''))
-    return [...deletedIds, ...ordersIds]
+    return [...deletedIds, ...preferencesIds]
 }
-const updateOrdersWithEditedOrder = (state: ShmiraListStore): ShmiraListStore => {
-    const currentOrderId = state?.dataHolderForCurrentOrderInEdit?.id
-    if (currentOrderId) {
-        state.orders = state.orders.map(order => {
-            if ((currentOrderId === order.id) && state.dataHolderForCurrentOrderInEdit) {
-                order = state.dataHolderForCurrentOrderInEdit
+const updatePreferencesWithEditedPreference = (state: ShmiraListStore): ShmiraListStore => {
+    const currentPreferenceId = state?.dataHolderForCurrentPreferenceInEdit?.id
+    if (currentPreferenceId) {
+        state.preferences = state.preferences.map(preference => {
+            if ((currentPreferenceId === preference.id) && state.dataHolderForCurrentPreferenceInEdit) {
+                preference = state.dataHolderForCurrentPreferenceInEdit
             }
-            return order
+            return preference
         });
     }
 

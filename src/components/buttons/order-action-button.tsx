@@ -13,13 +13,13 @@ export interface OrdeerActionButtonProps {
 
 }
 
-export const OrderActionButton = (props: OrdeerActionButtonProps) => {
+export const PreferenceActionButton = (props: OrdeerActionButtonProps) => {
     const size = props.size ? props.size : 'medium'
     const sx = props.sx || {}
     return (
 
         <Box>
-            <Button sx={sx} id={'action-order-button'} variant="contained" onClick={props.actionClickHandler} aria-label="add" size={size}>
+            <Button sx={sx} id={'action-preference-button'} variant="contained" onClick={props.actionClickHandler} aria-label="add" size={size}>
                 {props.text}
             </Button>
 

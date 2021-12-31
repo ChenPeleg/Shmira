@@ -1,30 +1,29 @@
 import React from 'react'
 import {Box} from '@mui/material';
-import {Orders} from '../components/Orders/orders';
-import {Vehicles} from '../components/Vehicles/vehicles';
 import {useSelector} from 'react-redux';
 import {DisplaySettings} from '../store/store.types';
 import {SketchesContainer} from '../components/Sketch/SketchesContainer';
 import {LocationGroupEditWrapper} from '../components/LocationsEdit/location-group-edit-wrapper';
+import { Preferences } from '../components/Preferences/preferences';
 
 
 export const MainLayout = () => {
     const displaySetting: DisplaySettings = useSelector((state: { displaySetting: DisplaySettings }) => state.displaySetting);
     let displaySketches: boolean = false;
-    let displayOrders: boolean = true;
+    let displayPreferences: boolean = true;
     let displayLocations: boolean = false
 
     switch (displaySetting?.view) {
-        case 'orders':
-            displayOrders = true;
+        case 'preferences':
+            displayPreferences = true;
             displaySketches = false;
             break;
         case 'sketch':
-            displayOrders = false;
+            displayPreferences = false;
             displaySketches = true;
             break;
         case 'locationsView':
-            displayOrders = false;
+            displayPreferences = false;
             displaySketches = false;
             displayLocations = true
             break;
@@ -43,10 +42,10 @@ export const MainLayout = () => {
                     <SketchesContainer/>
 
                 </Box> : null}
-                {displayOrders ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
+                {displayPreferences ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
 
-                    <Vehicles/>
-                    <Orders/>
+
+                    <Preferences/>
 
                 </Box> : null}
                 {displayLocations ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
