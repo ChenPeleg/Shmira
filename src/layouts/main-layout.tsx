@@ -5,6 +5,7 @@ import {DisplaySettings} from '../store/store.types';
 import {SketchesContainer} from '../components/Sketch/SketchesContainer';
 import {LocationGroupEditWrapper} from '../components/LocationsEdit/location-group-edit-wrapper';
 import { Preferences } from '../components/Preferences/preferences';
+import {DataRange} from '../components/DateRange/data-range';
 
 
 export const MainLayout = () => {
@@ -44,7 +45,7 @@ export const MainLayout = () => {
                 </Box> : null}
                 {displayPreferences ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
 
-
+<DataRange/>
                     <Preferences/>
 
                 </Box> : null}

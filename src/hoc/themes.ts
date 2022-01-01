@@ -75,5 +75,9 @@ export const Styles: Record<string, SxProps> = {
         alignItems: 'start',
         alignContent: 'start'
     },
+    divider : {
+        height : '20px',
+        width : '20px',
+    }
 
 }

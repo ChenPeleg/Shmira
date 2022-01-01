@@ -41,6 +41,8 @@ export const translations = {
     'addLocation': 'הוסף מקום',
     'Start': 'התחלה',
     'Finish': 'סיום',
+    'FromDate': 'מתאריך',
+    'ToDate': 'לתאריך',
     'TypeOfDrivePreference': 'הגבלת שמירה',
     'Tsamud': 'צמוד',
     'CanGuardIn': 'לא יכול לשמור בתאריכים',

@@ -24,7 +24,9 @@ const DefaultShmiraList: ShmiraListRecord = {
     vehicles: [defaultVehicleValues],
     sketches: [],
     chosenSketch: '',
-    locationGroup: null
+    locationGroup: null,
+    DateFrom : '',
+    DateTo : ''
 
 }
 
@@ -177,6 +179,8 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
             sketches: [],
             chosenSketch: '',
             locationGroup: null,
+            DateTo : '',
+            DateFrom : ''
         }
         newState.shmiraListCollection = newState.shmiraListCollection.map(c => c);
         newState.shmiraListCollection.push(newShmiraList);

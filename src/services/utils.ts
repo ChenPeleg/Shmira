@@ -131,7 +131,6 @@ export const Utils = {
 
 
     },
-
     minutesToFraction(minute: string | number): number {
         const minAsNumber = Number(minute) || 0;
         if (minAsNumber == 0) {
@@ -146,5 +145,23 @@ export const Utils = {
         }
         return Math.floor((minAsNumber / 100) * 60)
     },
+    Date : {
+        dateToTimeStamp (inDate : Date) : string{
+            const returnDateTime = 25569.0 + ((inDate.getTime() - (inDate.getTimezoneOffset() * 60 * 1000)) / (1000 * 60 * 60 * 24));
+            return returnDateTime.toString().substr(0,20);
+        },
+
+        excelDateToJSDate(orgExcelDate : string | number) {
+           const excelDate = Number (orgExcelDate) | 44000
+            const date = new Date(Math.round((excelDate - (25567 + 1)) * 86400 * 1000));
+            const converted_date = date.toISOString().split('T')[0];
+            return converted_date;
+        }
+
+
+
+
+
+    }
 
 }

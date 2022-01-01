@@ -21,7 +21,9 @@ export interface ShmiraListRecord {
     defaultPreferenceValues?: PreferenceModel,
     sketches: SketchModel[],
     chosenSketch: string,
-    locationGroup: LocationGroup | null
+    locationGroup: LocationGroup | null,
+    DateFrom : string,
+    DateTo : string
 }
 
 export interface DisplaySettings {
