@@ -76,14 +76,15 @@ const preferencesToPreferenceModel = (preferences: EshbalPreference[]): Preferen
         const appPreference: PreferenceModel = {
             id: idNum.toString(),
             flexibilityByDays: defaultValues.flexibilityByDays,
-            flexibilityByDates : [],
+            flexibilityByDates: [],
             halfOrFull: '1',
             location: '',
             TypeOfDrivePreference: null,
             optionalGuardDaysByDates: convertTimeTo4Digits(ePreference.hour),
             Comments: ePreference.text,
             guardName: ePreference.name,
-            finishHour: ''
+            finishHour: '',
+            weekDaysOrDates: null
         }
         idNum++;
         return appPreference;

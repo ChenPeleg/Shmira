@@ -22,8 +22,8 @@ export interface ShmiraListRecord {
     sketches: SketchModel[],
     chosenSketch: string,
     locationGroup: LocationGroup | null,
-    DateFrom : string,
-    DateTo : string
+    DateFrom: string,
+    DateTo: string
 }
 
 export interface DisplaySettings {
@@ -68,9 +68,10 @@ export const defaultPreferenceValues: PreferenceModel = {
     TypeOfDrivePreference: PreferenceType.CantGuardIn,
     Comments: '',
     halfOrFull: '1',
-    flexibilityByDays: [ ],
-    flexibilityByDates: [ ],
-    location: ''
+    flexibilityByDays: [],
+    flexibilityByDates: [],
+    location: '',
+    weekDaysOrDates: null
 }
 export const defaultVehicleValues: VehicleModel = {
     id: '1',

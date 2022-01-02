@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import {Field, Form} from 'react-final-form';
 import {MuiFormPropsModel} from '../../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
-import {HourPicker} from '../Form/hour-picker';
 import {RenderTextField} from '../Form/text-field';
 import {RenderSelectField} from '../Form/select-field';
 import {PreferenceType} from '../../models/PreferenceType.enum';
@@ -16,7 +15,6 @@ import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {RenderFullNightField} from '../Form/full-night-field';
 import {RenderFlexibilityField} from '../Form/flex-field';
-import {RenderSelectFieldAutoComplete} from '../Form/select-field-auto-complete';
 import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
 
 
@@ -147,8 +145,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 {/*           label={driveTimelanguage.timeEnd}/>*/}
                 {/*</Box>*/}
 
-                
-                
+
                 <Box
                     sx={fieldWrapper}> <Field name={preferenceFields.Comments}
                                               component={RenderTextField}
@@ -168,7 +165,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 />
                 </Box>
                 <Box
-                    sx={advanceFieldWrapper}> <Field name={preferenceFields.flexibilityByDays[0]}
+                    sx={advanceFieldWrapper}> <Field name={'weekDaysOrDates'}
                                                      component={RenderFlexibilityField}
                                                      label={TRL.flexibilityByDays}
                                                      rows={2}

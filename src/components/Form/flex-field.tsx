@@ -3,7 +3,7 @@ import {TextFieldPropertiesModel} from '../../models/text-field-properties.model
 import React from 'react';
 import {Box, Slider, Theme, Typography} from '@mui/material';
 import {translations} from '../../services/translations';
-import {Utils} from '../../services/utils';
+import {Styles} from '../../hoc/themes';
 
 
 const sliderSx = {
@@ -35,26 +35,30 @@ export const RenderFlexibilityField = (
     }: TextFieldPropertiesModel,
 ) => {
     const convertedInput = {...input}
-    convertedInput.value = convertedInput.value.map((v: string) => Utils.convertStrToNum(v))
+    // convertedInput.value = convertedInput.value.map((v: string) => Utils.convertStrToNum(v))
     return (
         <>
-            <Typography component="legend"><b>{translations.flexibilityByDays}: </b>{renderFlexibilityText(input.value)}</Typography>
+            <Box sx={Styles.flexRow}>
+                <Typography component="legend"><b>{translations.byDates}: </b> </Typography>
 
-            <Box sx={{width: '250px'}}>
+                <Box sx={{width: '50px'}}>
 
-                <Slider variant={'standard'}
-                        sx={sliderSx}
-                        disableSwap
-                        valueLabelDisplay="auto"
-                        label={label}
-                        min={-60}
-                        max={120}
-                        step={10}
-                        onChange={input.onChange}
+                    <Slider variant={'standard'}
+                            sx={sliderSx}
+                            disableSwap
+                            valueLabelDisplay="auto"
+                            label={label}
+                            min={1}
+                            max={2}
+                            step={1}
+                            onChange={input.onChange}
 
-                        {...convertedInput}
-                        {...custom}
-                />
-            </Box>   </>
+                            {...convertedInput}
+                            {...custom}
+                    />
+                </Box>
+                <Typography component="legend"><b>{translations.byWeekDays}: </b> </Typography>
+            </Box>
+        </>
     );
 }

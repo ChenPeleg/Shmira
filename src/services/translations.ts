@@ -72,11 +72,13 @@ export const translations = {
     'seats': 'מושבים',
     'halfOrFull': 'נוסעים',
     'flexibilityByDays': 'גמישות',
+    'byDates': 'תאריכים',
+    'byWeekDays': 'ימות השבוע',
     'missingDetails': 'מידע חלקי',
 
     'onePassenger': 'נוסע/ת אחד/ת',
-    'halfNight' : 'רגילה - חצי לילה',
-    'fullNight' : 'כפולה - כל הלילה',
+    'halfNight': 'רגילה - חצי לילה',
+    'fullNight': 'כפולה - כל הלילה',
 
     'none': 'אין',
     'exitTime': 'יציאה',

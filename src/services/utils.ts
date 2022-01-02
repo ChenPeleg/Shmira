@@ -2,7 +2,7 @@ import {hashFunction} from './hash-function';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {PreferenceType} from '../models/PreferenceType.enum';
 
-
+const ExcelDifferenece = 25569.0;
 export const Utils = {
     getNextId: (currentIds: string[]): string => {
         const allIds: number [] = currentIds.map(id => Number(id));
@@ -45,6 +45,7 @@ export const Utils = {
                 flexibilityByDates: [],
                 implementsPreferences: [],
                 description: '',
+                weekDaysOrDates: null
             }
 
         }
@@ -145,21 +146,45 @@ export const Utils = {
         }
         return Math.floor((minAsNumber / 100) * 60)
     },
-    Date : {
-        dateToTimeStamp (inDate : Date) : string{
-            const returnDateTime = 25569.0 + ((inDate.getTime() - (inDate.getTimezoneOffset() * 60 * 1000)) / (1000 * 60 * 60 * 24));
-            return returnDateTime.toString().substr(0,20);
+    Date: {
+        // dateToTimeStamp(inDate: Date): string {
+        //
+        //     const returnDateTime = ((inDate.getTime() - 1) / (1000 * 60 * 60 * 24));
+        //     return returnDateTime.toString();
+        // },
+
+        // excelDateToJSDate(orgExcelDate: string | number): Date {
+        //     const excelDate = Number(orgExcelDate) | 0
+        //     const date = new Date(Math.round((excelDate - (25567 + 1)) * 86400 * 1000));
+        //     const converted_date = date.toISOString().split('T')[0];
+        //     return date;
+        // },
+        dateStampToDate(dateStamp: string): Date | null {
+            if (!dateStamp) {
+                return null;
+            }
+
+            let result = new Date(1900, 0, 1);
+            result.setDate(result.getDate() + Number.parseInt(dateStamp));
+
+            return result;
         },
+        dateToDateStamp(date: Date): string {
+            if (!date) {
+                return '';
+            }
 
-        excelDateToJSDate(orgExcelDate : string | number) {
-           const excelDate = Number (orgExcelDate) | 44000
-            const date = new Date(Math.round((excelDate - (25567 + 1)) * 86400 * 1000));
-            const converted_date = date.toISOString().split('T')[0];
-            return converted_date;
+            let startDate = new Date('1900-01-01');
+            let resultDate = new Date(date);
+            let x = new Date();
+            var offset = (x.getTimezoneOffset() * 60 * 1000);
+
+            const milisecondsInDay = (24 * 60 * 60 * 1000);
+            let dateStamp = Math.floor((resultDate.getTime() - resultDate.getTimezoneOffset() * 60 * 1000) / milisecondsInDay) -
+                Math.round((startDate.getTime() - startDate.getTimezoneOffset()) / milisecondsInDay);
+
+            return dateStamp.toString();
         }
-
-
-
 
 
     }

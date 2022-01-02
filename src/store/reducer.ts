@@ -13,6 +13,8 @@ import {PendingPreferencesReducer} from './pendingPreferencesReducer';
 import {ListSketchNightReducer} from './list-sketch-night.reducer';
 import {LocationGroupReducer} from './locationGroup.reducer';
 import {defaultShmiraListEshbal} from './store-inital-state';
+import {DateRangesReducer} from './date-ranges.reducer';
+import {Utils} from '../services/utils';
 
 
 const startPreferences: PreferenceModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): PreferenceModel => ({
@@ -47,8 +49,10 @@ const defaultInitialState: ShmiraListStore = {
         vehicles: [defaultVehicleValues],
         sketches: [],
         chosenSketch: '',
-        locationGroup: null
-    }, defaultShmiraListEshbal
+        locationGroup: null,
+        DateTo: Utils.Date.dateToDateStamp(new Date()),
+        DateFrom: Number((Utils.Date.dateToDateStamp(new Date())) + 60).toString(),
+    }, {...defaultShmiraListEshbal}
 
     ],
     shmiraListId: '1',
@@ -144,6 +148,9 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
         case ActionsTypes.CHOOSE_LOCATION_GROUP_TAB:
 
             return LocationGroupReducer [action.type](newState, action)
+
+        case ActionsTypes.DATE_RANGES_UPDATE:
+            return DateRangesReducer[action.type](newState, action)
 
         default:
             break;

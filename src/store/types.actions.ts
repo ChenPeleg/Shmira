@@ -71,6 +71,7 @@ export enum ActionsTypes {
 
     /* Locations */
     NEW_LOCATION = 'NEW_LOCATION',
+    DATE_RANGES_UPDATE = 'DATE_RANGES_UPDATE',
     UPDATE_LOCATION = 'UPDATE_LOCATION',
     DELETE_LOCATION = 'DELETE_LOCATION',
 

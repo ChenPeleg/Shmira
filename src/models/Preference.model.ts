@@ -1,4 +1,4 @@
-import {PreferenceType} from './PreferenceType.enum';
+import {PreferenceType, WeekDaysOrDates} from './PreferenceType.enum';
 
 export interface PreferenceModel {
     id: string,
@@ -8,8 +8,9 @@ export interface PreferenceModel {
     TypeOfDrivePreference: PreferenceType | null,
     Comments: string,
     halfOrFull: string,
-    flexibilityByDays:  string[],
-    flexibilityByDates:  string[]
+    weekDaysOrDates: WeekDaysOrDates | null,
+    flexibilityByDays: string[],
+    flexibilityByDates: string[]
     optionalGuardDaysByDates: string,
 }
 
@@ -21,8 +22,9 @@ export class PreferenceFields implements PreferenceModel {
     Comments: string = 'Comments';
     location: string = 'location';
     halfOrFull: string = 'halfOrFull';
-    flexibilityByDays:  string[] = ['flexibilityByDays', 'flexibilityByDays'];
-    flexibilityByDates:  string[] = ['flexibilityByDates', 'flexibilityByDates']
+    weekDaysOrDates: WeekDaysOrDates | null = null;
+    flexibilityByDays: string[] = ['flexibilityByDays', 'flexibilityByDays'];
+    flexibilityByDates: string[] = ['flexibilityByDates', 'flexibilityByDates']
     optionalGuardDaysByDates: string = 'optionalGuardDaysByDates';
 
     constructor() {

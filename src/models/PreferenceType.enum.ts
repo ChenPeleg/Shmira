@@ -5,3 +5,8 @@ export enum PreferenceType {
     OneWayFrom = '4'
 
 }
+
+export enum WeekDaysOrDates {
+    WeekDays = 1,
+    Dates = 2
+}
