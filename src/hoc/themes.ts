@@ -55,7 +55,7 @@ export const themeMain: Theme = createTheme({
 });
 
 export const Colors: Record<string, string> = {
-    'warningRed': 'rgb(255,59,59)',
+    'warningRed': 'rgb(212,4,4)',
     'warningYellow': '#fcd632'
 }
 export const Styles: Record<string, SxProps> = {
@@ -75,9 +75,9 @@ export const Styles: Record<string, SxProps> = {
         alignItems: 'start',
         alignContent: 'start'
     },
-    divider : {
-        height : '20px',
-        width : '20px',
+    divider: {
+        height: '20px',
+        width: '20px',
     }
 
 }

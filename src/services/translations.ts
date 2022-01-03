@@ -116,5 +116,9 @@ export const translations = {
     'SketchActionPublicTransport': 'צור פתרון בתחב"צ',
     'SketchActionAddToPending': 'סמן כ"לא מטופלת"',
 
+    /* date errors  */
+    'dateErrStartBiggerthan': 'על תאריך ההתחלה להיות לפני תאריך הסיום',
+    'moreThan90days': 'על טווח התאריכים להיות בין 10 ל 100 ימים',
+
 
 }

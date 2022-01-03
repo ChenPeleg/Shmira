@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 
-import {PrefrenceRequestForm} from './prefrence-request-form';
+import {PreferenceRequestForm} from './preference-request-form';
+
 import {translations} from '../../services/translations';
 import {Box, Card, Collapse} from '@mui/material';
 import {PrefrenceRequestBrief} from './prefrence-request-brief';
@@ -116,9 +117,9 @@ export const PrefrenceRequest = (props: AppProps) => {
 
                     <Collapse in={props.isInEdit} unmountOnExit>
 
-                        <PrefrenceRequestForm isInEdit={props.isInEdit} preferenceId={props.preferenceId} handleSubmit={'d'} pristine={'b'}
-                                              reset={'c'}
-                                              submitting={'d'}/>
+                        <PreferenceRequestForm isInEdit={props.isInEdit} preferenceId={props.preferenceId} handleSubmit={'d'} pristine={'b'}
+                                               reset={'c'}
+                                               submitting={'d'}/>
 
                     </Collapse>
 

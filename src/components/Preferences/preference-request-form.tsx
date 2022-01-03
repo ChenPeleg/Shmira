@@ -18,6 +18,7 @@ import {RenderFlexibilityField} from '../Form/flex-field';
 import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
 import {RenderSelectFieldDDays} from '../Form/select-field-days';
 import {ShmiraListRecord} from '../../store/store.types';
+import {Utils} from '../../services/utils';
 
 
 const TRL = translations;
@@ -105,14 +106,15 @@ const daysOfWeekMenuItem = [
 ]
 const createItemsFromDateRange = (dateFrom: string, dateTo: string): { dateInShort: string, timeStamp: string } [] => {
 
-    const numberOfDays: number = Number(dateTo) - Number(dateFrom);
-    const plainNumbersArray = Array.from(Array(40).keys())
-    const dateStampArr = plainNumbersArray.map(d => d + Number(dateFrom))
-    return dateStampArr.map(n =>
-        ({
-            dateInShort: n.toString(),
-            timeStamp: n.toString(),
-        })
+
+    const dateStampArr = Utils.Date.getTimestampArrayFromStartAndFinishDate(dateFrom, dateTo);
+    return dateStampArr.map(n => {
+            const simpleDate = Utils.Date.simpleDateFromDateStamp(n.toString())
+            return ({
+                dateInShort: simpleDate,
+                timeStamp: n.toString(),
+            })
+        }
     )
 }
 const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
@@ -264,7 +266,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     );
 };
 
-export const PrefrenceRequestForm = (formProps: MuiFormPropsModel) => {
+export const PreferenceRequestForm = (formProps: MuiFormPropsModel) => {
 
     const dispatch = useDispatch();
 

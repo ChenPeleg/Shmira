@@ -184,6 +184,26 @@ export const Utils = {
                 Math.round((startDate.getTime() - startDate.getTimezoneOffset()) / milisecondsInDay);
 
             return dateStamp.toString();
+        },
+        simpleDateFromDateStamp(dateStamp: string): string {
+            const date: Date | null = this.dateStampToDate(dateStamp)
+
+            if (date) {
+                return date.getDate().toString() + '.' + (date.getMonth() + 1).toString()
+            } else {
+                return ''
+            }
+
+        },
+        getTimestampArrayFromStartAndFinishDate(dateFrom: string, dateTo: string): string [] {
+            const numberOfDays: number = Number(dateTo) - Number(dateFrom) + 1;
+            const correctedNumberOfDays = numberOfDays < 100 && numberOfDays > 10 ? numberOfDays : 40
+            const plainNumbersArray = Array.from(Array(correctedNumberOfDays).keys())
+            const dateStampArr = plainNumbersArray.map(d => d + Number(dateFrom))
+
+            return dateStampArr.map(d => d.toString())
+
+
         }
 
 

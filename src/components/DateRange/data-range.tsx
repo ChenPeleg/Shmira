@@ -1,11 +1,12 @@
 import * as React from 'react';
+import {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import {translations} from '../../services/translations';
-import {Box} from '@mui/material';
-import {Styles} from '../../hoc/themes';
+import {Box, Typography} from '@mui/material';
+import {Colors, Styles} from '../../hoc/themes';
 import {useDispatch, useSelector} from 'react-redux';
 import {ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
 import {Utils} from '../../services/utils';
@@ -14,7 +15,19 @@ import {ActionsTypes} from '../../store/types.actions';
 type FromOrTo = 'From' | 'To';
 const textFieldSx = {bgcolor: 'rgba(240,240,240,0.2)'}
 
-
+const validateDates = (DateFrom: number, DateTo: number): null | string => {
+    if (!DateFrom || !DateTo) {
+        return null
+    }
+    console.log(DateFrom, DateTo)
+    const gap = DateTo - DateFrom;
+    if (gap < 0) {
+        return translations.dateErrStartBiggerthan
+    } else if (gap < 10 || gap > 100) {
+        return translations.moreThan90days
+    }
+    return null
+}
 export const DataRange = () => {
 
     const shmiraListId = useSelector((state: ShmiraListStore) => state.shmiraListId);
@@ -22,10 +35,11 @@ export const DataRange = () => {
     const shmiraListSelected = shmiraListCollection.find((shmiraListRecord: ShmiraListRecord) => shmiraListRecord.id === shmiraListId);
     const DateFromString = shmiraListSelected?.DateFrom || null;
     const DateToString = shmiraListSelected?.DateTo || null;
+    const [dateError, setDateError] = useState<string | null>(null)
     const DateFrom = Utils.Date.dateStampToDate(DateFromString || '');
     const dispatch = useDispatch()
     const DateTo = Utils.Date.dateStampToDate(DateToString || '');
-    console.log(DateTo, DateFrom)
+
     const handleDatesChange = (newValue: Date | null, fromOrTo: FromOrTo): void => {
         const payload = {
             DateTo: DateToString,
@@ -37,7 +51,15 @@ export const DataRange = () => {
         if (fromOrTo === 'To' && newValue) {
             payload.DateTo = Utils.Date.dateToDateStamp(newValue)
         }
-        console.dir(payload)
+        const validation = validateDates(Number(payload.DateFrom), Number(payload.DateTo));
+        if (validation) {
+            setDateError(validation)
+            // return
+        } else {
+            setDateError(null)
+        }
+
+
         dispatch({
             type: ActionsTypes.DATE_RANGES_UPDATE,
             payload
@@ -76,6 +98,7 @@ export const DataRange = () => {
                     renderInput={(params) => <TextField sx={textFieldSx} {...params} />}
                 />
             </LocalizationProvider>
+            {dateError ? <Box sx={{m: '1em'}}> <Typography color={Colors.warningRed}> {dateError}</Typography></Box> : null}
         </Box>
     );
 }
