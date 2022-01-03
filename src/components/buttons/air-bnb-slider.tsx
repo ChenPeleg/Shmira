@@ -10,8 +10,8 @@ export const AirbnbSlider = styled(Slider)(({theme}) => ({
     // padding: '13px 0',
     '& .MuiSlider-thumb': {
         borderRadius: '5px',
-        width: '80px',
-        height: '2em',
+        width: '40px',
+        height: '1em',
         // after: {
         //     content: '',
         //     backgroundColor: '#fff',
@@ -25,7 +25,7 @@ export const AirbnbSlider = styled(Slider)(({theme}) => ({
         backgroundColor: '#fff',
         border: '1px solid currentColor',
         '&:hover': {
-            boxShadow: '0 0 0 8px rgba(58, 133, 137, 0.16)',
+            boxShadow: '0 0 0 3px rgba(58, 133, 137, 0.16)',
         },
         '& .airbnb-bar': {
             height: 9,

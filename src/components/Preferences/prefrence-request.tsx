@@ -111,15 +111,13 @@ export const PrefrenceRequest = (props: AppProps) => {
                     </div>
 
                     {props.isInEdit ? <>
-                        {/*    <CardHeader sx={{*/}
-                        {/*    ...classes*/}
-                        {/*        .cardHeader*/}
-                        {/*}} title={TRL.Preference}/>*/}
+
                     </> : null}
 
                     <Collapse in={props.isInEdit} unmountOnExit>
 
-                        <PrefrenceRequestForm isInEdit={props.isInEdit} preferenceId={props.preferenceId} handleSubmit={'d'} pristine={'b'} reset={'c'}
+                        <PrefrenceRequestForm isInEdit={props.isInEdit} preferenceId={props.preferenceId} handleSubmit={'d'} pristine={'b'}
+                                              reset={'c'}
                                               submitting={'d'}/>
 
                     </Collapse>

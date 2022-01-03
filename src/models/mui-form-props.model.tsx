@@ -9,4 +9,4 @@ export interface MuiFormPropsModel {
     isInEdit: boolean,
     typeOfDrive?: PreferenceType
 
-}
+};

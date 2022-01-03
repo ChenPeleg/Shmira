@@ -47,6 +47,8 @@ export const translations = {
     'Tsamud': 'צמוד',
     'CanGuardIn': 'לא יכול לשמור בתאריכים',
     'CantGuardIn': 'יכול לשמור רק בתאריכים',
+    'CanGuardInDays': 'לא יכול לשמור בימים',
+    'CantGuardInDays': 'יכול לשמור רק בימים',
     'CanAlwaysGuard': 'יכול לשמור בכל הימים',
     'TsamudWord': 'צמוד',
     'OneWayTo': 'הסעה',

@@ -1,9 +1,12 @@
 import {TextFieldPropertiesModel} from '../../models/text-field-properties.model';
 
 import React from 'react';
-import {Box, Slider, Theme, Typography} from '@mui/material';
+import {Box, Theme, ToggleButtonGroup} from '@mui/material';
 import {translations} from '../../services/translations';
 import {Styles} from '../../hoc/themes';
+import ToggleButton from '@mui/material/ToggleButton';
+import {WeekDaysOrDates} from '../../models/PreferenceType.enum';
+import {SxProps} from '@mui/system';
 
 
 const sliderSx = {
@@ -15,8 +18,19 @@ const sliderSx = {
         marginLeft: 0
     }
 }
+const toggleStyle: SxProps = {
 
+    '& .MuiToggleButton-root': {
+        borderRadius: '30px 30px 30px 30px',
+        border: '1px solid grey',
 
+    },
+    '& .MuiButtonBase-root': {
+        borderRadius: '30px 30px 30px 30px',
+        border: '1px solid grey',
+
+    }
+}
 const renderFlexibilityText = (flexValues: [number, number]): string => {
     const absValue = (n: number): string => Math.abs(n).toString()
     let text = translations.flexEarly + ' ' + absValue(flexValues[0]) + ' ' + translations.min + ', ' +
@@ -35,29 +49,34 @@ export const RenderFlexibilityField = (
     }: TextFieldPropertiesModel,
 ) => {
     const convertedInput = {...input}
+    const valueAsEnumb: WeekDaysOrDates | null = convertedInput.value == '1' ? WeekDaysOrDates.WeekDays : WeekDaysOrDates.Dates
     // convertedInput.value = convertedInput.value.map((v: string) => Utils.convertStrToNum(v))
     return (
         <>
             <Box sx={Styles.flexRow}>
-                <Typography component="legend"><b>{translations.byDates}: </b> </Typography>
 
-                <Box sx={{width: '50px'}}>
+                <Box sx={{
+                    height: '40px',
+                    pt: '10px'
+                }}>
 
-                    <Slider variant={'standard'}
-                            sx={sliderSx}
-                            disableSwap
-                            valueLabelDisplay="auto"
-                            label={label}
-                            min={1}
-                            max={2}
-                            step={1}
-                            onChange={input.onChange}
+                    <ToggleButtonGroup
 
-                            {...convertedInput}
-                            {...custom}
-                    />
+                        size={'small'}
+                        dir={'ltr'}
+                        label={''}
+                        onChange={input.onChange}
+                        value={valueAsEnumb}
+
+                        {...convertedInput}
+                        {...custom}
+                    >
+                        <ToggleButton key={1} sx={{...toggleStyle}}
+                                      value={WeekDaysOrDates.Dates.toString()}> {translations.byDates} </ToggleButton>
+                        <ToggleButton key={2} sx={{...toggleStyle}}
+                                      value={WeekDaysOrDates.WeekDays.toString()}>{translations.byWeekDays}</ToggleButton>
+                    </ToggleButtonGroup>
                 </Box>
-                <Typography component="legend"><b>{translations.byWeekDays}: </b> </Typography>
             </Box>
         </>
     );
