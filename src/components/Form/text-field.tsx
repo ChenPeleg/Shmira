@@ -38,10 +38,12 @@ export const RenderTextField = (
                sx={{
                    ...
                        useStyles()
-                           .root
+                           .root,
+                   width: '300px'
                }}
                onChange={input.onChange}
                {...input}
                {...custom}
+
     />
 );

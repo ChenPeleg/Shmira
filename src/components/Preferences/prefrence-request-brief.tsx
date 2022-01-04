@@ -3,11 +3,12 @@ import {useSelector} from 'react-redux';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Typography} from '@mui/material';
 import {translations} from '../../services/translations';
-import {LanguageUtilities} from '../../services/language-utilities';
 import {LocationModel} from '../../models/Location.model';
 import {locations} from '../../services/locations';
-import {PreferenceType} from '../../models/PreferenceType.enum';
+import {PreferenceType, WeekDaysOrDates} from '../../models/PreferenceType.enum';
 import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
+import {Utils} from '../../services/utils';
+import {LanguageUtilities} from '../../services/language-utilities';
 
 
 //const TRL = translations;
@@ -50,9 +51,26 @@ const useStyles: any = (() => ({
     }
 }))
 const preferenceFields: PreferenceModel = new PreferenceFields();
+const getGuardDatesFromRecord = (preference: PreferenceModel): string[] => {
+    if (preference.TypeOfInfoPreference === PreferenceType.CanAlwaysGuard) {
+        return []
+    } else if (preference.TypeOfInfoPreference === PreferenceType.CantGuardIn || preference.TypeOfInfoPreference === PreferenceType.CanGuardIn) {
+        if (preference.weekDaysOrDates === WeekDaysOrDates.Dates) {
+            return preference.flexibilityByDates.map(d => Utils.Date.simpleDateFromDateStamp(d))
+        }
+        if (preference.weekDaysOrDates === WeekDaysOrDates.WeekDays) {
+            return preference.flexibilityByDays.map(d => Utils.Date.simpleDateFromDateStamp(d))
+        }
+    }
 
+    return []
+}
+const doesNameExist = (allPreferences: PreferenceModel[], thisPreference: PreferenceModel): boolean => {
+    return allPreferences.filter(p => p.id !== thisPreference.id).map(p => p.guardName.trim()).includes(thisPreference.guardName.trim());
+
+}
 const areDetailsMissing = (preferenceValues: PreferenceModel): boolean => {
-    if (!preferenceValues.TypeOfInfoPreference || !preferenceValues.guardName || !preferenceValues.optionalGuardDaysByDates) {
+    if (!preferenceValues.TypeOfInfoPreference || !preferenceValues.guardName) {
         return true
     }
     if (preferenceValues.TypeOfInfoPreference === PreferenceType.CanGuardIn) {
@@ -68,28 +86,51 @@ const buildBriefText = (preferenceValues: PreferenceModel): string => {
     if (!isWithName) {
         return translations.NewPreference
     }
-    let timeText = preferenceValues?.optionalGuardDaysByDates || '';
-    if (preferenceValues.TypeOfInfoPreference === PreferenceType.CanGuardIn && preferenceValues?.optionalGuardDaysByDates && preferenceValues?.finishHour) {
-        timeText = preferenceValues.finishHour + ' - ' + preferenceValues.optionalGuardDaysByDates;
-    }
-    let briefText = timeText + ' ' + preferenceValues.guardName;
-    if (preferenceValues.TypeOfInfoPreference && preferenceValues.location) {
-        const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfInfoPreference);
-        const location = allLocations.find(l => l.id === preferenceValues.location);
-        if (location) {
-            briefText += ' ' + driveTimeLanguage.location + location.name
+    let abilityText = '';
+    //const get
+
+    const datesArray = getGuardDatesFromRecord(preferenceValues);
+
+    const daysText = ''
+
+    if (preferenceValues.TypeOfInfoPreference === PreferenceType.CanAlwaysGuard) {
+        abilityText = translations.CanAlwaysGuardShort
+    } else if (preferenceValues.TypeOfInfoPreference === PreferenceType.CanGuardIn || preferenceValues.TypeOfInfoPreference === PreferenceType.CantGuardIn) {
+        abilityText = preferenceValues.TypeOfInfoPreference === PreferenceType.CanGuardIn ? translations.CanGuardInDaysShort : translations.CantGuardInDaysShort;
+        let daysArr: any [] = [];
+
+        if (preferenceValues.weekDaysOrDates === WeekDaysOrDates.Dates) {
+            daysArr = getGuardDatesFromRecord(preferenceValues);
+        }
+        if (preferenceValues.weekDaysOrDates === WeekDaysOrDates.WeekDays) {
+            daysArr = preferenceValues.flexibilityByDays.map(d => {
+                const dayName = Utils.Date.dateOfWeekObject.find(dObj => dObj.weekDayNumber.toString() === d.toString())
+                return dayName?.name
+            }).filter(d => d);
+
+        }
+        if (daysArr.length) {
+            abilityText += ': ' + daysArr.join(', ');
+        } else {
+            abilityText = ''
         }
 
     }
+
+    let briefText = LanguageUtilities.trimText(preferenceValues.guardName + ' ' + abilityText, 55)
 
     return briefText
 }
 export const PrefrenceRequestBrief = (props: AppProps) => {
     const id = props.preferenceId;
-    const preferenceValues = useSelector((state: { preferences: PreferenceModel[] }) => {
-        return state.preferences.find(preference => preference.id === id) as PreferenceModel;
-    });
+
+
+    const allPreferences = useSelector((state: { preferences: PreferenceModel[] }) => state.preferences) || [];
+    const preferenceValues = allPreferences.find(preference => preference.id === id) as PreferenceModel;
+
+
     const missingDetailsShown: boolean = areDetailsMissing(preferenceValues) && !props.isInEdit;
+    const isThereSimilarName: boolean = doesNameExist(allPreferences, preferenceValues) && !props.isInEdit;
 
 
     return (
@@ -104,7 +145,8 @@ export const PrefrenceRequestBrief = (props: AppProps) => {
                 {buildBriefText(preferenceValues)}
             </Typography>
             <Typography fontSize={'large'} color={'red'} padding={'initial'}>  &nbsp;
-                {missingDetailsShown ? ' (' + translations.missingDetails + ') ' : null}
+                {missingDetailsShown ? '(' + translations.missingDetails + ')' : null}
+                {isThereSimilarName && !missingDetailsShown ? '(' + translations.nameExist + ')' : null}
             </Typography>
 
         </Box>

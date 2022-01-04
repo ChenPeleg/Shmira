@@ -204,6 +204,38 @@ export const Utils = {
             return dateStampArr.map(d => d.toString())
 
 
+        },
+        get dateOfWeekObject() {
+            return [
+                {
+                    name: 'ראשון',
+                    weekDayNumber: 1
+                },
+                {
+                    name: 'שני',
+                    weekDayNumber: 2
+                },
+                {
+                    name: 'שלישי',
+                    weekDayNumber: 3
+                },
+                {
+                    name: 'רביעי',
+                    weekDayNumber: 4
+                },
+                {
+                    name: 'חמישי',
+                    weekDayNumber: 5
+                },
+                {
+                    name: 'שישי',
+                    weekDayNumber: 6
+                },
+                {
+                    name: 'שבת',
+                    weekDayNumber: 7
+                },
+            ]
         }
 
 

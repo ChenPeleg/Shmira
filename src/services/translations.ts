@@ -50,6 +50,9 @@ export const translations = {
     'CanGuardInDays': 'לא יכול לשמור בימים',
     'CantGuardInDays': 'יכול לשמור רק בימים',
     'CanAlwaysGuard': 'יכול לשמור בכל הימים',
+    'CanGuardInDaysShort': 'רק לא בימים',
+    'CantGuardInDaysShort': 'רק בימים',
+    'CanAlwaysGuardShort': ' יכול לשמור בכל הימים',
     'TsamudWord': 'צמוד',
     'OneWayTo': 'הסעה',
     'OneWayFrom': 'איסוף',
@@ -77,6 +80,7 @@ export const translations = {
     'byDates': 'תאריכים',
     'byWeekDays': 'ימות השבוע',
     'missingDetails': 'מידע חלקי',
+    'nameExist': 'השם נמצא יותר מפעם אחת ',
 
     'onePassenger': 'נוסע/ת אחד/ת',
     'halfNight': 'רגילה - חצי לילה',

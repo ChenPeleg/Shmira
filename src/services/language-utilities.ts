@@ -131,5 +131,18 @@ export const LanguageUtilities = {
             })
         }
         return ret
+    },
+    trimText(name: string, maxNameLength: number = 30): string {
+        // let maxNameLength = 30;
+        let threeDots = ''
+        if (!name) {
+            name = ''
+        }
+        if (name.length > maxNameLength) {
+            threeDots = '...'
+        }
+        return name.slice(0, maxNameLength) + threeDots;
+
+
     }
 }

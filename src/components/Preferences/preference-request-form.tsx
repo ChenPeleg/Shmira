@@ -73,37 +73,10 @@ const preferenceFields: PreferenceModel = new PreferenceFields();
 const Divider = () => (<Box sx={{
     width: '10px',
     height: '5px'
-}}/>)
-const daysOfWeekMenuItem = [
-    {
-        name: 'ראשון',
-        weekDayNumber: 1
-    },
-    {
-        name: 'שני',
-        weekDayNumber: 2
-    },
-    {
-        name: 'שלישי',
-        weekDayNumber: 3
-    },
-    {
-        name: 'רביעי',
-        weekDayNumber: 4
-    },
-    {
-        name: 'חמישי',
-        weekDayNumber: 5
-    },
-    {
-        name: 'שישי',
-        weekDayNumber: 6
-    },
-    {
-        name: 'שבת',
-        weekDayNumber: 7
-    },
-]
+}}/>);
+
+const daysOfWeekMenuItem = Utils.Date.dateOfWeekObject;
+
 const createItemsFromDateRange = (dateFrom: string, dateTo: string): { dateInShort: string, timeStamp: string } [] => {
 
 
@@ -186,7 +159,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 
 
                     </Box> : null}
-                {typeOfPreference === PreferenceType.CanGuardIn || typeOfPreference === PreferenceType.CantGuardIn && weekDaysOrDates == WeekDaysOrDates.WeekDays ?
+                {(typeOfPreference === PreferenceType.CanGuardIn || typeOfPreference === PreferenceType.CantGuardIn) && weekDaysOrDates == WeekDaysOrDates.WeekDays ?
                     <Box sx={{
                         ...selectFieldWrapper,
                         minWidth: '20%'
@@ -205,7 +178,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                         </Field>
 
                     </Box> : null}
-                {typeOfPreference === PreferenceType.CanGuardIn || typeOfPreference === PreferenceType.CantGuardIn && weekDaysOrDates == WeekDaysOrDates.Dates ?
+                {(typeOfPreference === PreferenceType.CanGuardIn || typeOfPreference === PreferenceType.CantGuardIn) && weekDaysOrDates == WeekDaysOrDates.Dates ?
                     <Box sx={{
                         ...selectFieldWrapper,
                         minWidth: '30%'

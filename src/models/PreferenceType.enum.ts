@@ -7,6 +7,6 @@ export enum PreferenceType {
 }
 
 export enum WeekDaysOrDates {
-    WeekDays = 1,
-    Dates = 2
+    WeekDays = '1',
+    Dates = '2'
 }

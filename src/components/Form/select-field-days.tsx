@@ -49,7 +49,8 @@ export const RenderSelectFieldDDays = (
                     sx={{
                         ...
                             classes
-                                .root
+                                .root,
+                        minWidth: '300px'
                     }}
                     labelId="select-liable"
                     label={label}

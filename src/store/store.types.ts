@@ -1,6 +1,6 @@
 import {ActionsTypes} from './types.actions'
 import {PreferenceModel} from '../models/Preference.model';
-import {PreferenceType} from '../models/PreferenceType.enum';
+import {PreferenceType, WeekDaysOrDates} from '../models/PreferenceType.enum';
 import {VehicleModel} from '../models/Vehicle.model';
 import {SketchModel} from '../models/Sketch.model';
 import {LocationGroup} from '../models/Location.model';
@@ -63,15 +63,15 @@ export interface ShmiraListStore {
 export const defaultPreferenceValues: PreferenceModel = {
     id: '1',
     guardName: '',
-    optionalGuardDaysByDates: '08:00',
-    finishHour: '09:00',
+    optionalGuardDaysByDates: '',
+    finishHour: '',
     TypeOfInfoPreference: PreferenceType.CantGuardIn,
     Comments: '',
     halfOrFull: '1',
     flexibilityByDays: [],
     flexibilityByDates: [],
     location: '',
-    weekDaysOrDates: null
+    weekDaysOrDates: WeekDaysOrDates.WeekDays
 }
 export const defaultVehicleValues: VehicleModel = {
     id: '1',
