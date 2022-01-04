@@ -59,12 +59,12 @@ export const LanguageUtilities = {
 
         }
         let timeText = preferenceValues?.optionalGuardDaysByDates || '';
-        if (preferenceValues.TypeOfDrivePreference === PreferenceType.CanGuardIn && preferenceValues?.optionalGuardDaysByDates && preferenceValues?.finishHour) {
+        if (preferenceValues.TypeOfInfoPreference === PreferenceType.CanGuardIn && preferenceValues?.optionalGuardDaysByDates && preferenceValues?.finishHour) {
             timeText = preferenceValues.optionalGuardDaysByDates + ' - ' + preferenceValues.finishHour;
         }
         let briefText = preferenceValues.guardName;
-        if (preferenceValues.TypeOfDrivePreference && preferenceValues.location) {
-            const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfDrivePreference);
+        if (preferenceValues.TypeOfInfoPreference && preferenceValues.location) {
+            const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfInfoPreference);
             const location = locations.find(l => l.id === preferenceValues.location);
             if (location) {
                 briefText += ' ' + driveTimeLanguage.location + location.name

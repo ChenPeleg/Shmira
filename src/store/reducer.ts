@@ -1,10 +1,8 @@
-import {PreferenceModel} from '../models/Preference.model';
-import {defaultPreferenceValues, defaultVehicleValues, IAction, SessionModel, ShmiraListStore} from './store.types';
+import {IAction, ShmiraListStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {ShmiraListReducer} from './shmiraList.reducer';
 import {PreferenceReducer} from './preferenceReducer';
 import {ImportExportReducer} from './import-export.reducer';
-import {VehicleModel} from '../models/Vehicle.model';
 import {VehicleReducer} from './vehicle.reducer';
 import {ActionsTypes} from './types.actions';
 import {DisplayReducer} from './display.reducer';
@@ -12,67 +10,14 @@ import {ListSketchReducer} from './list-sketch.reducer';
 import {PendingPreferencesReducer} from './pendingPreferencesReducer';
 import {ListSketchNightReducer} from './list-sketch-night.reducer';
 import {LocationGroupReducer} from './locationGroup.reducer';
-import {defaultShmiraListEshbal} from './store-inital-state';
 import {DateRangesReducer} from './date-ranges.reducer';
-import {Utils} from '../services/utils';
+import {StoreUtils} from './store-utils';
 
 
-const startPreferences: PreferenceModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): PreferenceModel => ({
-    ...defaultPreferenceValues,
-    id: (index + 1).toString(),
-    guardName: name
-}));
-const startVehicles: VehicleModel[] = ['סנאו', 'שלגיה', 'שכור', 'מאזדה'].map((name: string, index: number): VehicleModel => ({
-    ...defaultVehicleValues,
-    id: (index + 1).toString(),
-    vehicleName: name,
-
-}))
-const sessionState: SessionModel = {
-    LocationGroupTabOpen: null,
-    SketchIdInEdit: null,
-    locationGroupInEdit: null,
-    preferenceIdInEdit: null,
-    pendingPreferenceIdInEdit: null,
-    dataHolderForCurrentPreferenceInEdit: null
-
-}
 // @ts-ignore
-const defaultInitialState: ShmiraListStore = {
-    shmiraListArchive: [],
-    locationGroupInEdit: null,
-    shmiraListCollection: [{
-        id: '1',
-        Name: 'רשימת שמירה 2021',
-        preferences: [],
-        deletedPreferences: [],
-        vehicles: [defaultVehicleValues],
-        sketches: [],
-        chosenSketch: '',
-        locationGroup: null,
-        DateTo: Utils.Date.dateToDateStamp(new Date()),
-        DateFrom: Number((Utils.Date.dateToDateStamp(new Date())) + 60).toString(),
-    }, {...defaultShmiraListEshbal}
-
-    ],
-    shmiraListId: '1',
-    preferences: startPreferences,
-    vehicles: startVehicles,
-    preferenceIdInEdit: '1',
-    dataHolderForCurrentPreferenceInEdit: startPreferences[0] || null,
-    deletedPreferences: [],
-    defaultPreferenceValues: {...defaultPreferenceValues},
-    sketches: [],
-    displaySetting: {view: 'locationsView'},
-    SketchIdInEdit: null,
-    pendingPreferenceIdInEdit: null,
-    currentSessionState: sessionState,
-    LocationGroups: []
-
-}
 
 const stateFromLocalStorage: ShmiraListStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore
-const initialState = stateFromLocalStorage || defaultInitialState;
+const initialState = stateFromLocalStorage || StoreUtils.defaultInitialState();
 
 const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
     let newState = {

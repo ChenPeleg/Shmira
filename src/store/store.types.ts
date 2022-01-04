@@ -65,7 +65,7 @@ export const defaultPreferenceValues: PreferenceModel = {
     guardName: '',
     optionalGuardDaysByDates: '08:00',
     finishHour: '09:00',
-    TypeOfDrivePreference: PreferenceType.CantGuardIn,
+    TypeOfInfoPreference: PreferenceType.CantGuardIn,
     Comments: '',
     halfOrFull: '1',
     flexibilityByDays: [],

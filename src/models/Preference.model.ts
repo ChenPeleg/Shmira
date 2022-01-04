@@ -5,7 +5,7 @@ export interface PreferenceModel {
     guardName: string,
     location: string,
     finishHour: string,
-    TypeOfDrivePreference: PreferenceType | null,
+    TypeOfInfoPreference: PreferenceType | null,
     Comments: string,
     halfOrFull: string,
     weekDaysOrDates: WeekDaysOrDates | null,
@@ -18,7 +18,7 @@ export class PreferenceFields implements PreferenceModel {
     id: string = 'id';
     guardName: string = 'guardName';
     finishHour: string = 'finishHour';
-    TypeOfDrivePreference: PreferenceType | null = null;
+    TypeOfInfoPreference: PreferenceType | null = null;
     Comments: string = 'Comments';
     location: string = 'location';
     halfOrFull: string = 'halfOrFull';

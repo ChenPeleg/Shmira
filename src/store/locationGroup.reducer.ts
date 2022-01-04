@@ -112,7 +112,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             }
 
         })
-        console.log(newState.LocationGroups)
+        
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },

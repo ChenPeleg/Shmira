@@ -43,7 +43,7 @@ export const translations = {
     'Finish': 'סיום',
     'FromDate': 'מתאריך',
     'ToDate': 'לתאריך',
-    'TypeOfDrivePreference': 'הגבלת שמירה',
+    'TypeOfInfoPreference': 'הגבלת שמירה',
     'Tsamud': 'צמוד',
     'CanGuardIn': 'לא יכול לשמור בתאריכים',
     'CantGuardIn': 'יכול לשמור רק בתאריכים',

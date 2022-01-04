@@ -29,7 +29,7 @@ export const ShmiraListBuilderBuildPreferencesMetaData = (preferences: Preferenc
 
     // Estimate finish hour of non-Tsamud Drives
     preferencesMeta.forEach((metaPreference: PreferenceMetaDataModel) => {
-        const driveType = metaPreference.preference.TypeOfDrivePreference
+        const driveType = metaPreference.preference.TypeOfInfoPreference
         if (driveType === PreferenceType.CanGuardIn) {
             return
         }

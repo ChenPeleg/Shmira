@@ -21,7 +21,7 @@ const MOckDrive = {
     ],
     'halfOrFull': '1',
     'location': '6',
-    'TypeOfDrivePreference': '2',
+    'TypeOfInfoPreference': '2',
     'optionalGuardDaysByDates': '09:45',
     'Comments': 'ורד תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.',
     'guardName': 'ורד',

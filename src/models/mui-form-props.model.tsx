@@ -1,4 +1,4 @@
-import {PreferenceType} from './PreferenceType.enum';
+import {PreferenceType, WeekDaysOrDates} from './PreferenceType.enum';
 
 export interface MuiFormPropsModel {
     handleSubmit: any,
@@ -7,6 +7,7 @@ export interface MuiFormPropsModel {
     submitting: any,
     preferenceId: any,
     isInEdit: boolean,
-    typeOfDrive?: PreferenceType
+    typeOfPreference?: PreferenceType,
+    weekDaysOrDates?: WeekDaysOrDates
 
 };

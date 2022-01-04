@@ -5,20 +5,20 @@ import {MuiFormPropsModel} from '../../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
 import {RenderTextField} from '../Form/text-field';
 import {RenderSelectField} from '../Form/select-field';
-import {PreferenceType} from '../../models/PreferenceType.enum';
+import {PreferenceType, WeekDaysOrDates} from '../../models/PreferenceType.enum';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Button, MenuItem} from '@mui/material';
 import {translations} from '../../services/translations';
 import {ActionsTypes} from '../../store/types.actions';
 import {LocationModel} from '../../models/Location.model';
 import {locations} from '../../services/locations';
-import {LanguageUtilities} from '../../services/language-utilities';
 import {RenderFullNightField} from '../Form/full-night-field';
 import {RenderFlexibilityField} from '../Form/flex-field';
 import {PreferenceFields, PreferenceModel} from '../../models/Preference.model';
 import {RenderSelectFieldDDays} from '../Form/select-field-days';
 import {ShmiraListRecord} from '../../store/store.types';
 import {Utils} from '../../services/utils';
+import {Styles} from '../../hoc/themes';
 
 
 const TRL = translations;
@@ -123,9 +123,11 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         pristine,
         reset,
         submitting,
-        typeOfDrive
+        typeOfPreference,
+        weekDaysOrDates
     } = muiFormProps;
     const classes = useStyles();
+    console.log(typeOfPreference)
     const shmiraListCollection: ShmiraListRecord[] = useSelector((state: { shmiraListCollection: ShmiraListRecord[] }) => state.shmiraListCollection);
     const shmiraListId: string = useSelector((state: { shmiraListId: string }) => state.shmiraListId);
     const currenList: ShmiraListRecord | undefined = shmiraListCollection.find(s => s.id === shmiraListId);
@@ -142,8 +144,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         ...fieldWrapper,
         display: isAdvanced ? 'initial' : 'none'
     }
-    const driveTimelanguage = LanguageUtilities.getPrefixByDriveType(typeOfDrive)
-    //console.log(typeOfDrive, driveTimelanguage.location)
+
     return (
 
         <form onSubmit={(...args) => submitting(...args)} dir={'rtl'}>
@@ -164,8 +165,8 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 </Box>
                 <Box sx={selectFieldWrapper}>
                     <Field
-                        label={TRL.TypeOfDrivePreference}
-                        name={'flexibilityByDays'}
+                        label={TRL.TypeOfInfoPreference}
+                        name={'TypeOfInfoPreference'}
                         component={RenderSelectField}>
 
                         <MenuItem value={PreferenceType.CanGuardIn.toString()}>{TRL.CanGuardIn}</MenuItem>
@@ -175,92 +176,96 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     </Field>
 
                 </Box>
-                <Box
-                    sx={selectFieldWrapper}> <Field name={'weekDaysOrDates'}
-                                                    component={RenderFlexibilityField}
-                                                    label={TRL.flexibilityByDays}
-                                                    rows={2}
-                />
+                {typeOfPreference === PreferenceType.CanGuardIn || typeOfPreference === PreferenceType.CantGuardIn ?
+                    <Box
+                        sx={selectFieldWrapper}> <Field name={'weekDaysOrDates'}
+                                                        component={RenderFlexibilityField}
+                                                        label={TRL.flexibilityByDays}
+                                                        rows={2}
+                    />
 
 
-                </Box>
-                <Box sx={{
-                    ...selectFieldWrapper,
-                    minWidth: '20%'
-                }}>
-                    <Field
-                        name={'TypeOfDrivePreference'}
-                        component={RenderSelectFieldDDays}
-                        label={TRL.TypeOfDrivePreference ? TRL.CantGuardInDays : TRL.CantGuardInDays}
+                    </Box> : null}
+                {typeOfPreference === PreferenceType.CanGuardIn || typeOfPreference === PreferenceType.CantGuardIn && weekDaysOrDates == WeekDaysOrDates.WeekDays ?
+                    <Box sx={{
+                        ...selectFieldWrapper,
+                        minWidth: '20%'
+                    }}>
+                        <Field
+                            name={'flexibilityByDays'}
+                            component={RenderSelectFieldDDays}
+                            label={typeOfPreference === PreferenceType.CanGuardIn ? TRL.CanGuardInDays : TRL.CantGuardInDays}
+
+                        >
+                            {daysOfWeekMenuItem.map((day: { name: string, weekDayNumber: number }) => {
+                                return (<MenuItem key={day.weekDayNumber} value={day.weekDayNumber.toString()}>{day.name}</MenuItem>
+                                )
+
+                            })}
+                        </Field>
+
+                    </Box> : null}
+                {typeOfPreference === PreferenceType.CanGuardIn || typeOfPreference === PreferenceType.CantGuardIn && weekDaysOrDates == WeekDaysOrDates.Dates ?
+                    <Box sx={{
+                        ...selectFieldWrapper,
+                        minWidth: '30%'
+                    }}>
+                        <Field
+                            name={'flexibilityByDates'}
+                            component={RenderSelectFieldDDays}
+                            label={typeOfPreference === PreferenceType.CanGuardIn ? TRL.CanGuardInDays : TRL.CantGuardInDays}
 
 
-                    >
-                        {daysOfWeekMenuItem.map((day: { name: string, weekDayNumber: number }) => {
-                            return (<MenuItem key={day.weekDayNumber} value={day.weekDayNumber.toString()}>{day.name}</MenuItem>
-                            )
+                        >
+                            {dateRange.map((day: { dateInShort: string, timeStamp: string }) => {
+                                return (<MenuItem key={day.dateInShort} value={day.timeStamp.toString()}>{day.dateInShort}</MenuItem>
+                                )
 
-                        })}
-                    </Field>
+                            })}
+                        </Field>
 
-                </Box>
+                    </Box> : null}
+
+                <Box sx={Styles.flexRow}>
+                    <Box
+                        sx={fieldWrapper}> <Field name={preferenceFields.Comments}
+                                                  component={RenderTextField}
+                                                  label={TRL.Comments}
+                        // multiLine={true}
+                                                  rows={2}
+                    />
+                    </Box>
+                    <Box
+                        sx={{
+                            ...fieldWrapper,
+                            alignSelf: 'flex-end'
+                        }}> <Field name={preferenceFields.halfOrFull}
+                                   component={RenderFullNightField}
+                                   label={TRL.halfOrFull}
+                                   type={'text'}
+                                   rows={2}
+                    />
 
 
-                <Box sx={{
-                    ...selectFieldWrapper,
-                    minWidth: '30%'
-                }}>
-                    <Field
-                        name={'TypeOfDrivePreference'}
-                        component={RenderSelectFieldDDays}
-                        label={TRL.TypeOfDrivePreference ? TRL.CantGuardInDays : TRL.CantGuardInDays}
+                    </Box>
 
-
-                    >
-                        {dateRange.map((day: { dateInShort: string, timeStamp: string }) => {
-                            return (<MenuItem key={day.dateInShort} value={day.timeStamp.toString()}>{day.dateInShort}</MenuItem>
-                            )
-
-                        })}
-                    </Field>
-
-                </Box>
-
-                <Box
-                    sx={{
+                    <Box sx={{
                         ...fieldWrapper,
+                        display: 'flex',
+                        flexDirection: 'row',
                         alignSelf: 'flex-end'
-                    }}> <Field name={preferenceFields.halfOrFull}
-                               component={RenderFullNightField}
-                               label={TRL.halfOrFull}
-                               type={'text'}
-                               rows={2}
-                />
+                    }}
+                    >
+
+                        <Button sx={{m: '5px'}} variant="contained" color={'primary'} type="button"
+                                onClick={handleSubmit}>{TRL.Submit}</Button>
 
 
-                </Box>
-                <Box
-                    sx={fieldWrapper}> <Field name={preferenceFields.Comments}
-                                              component={RenderTextField}
-                                              label={TRL.Comments}
-                    // multiLine={true}
-                                              rows={2}
-                />
-                </Box>
-
-
-                <Box sx={{
-                    ...fieldWrapper,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignSelf: 'flex-end'
-                }}
-                >
-
-                    <Button sx={{m: '5px'}} variant="contained" color={'primary'} type="button"
-                            onClick={handleSubmit}>{TRL.Submit}</Button>
-
+                    </Box>
 
                 </Box>
+
+
             </Box>
         </form>
     );
@@ -276,7 +281,8 @@ export const PreferenceRequestForm = (formProps: MuiFormPropsModel) => {
 
     const initialValues = preferences.find(preference => preference.id === id);
     // @ts-ignore
-    const [_typeOfDrive, set_typeOfDrive] = useState(initialValues.TypeOfDrivePreference as PreferenceType)
+    const [_typeOfPreference, set_typeOfPreference] = useState<PreferenceType | undefined>(initialValues.TypeOfInfoPreference as PreferenceType);
+    const [_weekDaysOrDays, set_weekDaysOrDays] = useState<WeekDaysOrDates | undefined>(initialValues?.weekDaysOrDates as WeekDaysOrDates);
     let formValues = {...initialValues};
 
 
@@ -296,10 +302,13 @@ export const PreferenceRequestForm = (formProps: MuiFormPropsModel) => {
                         ...values
                     }
                 })
-                if (values?.TypeOfDrivePreference && values?.TypeOfDrivePreference !== _typeOfDrive) {
-                    set_typeOfDrive(values.TypeOfDrivePreference)
+                if (values?.TypeOfInfoPreference && values?.TypeOfInfoPreference !== _typeOfPreference) {
+                    set_typeOfPreference(values.TypeOfInfoPreference)
                 }
-                return {} // validate(values)
+                if (values?.weekDaysOrDates && values?.weekDaysOrDates !== _weekDaysOrDays) {
+                    set_weekDaysOrDays(values.weekDaysOrDates)
+                }
+                return {}
             }}
             handleSubmit={(event: Event, values: any) => {
                 if (!formProps.isInEdit) {
@@ -315,7 +324,8 @@ export const PreferenceRequestForm = (formProps: MuiFormPropsModel) => {
             }}
             render={({handleSubmit}: any) => (MaterialUiForm({
                 ...formProps,
-                typeOfDrive: _typeOfDrive,
+                typeOfPreference: _typeOfPreference,
+                weekDaysOrDates: _weekDaysOrDays,
                 handleSubmit,
             }))
 

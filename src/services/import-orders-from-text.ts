@@ -79,7 +79,7 @@ const preferencesToPreferenceModel = (preferences: EshbalPreference[]): Preferen
             flexibilityByDates: [],
             halfOrFull: '1',
             location: '',
-            TypeOfDrivePreference: null,
+            TypeOfInfoPreference: null,
             optionalGuardDaysByDates: convertTimeTo4Digits(ePreference.hour),
             Comments: ePreference.text,
             guardName: ePreference.name,
@@ -183,7 +183,7 @@ const getLocationAndTypeFromComments = (preferences: PreferenceModel[]): Prefere
             preference.location = LocationSearchResult.locationFound.id
         }
         if (LocationSearchResult.typeOfDrive) {
-            preference.TypeOfDrivePreference = LocationSearchResult.typeOfDrive
+            preference.TypeOfInfoPreference = LocationSearchResult.typeOfDrive
         }
         const anotherTimeSearchResults = searchAnotherTimeInText(preference);
         if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== preference.optionalGuardDaysByDates) {

@@ -6,7 +6,7 @@ export interface DriveModel extends PreferenceModel {
     guardName: string,
     optionalGuardDaysByDates: string,
     finishHour: string,
-    TypeOfDrivePreference: PreferenceType | null,
+    TypeOfInfoPreference: PreferenceType | null,
     location: string,
     Comments: string,
     halfOrFull: string,
@@ -17,7 +17,7 @@ export interface DriveModel extends PreferenceModel {
      */
     implementsPreferences: string [],
     description: string,
-    
+
 }
 
 export interface VehicleScheduleModel {

@@ -52,10 +52,10 @@ const useStyles: any = (() => ({
 const preferenceFields: PreferenceModel = new PreferenceFields();
 
 const areDetailsMissing = (preferenceValues: PreferenceModel): boolean => {
-    if (!preferenceValues.TypeOfDrivePreference || !preferenceValues.guardName || !preferenceValues.optionalGuardDaysByDates) {
+    if (!preferenceValues.TypeOfInfoPreference || !preferenceValues.guardName || !preferenceValues.optionalGuardDaysByDates) {
         return true
     }
-    if (preferenceValues.TypeOfDrivePreference === PreferenceType.CanGuardIn) {
+    if (preferenceValues.TypeOfInfoPreference === PreferenceType.CanGuardIn) {
         if (!preferenceValues.finishHour || !preferenceValues.optionalGuardDaysByDates) {
             return true
         }
@@ -69,12 +69,12 @@ const buildBriefText = (preferenceValues: PreferenceModel): string => {
         return translations.NewPreference
     }
     let timeText = preferenceValues?.optionalGuardDaysByDates || '';
-    if (preferenceValues.TypeOfDrivePreference === PreferenceType.CanGuardIn && preferenceValues?.optionalGuardDaysByDates && preferenceValues?.finishHour) {
+    if (preferenceValues.TypeOfInfoPreference === PreferenceType.CanGuardIn && preferenceValues?.optionalGuardDaysByDates && preferenceValues?.finishHour) {
         timeText = preferenceValues.finishHour + ' - ' + preferenceValues.optionalGuardDaysByDates;
     }
     let briefText = timeText + ' ' + preferenceValues.guardName;
-    if (preferenceValues.TypeOfDrivePreference && preferenceValues.location) {
-        const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfDrivePreference);
+    if (preferenceValues.TypeOfInfoPreference && preferenceValues.location) {
+        const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(preferenceValues.TypeOfInfoPreference);
         const location = allLocations.find(l => l.id === preferenceValues.location);
         if (location) {
             briefText += ' ' + driveTimeLanguage.location + location.name

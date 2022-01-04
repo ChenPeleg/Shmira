@@ -113,7 +113,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
                 }}>
                     <Typography dir="ltr"
                                 variant={'subtitle1'}>{drive.optionalGuardDaysByDates}  </Typography>
-                    {drive.TypeOfDrivePreference === PreferenceType.CanGuardIn || drive.TypeOfDrivePreference === PreferenceType.CantGuardIn ?
+                    {drive.TypeOfInfoPreference === PreferenceType.CanGuardIn || drive.TypeOfInfoPreference === PreferenceType.CantGuardIn ?
                         (<><Box sx={{
                             width: '10px',
                             height: '2px',

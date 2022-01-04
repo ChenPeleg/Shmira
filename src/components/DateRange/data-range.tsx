@@ -19,7 +19,7 @@ const validateDates = (DateFrom: number, DateTo: number): null | string => {
     if (!DateFrom || !DateTo) {
         return null
     }
-    console.log(DateFrom, DateTo)
+
     const gap = DateTo - DateFrom;
     if (gap < 0) {
         return translations.dateErrStartBiggerthan
