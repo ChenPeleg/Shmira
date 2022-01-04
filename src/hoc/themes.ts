@@ -78,6 +78,10 @@ export const Styles: Record<string, SxProps> = {
     divider: {
         height: '20px',
         width: '20px',
+    },
+    toolTip: {
+        height: '20px',
+        width: '20px',
     }
 
 }

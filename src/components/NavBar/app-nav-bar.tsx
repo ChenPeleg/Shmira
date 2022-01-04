@@ -5,13 +5,11 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {translations} from '../../services/translations';
 import {useDispatch, useSelector} from 'react-redux';
 import {Select, SelectChangeEvent} from '@mui/material';
-import {Edit} from '@mui/icons-material';
+import {Edit, Save, Shield, UploadFile} from '@mui/icons-material';
 import {ProfileMenu} from './profile-menu';
 import {ActionsTypes} from '../../store/types.actions';
 import {ShmiraListMenu} from './shmiraList-menu';
@@ -24,6 +22,8 @@ import {ToggleButtons} from '../buttons/toggle-button-group';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {ShmiraListManagementDialog} from '../Dialogs/shmira-list-management-dialog';
 import {PreferenceImportDialog} from '../Dialogs/orders-import-dialog';
+import {Styles} from '../../hoc/themes';
+import {LightTooltip} from '../Styled/styled-tool-tip';
 
 
 export const AppNavBar = () => {
@@ -175,14 +175,9 @@ export const AppNavBar = () => {
                     mr: 0,
                     ml: 0
                 }}>
-                    <IconButton
-                        size="large"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{mr: 0}}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
+
+                    <Shield/>
+
                     <Typography
                         variant="h6"
                         noWrap
@@ -207,7 +202,7 @@ export const AppNavBar = () => {
                             <MenuItem key={'NEW'}
                                       value={'NEW'}> &nbsp;&nbsp;<b>{translations.NewShmiraList}</b> &nbsp;&nbsp;</MenuItem>
                             {shmiraListCollection.map((shmiraListRecord: ShmiraListRecord) => <MenuItem key={shmiraListRecord.id}
-                                                                                         value={shmiraListRecord.id}> &nbsp;&nbsp;{shmiraListRecord.Name} &nbsp;&nbsp;</MenuItem>)}
+                                                                                                        value={shmiraListRecord.id}> &nbsp;&nbsp;{shmiraListRecord.Name} &nbsp;&nbsp;</MenuItem>)}
                         </Select>
                     </Typography>
                     <IconButton
@@ -233,18 +228,38 @@ export const AppNavBar = () => {
                             md: 'flex'
                         }
                     }}>
-
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle/>
-                        </IconButton>
+                        <LightTooltip title={translations.ImportFromFile}>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={() => handleProfileMenuClose(null, ProfileMenuClickActionType.Import)}
+                                color="inherit"
+                            >
+                                <UploadFile/>
+                            </IconButton>
+                        </LightTooltip>
+                        <Box sx={{
+                            ...
+                                Styles
+                                    .divider,
+                            width: '30px'
+                        }}/>
+                        <LightTooltip title={translations.ExportToFile}>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={() => handleProfileMenuClose(null, ProfileMenuClickActionType.Export)}
+                                color="inherit"
+                            >
+                                <Save/>
+                            </IconButton>
+                        </LightTooltip>
                     </Box>
                     <Box sx={{
                         display: {
@@ -266,8 +281,9 @@ export const AppNavBar = () => {
                 </Toolbar>
             </AppBar>
 
-            <ShmiraListMenu shmiraListMoreAnchorEl={shmiraListMoreAnchorEl} shmiraListMenuId={shmiraListMenuId} isShmiraListMenuOpen={isShmiraListMenuOpen}
-                       handleShmiraListMenuClick={handleShmiraListMenuClick} handleShmiraListMenuClose={handleShmiraListMenuClose}/>
+            <ShmiraListMenu shmiraListMoreAnchorEl={shmiraListMoreAnchorEl} shmiraListMenuId={shmiraListMenuId}
+                            isShmiraListMenuOpen={isShmiraListMenuOpen}
+                            handleShmiraListMenuClick={handleShmiraListMenuClick} handleShmiraListMenuClose={handleShmiraListMenuClose}/>
             <ProfileMenu menuId={menuId} anchorEl={anchorEl} handleMenuClose={handleProfileMenuClose} isMenuOpen={isProfileMenuOpen}/>
             <RenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={shmiraListName}/>
             <FileUploadDialog open={UploadOpen} onClose={handleUploadClose} selectedValue={''}/>

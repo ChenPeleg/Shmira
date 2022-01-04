@@ -27,13 +27,13 @@ export const ToggleButtons = () => {
         <ToggleButtonGroup
             value={alignment}
             exclusive
-            sx={{color: 'white'}}
-
+            // sx={{color: 'white'}}
+            dir={'ltr'}
             onChange={handleChange}
         >
-            <ToggleButton sx={{color: 'white'}} value={'preferences'}> {translations.Preferences} </ToggleButton>
             <ToggleButton sx={{color: 'white'}} value={'sketch'}>{translations.Sketch}</ToggleButton>
-            <ToggleButton sx={{color: 'white'}} value={'locationsView'}>{translations.Locations}</ToggleButton>
+            <ToggleButton sx={{color: 'white'}} value={'preferences'}> {translations.Preferences} </ToggleButton>
+            {/*<ToggleButton sx={{color: 'white'}} value={'locationsView'}>{translations.Locations}</ToggleButton>*/}
         </ToggleButtonGroup>
     );
 }
