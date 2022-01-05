@@ -1,5 +1,6 @@
 import {AppConstants, IAction, ShmiraListStore} from './store.types';
 import {ActionsTypes} from './types.actions';
+import {StoreUtils} from './store-utils';
 
 export type DisplayReducerFunctions =
     ActionsTypes.CHANGE_VIEW
@@ -9,7 +10,10 @@ export const DisplayReducer: Record<DisplayReducerFunctions, (state: ShmiraListS
     [ActionsTypes.CHANGE_VIEW]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         newState.displaySetting = {...newState.displaySetting}
-        newState.displaySetting.view = action.payload.value
+        newState.displaySetting.view = action.payload.value;
+
+        StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
 
@@ -33,6 +37,7 @@ const updatePreferencesWithEditedPreference = (state: ShmiraListStore): ShmiraLi
             return preference
         });
     }
+
 
     return state
 }

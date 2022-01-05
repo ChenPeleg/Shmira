@@ -5,7 +5,8 @@ export interface SuggestionModel {
 }
 
 export interface ShmiraListBuildSettings {
-    custom: any
+    custom?: any,
+    Range: RangeModel
 }
 
 export enum PreferenceMetaStatus {
@@ -17,11 +18,17 @@ export enum PreferenceMetaStatus {
 export interface PreferenceMetaDataModel {
     id: string
     preference: PreferenceModel,
-    optionalDates: string[]
-    guardDates: [string, string] | [string],
+    datesYouCanGuard: string[]
+    guardDates: [string, string] | [string] | [],
     length: number,
     status: PreferenceMetaStatus
 }
+
+export interface RangeModel {
+    DateFrom: string,
+    DateTo: string
+}
+
 
 export const BuilderConstants: Object = {
     drivesToResolve: 'DtoRes'

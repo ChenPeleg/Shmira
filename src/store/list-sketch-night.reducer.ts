@@ -22,7 +22,7 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
 
         if (sketchObj !== undefined) {
             const vehicleId = getVehicleIdFromDriveId(state, sketchDriveChanged.id);
-            const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleId);
+            const relevantVehicle = sketchObj.NightSchedule.find(v => v.id === vehicleId);
             if (relevantVehicle) {
                 relevantVehicle.drivesToRemove = relevantVehicle.drivesToRemove.map((d: DriveModel) => {
                     if (d.id === sketchDriveChanged.id) {
@@ -51,7 +51,7 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
 
         if (sketchObj !== undefined) {
             const vehicleId = getVehicleIdFromDriveId(state, sketchDriveChangedId);
-            const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleId);
+            const relevantVehicle = sketchObj.NightSchedule.find(v => v.id === vehicleId);
             if (relevantVehicle) {
                 relevantVehicle.drivesToRemove = relevantVehicle.drivesToRemove.map((d: DriveModel) => {
                     if (d.id === sketchDriveChangedId) {
@@ -76,6 +76,7 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
 
         }
         StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
 
     },
@@ -88,7 +89,7 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
 
         if (sketchObj !== undefined) {
             const vehicleId = getVehicleIdFromDriveId(state, sketchDriveToDelete.id);
-            const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleId);
+            const relevantVehicle = sketchObj.NightSchedule.find(v => v.id === vehicleId);
             if (relevantVehicle) {
 
                 const newDrives: (DriveModel | null) [] = relevantVehicle.drivesToRemove.map((d: DriveModel) => {
@@ -104,6 +105,9 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
 
         }
         StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+
+
         return newState
 
     },
@@ -127,7 +131,7 @@ const updateShmiraListRecordWithSketchChanges = (state: ShmiraListStore): Shmira
 const getVehicleIdFromDriveId = (state: ShmiraListStore, driveId: string): string => {
     const SketchIdInEdit = state.SketchIdInEdit
     const sketchObj: SketchModel | undefined = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
-    const vehicleSchedules = sketchObj?.vehicleSchedules || [];
+    const vehicleSchedules = sketchObj?.NightSchedule || [];
     let vehicleId = '';
     vehicleSchedules.forEach((v: NightScheduleModel) => {
         v.drivesToRemove.forEach((d: DriveModel) => {

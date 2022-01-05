@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Collapse, Divider, Typography} from '@mui/material';
 import {DriveModel, NightScheduleModel, SketchModel} from '../../models/Sketch.model';
 import {VehicleModel} from '../../models/Vehicle.model';
-import {SketchDrive} from './SketchDrive';
+import {SketchNight} from './sketch-night';
 import {ListSketchDriveEditDialog} from '../Dialogs/list-sketch-drive-edit-dialog';
 import {ActionsTypes} from '../../store/types.actions';
 import {ShmiraListStore} from '../../store/store.types';
@@ -109,7 +109,7 @@ export const Sketch = () => {
                     <SketchPendingPreferences pendingPreferences={sketchInEdit.unassignedPreferences}/>
 
 
-                    {sketchInEdit.vehicleSchedules.map((vehicleTimeTable: NightScheduleModel, i: number) => {
+                    {sketchInEdit.NightSchedule.map((nights: NightScheduleModel, i: number) => {
                         return (<Box key={i}>
                             <Box key={i} id={'vehicle-column'} sx={{
                                 display: 'flex',
@@ -120,14 +120,14 @@ export const Sketch = () => {
                                 justifyContent: 'start',
                                 minWidth: '6vw',
                                 minHeight: '60vh',
-                            }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.VehicleId)}  </Typography>
+                            }}> <Typography variant={'h6'}>{getVehicleNameFromId(nights.date)}  </Typography>
                                 <TransitionGroup>
-                                    {vehicleTimeTable.drivesToRemove.map((drive: DriveModel, i: number) => {
+                                    {nights.drivesToRemove.map((drive: DriveModel, i: number) => {
                                         return (
                                             <Collapse key={i}>
-                                                <SketchDrive
-                                                    sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, vehicleTimeTable.id)}
-                                                    key={i} drive={drive} prevoiusDrive={vehicleTimeTable.drivesToRemove[i - 1] || null}/>
+                                                <SketchNight
+                                                    sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, nights.id)}
+                                                    key={i} drive={drive} prevoiusDrive={nights.drivesToRemove[i - 1] || null}/>
                                             </Collapse>
 
                                         )

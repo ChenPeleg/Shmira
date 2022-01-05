@@ -22,7 +22,7 @@ export interface DriveModel extends PreferenceModel {
 
 export interface NightScheduleModel {
     id: string
-    VehicleId: string,
+    date: string,
     drivesToRemove: DriveModel[],
     Comments: string,
     optionalGuards: string [],
@@ -33,7 +33,7 @@ export interface NightScheduleModel {
 export interface SketchModel {
     id: string,
     name: string,
-    vehicleSchedules: NightScheduleModel[],
+    NightSchedule: NightScheduleModel[],
     unassignedPreferences: PreferenceModel[],
     assignedPreferences: PreferenceModel[],
     Comments: string,

@@ -51,7 +51,7 @@ export const Utils = {
         }
         const vehicle1: NightScheduleModel = {
             id: '1',
-            VehicleId: '1',
+            date: '1',
             drivesToRemove: [
                 mkDrv('יוסי', '08:00', '10:00', '1'),
                 mkDrv('חן', '11:00', '14:00', '1'),
@@ -64,7 +64,7 @@ export const Utils = {
         }
         const vehicle2: NightScheduleModel = {
             id: '2',
-            VehicleId: '1',
+            date: '1',
             drivesToRemove: [
                 mkDrv('יוליה', '06:00', '12:00', '1'),
                 mkDrv('רונן', '12:30', '14:00', '1'),
@@ -76,7 +76,7 @@ export const Utils = {
             Comments: 'רכב ראשון'
         }
         return {
-            vehicleSchedules: [vehicle1, vehicle2],
+            NightSchedule: [vehicle1, vehicle2],
             id: '1',
             Comments: '',
             name: 'סידור בשני רכבים',
@@ -208,6 +208,17 @@ export const Utils = {
             return dateStampArr.map(d => d.toString())
 
 
+        },
+        getWeekDayNumberFromTimeStamps(timeStamps: string[]): { timeStamp: string, dayNumber: number }[] {
+            return timeStamps.map((t: string) => {
+                const date: Date = this.dateStampToDate(t) || new Date();
+
+                return {
+                    timeStamp: t,
+                    dayNumber: date.getDay() + 1
+                }
+
+            })
         },
         get dateOfWeekObject() {
             return [

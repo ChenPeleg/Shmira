@@ -36,23 +36,26 @@ export const MainLayout = () => {
     return (
 
         <main>
-            <Box sx={{margin: '20px'}} flexDirection="row" display="flex" alignItems="optionalDates" justifyContent="optionalDates">
+            <Box sx={{margin: '20px'}} flexDirection="row" display="flex" alignItems="datesYouCanGuard" justifyContent="datesYouCanGuard">
 
                 {displaySketches ?
-                    <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="optionalDates" justifyContent="optionalDates">
+                    <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="datesYouCanGuard"
+                         justifyContent="datesYouCanGuard">
 
                         <SketchesContainer/>
 
                     </Box> : null}
                 {displayPreferences ?
-                    <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="optionalDates" justifyContent="optionalDates">
+                    <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="datesYouCanGuard"
+                         justifyContent="datesYouCanGuard">
 
                         <DataRange/>
                         <Preferences/>
 
                     </Box> : null}
                 {displayLocations ?
-                    <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="optionalDates" justifyContent="optionalDates">
+                    <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="datesYouCanGuard"
+                         justifyContent="datesYouCanGuard">
 
                         <LocationGroupEditWrapper/>
 

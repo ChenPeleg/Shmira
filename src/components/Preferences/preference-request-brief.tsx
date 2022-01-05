@@ -71,15 +71,20 @@ const doesNameExist = (allPreferences: PreferenceModel[], thisPreference: Prefer
 
 }
 const areDetailsMissing = (preferenceValues: PreferenceModel): boolean => {
+
     if (!preferenceValues.TypeOfInfoPreference || !preferenceValues.guardName) {
+
         return true
     }
-    if (preferenceValues.TypeOfInfoPreference === PreferenceType.CanGuardIn) {
-        if (!preferenceValues.finishHour || !preferenceValues.optionalGuardDaysByDates) {
-            return true
-        }
+    if (preferenceValues.TypeOfInfoPreference === PreferenceType.CanAlwaysGuard) {
+        return false
     }
-    return false
+
+
+    const relevantField = preferenceValues.weekDaysOrDates === WeekDaysOrDates.Dates ? preferenceValues.flexibilityByDates : preferenceValues.flexibilityByDays
+
+    return !relevantField || relevantField.length === 0;
+
 }
 
 const buildBriefText = (preferenceValues: PreferenceModel): string => {
@@ -88,11 +93,7 @@ const buildBriefText = (preferenceValues: PreferenceModel): string => {
         return translations.NewPreference
     }
     let abilityText = '';
-    //const get
 
-    const datesArray = getGuardDatesFromRecord(preferenceValues);
-
-    const daysText = ''
 
     if (preferenceValues.TypeOfInfoPreference === PreferenceType.CanAlwaysGuard) {
         abilityText = translations.CanAlwaysGuardShort
@@ -122,7 +123,7 @@ const buildBriefText = (preferenceValues: PreferenceModel): string => {
 
     return briefText
 }
-export const PrefrenceRequestBrief = (props: AppProps) => {
+export const PreferenceRequestBrief = (props: AppProps) => {
     const id = props.preferenceId;
 
 
@@ -130,8 +131,8 @@ export const PrefrenceRequestBrief = (props: AppProps) => {
     const preferenceValues = allPreferences.find(preference => preference.id === id) as PreferenceModel;
 
 
-    const missingDetailsShown: boolean = areDetailsMissing(preferenceValues) && !props.isInEdit;
-    const isThereSimilarName: boolean = doesNameExist(allPreferences, preferenceValues) && !props.isInEdit;
+    const missingDetailsShown: boolean = areDetailsMissing(preferenceValues);
+    const isThereSimilarName: boolean = doesNameExist(allPreferences, preferenceValues);
 
 
     return (
@@ -150,10 +151,12 @@ export const PrefrenceRequestBrief = (props: AppProps) => {
             <Typography fontWeight={props.isInEdit ? 'bold' : 'initial'} fontSize={'large'} padding={'initial'}>
                 {buildBriefText(preferenceValues)}
             </Typography>
-            <Typography fontSize={'large'} color={'red'} padding={'initial'}>  &nbsp;
-                {missingDetailsShown ? '(' + translations.missingDetails + ')' : null}
-                {isThereSimilarName && !missingDetailsShown ? '(' + translations.nameExist + ')' : null}
-            </Typography>
+            {!props.isInEdit ?
+                (<Typography fontSize={'large'} color={'red'} padding={'initial'}>  &nbsp;
+                    {missingDetailsShown ? '(' + translations.missingDetails + ')' : null}
+                    {isThereSimilarName && !missingDetailsShown ? '(' + translations.nameExist + ')' : null}
+                </Typography>)
+                : null}
 
         </Box>
 

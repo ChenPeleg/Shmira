@@ -6,7 +6,6 @@ import {DriveModel} from '../../models/Sketch.model';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {PreferenceType} from '../../models/PreferenceType.enum';
-import {Utils} from '../../services/utils';
 import {translations} from '../../services/translations';
 import {Colors, Styles} from '../../hoc/themes';
 import {WarningIcon} from '../buttons/warning-icon';
@@ -27,7 +26,7 @@ function ArrowUpwardIcon() {
 }
 
 
-export const SketchDrive = (props: sketchDriveProps) => {
+export const SketchNight = (props: sketchDriveProps) => {
     const dispatch = useDispatch();
     const drive = props.drive;
     const [inHover, setInHover] = useState(false);
@@ -37,19 +36,8 @@ export const SketchDrive = (props: sketchDriveProps) => {
     const onMouseOut = () => {
         setInHover(false)
     };
-    const calculateIfDrivesOverlap = (thisDrive: DriveModel, perviousDrive: DriveModel | null): DriveModel | null => {
-        if (!perviousDrive) {
-            return null
-        }
-        const prevFinish = Utils.hourTextToDecimal(perviousDrive.finishHour);
-        const thisStart = Utils.hourTextToDecimal(thisDrive.optionalGuardDaysByDates);
-        if (prevFinish > thisStart) {
-            return perviousDrive
-        } else {
-            return null
-        }
-    }
-    const driveOverlap = !!calculateIfDrivesOverlap(props.drive, props.prevoiusDrive);
+
+    const driveOverlap = false;
 
 
     return (

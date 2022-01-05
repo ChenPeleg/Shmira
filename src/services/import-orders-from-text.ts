@@ -93,7 +93,7 @@ const preferencesToPreferenceModel = (preferences: EshbalPreference[]): Preferen
     return PreferencesApp;
 }
 /**
- * @description Searches for Time (number in hour pattern in the text, if the returned number is not equal to optionalDates hour, returns them
+ * @description Searches for Time (number in hour pattern in the text, if the returned number is not equal to datesYouCanGuard hour, returns them
  * @param {PreferenceModel} preference
  * @returns {{anotherTime: string | null}}
  */

@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RenderTextField} from '../Form/text-field';
 import {RenderSelectField} from '../Form/select-field';
 import {PreferenceType, WeekDaysOrDates} from '../../models/PreferenceType.enum';
-import {Box, SxProps, Theme} from '@mui/system';
+import {Box, SxProps} from '@mui/system';
 import {Button, MenuItem} from '@mui/material';
 import {translations} from '../../services/translations';
 import {ActionsTypes} from '../../store/types.actions';
@@ -24,36 +24,23 @@ import {Styles} from '../../hoc/themes';
 const TRL = translations;
 
 
-const useStyles: any = (() => ({
-    root: {
-        direction: (theme: Theme) => theme.direction,
-        '& .MuiFormLabel-root': {
-            left: 'inherit'
-        }
-    },
-    fieldWrapper: {
-        padding: '10px'
-    },
-    fieldWrapperText: {
-        display: 'inline-flex',
-        padding: '10px',
-        maxWidth: '150px'
-    },
-    cardBase: {
-        direction: (theme: Theme) => theme.direction,
-        padding: '10px',
-        cursor: 'pointer',
-        width: '90%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
+const getLabelByPreferenceType = (canOrCant: PreferenceType, weekDaysOrDates: WeekDaysOrDates): string => {
+    let res = ''
+    switch (canOrCant) {
+        case PreferenceType.CanAlwaysGuard:
+            return ''
+        case PreferenceType.CanGuardIn:
+            return weekDaysOrDates === WeekDaysOrDates.WeekDays ?
+                translations.CanGuardInDays : translations.CantGuardInDaysDates
 
-    },
-    additionalText: {
-        fontSize: '14px'
+        case PreferenceType.CantGuardIn:
+            return weekDaysOrDates === WeekDaysOrDates.WeekDays ?
+                translations.CantGuardInDays : translations.CantGuardInDaysDates
+        default:
+            return ''
     }
-}));
+    return res
+}
 const fieldWrapper: SxProps = {
     padding: '10px'
 }
@@ -99,8 +86,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         typeOfPreference,
         weekDaysOrDates
     } = muiFormProps;
-    const classes = useStyles();
-    console.log(typeOfPreference)
+
     const shmiraListCollection: ShmiraListRecord[] = useSelector((state: { shmiraListCollection: ShmiraListRecord[] }) => state.shmiraListCollection);
     const shmiraListId: string = useSelector((state: { shmiraListId: string }) => state.shmiraListId);
     const currenList: ShmiraListRecord | undefined = shmiraListCollection.find(s => s.id === shmiraListId);
@@ -167,7 +153,8 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                         <Field
                             name={'flexibilityByDays'}
                             component={RenderSelectFieldDDays}
-                            label={typeOfPreference === PreferenceType.CanGuardIn ? TRL.CanGuardInDays : TRL.CantGuardInDays}
+                            label={getLabelByPreferenceType(typeOfPreference, WeekDaysOrDates.WeekDays)}
+
 
                         >
                             {daysOfWeekMenuItem.map((day: { name: string, weekDayNumber: number }) => {
@@ -186,7 +173,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                         <Field
                             name={'flexibilityByDates'}
                             component={RenderSelectFieldDDays}
-                            label={typeOfPreference === PreferenceType.CanGuardIn ? TRL.CanGuardInDays : TRL.CantGuardInDays}
+                            label={getLabelByPreferenceType(typeOfPreference, WeekDaysOrDates.Dates)}
 
 
                         >
@@ -199,7 +186,13 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 
                     </Box> : null}
 
-                <Box sx={Styles.flexRow}>
+                <Box sx={{
+                    ...
+                        Styles
+                            .flexRow,
+                    flexWrap: 'wrap',
+                    mt: '0.5em'
+                }}>
                     <Box
                         sx={fieldWrapper}> <Field name={preferenceFields.Comments}
                                                   component={RenderTextField}
@@ -211,7 +204,8 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     <Box
                         sx={{
                             ...fieldWrapper,
-                            alignSelf: 'flex-end'
+                            //alignSelf: 'flex-end',
+                            //minWidth: '80%'
                         }}> <Field name={preferenceFields.halfOrFull}
                                    component={RenderFullNightField}
                                    label={TRL.halfOrFull}
@@ -230,7 +224,12 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     }}
                     >
 
-                        <Button sx={{m: '5px'}} variant="contained" color={'primary'} type="button"
+                        <Button sx={{
+                            alignSelf: 'flex-end',
+                            justifySelf: 'end',
+                            m: '5px',
+                            width: '90px'
+                        }} variant="contained" color={'primary'} type="button"
                                 onClick={handleSubmit}>{TRL.Submit}</Button>
 
 

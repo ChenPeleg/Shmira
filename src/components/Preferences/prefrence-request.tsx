@@ -4,7 +4,7 @@ import {PreferenceRequestForm} from './preference-request-form';
 
 import {translations} from '../../services/translations';
 import {Box, Card, Collapse} from '@mui/material';
-import {PrefrenceRequestBrief} from './prefrence-request-brief';
+import {PreferenceRequestBrief} from './preference-request-brief';
 import {SxProps} from '@mui/system';
 import {useDispatch} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
@@ -101,7 +101,7 @@ export const PrefrenceRequest = (props: AppProps) => {
                             flexDirection: 'row',
                             justifyContent: 'space-between'
                         }}>
-                            <PrefrenceRequestBrief
+                            <PreferenceRequestBrief
                                 onEnterPress={(event) => !props.isInEdit ? cardClickHandler(event) : null}
                                 isInEdit={props.isInEdit} sx={{...classes.cardBase}} preferenceId={props.preferenceId}/>
                             <Box sx={{

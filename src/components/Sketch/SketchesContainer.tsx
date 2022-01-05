@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {translations} from '../../services/translations';
 import {SketchModel} from '../../models/Sketch.model';
 import {ActionsTypes} from '../../store/types.actions';
-import {ShmiraListStore} from '../../store/store.types';
+import {ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
 import {SketchActionType} from '../../models/SketchMenuClickActionType.enum';
 import {SketchMenu} from './sketch-menu';
 import {Edit} from '@mui/icons-material';
@@ -13,16 +13,20 @@ import IconButton from '@mui/material/IconButton';
 import {Sketch} from './Sketch';
 import MenuItem from '@mui/material/MenuItem';
 import {RenameDialog} from '../Dialogs/rename-dialog';
+import {ShmiraListBuilder} from '../../shmiraListBuilder/shmiraListBuilder.main';
 
 
 export const SketchesContainer = () => {
     const dispatch = useDispatch();
     const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
-
+    const [mock, setMock] = useState<boolean>(true)
     const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const isSketchMenuOpen = Boolean(sketchMoreAnchorEl);
+    const shmiraListId = useSelector((state: ShmiraListStore) => state.shmiraListId);
+    const shmiraListCollection = useSelector((state: ShmiraListStore) => state.shmiraListCollection);
+    const shmiraListSelected = shmiraListCollection.find((shmiraListRecord: ShmiraListRecord) => shmiraListRecord.id === shmiraListId);
 
     const sketchMenuId = 'primary-sketch-menu';
     const [RenameOpen, setRenameOpen] = React.useState(false);
@@ -91,6 +95,14 @@ export const SketchesContainer = () => {
 
 
     }
+    useEffect(() => {
+        if (mock) {
+            setMock(false)
+            console.clear()
+            const listRes = ShmiraListBuilder(shmiraListSelected as ShmiraListRecord)
+
+        }
+    })
     const handleCreateSketch = () => {
         dispatch({
             type: ActionsTypes.NEW_SKETCH,

@@ -35,7 +35,7 @@ export class CloneUtil {
     }
 
     static deepCloneSketch(obj: SketchModel): SketchModel {
-        obj.vehicleSchedules = obj.vehicleSchedules.map(vs => CloneUtil.deepCloneVehicleSchedules(vs))
+        obj.NightSchedule = obj.NightSchedule.map(vs => CloneUtil.deepCloneVehicleSchedules(vs))
         return {...obj}
     }
 
