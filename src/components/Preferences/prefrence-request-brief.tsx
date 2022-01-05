@@ -16,7 +16,8 @@ import {LanguageUtilities} from '../../services/language-utilities';
 type AppProps = {
     preferenceId: string;
     sx: SxProps,
-    isInEdit: boolean
+    isInEdit: boolean,
+    onEnterPress: (event: KeyboardEvent) => void
 };
 const allLocations: LocationModel[] = locations.map(o => ({...o}))
 const useStyles: any = (() => ({
@@ -140,6 +141,11 @@ export const PrefrenceRequestBrief = (props: AppProps) => {
             flexDirection: 'row',
             justifyContent: 'start',
             alignItems: 'start'
+        }} onKeyUp={(event) => {
+            if (event.key === 'Enter') {
+                alert('enter')
+                props.onEnterPress(event as any)
+            }
         }}>
             <Typography fontWeight={props.isInEdit ? 'bold' : 'initial'} fontSize={'large'} padding={'initial'}>
                 {buildBriefText(preferenceValues)}

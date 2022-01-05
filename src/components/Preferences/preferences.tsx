@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
 import {AddButton} from '../Icons/add-button';
 import {PreferenceModel} from '../../models/Preference.model';
+import {ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
 
 const TRL = translations;
 const useStyles = (() => ({
@@ -25,12 +26,23 @@ const useStyles = (() => ({
         fontSize: '14px'
     }
 }))
-
+const buildGenData = (numberOfPrefrences: number, NumberOfDays: number): string => {
+    let text = numberOfPrefrences.toString() + ' ' + translations.guards;
+    text += ', ' + NumberOfDays.toString() + ' ' + translations.guardDates;
+    return text
+}
 export const Preferences = () => {
     const dispatch = useDispatch()
     const preferences = useSelector((state: { preferences: PreferenceModel[] }) => state.preferences);
     const preferenceIdInEdit = useSelector((state: { preferenceIdInEdit: string | null }) => state.preferenceIdInEdit);
-    const classes = useStyles();
+    const shmiraListId = useSelector((state: ShmiraListStore) => state.shmiraListId);
+    const shmiraListCollection = useSelector((state: ShmiraListStore) => state.shmiraListCollection);
+    const shmiraListSelected = shmiraListCollection.find((shmiraListRecord: ShmiraListRecord) => shmiraListRecord.id === shmiraListId);
+    const DateFromString = shmiraListSelected?.DateFrom || '0';
+    const DateToString = shmiraListSelected?.DateTo || '0';
+    const days = Number(DateFromString) - Number(DateToString)
+
+    const generalData = buildGenData(preferences.length, Math.abs(days))
     const addClickHandler = (event: any) => {
         dispatch({
             type: ActionsTypes.ADD_NEW_ORDER,
@@ -43,12 +55,35 @@ export const Preferences = () => {
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'center',
+                alignItems: 'start',
                 mb: '10px',
-                justifyContent: 'center',
+                justifyContent: 'start',
                 minWidth: '30vw',
             }}>
-                <AddButton addClickHandler={addClickHandler}/>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    mb: '10px',
+                    justifyContent: 'center',
+                    minWidth: '18vw',
+                }}>
+
+                    {generalData}
+
+                </Box>
+                <Box sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+
+                    justifyContent: 'center',
+                    minWidth: '15vw',
+                }}>
+
+                    <AddButton addClickHandler={addClickHandler}/>
+
+                </Box>
             </Box>
             <Box>
                 {preferences.map((o) => (

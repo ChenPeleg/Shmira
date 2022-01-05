@@ -119,6 +119,8 @@ export const translations = {
     'SketchActionReplaceExisting': 'העבר לרכב במקום נסיעה קיימת',
     'SketchActionPublicTransport': 'צור פתרון בתחב"צ',
     'SketchActionAddToPending': 'סמן כ"לא מטופלת"',
+    'guards': 'שומרים',
+    'guardDates': 'ימי שמירה',
 
     /* date errors  */
     'dateErrStartBiggerthan': 'על תאריך ההתחלה להיות לפני תאריך הסיום',

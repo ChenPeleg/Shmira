@@ -7,6 +7,7 @@ import {Utils} from '../services/utils';
 import {SketchModel} from '../models/Sketch.model';
 import {CloneUtil} from '../services/clone-utility';
 import {translations} from '../services/translations';
+import {ShmiraListBuilder} from '../shmiraListBuilder/shmiraListBuilder.main';
 
 export type SketchReducerFunctions =
     | ActionsTypes.NEW_SKETCH
@@ -25,17 +26,17 @@ export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraLis
         const newId = Utils.getNextId(newState.sketches.map(v => v.id));
         const chosenShmiraListObj: ShmiraListRecord | undefined = newState.shmiraListCollection.find((record: ShmiraListRecord) => record.id === newState.shmiraListId);
         if (chosenShmiraListObj !== undefined) {
-            // const deconstructedShmiraList = {...chosenShmiraListObj};
-            // deconstructedShmiraList.preferences = newState.preferences;
-            // deconstructedShmiraList.sketches = newState.sketches;
-            // deconstructedShmiraList.vehicles = newState.vehicles;
-            // const newSketch = ShmiraListBuilder(deconstructedShmiraList);
-            // newSketch.id = newId;
-            // if (!newState.sketches) {
-            //     newState.sketches = [];
-            // }
-            // newState.sketches.push(newSketch);
-            // newState.SketchIdInEdit = newId;
+            const deconstructedShmiraList = {...chosenShmiraListObj};
+            deconstructedShmiraList.preferences = newState.preferences;
+            deconstructedShmiraList.sketches = newState.sketches;
+            deconstructedShmiraList.vehicles = newState.vehicles;
+            const newSketch = ShmiraListBuilder(deconstructedShmiraList);
+            newSketch.id = newId;
+            if (!newState.sketches) {
+                newState.sketches = [];
+            }
+            newState.sketches.push(newSketch);
+            newState.SketchIdInEdit = newId;
         }
 
 
@@ -137,7 +138,7 @@ export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraLis
 
 
 }
- 
+
 const getAllSketchesIDs = (state: ShmiraListStore): string[] => {
     const sketchesIds = state.sketches.map(o => o.id);
 

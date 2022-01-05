@@ -1,6 +1,6 @@
 import {SxProps} from '@mui/system';
 import React from 'react';
-import {Box, IconButton} from '@mui/material';
+import {IconButton} from '@mui/material';
 import {ContentCopy} from '@mui/icons-material';
 
 export interface CloneButtonProps {
@@ -11,12 +11,13 @@ export interface CloneButtonProps {
 
 export const CloneButton = (props: CloneButtonProps) => {
     return (
-        <Box>
+        <div>
 
-            <IconButton id={'clone-button'} onClick={props.cloneClickHandler} size={'small'} sx={{...props.sx}} aria-label="delete">
+            <IconButton tabIndex={-1} id={'clone-button'} onClick={props.cloneClickHandler} size={'small'} sx={{...props.sx}}
+                        aria-label="delete">
                 <ContentCopy/>
             </IconButton>
-        </Box>
+        </div>
 
 
     )

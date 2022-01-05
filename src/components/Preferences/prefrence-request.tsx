@@ -47,7 +47,7 @@ export const PrefrenceRequest = (props: AppProps) => {
         setInHover(false)
     };
     const dispatch = useDispatch();
-    const cardClickHandler = (event: MouseEvent) => {
+    const cardClickHandler = (event: MouseEvent | Event) => {
         dispatch({
             type: ActionsTypes.CLICKED_ORDER,
             payload: {
@@ -92,14 +92,18 @@ export const PrefrenceRequest = (props: AppProps) => {
                     ...classes.cardBase,
                     ...briefPreferenceStyle
                 }} onClick={(event: any) => !props.isInEdit ? cardClickHandler(event) : null}>
-                    <div tabIndex={0}>
+                    <div tabIndex={0} onKeyUp={(event: any) => !props.isInEdit && event.key === 'Enter' ?
+                        cardClickHandler(event)
+                        : null}>
                         <Box sx={{
 
                             display: 'flex',
                             flexDirection: 'row',
                             justifyContent: 'space-between'
                         }}>
-                            <PrefrenceRequestBrief isInEdit={props.isInEdit} sx={{...classes.cardBase}} preferenceId={props.preferenceId}/>
+                            <PrefrenceRequestBrief
+                                onEnterPress={(event) => !props.isInEdit ? cardClickHandler(event) : null}
+                                isInEdit={props.isInEdit} sx={{...classes.cardBase}} preferenceId={props.preferenceId}/>
                             <Box sx={{
                                 display: 'flex',
                                 flexDirection: 'row'
