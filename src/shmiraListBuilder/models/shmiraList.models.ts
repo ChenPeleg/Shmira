@@ -17,8 +17,8 @@ export enum PreferenceMetaStatus {
 export interface PreferenceMetaDataModel {
     id: string
     preference: PreferenceModel,
-    start: number
-    finish: number,
+    optionalDates: string[]
+    guardDates: [string, string] | [string],
     length: number,
     status: PreferenceMetaStatus
 }

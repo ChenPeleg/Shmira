@@ -1,5 +1,5 @@
 import {hashFunction} from './hash-function';
-import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
+import {DriveModel, NightScheduleModel, SketchModel} from '../models/Sketch.model';
 import {PreferenceType} from '../models/PreferenceType.enum';
 
 const ExcelDifferenece = 25569.0;
@@ -49,26 +49,30 @@ export const Utils = {
             }
 
         }
-        const vehicle1: VehicleScheduleModel = {
+        const vehicle1: NightScheduleModel = {
             id: '1',
             VehicleId: '1',
-            drives: [
+            drivesToRemove: [
                 mkDrv('יוסי', '08:00', '10:00', '1'),
                 mkDrv('חן', '11:00', '14:00', '1'),
                 mkDrv('אברהם', '16:00', '20:00', '1'),
                 mkDrv('רונה', '20:30', '20:00', '1'),
             ],
-            Comments: 'רכב ראשון'
+            Comments: 'רכב ראשון',
+            guards: [],
+            optionalGuards: [],
         }
-        const vehicle2: VehicleScheduleModel = {
+        const vehicle2: NightScheduleModel = {
             id: '2',
             VehicleId: '1',
-            drives: [
+            drivesToRemove: [
                 mkDrv('יוליה', '06:00', '12:00', '1'),
                 mkDrv('רונן', '12:30', '14:00', '1'),
                 mkDrv('שמואל', '15:00', '19:00', '1'),
                 mkDrv('מיכל', '20:00', '23:00', '1'),
             ],
+            guards: [],
+            optionalGuards: [],
             Comments: 'רכב ראשון'
         }
         return {

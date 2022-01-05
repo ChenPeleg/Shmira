@@ -1,4 +1,4 @@
-import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
+import {DriveModel, NightScheduleModel, SketchModel} from '../models/Sketch.model';
 import {PreferenceModel} from '../models/Preference.model';
 import {ShmiraListRecord} from '../store/store.types';
 
@@ -19,9 +19,9 @@ export class CloneUtil {
         return cloned
     }
 
-    static deepCloneVehicleSchedules(obj: VehicleScheduleModel): VehicleScheduleModel {
-        const cloned: VehicleScheduleModel = {...obj}
-        cloned.drives = cloned.drives.map(d => CloneUtil.deepCloneDrive(d))
+    static deepCloneVehicleSchedules(obj: NightScheduleModel): NightScheduleModel {
+        const cloned: NightScheduleModel = {...obj}
+        cloned.drivesToRemove = cloned.drivesToRemove.map(d => CloneUtil.deepCloneDrive(d))
         return cloned
     }
 

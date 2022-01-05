@@ -20,17 +20,20 @@ export interface DriveModel extends PreferenceModel {
 
 }
 
-export interface VehicleScheduleModel {
+export interface NightScheduleModel {
     id: string
     VehicleId: string,
-    drives: DriveModel[],
-    Comments: string
+    drivesToRemove: DriveModel[],
+    Comments: string,
+    optionalGuards: string [],
+    guards: string[]
+
 }
 
 export interface SketchModel {
     id: string,
     name: string,
-    vehicleSchedules: VehicleScheduleModel[],
+    vehicleSchedules: NightScheduleModel[],
     unassignedPreferences: PreferenceModel[],
     assignedPreferences: PreferenceModel[],
     Comments: string,

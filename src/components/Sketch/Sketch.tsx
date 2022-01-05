@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Collapse, Divider, Typography} from '@mui/material';
-import {DriveModel, SketchModel, VehicleScheduleModel} from '../../models/Sketch.model';
+import {DriveModel, NightScheduleModel, SketchModel} from '../../models/Sketch.model';
 import {VehicleModel} from '../../models/Vehicle.model';
 import {SketchDrive} from './SketchDrive';
 import {ListSketchDriveEditDialog} from '../Dialogs/list-sketch-drive-edit-dialog';
@@ -109,7 +109,7 @@ export const Sketch = () => {
                     <SketchPendingPreferences pendingPreferences={sketchInEdit.unassignedPreferences}/>
 
 
-                    {sketchInEdit.vehicleSchedules.map((vehicleTimeTable: VehicleScheduleModel, i: number) => {
+                    {sketchInEdit.vehicleSchedules.map((vehicleTimeTable: NightScheduleModel, i: number) => {
                         return (<Box key={i}>
                             <Box key={i} id={'vehicle-column'} sx={{
                                 display: 'flex',
@@ -122,12 +122,12 @@ export const Sketch = () => {
                                 minHeight: '60vh',
                             }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.VehicleId)}  </Typography>
                                 <TransitionGroup>
-                                    {vehicleTimeTable.drives.map((drive: DriveModel, i: number) => {
+                                    {vehicleTimeTable.drivesToRemove.map((drive: DriveModel, i: number) => {
                                         return (
                                             <Collapse key={i}>
                                                 <SketchDrive
                                                     sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, vehicleTimeTable.id)}
-                                                    key={i} drive={drive} prevoiusDrive={vehicleTimeTable.drives[i - 1] || null}/>
+                                                    key={i} drive={drive} prevoiusDrive={vehicleTimeTable.drivesToRemove[i - 1] || null}/>
                                             </Collapse>
 
                                         )

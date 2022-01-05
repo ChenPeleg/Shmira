@@ -1,11 +1,10 @@
 import {ShmiraListRecord} from '../store/store.types';
-import {SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
+import {SketchModel} from '../models/Sketch.model';
 
 
-import {ShmiraListBuilderBuildVehiclesAndUnAssigned} from './shmiraListBuilder.buildMonths';
+import {ShmiraListBuilderBuildVehiclesAndUnAssigned} from './shmiraListBuilder.assignGuards';
 
 import {Utils} from '../services/utils';
-import {PreferenceModel} from '../models/Preference.model';
 import {PreferenceMetaDataModel, ShmiraListBuildSettings} from './models/shmiraList.models';
 import {ShmiraListBuilderTools} from './shmiraList.tools';
 import {ShmiraListBuilderBuildPreferencesMetaData} from './shmiraListBuilder.buildPreferenceMetaData';
@@ -17,18 +16,18 @@ export const ShmiraListBuilder = (ShmiraList: ShmiraListRecord, buildSettings: a
     const settings: ShmiraListBuildSettings = {custom: null}
     const preferencesMetaData: PreferenceMetaDataModel[] = ShmiraListBuilderBuildPreferencesMetaData(ShmiraList.preferences, settings)
     const BuildResult = ShmiraListBuilderBuildVehiclesAndUnAssigned(preferencesMetaData, ShmiraList.vehicles, settings);
-    const initialVehicles: VehicleScheduleModel [] = BuildResult.vehicleSchedules;
-    const unassignedPreferences: PreferenceModel [] = BuildResult.unassignedPreferences;
-    const assignedPreferences: PreferenceModel [] = BuildResult.assignedPreferences;
+    // const initialVehicles: NightScheduleModel [] = BuildResult.vehicleSchedules;
+    // const unassignedPreferences: PreferenceModel [] = BuildResult.unassignedPreferences;
+    // const assignedPreferences: PreferenceModel [] = BuildResult.assignedPreferences;
 
 
     const baseSketch: SketchModel = {
         id: '2',
         name: 'first sketch',
-        vehicleSchedules: initialVehicles,
+        vehicleSchedules: [],// initialVehicles,
         Comments: '',
-        unassignedPreferences: unassignedPreferences,
-        assignedPreferences: assignedPreferences
+        unassignedPreferences: [], //unassignedPreferences,
+        assignedPreferences: []// assignedPreferences
     };
 
     const newId = Utils.getNextId(ShmiraList.sketches.map(v => v.id));

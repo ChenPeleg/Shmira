@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {DisplaySettings} from '../store/store.types';
 import {SketchesContainer} from '../components/Sketch/SketchesContainer';
 import {LocationGroupEditWrapper} from '../components/LocationsEdit/location-group-edit-wrapper';
-import { Preferences } from '../components/Preferences/preferences';
+import {Preferences} from '../components/Preferences/preferences';
 import {DataRange} from '../components/DateRange/data-range';
 
 
@@ -36,24 +36,27 @@ export const MainLayout = () => {
     return (
 
         <main>
-            <Box sx={{margin: '20px'}} flexDirection="row" display="flex" alignItems="start" justifyContent="start">
+            <Box sx={{margin: '20px'}} flexDirection="row" display="flex" alignItems="optionalDates" justifyContent="optionalDates">
 
-                {displaySketches ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
+                {displaySketches ?
+                    <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="optionalDates" justifyContent="optionalDates">
 
-                    <SketchesContainer/>
+                        <SketchesContainer/>
 
-                </Box> : null}
-                {displayPreferences ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
+                    </Box> : null}
+                {displayPreferences ?
+                    <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="optionalDates" justifyContent="optionalDates">
 
-<DataRange/>
-                    <Preferences/>
+                        <DataRange/>
+                        <Preferences/>
 
-                </Box> : null}
-                {displayLocations ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
+                    </Box> : null}
+                {displayLocations ?
+                    <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="optionalDates" justifyContent="optionalDates">
 
-                    <LocationGroupEditWrapper/>
+                        <LocationGroupEditWrapper/>
 
-                </Box> : null}
+                    </Box> : null}
 
             </Box>
 

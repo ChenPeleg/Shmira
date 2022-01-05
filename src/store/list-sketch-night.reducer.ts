@@ -2,7 +2,7 @@ import {ActionsTypes} from './types.actions';
 
 
 import {IAction, ShmiraListRecord, ShmiraListStore} from './store.types';
-import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
+import {DriveModel, NightScheduleModel, SketchModel} from '../models/Sketch.model';
 import {CloneUtil} from '../services/clone-utility';
 import {PreferenceModel} from '../models/Preference.model';
 import {StoreUtils} from './store-utils';
@@ -24,7 +24,7 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
             const vehicleId = getVehicleIdFromDriveId(state, sketchDriveChanged.id);
             const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleId);
             if (relevantVehicle) {
-                relevantVehicle.drives = relevantVehicle.drives.map((d: DriveModel) => {
+                relevantVehicle.drivesToRemove = relevantVehicle.drivesToRemove.map((d: DriveModel) => {
                     if (d.id === sketchDriveChanged.id) {
                         return sketchDriveChanged
                     } else {
@@ -53,7 +53,7 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
             const vehicleId = getVehicleIdFromDriveId(state, sketchDriveChangedId);
             const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleId);
             if (relevantVehicle) {
-                relevantVehicle.drives = relevantVehicle.drives.map((d: DriveModel) => {
+                relevantVehicle.drivesToRemove = relevantVehicle.drivesToRemove.map((d: DriveModel) => {
                     if (d.id === sketchDriveChangedId) {
                         const newDrive = {...d};
                         newDrive.implementsPreferences = (newDrive.implementsPreferences).filter(ord => ord !== preferenceIdToRemove)
@@ -91,14 +91,14 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
             const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleId);
             if (relevantVehicle) {
 
-                const newDrives: (DriveModel | null) [] = relevantVehicle.drives.map((d: DriveModel) => {
+                const newDrives: (DriveModel | null) [] = relevantVehicle.drivesToRemove.map((d: DriveModel) => {
                     if (d.id === sketchDriveToDelete.id) {
                         return null
                     } else {
                         return d
                     }
                 });
-                relevantVehicle.drives = newDrives.filter(d => d) as DriveModel[]
+                relevantVehicle.drivesToRemove = newDrives.filter(d => d) as DriveModel[]
             }
 
 
@@ -129,8 +129,8 @@ const getVehicleIdFromDriveId = (state: ShmiraListStore, driveId: string): strin
     const sketchObj: SketchModel | undefined = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
     const vehicleSchedules = sketchObj?.vehicleSchedules || [];
     let vehicleId = '';
-    vehicleSchedules.forEach((v: VehicleScheduleModel) => {
-        v.drives.forEach((d: DriveModel) => {
+    vehicleSchedules.forEach((v: NightScheduleModel) => {
+        v.drivesToRemove.forEach((d: DriveModel) => {
             if (d.id === driveId) {
                 vehicleId = v.id
             }
