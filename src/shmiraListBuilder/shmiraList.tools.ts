@@ -1,4 +1,5 @@
 import {translations} from '../services/translations';
+import {PreferenceMetaDataModel} from './models/shmiraList.models';
 
 export const ShmiraListBuilderTools = {
 
@@ -26,6 +27,12 @@ export const ShmiraListBuilderTools = {
                 return (++currentId).toString()
             }
         }
+    },
+    checkIfPersonCanGuard(preference: PreferenceMetaDataModel, date: string): boolean {
+        if (preference.datesYouCanGuard.includes(date) && preference.guardDates.length < 2) {
+            return true
+        }
+        return false
     }
 
 }

@@ -23,9 +23,9 @@ import {PreferenceModel} from '../../models/Preference.model';
 interface SketchDriveEditDialogProps {
 
     open: boolean;
-    sketchDriveData: { drive: DriveModel, vehicleId: string };
+    sketchDriveData: { night: DriveModel, vehicleId: string };
     vehicleId: string;
-    onDelete: (sketchDriveData: { drive: DriveModel, vehicleId: string }) => void;
+    onDelete: (sketchDriveData: { night: DriveModel, vehicleId: string }) => void;
     onClose: (vehicleUpdate: DriveModel | null) => void;
 }
 
@@ -37,7 +37,7 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
         sketchDriveData
     } = props;
     const vehicleId = sketchDriveData.vehicleId
-    const driveData = sketchDriveData.drive
+    const driveData = sketchDriveData.night
     const dispatch = useDispatch();
     const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
@@ -65,7 +65,7 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
     };
     const handleCloseDelete = (): void => {
         const sketchDriveDataForDelete = {...sketchDriveData}
-        
+
         onDelete(sketchDriveDataForDelete);
     };
     const addToPendingClickHandler = (event: Event, preferenceId: string) => {
@@ -172,9 +172,9 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
                                     </Box>
 
                                     <PreferenceActionButton sx={{width: '100%'}} size={'small'}
-                                                       actionType={SketchEditActionEnum.AddToPending}
-                                                       text={'      ' + translations.SketchActionAddToPending}
-                                                       actionClickHandler={(event: any) => addToPendingClickHandler(event, preference.id)}/>
+                                                            actionType={SketchEditActionEnum.AddToPending}
+                                                            text={'      ' + translations.SketchActionAddToPending}
+                                                            actionClickHandler={(event: any) => addToPendingClickHandler(event, preference.id)}/>
 
                                 </Card>))}
                         </Box>

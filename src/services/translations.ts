@@ -127,6 +127,7 @@ export const translations = {
     'SketchActionAddToPending': 'סמן כ"לא מטופלת"',
     'guards': 'שומרים',
     'guardDates': 'ימי שמירה',
+    'peopleWhoCanGuard': 'יכולים לשמור',
 
     /* date errors  */
     'dateErrStartBiggerthan': 'על תאריך ההתחלה להיות לפני תאריך הסיום',

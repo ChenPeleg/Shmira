@@ -1,17 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
-import {Collapse, Divider, Typography} from '@mui/material';
+import {Collapse, Divider} from '@mui/material';
 import {DriveModel, NightScheduleModel, SketchModel} from '../../models/Sketch.model';
 import {VehicleModel} from '../../models/Vehicle.model';
 import {SketchNight} from './sketch-night';
-import {ListSketchDriveEditDialog} from '../Dialogs/list-sketch-drive-edit-dialog';
 import {ActionsTypes} from '../../store/types.actions';
 import {ShmiraListStore} from '../../store/store.types';
 import {SketchNoSketchMessage} from './sketch-no-sketch-message';
 
 import {TransitionGroup} from 'react-transition-group';
-import {SketchPendingPreferences} from './SketchPendeingOrders';
 
 const MOckDrive = {
     'id': '0',
@@ -100,39 +98,39 @@ export const Sketch = () => {
             <Box>
                 <Box id={'sketch-wrapper-row'} sx={{
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: 'column',
+                    flexWrap: 'wrap',
                     alignItems: 'start',
                     mb: '10px',
                     justifyContent: 'center',
-                    minWidth: '30vw',
+                    maxHeight: '80vh',
+                    columnGap: '40px'
+                    // minWidth: '30vw',
                 }}>
-                    <SketchPendingPreferences pendingPreferences={sketchInEdit.unassignedPreferences}/>
+                    {/*<SketchPendingPreferences pendingPreferences={sketchInEdit.unassignedPreferences}/>*/}
 
 
-                    {sketchInEdit.NightSchedule.map((nights: NightScheduleModel, i: number) => {
+                    {sketchInEdit.NightSchedule.map((night: NightScheduleModel, i: number) => {
                         return (<Box key={i}>
                             <Box key={i} id={'vehicle-column'} sx={{
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'stretch',
-                                m: '15px',
-                                mt: '0px',
+                                m: '5px',
                                 justifyContent: 'start',
                                 minWidth: '6vw',
-                                minHeight: '60vh',
-                            }}> <Typography variant={'h6'}>{getVehicleNameFromId(nights.date)}  </Typography>
+                            }}>
                                 <TransitionGroup>
-                                    {nights.drivesToRemove.map((drive: DriveModel, i: number) => {
-                                        return (
-                                            <Collapse key={i}>
-                                                <SketchNight
-                                                    sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, nights.id)}
-                                                    key={i} drive={drive} prevoiusDrive={nights.drivesToRemove[i - 1] || null}/>
-                                            </Collapse>
+                                    {
 
-                                        )
+                                        <Collapse key={i}>
+                                            <SketchNight
+                                                sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, night.id)}
+                                                key={i} night={night}/>
+                                        </Collapse>
 
-                                    })}
+
+                                    }
                                 </TransitionGroup>
 
                             </Box>
@@ -143,10 +141,6 @@ export const Sketch = () => {
                     })}
 
                 </Box>
-                {chosenDrive ?
-                    <ListSketchDriveEditDialog vehicleId={'1'} open={sketchDriveEditOpen} onClose={handleSketchDriveEditClose}
-                                               sketchDriveData={chosenDrive}
-                                               onDelete={handleSketchDriveEditDelete}/> : null}
 
 
             </Box>) : <SketchNoSketchMessage/>)

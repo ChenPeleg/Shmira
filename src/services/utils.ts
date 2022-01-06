@@ -220,6 +220,13 @@ export const Utils = {
 
             })
         },
+        getDatOfWeekTextFromTimeStamp(timeStamps: string): string {
+            const date: Date = this.dateStampToDate(timeStamps) || new Date();
+
+            const dayNumber = date.getDay() + 1
+            return this.dateOfWeekObject.find(d => d.weekDayNumber === dayNumber)?.name || ''
+
+        },
         get dateOfWeekObject() {
             return [
                 {
