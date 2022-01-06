@@ -92,7 +92,7 @@ export const AppNavBar = () => {
                 break;
             case ShmiraListActionType.Delete:
                 dispatch({
-                    type: ActionsTypes.DELETE_SIDUR,
+                    type: ActionsTypes.DELETE_SHMIRA,
                     payload: {id: shmiraListId}
                 })
                 break;
@@ -148,7 +148,7 @@ export const AppNavBar = () => {
         const chosenShmiraList = event.target.value as string;
         if (chosenShmiraList === 'NEW') {
             dispatch({
-                type: ActionsTypes.ADD_NEW_SIDUR,
+                type: ActionsTypes.ADD_NEW_SHMIRA,
                 payload: null
             });
         } else {

@@ -1,5 +1,5 @@
 import {ActionsTypes} from './types.actions';
-import {AppConstants, defaultVehicleValues, IAction, ShmiraListRecord, ShmiraListStore} from './store.types';
+import {AppConstants, defaultDaysBetweenGuardDuty, IAction, ShmiraListRecord, ShmiraListStore} from './store.types';
 import {PreferenceModel} from '../models/Preference.model';
 import {Utils} from '../services/utils';
 import {translations} from '../services/translations';
@@ -8,25 +8,26 @@ import {CloneUtil} from '../services/clone-utility';
 
 export type ShmiraListReducerFunctions =
     ActionsTypes.RENAME_SIDUR
-    | ActionsTypes.DELETE_SIDUR
-    | ActionsTypes.ADD_NEW_SIDUR
+    | ActionsTypes.DELETE_SHMIRA
+    | ActionsTypes.ADD_NEW_SHMIRA
     | ActionsTypes.CHOOSE_SIDUR
     | ActionsTypes.CLONE_SIDUR
     | ActionsTypes.ARCHIVE_SIDUR
     | ActionsTypes.MOVE_TO_ACTIVE_SIDUR
-    | ActionsTypes.DELETE_FOREVER_SIDUR
+    | ActionsTypes.DELETE_FOREVER_SIDUR | ActionsTypes.UPDATE_DAYS_BETWEEN
 
 const DefaultShmiraList: ShmiraListRecord = {
     id: '1',
     Name: 'הסידור החדש שלי',
     preferences: [],
     deletedPreferences: [],
-    vehicles: [defaultVehicleValues],
+    daysBetweenGuardDuty: defaultDaysBetweenGuardDuty,
     sketches: [],
     chosenSketch: '',
     locationGroup: null,
-    DateFrom : '',
-    DateTo : ''
+
+    DateFrom: Utils.Date.dateToDateStamp(new Date()),
+    DateTo: (Number((Utils.Date.dateToDateStamp(new Date()))) + 30).toString()
 
 }
 
@@ -53,9 +54,7 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
                 NewPreviousShmiraListObj.sketches = newState.sketches.map(o => ({
                     ...o
                 }));
-                NewPreviousShmiraListObj.vehicles = newState.vehicles.map(o => ({
-                    ...o
-                }));
+                NewPreviousShmiraListObj.daysBetweenGuardDuty = newState.daysBetweenGuardDuty;
 
                 NewPreviousShmiraListObj.defaultPreferenceValues = {
                     ...
@@ -96,7 +95,27 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
         });
         return newState
     },
-    [ActionsTypes.DELETE_SIDUR]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+    [ActionsTypes.UPDATE_DAYS_BETWEEN]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+        let newState = {...state}
+        const shmiraListId = newState.shmiraListId// newState.shmiraListId;
+        const newNumber = action.payload.value;
+        // @ts-ignore
+        delete newState['vehicles'];
+        newState.shmiraListCollection = newState.shmiraListCollection.map((shmiraList: ShmiraListRecord) => {
+            if (shmiraList.id === shmiraListId) {
+                const updatedShmiraList = {...shmiraList};
+                updatedShmiraList.daysBetweenGuardDuty = newNumber;
+                newState.daysBetweenGuardDuty = newNumber;
+                return updatedShmiraList
+            } else {
+                return shmiraList
+            }
+        });
+        newState.daysBetweenGuardDuty = newNumber;
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState
+    },
+    [ActionsTypes.DELETE_SHMIRA]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const shmiraListIdToDelete = action.payload.id// newState.shmiraListId;
         if (shmiraListIdToDelete.includes(AppConstants.ArchiveIdPrefix)) {
@@ -127,7 +146,7 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
             newState = setChosenShmiraList(newState, chosenShmiraListAfterDelete);
         }
 
-
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
     [ActionsTypes.ARCHIVE_SIDUR]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
@@ -162,10 +181,10 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
             newState.shmiraListId = chosenShmiraListAfterArchive.id
             newState = setChosenShmiraList(newState, chosenShmiraListAfterArchive);
         }
-
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
-    [ActionsTypes.ADD_NEW_SIDUR]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+    [ActionsTypes.ADD_NEW_SHMIRA]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
 
         const newShmiraListId = Utils.getNextId(getAllShmiraListIDs(state))
@@ -174,18 +193,19 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
             Name: translations.ShmiraList + ' ' + newShmiraListId,
             preferences: [],
             deletedPreferences: [],
-            vehicles: [defaultVehicleValues],
+            daysBetweenGuardDuty: defaultDaysBetweenGuardDuty,
             defaultPreferenceValues: newState.defaultPreferenceValues,
             sketches: [],
             chosenSketch: '',
             locationGroup: null,
-            DateTo : '',
-            DateFrom : ''
+            DateFrom: Utils.Date.dateToDateStamp(new Date()),
+            DateTo: (Number((Utils.Date.dateToDateStamp(new Date()))) + 30).toString()
         }
         newState.shmiraListCollection = newState.shmiraListCollection.map(c => c);
         newState.shmiraListCollection.push(newShmiraList);
         newState.shmiraListId = newShmiraListId;
         newState = setChosenShmiraList(newState, newShmiraList);
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
     [ActionsTypes.CLONE_SIDUR]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
@@ -203,7 +223,7 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
             newState.shmiraListId = newShmiraListId;
             newState = setChosenShmiraList(newState, newShmiraList);
         }
-
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
     [ActionsTypes.MOVE_TO_ACTIVE_SIDUR]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
@@ -226,6 +246,7 @@ export const ShmiraListReducer: Record<ShmiraListReducerFunctions, (state: Shmir
         let newState = {...state}
         const shmiraListIdToDeleteForever = action.payload.id;
         newState.shmiraListArchive = newState.shmiraListArchive.filter(s => s.id !== shmiraListIdToDeleteForever);
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
 
@@ -235,7 +256,7 @@ const setChosenShmiraList = (state: ShmiraListStore, chosenShmiraList: ShmiraLis
     const newState = {...state};
 
     newState.preferences = chosenShmiraList?.preferences.map(o => ({...o})) || []
-    newState.vehicles = chosenShmiraList?.vehicles.map(o => ({...o})) || []
+    newState.daysBetweenGuardDuty = chosenShmiraList?.daysBetweenGuardDuty
     newState.deletedPreferences = chosenShmiraList?.deletedPreferences?.map(o => ({...o})) || [];
     newState.sketches = chosenShmiraList?.sketches?.map(o => ({...o})) || [];
     newState.preferenceIdInEdit = null;

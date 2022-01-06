@@ -27,12 +27,13 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
     switch (action.type) {
         case ActionsTypes.CHOOSE_SIDUR:
         case ActionsTypes.RENAME_SIDUR:
-        case ActionsTypes.ADD_NEW_SIDUR:
-        case ActionsTypes.DELETE_SIDUR:
+        case ActionsTypes.ADD_NEW_SHMIRA:
+        case ActionsTypes.DELETE_SHMIRA:
         case ActionsTypes.CLONE_SIDUR:
         case ActionsTypes.ARCHIVE_SIDUR:
         case ActionsTypes.MOVE_TO_ACTIVE_SIDUR:
         case  ActionsTypes.DELETE_FOREVER_SIDUR:
+        case  ActionsTypes.UPDATE_DAYS_BETWEEN:
 
             return ShmiraListReducer[action.type](newState, action)
 

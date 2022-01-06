@@ -6,6 +6,8 @@ import {SketchesContainer} from '../components/Sketch/SketchesContainer';
 import {LocationGroupEditWrapper} from '../components/LocationsEdit/location-group-edit-wrapper';
 import {Preferences} from '../components/Preferences/preferences';
 import {DataRange} from '../components/DateRange/data-range';
+import {DaysBetween} from '../components/DaysBetweenGuards/days-between';
+import {Styles} from '../hoc/themes';
 
 
 export const MainLayout = () => {
@@ -46,10 +48,15 @@ export const MainLayout = () => {
 
                     </Box> : null}
                 {displayPreferences ?
-                    <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="datesYouCanGuard"
-                         justifyContent="datesYouCanGuard">
+                    <Box flexDirection="column" flexWrap="wrap" display="flex">
+                        <Box sx={{
+                            ...Styles.flexRow,
+                            minWidth: '50vw'
+                        }}>
+                            <DataRange/>
+                            <DaysBetween/>
+                        </Box>
 
-                        <DataRange/>
                         <Preferences/>
 
                     </Box> : null}

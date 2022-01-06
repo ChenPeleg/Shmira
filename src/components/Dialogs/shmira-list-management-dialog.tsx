@@ -52,7 +52,7 @@ export const ShmiraListManagementDialog = (props: FileUploadProps) => {
                 break;
             case ShmiraListManagementActionType.MoveToTrash:
                 dispatch({
-                    type: ActionsTypes.DELETE_SIDUR,
+                    type: ActionsTypes.DELETE_SHMIRA,
                     payload: {id: props.shmiraListId}
                 })
                 break;
@@ -191,7 +191,7 @@ export const ShmiraListManagementDialog = (props: FileUploadProps) => {
                             <Box sx={headerSx}>{translations.Trash}</Box>
                             {shmiraListArchive.filter((s: ShmiraListRecord) => s.id.includes(AppConstants.deleteIdPrefix)).map((shmiraList: ShmiraListRecord, index: number) => (
                                 <Box sx={oneShmiraListSx} key={index}> {shmiraList.Name}<ActionButton shmiraListId={shmiraList.id}
-                                                                                            action={ShmiraListManagementActionType.MoveToActive}/>
+                                                                                                      action={ShmiraListManagementActionType.MoveToActive}/>
                                     <ActionButton shmiraListId={shmiraList.id}
                                                   action={ShmiraListManagementActionType.DeleteForever}/> </Box>))}
                         </Box>

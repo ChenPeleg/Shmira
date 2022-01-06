@@ -1,7 +1,6 @@
 import {ActionsTypes} from './types.actions'
 import {PreferenceModel} from '../models/Preference.model';
 import {PreferenceType, WeekDaysOrDates} from '../models/PreferenceType.enum';
-import {VehicleModel} from '../models/Vehicle.model';
 import {SketchModel} from '../models/Sketch.model';
 import {LocationGroup} from '../models/Location.model';
 
@@ -16,7 +15,7 @@ export interface ShmiraListRecord {
     id: string,
     Name: string,
     preferences: PreferenceModel[];
-    vehicles: VehicleModel[];
+    daysBetweenGuardDuty: string;
     deletedPreferences: PreferenceModel[];
     defaultPreferenceValues?: PreferenceModel,
     sketches: SketchModel[],
@@ -44,7 +43,8 @@ export interface ShmiraListStore {
     shmiraListCollection: ShmiraListRecord[];
     shmiraListArchive: ShmiraListRecord[];
     preferences: PreferenceModel[];
-    vehicles: VehicleModel[];
+    
+    daysBetweenGuardDuty: string;
     deletedPreferences: PreferenceModel[];
     defaultPreferenceValues: PreferenceModel,
     displaySetting: DisplaySettings,
@@ -74,15 +74,7 @@ export const defaultPreferenceValues: PreferenceModel = {
     location: '',
     weekDaysOrDates: WeekDaysOrDates.WeekDays
 }
-export const defaultVehicleValues: VehicleModel = {
-    id: '1',
-    vehicleName: 'רכב',
-    optionalGuardDaysByDates: '08:00',
-    endHour: '09:00',
-    kmLimit: '',
-    seats: '5',
-    Comments: ''
-}
+export const defaultDaysBetweenGuardDuty = '6'
 export const AppConstants = {
     deleteIdPrefix: 'Del',
     ArchiveIdPrefix: 'Arch',

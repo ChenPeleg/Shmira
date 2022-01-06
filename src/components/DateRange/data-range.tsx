@@ -72,6 +72,7 @@ export const DataRange = () => {
         <Box sx={{
             ...Styles
                 .flexRow,
+            minWidth: '30vw',
             m: '1em',
             mt: 0
         }}>

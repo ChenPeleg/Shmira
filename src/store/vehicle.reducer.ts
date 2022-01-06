@@ -3,7 +3,6 @@ import {ActionsTypes} from './types.actions';
 
 import {IAction, ShmiraListStore} from './store.types';
 import {StoreUtils} from './store-utils';
-import {Utils} from '../services/utils';
 import {VehicleModel} from '../models/Vehicle.model';
 
 export type VehicleReducerFunctions =
@@ -15,17 +14,9 @@ export type VehicleReducerFunctions =
 export const VehicleReducer: Record<VehicleReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
     [ActionsTypes.NEW_VEHICLE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
-        const newId = Utils.getNextId(state.vehicles.map(v => v.id));
+
 
         const newVehicle: VehicleModel = action.payload.value;
-        newVehicle.id = newId;
-
-        const existingNames = state.vehicles.map(v => v.vehicleName);
-        if (existingNames.includes(newVehicle.vehicleName)) {
-            newVehicle.vehicleName = newVehicle.vehicleName + ' ' + newVehicle.id.toString()
-        }
-        //const newVehicleId = get
-        newState.vehicles = [...newState.vehicles, newVehicle]
 
 
         newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState);
@@ -36,25 +27,7 @@ export const VehicleReducer: Record<VehicleReducerFunctions, (state: ShmiraListS
     [ActionsTypes.UPDATE_VEHICLE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state};
         const updateVehicle: VehicleModel = action.payload.value;
-        if (updateVehicle) {
-            const vehicleId = updateVehicle.id;
-            const existingNames = state.vehicles.filter(v => v.id !== vehicleId).map(v => v.vehicleName);
-            if (existingNames.includes(updateVehicle.vehicleName)) {
-                updateVehicle.vehicleName = updateVehicle.vehicleName + ' ' + updateVehicle.id.toString()
-            }
-            const newIdIfNeeded = Utils.getNextId(state.vehicles.map(v => v.id));
 
-            newState.vehicles = newState.vehicles.map(vehicle => {
-                if ((vehicleId === vehicle.id)) {
-                    vehicle = {...updateVehicle};
-                    if (vehicleId === '0') {
-                        vehicle.id = newIdIfNeeded
-                    }
-                }
-                return vehicle
-            });
-
-        }
         newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
@@ -63,9 +36,6 @@ export const VehicleReducer: Record<VehicleReducerFunctions, (state: ShmiraListS
     [ActionsTypes.DELETE_VEHICLE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const deleteVehiclerId = action.payload.id;
-        newState.vehicles = newState.vehicles.filter(vehicle => deleteVehiclerId !== vehicle.id)
-
-
         newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
