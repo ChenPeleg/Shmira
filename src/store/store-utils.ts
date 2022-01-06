@@ -22,7 +22,10 @@ export const StoreUtils = {
     },
     HandleReducerSaveToLocalStorage: (state: ShmiraListStore): void => {
         const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(state, 'chen', 'chen')
-        SaveLoadService.saveToLocalStorage(saveObj);
+        if (state.currentSessionState?.userName?.length > 0) {
+
+            SaveLoadService.saveToLocalStorage(saveObj);
+        }
     },
 
     UpdateShmiraListCollectionWithCurrenShmiraList: (state: ShmiraListStore): ShmiraListRecord[] => {
@@ -76,6 +79,7 @@ export const StoreUtils = {
             guardName: name
         }));
         const sessionState: SessionModel = {
+            userName: '',
             LocationGroupTabOpen: null,
             SketchIdInEdit: null,
             locationGroupInEdit: null,

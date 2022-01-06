@@ -57,6 +57,7 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
 
             return VehicleReducer[action.type](newState, action)
         case ActionsTypes.CHANGE_VIEW:
+        case ActionsTypes.CHANGE_USER_NAME:
             return DisplayReducer[action.type](newState, action)
 
 

@@ -12,6 +12,7 @@ interface RenameProps {
     open: boolean;
     selectedValue: string;
     onClose: (value: string | null) => void;
+    customType?: 'EnterUserName'
 }
 
 export const RenameDialog = (props: RenameProps) => {
@@ -28,18 +29,22 @@ export const RenameDialog = (props: RenameProps) => {
     const handleCloseRename = () => {
         onClose(valueRef.current.value || selectedValue);
     };
+
+    const headerText = props.customType === 'EnterUserName' ? translations.NameWhatIsMyName : translations.Rename
+    const inputLabel = props.customType === 'EnterUserName' ? translations.Name : translations.NewName
+
     return (
         <div>
 
             <Dialog open={open} onClose={handleCloseCancel}>
-                <DialogTitle> {translations.Rename}</DialogTitle>
+                <DialogTitle> {headerText}</DialogTitle>
                 <DialogContent>
 
                     <TextField
                         autoFocus
                         margin="dense"
                         id={'shmiraList-rename-dialog-text-field'}
-                        label={translations.NewName}
+                        label={inputLabel}
                         type="text"
                         fullWidth
                         variant="standard"

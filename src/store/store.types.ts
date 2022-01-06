@@ -31,6 +31,7 @@ export interface DisplaySettings {
 }
 
 export interface SessionModel {
+    userName: string
     locationGroupInEdit: null | string;
     preferenceIdInEdit: null | string;
     pendingPreferenceIdInEdit: null | string;

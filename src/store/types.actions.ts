@@ -33,6 +33,7 @@ export enum ActionsTypes {
     NEW_VEHICLE = 'NEW_VEHICLE',
     DELETE_VEHICLE = 'DELETE_VEHICLE',
     CHANGE_VIEW = 'CHANGE_VIEW',
+    CHANGE_USER_NAME = 'CHANGE_USER_NAME',
 
     /* Sketch */
     NEW_SKETCH = 'NEW_SKETCH',

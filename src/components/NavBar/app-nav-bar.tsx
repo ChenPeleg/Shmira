@@ -24,6 +24,7 @@ import {ShmiraListManagementDialog} from '../Dialogs/shmira-list-management-dial
 import {PreferenceImportDialog} from '../Dialogs/orders-import-dialog';
 import {Styles} from '../../hoc/themes';
 import {LightTooltip} from '../Styled/styled-tool-tip';
+import {SessionUseSave} from '../Session/session-use-save';
 
 
 export const AppNavBar = () => {
@@ -222,12 +223,14 @@ export const AppNavBar = () => {
                     <ToggleButtons/>
 
                     <Box sx={{flexGrow: 1}}/>
+                    <SessionUseSave/>
                     <Box sx={{
                         display: {
                             xs: 'none',
                             md: 'flex'
                         }
                     }}>
+
                         <LightTooltip title={translations.ImportFromFile}>
                             <IconButton
                                 size="large"

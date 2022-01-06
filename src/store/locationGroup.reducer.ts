@@ -70,6 +70,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
         const tabWasChosen = action.payload.id;
         if (!newState.currentSessionState) {
             newState.currentSessionState = {
+                userName: '',
                 LocationGroupTabOpen: null,
                 SketchIdInEdit: null,
                 dataHolderForCurrentPreferenceInEdit: null,
@@ -112,7 +113,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             }
 
         })
-        
+
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },

@@ -3,7 +3,7 @@ import {ActionsTypes} from './types.actions';
 import {StoreUtils} from './store-utils';
 
 export type DisplayReducerFunctions =
-    ActionsTypes.CHANGE_VIEW
+    ActionsTypes.CHANGE_VIEW | ActionsTypes.CHANGE_USER_NAME
 
 
 export const DisplayReducer: Record<DisplayReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
@@ -11,6 +11,15 @@ export const DisplayReducer: Record<DisplayReducerFunctions, (state: ShmiraListS
         let newState = {...state}
         newState.displaySetting = {...newState.displaySetting}
         newState.displaySetting.view = action.payload.value;
+
+        StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState
+    },
+    [ActionsTypes.CHANGE_USER_NAME]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+        let newState = {...state}
+        newState.currentSessionState = {...newState.currentSessionState}
+        newState.currentSessionState.userName = action.payload.value;
 
         StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
