@@ -15,23 +15,24 @@ interface sketchPendingPreferencesProps {
 
 
 export const SketchPendingPreferences = (props: sketchPendingPreferencesProps) => {
- 
-    const pendingPreferenceInEdit = useSelector((state: ShmiraListStore) => state.pendingPreferenceIdInEdit);
 
+    const pendingPreferenceInEdit = useSelector((state: ShmiraListStore) => state.pendingPreferenceIdInEdit);
+    //console.log(pendingPreferenceInEdit)
     return (<Box id={'pending-preference-container'} sx={{
             m: '0.2em',
             mb: '0.3em',
             minHeight: '10vh',
-            minWidth: '30vw',
+            minWidth: '20vw',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'stretch',
             justifyContent: 'start',
         }}>
-            <Typography variant={'h6'}> {translations.PendingPreferences} </Typography>
+            <Typography variant={'h6'}> {translations.GuardsNoAssigned} </Typography>
 
             {(props.pendingPreferences || []).map((preference: PreferenceModel) => {
-                return <SketchPendingPreference isInEdit={pendingPreferenceInEdit === preference.id} key={preference.id} preference={preference}/>
+                return <SketchPendingPreference isInEdit={pendingPreferenceInEdit === preference.id} key={preference.id}
+                                                preference={preference}/>
             })}
         </Box>
 

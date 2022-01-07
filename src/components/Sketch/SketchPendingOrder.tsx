@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
-import {useDispatch} from 'react-redux'; import {ActionsTypes} from '../../store/types.actions';
+import {useDispatch} from 'react-redux';
+import {ActionsTypes} from '../../store/types.actions';
 import {SxProps} from '@mui/system';
 import {Box, Card, Collapse} from '@mui/material';
 import {SketchPendingPreferenceFull} from './SketchPendingOrderFull';
 import {SketchPendingPreferenceBrief} from './SketchPendingOrderBrief';
 import {PreferenceModel} from '../../models/Preference.model';
+
 interface sketchPendingPreferenceProps {
     preference: PreferenceModel,
     isInEdit: boolean
@@ -46,8 +48,8 @@ export const SketchPendingPreference = (props: sketchPendingPreferenceProps) => 
                     m: '0.2em',
                     mb: '0.3em',
                     minHeight: '10vh',
-                    minWidth: '30vw',
-                    maxWidth: '50vw',
+                    minWidth: '20vw',
+                    maxWidth: '30vw',
                     cursor: 'pointer',
                     display: 'flex',
                     flexDirection: 'row',

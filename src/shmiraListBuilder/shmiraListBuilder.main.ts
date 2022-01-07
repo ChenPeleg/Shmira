@@ -17,15 +17,14 @@ export const ShmiraListBuilder = (ShmiraList: ShmiraListRecord, buildSettings: a
         custom: null,
         Range: {
             DateFrom: ShmiraList.DateFrom,
-            DateTo: ShmiraList.DateTo
-        }
+            DateTo: ShmiraList.DateTo,
+
+        },
+        daysBetweenGuardDuty: ShmiraList.daysBetweenGuardDuty
     }
     const preferencesMetaData: PreferenceMetaDataModel[] = ShmiraListBuilderBuildPreferencesMetaData(ShmiraList.preferences, settings);
-    
+
     const BuildResult = ShmiraListBuilderBuildNightsAndUnAssigned(preferencesMetaData, settings);
-    // const initialVehicles: NightScheduleModel [] = BuildResult.NightSchedule;
-    // const unassignedPreferences: PreferenceModel [] = BuildResult.unassignedPreferences;
-    // const assignedPreferences: PreferenceModel [] = BuildResult.assignedPreferences;
 
 
     const baseSketch: SketchModel = {
@@ -33,8 +32,8 @@ export const ShmiraListBuilder = (ShmiraList: ShmiraListRecord, buildSettings: a
         name: 'first sketch',
         NightSchedule: BuildResult.nightSchedules,// initialVehicles,
         Comments: '',
-        unassignedPreferences: [], //unassignedPreferences,
-        assignedPreferences: []// assignedPreferences
+        unassignedPreferences: BuildResult.unassignedPreferences,
+        assignedPreferences: BuildResult.assignedPreferences
     };
 
     const newId = Utils.getNextId(ShmiraList.sketches.map(v => v.id));

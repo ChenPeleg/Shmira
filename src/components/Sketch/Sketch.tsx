@@ -10,6 +10,7 @@ import {ShmiraListStore} from '../../store/store.types';
 import {SketchNoSketchMessage} from './sketch-no-sketch-message';
 
 import {TransitionGroup} from 'react-transition-group';
+import {SketchPendingPreferences} from './SketchPendeingOrders';
 
 const MOckDrive = {
     'id': '0',
@@ -95,8 +96,17 @@ export const Sketch = () => {
 
     return (
         sketchInEdit ? (
-            <Box>
-                <Box id={'sketch-wrapper-row'} sx={{
+            <Box id={'sketch-wrapper-row'} sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'start',
+                justifyContent: 'start',
+                maxHeight: '80vh',
+                // minWidth: '30vw',
+            }}>
+                <SketchPendingPreferences pendingPreferences={sketchInEdit.unassignedPreferences}/>
+
+                <Box id={'sketch-wrapper-column'} sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     flexWrap: 'wrap',
@@ -107,7 +117,6 @@ export const Sketch = () => {
                     columnGap: '40px'
                     // minWidth: '30vw',
                 }}>
-                    {/*<SketchPendingPreferences pendingPreferences={sketchInEdit.unassignedPreferences}/>*/}
 
 
                     {sketchInEdit.NightSchedule.map((night: NightScheduleModel, i: number) => {
@@ -116,7 +125,7 @@ export const Sketch = () => {
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'stretch',
-                                m: '5px',
+                                m: '1px',
                                 justifyContent: 'start',
                                 minWidth: '6vw',
                             }}>

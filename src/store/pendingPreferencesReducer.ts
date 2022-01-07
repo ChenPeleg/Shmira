@@ -26,9 +26,11 @@ export const PendingPreferencesReducer: Record<PendingPreferencesReducerFunction
 
         return newState
     },
-    [ActionsTypes.CLICKED_CLOSE_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
-        let newState = {...state}
 
+    [ActionsTypes.CLICKED_CLOSE_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+
+        let newState = {...state}
+        console.log(newState.pendingPreferenceIdInEdit)
         newState.pendingPreferenceIdInEdit = null;
 
 

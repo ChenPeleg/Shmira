@@ -80,6 +80,7 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
         case ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER  :
         case ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER:
 
+
             return PendingPreferencesReducer [action.type](newState, action)
         case ActionsTypes.DELETE_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE:

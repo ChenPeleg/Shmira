@@ -1,6 +1,6 @@
 import React from 'react'
 import {Box, SxProps} from '@mui/system';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Button, Typography} from '@mui/material';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
@@ -11,6 +11,8 @@ import {PendingPreferenceMenu} from './pending-order-menu';
 import {ActionsTypes} from '../../store/types.actions';
 import {PreferenceActionButton} from '../buttons/order-action-button';
 import {PreferenceModel} from '../../models/Preference.model';
+import {ShmiraListStore} from '../../store/store.types';
+import {SketchModel} from '../../models/Sketch.model';
 
 
 interface sketchPendingPreferenceProps {
@@ -21,9 +23,20 @@ interface sketchPendingPreferenceProps {
 
 const pendingPreferenceMenuId = 'sketch-pending-menu-button';
 const timeText = (drive: PreferenceModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
-const driverAndLocation = (drive: PreferenceModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
+const assingAtText = (drive: PreferenceModel, dates: string []) => LanguageUtilities.buildBriefAssingText(drive, dates);
 export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps) => {
     const dispatch = useDispatch();
+
+    const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
+
+    const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
+    const sketchInEdit = sketches.find(s => s.id === SketchIdInEdit);
+    let datesThatThisGuardIsAssignedTo: any = []
+    if (sketchInEdit) {
+        datesThatThisGuardIsAssignedTo = sketchInEdit.NightSchedule.filter(n => n.guards.includes(props.preference.id)).map(n => n.date)
+    }
+    const assingedText = assingAtText(props?.preference, datesThatThisGuardIsAssignedTo)
+
     const [pendingPreferenceAnchorEl, setPendingPreferenceAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const handlePendingPreferenceMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchEditActionEnum) => {
@@ -86,7 +99,7 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
             }}>
 
                 <Typography
-                    variant={'subtitle1'}>{preference.Comments + ', ' + LanguageUtilities.renderPassengerText(preference.halfOrFull)}  </Typography>
+                    variant={'subtitle1'}>{assingedText + ' ' + preference.Comments + ', ' + LanguageUtilities.renderPassengerText(preference.halfOrFull)}  </Typography>
 
             </Box>
 
@@ -106,19 +119,9 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
 
                 {[...pendingPreferencesActions].map((n, i: number) => (
                     <Box key={i} sx={{p: '0.5em'}}> <PreferenceActionButton key={n.action.toString()} text={n.name} actionType={n.action}
-                                                                       actionClickHandler={actionClickHandler}/>
+                                                                            actionClickHandler={actionClickHandler}/>
                     </Box>))}
-                <Box sx={{p: '0.5em'}}>
-                    <Button
-                        size="medium"
-                        aria-label="show more"
-                        aria-controls={pendingPreferenceMenuId}
-                        aria-haspopup="true"
-                        onClick={(event) => handlePendingPreferenceMenuClick(event, SketchEditActionEnum.RemoveFromPending)}
-                        variant={'contained'}
-                    > {translations.SketchActionRemove}
-                    </Button>
-                </Box>
+
                 <Box sx={{p: '0.5em'}}>
                     <Button sx={{
                         pl: '5px',
@@ -130,13 +133,8 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
                             aria-haspopup="true"
                             onClick={handlePendingPreferenceMenuOpen}
                             variant={'contained'}
-                    >&nbsp; {translations.moerActions}
-                        {/*<MoreIcon sx={{*/}
-                        {/*    pl: 0,*/}
-                        {/*    pr: 0,*/}
-                        {/*    mr: 0,*/}
-                        {/*    ml: 0*/}
-                        {/*}}/>*/}
+                    >&nbsp; {translations.assignIn}
+
                     </Button>
                 </Box>
                 <Box sx={{p: '0.5em'}}>
@@ -154,8 +152,9 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
 
             </Box>
             <PendingPreferenceMenu PendingPreferenceMenuAnchor={pendingPreferenceAnchorEl} PendingPreferenceMenuId={pendingPreferenceMenuId}
-                              isPendingPreferenceMenuOpen={isShmiraListMenuOpen}
-                              handlePendingPreferenceMenuClick={handlePendingPreferenceMenuClick} handlePendingPreferenceMenuClose={handleShmiraListMenuClose}/>
+                                   isPendingPreferenceMenuOpen={isShmiraListMenuOpen}
+                                   handlePendingPreferenceMenuClick={handlePendingPreferenceMenuClick}
+                                   handlePendingPreferenceMenuClose={handleShmiraListMenuClose}/>
         </Box>)
 
     )

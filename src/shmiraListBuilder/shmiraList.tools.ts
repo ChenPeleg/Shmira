@@ -28,9 +28,19 @@ export const ShmiraListBuilderTools = {
             }
         }
     },
-    checkIfPersonCanGuard(preference: PreferenceMetaDataModel, date: string): boolean {
-        if (preference.datesYouCanGuard.includes(date) && preference.guardDates.length < 2) {
+    checkIfPersonCanGuard(preference: PreferenceMetaDataModel, date: string, daysBetweenGuardDuty: string): boolean {
+        if (!preference.datesYouCanGuard.includes(date)) {
+            return false
+        }
+        const daysBetweenNumber = Number(daysBetweenGuardDuty) || 6
+        if (preference.guardDates.length === 0) {
             return true
+        } else if (preference.guardDates.length === 1) {
+            const gap = Number(date) - Number(preference.guardDates[0]);
+            if (Math.abs(gap) + 1 > daysBetweenNumber) {
+                return true
+            }
+
         }
         return false
     }

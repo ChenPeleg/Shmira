@@ -6,12 +6,12 @@ import {Utils} from '../services/utils';
 import {ShmiraListBuilderTools} from './shmiraList.tools';
 
 
-export const ShmiraListBuilderBuildNightsAndUnAssigned = (preferences: PreferenceMetaDataModel[], buildSettings: ShmiraListBuildSettings): { nightSchedules: NightScheduleModel[], unassignedPreferences: PreferenceModel[], assignedPreferences: PreferenceModel[] } => {
+export const ShmiraListBuilderBuildNightsAndUnAssigned = (preferencesMeta: PreferenceMetaDataModel[], buildSettings: ShmiraListBuildSettings): { nightSchedules: NightScheduleModel[], unassignedPreferences: PreferenceModel[], assignedPreferences: PreferenceModel[] } => {
     const range = buildSettings.Range;
     const allDatesArray = Utils.Date.getTimestampArrayFromStartAndFinishDate(range.DateFrom, range.DateTo);
 
     const nights: NightScheduleModel [] = allDatesArray.map((d: string, i: number) => {
-        const optionalGuards = preferences.filter(g => g.datesYouCanGuard.includes(d)).map(g => g.id)
+        const optionalGuards = preferencesMeta.filter(g => g.datesYouCanGuard.includes(d)).map(g => g.id)
         const night: NightScheduleModel = {
             Comments: '',
             date: d,
@@ -28,13 +28,13 @@ export const ShmiraListBuilderBuildNightsAndUnAssigned = (preferences: Preferenc
 
     sortedNights.forEach(n => {
         if (n.guards.length < 2) {
-            const unfilteredOptionalGuards: (PreferenceMetaDataModel | undefined)[] = n.optionalGuards.map(guardId => preferences.find(g => g.id === guardId));
+            const unfilteredOptionalGuards: (PreferenceMetaDataModel | undefined)[] = n.optionalGuards.map(guardId => preferencesMeta.find(g => g.id === guardId));
             const optionalGuards: PreferenceMetaDataModel[] = unfilteredOptionalGuards.filter(g => g) as PreferenceMetaDataModel[];
             optionalGuards.forEach(guard => {
                 if (n.guards.length >= 2) {
                     return
                 }
-                if (ShmiraListBuilderTools.checkIfPersonCanGuard(guard, n.date)) {
+                if (ShmiraListBuilderTools.checkIfPersonCanGuard(guard, n.date, buildSettings.daysBetweenGuardDuty)) {
                     // @ts-ignore
                     guard.guardDates.push(n.date);
                     n.guards.push(guard.id)
@@ -47,10 +47,11 @@ export const ShmiraListBuilderBuildNightsAndUnAssigned = (preferences: Preferenc
         }
 
     })
-
+    const assignedPreferences = preferencesMeta.filter(p => p.guardDates.length >= 2)
+    const unassignedPreferences = preferencesMeta.filter(p => p.guardDates.length < 2)
     return {
-        assignedPreferences: [],
-        unassignedPreferences: [],
+        assignedPreferences: assignedPreferences.map(p => p.preference),
+        unassignedPreferences: unassignedPreferences.map(p => p.preference),
         nightSchedules: nights
     };
 

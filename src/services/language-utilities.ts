@@ -4,6 +4,7 @@ import {PreferenceModel} from '../models/Preference.model';
 import {LocationModel} from '../models/Location.model';
 import {DriveModel} from '../models/Sketch.model';
 import {SketchEditActionEnum} from '../models/SketchEditAction.enum';
+import {Utils} from './utils';
 
 interface driveHourPrefixes {
     timeStart: string,
@@ -75,6 +76,15 @@ export const LanguageUtilities = {
         return {
             timeText: timeText,
             driverAndLocation: briefText
+        }
+    },
+    buildBriefAssingText(preferenceValues: PreferenceModel, dates: string []): string {
+        if (dates.length === 0) {
+            return translations.halfNight
+
+        } else {
+            const dateText = Utils.Date.simpleDateFromDateStamp(dates[0])
+            return 'ב משובץ' + dateText
         }
     },
     renderPassengerText(num: string): string {

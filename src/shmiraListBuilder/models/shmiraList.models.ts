@@ -6,7 +6,8 @@ export interface SuggestionModel {
 
 export interface ShmiraListBuildSettings {
     custom?: any,
-    Range: RangeModel
+    Range: RangeModel,
+    daysBetweenGuardDuty: string
 }
 
 export enum PreferenceMetaStatus {
