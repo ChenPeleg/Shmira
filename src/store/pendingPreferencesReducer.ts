@@ -15,6 +15,7 @@ export type PendingPreferencesReducerFunctions =
     | ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER
     | ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER
     | ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER
+    | ActionsTypes.CLICKED_ASSIGN_GUARD_TO_DATE
 
 
 export const PendingPreferencesReducer: Record<PendingPreferencesReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
@@ -28,6 +29,16 @@ export const PendingPreferencesReducer: Record<PendingPreferencesReducerFunction
     },
 
     [ActionsTypes.CLICKED_CLOSE_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+
+        let newState = {...state}
+        console.log(newState.pendingPreferenceIdInEdit)
+        newState.pendingPreferenceIdInEdit = null;
+
+
+        return newState
+    },
+
+    [ActionsTypes.CLICKED_ASSIGN_GUARD_TO_DATE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
 
         let newState = {...state}
         console.log(newState.pendingPreferenceIdInEdit)

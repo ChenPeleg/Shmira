@@ -19,6 +19,7 @@ export const SketchPendingPreferences = (props: sketchPendingPreferencesProps) =
     const pendingPreferenceInEdit = useSelector((state: ShmiraListStore) => state.pendingPreferenceIdInEdit);
     //console.log(pendingPreferenceInEdit)
     return (<Box id={'pending-preference-container'} sx={{
+            direction: 'rtl',
             m: '0.2em',
             mb: '0.3em',
             minHeight: '10vh',

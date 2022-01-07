@@ -1,5 +1,8 @@
 import {translations} from '../services/translations';
-import {PreferenceMetaDataModel} from './models/shmiraList.models';
+import {PreferenceMetaDataModel, RangeModel} from './models/shmiraList.models';
+import {PreferenceModel} from '../models/Preference.model';
+import {Utils} from '../services/utils';
+import {PreferenceType, WeekDaysOrDates} from '../models/PreferenceType.enum';
 
 export const ShmiraListBuilderTools = {
 
@@ -43,6 +46,26 @@ export const ShmiraListBuilderTools = {
 
         }
         return false
+    },
+    buildDaysYouCanGuard(preference: PreferenceModel, range: RangeModel) {
+        const allDatesArray = Utils.Date.getTimestampArrayFromStartAndFinishDate(range.DateFrom, range.DateTo);
+        let daysInputed: string[] = [];
+        if (preference.weekDaysOrDates == WeekDaysOrDates.WeekDays) {
+            const DateObjectRange = Utils.Date.getWeekDayNumberFromTimeStamps(allDatesArray);
+            daysInputed = DateObjectRange.filter(dObj => preference.flexibilityByDays.includes(dObj.dayNumber.toString())).map(d => d.timeStamp);
+        } else if (preference.weekDaysOrDates == WeekDaysOrDates.Dates) {
+            daysInputed = preference.flexibilityByDates
+        }
+        switch (preference.TypeOfInfoPreference) {
+            case PreferenceType.CanGuardIn:
+                return daysInputed
+
+            case PreferenceType.CantGuardIn:
+                return allDatesArray.filter(d => !daysInputed.includes(d))
+            case PreferenceType.CanAlwaysGuard:
+                return allDatesArray
+        }
+        return []
     }
 
 }

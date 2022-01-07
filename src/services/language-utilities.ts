@@ -78,13 +78,13 @@ export const LanguageUtilities = {
             driverAndLocation: briefText
         }
     },
-    buildBriefAssingText(preferenceValues: PreferenceModel, dates: string []): string {
+    buildBriefAssignText(preferenceValues: PreferenceModel, dates: string []): string {
         if (dates.length === 0) {
-            return translations.halfNight
+            return translations.withoutGuard
 
         } else {
             const dateText = Utils.Date.simpleDateFromDateStamp(dates[0])
-            return 'ב משובץ' + dateText
+            return translations.guardDates + ': ' + dateText
         }
     },
     renderPassengerText(num: string): string {
@@ -92,6 +92,16 @@ export const LanguageUtilities = {
             return translations.halfNight
         } else {
             return translations.fullNight
+        }
+
+    },
+    renderPassengerTextBrief(num: string): string {
+        if (num === '1') {
+            return translations.halfNightBrief
+        } else if (num === '2') {
+            return translations.fullNight
+        } else {
+            return translations.halfNightBrief
         }
 
     },

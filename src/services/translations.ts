@@ -87,9 +87,14 @@ export const translations = {
     'missingDetails': 'מידע חלקי',
     'nameExist': 'השם נמצא יותר מפעם אחת ',
 
+    'withoutGuard': 'ללא שיבוץ',
+    'noPotentialPlacesFound': 'לא נמצאו ימים מתאימים לשיבוץ.',
+
     'onePassenger': 'נוסע/ת אחד/ת',
     'halfNight': 'רגילה - חצי לילה',
     'fullNight': 'כפולה - כל הלילה',
+    'halfNightBrief': ' חצי לילה',
+    'fullNightBrief': 'כפולה - כל הלילה',
 
     'none': 'אין',
     'exitTime': 'יציאה',

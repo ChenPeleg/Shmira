@@ -6,13 +6,14 @@ import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 
 import {translations} from '../../services/translations';
-import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
 import {PendingPreferenceMenu} from './pending-order-menu';
 import {ActionsTypes} from '../../store/types.actions';
 import {PreferenceActionButton} from '../buttons/order-action-button';
 import {PreferenceModel} from '../../models/Preference.model';
-import {ShmiraListStore} from '../../store/store.types';
-import {SketchModel} from '../../models/Sketch.model';
+import {ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
+import {NightScheduleModel, SketchModel} from '../../models/Sketch.model';
+import {ShmiraListBuilderTools} from '../../shmiraListBuilder/shmiraList.tools';
+import {Utils} from '../../services/utils';
 
 
 interface sketchPendingPreferenceProps {
@@ -23,11 +24,15 @@ interface sketchPendingPreferenceProps {
 
 const pendingPreferenceMenuId = 'sketch-pending-menu-button';
 const timeText = (drive: PreferenceModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
-const assingAtText = (drive: PreferenceModel, dates: string []) => LanguageUtilities.buildBriefAssingText(drive, dates);
+const assingAtText = (drive: PreferenceModel, dates: string []) => LanguageUtilities.buildBriefAssignText(drive, dates);
 export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps) => {
     const dispatch = useDispatch();
 
     const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
+    const shmiraListId = useSelector((state: ShmiraListStore) => state.shmiraListId);
+    const shmiraListCollection = useSelector((state: ShmiraListStore) => state.shmiraListCollection);
+    const shmiraListSelected: ShmiraListRecord | undefined = shmiraListCollection.find((shmiraListRecord: ShmiraListRecord) => shmiraListRecord.id === shmiraListId) as ShmiraListRecord;
+
 
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const sketchInEdit = sketches.find(s => s.id === SketchIdInEdit);
@@ -35,30 +40,19 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
     if (sketchInEdit) {
         datesThatThisGuardIsAssignedTo = sketchInEdit.NightSchedule.filter(n => n.guards.includes(props.preference.id)).map(n => n.date)
     }
-    const assingedText = assingAtText(props?.preference, datesThatThisGuardIsAssignedTo)
+    const assignedText = assingAtText(props?.preference, datesThatThisGuardIsAssignedTo)
 
     const [pendingPreferenceAnchorEl, setPendingPreferenceAnchorEl] =
         React.useState<null | HTMLElement>(null);
-    const handlePendingPreferenceMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchEditActionEnum) => {
+    const handlePendingPreferenceMenuClick = (event: React.MouseEvent<HTMLElement>, date: string) => {
         const preferenceId = props.preference.id
-        switch (clickAction) {
-
-            case SketchEditActionEnum.AddToPending:
-                dispatch({
-                    type: ActionsTypes.CLONE_SIDUR,
-                    payload: {id: preferenceId}
-                })
-                break;
-            case SketchEditActionEnum.RemoveFromPending:
-                dispatch({
-                    type: ActionsTypes.CLICKED_REMOVE_PENDING_ORDER,
-                    payload: {id: preferenceId}
-                })
-                break;
-
-
-            default:
-        }
+        dispatch({
+            action: ActionsTypes.CLICKED_ASSIGN_GUARD_TO_DATE,
+            payload: {
+                id: preferenceId,
+                date: date
+            }
+        })
         handleShmiraListMenuClose()
     };
     const handleShmiraListMenuClose = () => {
@@ -83,6 +77,25 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
     const preference = props.preference;
     const actionButtonSx: SxProps = {}
     const isShmiraListMenuOpen = Boolean(pendingPreferenceAnchorEl);
+    const baseDays = ShmiraListBuilderTools.buildDaysYouCanGuard(preference, {
+        DateTo: shmiraListSelected.DateTo,
+        DateFrom: shmiraListSelected.DateFrom
+    })
+
+    const nights: NightScheduleModel[] = sketchInEdit?.NightSchedule ? sketchInEdit.NightSchedule : [];
+    const filteredDatesForHalfNight = nights.filter((n: NightScheduleModel) => baseDays.includes(n.date) && !(n.guards?.length === 2)).map(n => n.date)
+    const filteredDatesForFullNight = nights.filter((n: NightScheduleModel) => baseDays.includes(n.date) && (!n.guards || n.guards.length == 0)).map(n => n.date)
+
+    const baseDaysFiltered = preference.halfOrFull === '2' ? filteredDatesForFullNight : filteredDatesForHalfNight;
+
+
+    const datesForMenu: { timeStamp: string, name: string }[] = baseDaysFiltered.map(d => {
+        return {
+            timeStamp: d,
+            name: Utils.Date.simpleDateFromDateStamp(d)
+        }
+    })
+    const noPotentialPlacesWereFound = datesForMenu.length === 0 ? ', ' + translations.noPotentialPlacesFound : '';
 
     return ((<Box id={'pending-preference'}>
             <Box id={'pending-preference-data'} sx={{
@@ -99,7 +112,7 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
             }}>
 
                 <Typography
-                    variant={'subtitle1'}>{assingedText + ' ' + preference.Comments + ', ' + LanguageUtilities.renderPassengerText(preference.halfOrFull)}  </Typography>
+                    variant={'subtitle1'}>{assignedText + ' ,' + LanguageUtilities.renderPassengerTextBrief(preference.halfOrFull) + noPotentialPlacesWereFound}  </Typography>
 
             </Box>
 
@@ -121,22 +134,26 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
                     <Box key={i} sx={{p: '0.5em'}}> <PreferenceActionButton key={n.action.toString()} text={n.name} actionType={n.action}
                                                                             actionClickHandler={actionClickHandler}/>
                     </Box>))}
+                {datesForMenu.length > 0 ?
+                    <Box sx={{p: '0.5em'}}>
 
-                <Box sx={{p: '0.5em'}}>
-                    <Button sx={{
-                        pl: '5px',
-                        pr: '5px'
-                    }}
-                            size="medium"
-                            aria-label="show more"
-                            aria-controls={pendingPreferenceMenuId}
-                            aria-haspopup="true"
-                            onClick={handlePendingPreferenceMenuOpen}
-                            variant={'contained'}
-                    >&nbsp; {translations.assignIn}
+                        <Button sx={{
+                            pl: '5px',
+                            pr: '5px'
+                        }}
+                                size="medium"
+                                aria-label="show more"
+                                aria-controls={pendingPreferenceMenuId}
+                                aria-haspopup="true"
+                                onClick={handlePendingPreferenceMenuOpen}
+                                variant={'contained'}
+                        >&nbsp; {translations.assignIn}
 
-                    </Button>
-                </Box>
+                        </Button>
+                    </Box>
+
+                    : null}
+
                 <Box sx={{p: '0.5em'}}>
                     <Button
                         size="medium"
@@ -151,10 +168,11 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
 
 
             </Box>
+
             <PendingPreferenceMenu PendingPreferenceMenuAnchor={pendingPreferenceAnchorEl} PendingPreferenceMenuId={pendingPreferenceMenuId}
                                    isPendingPreferenceMenuOpen={isShmiraListMenuOpen}
                                    handlePendingPreferenceMenuClick={handlePendingPreferenceMenuClick}
-                                   handlePendingPreferenceMenuClose={handleShmiraListMenuClose}/>
+                                   handlePendingPreferenceMenuClose={handleShmiraListMenuClose} dates={datesForMenu}/>
         </Box>)
 
     )

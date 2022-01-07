@@ -103,8 +103,10 @@ export const Sketch = () => {
                 // minWidth: '30vw',
             }}>
                 <Box sx={{
-                    maxHeight: '80vh',
-                    overflowY: 'auto'
+                    maxHeight: '76vh',
+                    maxWidth: '25vw',
+                    overflowY: 'auto',
+                    direction: 'ltr'
                 }}>
                     <SketchPendingPreferences pendingPreferences={sketchInEdit.unassignedPreferences}/>
                 </Box>
@@ -114,9 +116,12 @@ export const Sketch = () => {
                     flexWrap: 'wrap',
                     alignItems: 'start',
                     mb: '10px',
+                    p: '2px',
                     justifyContent: 'center',
+                    width: '75vw',
                     maxHeight: '80vh',
-                    columnGap: '40px'
+                    columnGap: '20px',
+                    overflowY: 'auto'
                     // minWidth: '30vw',
                 }}>
 

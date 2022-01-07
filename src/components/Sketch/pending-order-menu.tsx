@@ -3,15 +3,15 @@ import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
-import {Icons} from '../Icons/icons';
 
 
 interface PendingPreferenceMenuProps {
     PendingPreferenceMenuAnchor: Element | ((element: Element) => Element) | null | undefined;
     PendingPreferenceMenuId: string,
     isPendingPreferenceMenuOpen: boolean,
-    handlePendingPreferenceMenuClick: (event: React.MouseEvent<HTMLElement>, action: SketchEditActionEnum) => void
-    handlePendingPreferenceMenuClose: () => void
+    handlePendingPreferenceMenuClick: (event: React.MouseEvent<HTMLElement>, date: string) => void
+    handlePendingPreferenceMenuClose: () => void,
+    dates: { timeStamp: string, name: string }[]
 }
 
 export const PendingPreferenceMenu = (props: PendingPreferenceMenuProps) => {
@@ -20,7 +20,8 @@ export const PendingPreferenceMenu = (props: PendingPreferenceMenuProps) => {
         PendingPreferenceMenuId,
         isPendingPreferenceMenuOpen,
         handlePendingPreferenceMenuClick,
-        handlePendingPreferenceMenuClose
+        handlePendingPreferenceMenuClose,
+        dates
     } = props;
 
     let pendingPreferencesActions: { action: SketchEditActionEnum, name: string, icon: string } [] = LanguageUtilities.buildSketchEditActionsArray();
@@ -41,9 +42,11 @@ export const PendingPreferenceMenu = (props: PendingPreferenceMenuProps) => {
             open={isPendingPreferenceMenuOpen}
             onClose={handlePendingPreferenceMenuClose}
         >
-            {pendingPreferencesActions.map((item, i: number) => <MenuItem key={i} onClick={(e) => handlePendingPreferenceMenuClick(e, item.action)}>
-                {Icons[item.icon] as React.ReactElement} &nbsp;
-                {item.name}
+         
+            {dates.map((date: { timeStamp: string, name: string }, i: number) => <MenuItem key={i}
+                                                                                           onClick={(e) => handlePendingPreferenceMenuClick(e, date.timeStamp)}>
+
+                {date.name}
             </MenuItem>)}
 
 
