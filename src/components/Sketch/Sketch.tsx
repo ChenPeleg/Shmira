@@ -64,7 +64,7 @@ export const Sketch = () => {
         if (value) {
 
             dispatch({
-                type: ActionsTypes.UPDATE_SKETCH_DRIVE,
+                type: ActionsTypes.UPDATE_SKETCH_NIGHT,
                 payload: {
                     value
                 }
@@ -99,11 +99,15 @@ export const Sketch = () => {
                 flexDirection: 'row',
                 alignItems: 'start',
                 justifyContent: 'start',
-                maxHeight: '80vh',
+                maxHeight: '75vh',
                 // minWidth: '30vw',
             }}>
-                <SketchPendingPreferences pendingPreferences={sketchInEdit.unassignedPreferences}/>
-
+                <Box sx={{
+                    maxHeight: '80vh',
+                    overflowY: 'auto'
+                }}>
+                    <SketchPendingPreferences pendingPreferences={sketchInEdit.unassignedPreferences}/>
+                </Box>
                 <Box id={'sketch-wrapper-column'} sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -149,9 +153,10 @@ export const Sketch = () => {
 
                 </Box>
 
-                <ListSketchDriveEditDialog nightData={chosenNight as NightScheduleModel} onClose={handleSketchDriveEditClose}
-                                           onDelete={handleSketchDriveEditDelete} key={'2'}
-                                           open={sketchDriveEditOpen}></ListSketchDriveEditDialog>
+                {sketchDriveEditOpen && chosenNight ?
+                    <ListSketchDriveEditDialog nightData={chosenNight as NightScheduleModel} onClose={handleSketchDriveEditClose}
+                                               onDelete={handleSketchDriveEditDelete} key={'2'}
+                                               open={sketchDriveEditOpen}/> : null}
 
             </Box>) : <SketchNoSketchMessage/>)
 

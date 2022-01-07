@@ -18,7 +18,7 @@ export const ShmiraListBuilderBuildNightsAndUnAssigned = (preferencesMeta: Prefe
             drivesToRemove: [],
             guards: [],
             optionalGuards: optionalGuards,
-            id: i.toString()
+            id: (i + 1).toString()
 
         }
         return night

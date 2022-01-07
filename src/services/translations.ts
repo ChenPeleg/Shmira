@@ -126,11 +126,12 @@ export const translations = {
     'SketchActionChangeTime': 'שינוי שעות של נסיעה קיימת',
     'SketchActionReplaceExisting': 'העבר לרכב במקום נסיעה קיימת',
     'SketchActionPublicTransport': 'צור פתרון בתחב"צ',
-    'SketchActionAddToPending': 'סמן כ"לא מטופלת"',
+    'removeFromThisNight': 'הסרה',
     'guards': 'שומרים',
     'guardDates': 'ימי שמירה',
     'minimumBetweenDates': 'ימים לפחות בין שמירות',
     'peopleWhoCanGuard': 'יכולים לשמור',
+    'missingGuard': 'חסר',
 
     /* date errors  */
     'dateErrStartBiggerthan': 'על תאריך ההתחלה להיות לפני תאריך הסיום',

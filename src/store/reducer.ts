@@ -83,8 +83,8 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
 
             return PendingPreferencesReducer [action.type](newState, action)
         case ActionsTypes.DELETE_SKETCH_DRIVE:
-        case ActionsTypes.UPDATE_SKETCH_DRIVE:
-        case ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE:
+        case ActionsTypes.UPDATE_SKETCH_NIGHT:
+        case ActionsTypes.REMOVE_GUARD_FROM_SKETCH_NIGHT:
             return ListSketchNightReducer [action.type](newState, action);
 
         case   ActionsTypes.UPDATE_LOCATION_GROUP :

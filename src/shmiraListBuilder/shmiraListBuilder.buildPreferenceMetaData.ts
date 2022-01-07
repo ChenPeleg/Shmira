@@ -4,16 +4,16 @@ import {Utils} from '../services/utils';
 import {PreferenceType, WeekDaysOrDates} from '../models/PreferenceType.enum';
 
 
-const buildDaysYouCanGuard = (prefrence: PreferenceModel, range: RangeModel) => {
+const buildDaysYouCanGuard = (preference: PreferenceModel, range: RangeModel) => {
     const allDatesArray = Utils.Date.getTimestampArrayFromStartAndFinishDate(range.DateFrom, range.DateTo);
     let daysInputed: string[] = [];
-    if (prefrence.weekDaysOrDates == WeekDaysOrDates.WeekDays) {
+    if (preference.weekDaysOrDates == WeekDaysOrDates.WeekDays) {
         const DateObjectRange = Utils.Date.getWeekDayNumberFromTimeStamps(allDatesArray);
-        daysInputed = DateObjectRange.filter(dObj => prefrence.flexibilityByDays.includes(dObj.dayNumber.toString())).map(d => d.timeStamp);
-    } else if (prefrence.weekDaysOrDates == WeekDaysOrDates.Dates) {
-        daysInputed = prefrence.flexibilityByDates
+        daysInputed = DateObjectRange.filter(dObj => preference.flexibilityByDays.includes(dObj.dayNumber.toString())).map(d => d.timeStamp);
+    } else if (preference.weekDaysOrDates == WeekDaysOrDates.Dates) {
+        daysInputed = preference.flexibilityByDates
     }
-    switch (prefrence.TypeOfInfoPreference) {
+    switch (preference.TypeOfInfoPreference) {
         case PreferenceType.CanGuardIn:
             return daysInputed
 

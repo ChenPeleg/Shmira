@@ -44,6 +44,7 @@ export const SketchNight = (props: nightsProps) => {
     const optionalGuardsArr = preferences.filter(g => night.optionalGuards.includes(g.id)).map(g => g.guardName);
     const guardsRaw: (PreferenceModel | undefined)[] = night.guards.map(guardId => preferences.find(p => p.id === guardId))
     const guardNames = guardsRaw.map(g => g && g.guardName ? g.guardName : null).filter(g => g)
+    const isMissing = guardNames.length < 2;
     return (
 
         <Box>
@@ -102,7 +103,12 @@ export const SketchNight = (props: nightsProps) => {
                         }}/>
                         <Typography
                             variant={'subtitle1'}>{guardNames.join(', ')}  </Typography>
-
+                        <Box sx={{
+                            width: '5px',
+                            height: '10px'
+                        }}/>
+                        {isMissing ? <Typography color={'red'} fontWeight={'bold'}
+                                                 variant={'subtitle1'}>{' ' + translations.missingGuard + ' '}  </Typography> : null}
                     </Box>
                 </Card>
             </LightTooltip>

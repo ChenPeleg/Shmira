@@ -8,12 +8,12 @@ import {PreferenceModel} from '../models/Preference.model';
 import {StoreUtils} from './store-utils';
 
 export type SketchDriveReducerFunctions = ActionsTypes.DELETE_SKETCH_DRIVE
-                                          | ActionsTypes.UPDATE_SKETCH_DRIVE | ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE
+                                          | ActionsTypes.UPDATE_SKETCH_NIGHT | ActionsTypes.REMOVE_GUARD_FROM_SKETCH_NIGHT
 
 
 export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
 
-    [ActionsTypes.UPDATE_SKETCH_DRIVE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+    [ActionsTypes.UPDATE_SKETCH_NIGHT]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         const sketchDriveChanged: ExtendedPreferenceModel = action.payload.value
         const SketchIdInEdit = newState.SketchIdInEdit;
@@ -21,17 +21,16 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
         const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
 
         if (sketchObj !== undefined) {
-            const vehicleId = getVehicleIdFromDriveId(state, sketchDriveChanged.id);
-            const relevantVehicle = sketchObj.NightSchedule.find(v => v.id === vehicleId);
-            if (relevantVehicle) {
-                relevantVehicle.drivesToRemove = relevantVehicle.drivesToRemove.map((d: ExtendedPreferenceModel) => {
-                    if (d.id === sketchDriveChanged.id) {
-                        return sketchDriveChanged
-                    } else {
-                        return d
-                    }
-                })
-            }
+            // const vehicleId = getVehicleIdFromDriveId(state, sketchDriveChanged.id);
+            // const relevantVehicle = sketchObj.NightSchedule.find(v => v.id === vehicleId);
+
+            // const drivesToRemove = drivesToRemove.map((d: ExtendedPreferenceModel) => {
+            //     if (d.id === sketchDriveChanged.id) {
+            //         return sketchDriveChanged
+            //     } else {
+            //         return d
+            //     }
+            // })
 
 
         }
@@ -39,10 +38,10 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
 
     },
 
-    [ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+    [ActionsTypes.REMOVE_GUARD_FROM_SKETCH_NIGHT]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
 
-        const sketchDriveChangedId: string = action.payload.sketchDriveId
+        const sketchNightChangedId: string = action.payload.sketchNightId
         const preferenceIdToRemove: string = action.payload.preferenceId
         const SketchIdInEdit = newState.SketchIdInEdit;
 
@@ -50,25 +49,26 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
         const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
 
         if (sketchObj !== undefined) {
-            const vehicleId = getVehicleIdFromDriveId(state, sketchDriveChangedId);
-            const relevantVehicle = sketchObj.NightSchedule.find(v => v.id === vehicleId);
-            if (relevantVehicle) {
-                relevantVehicle.drivesToRemove = relevantVehicle.drivesToRemove.map((d: ExtendedPreferenceModel) => {
-                    if (d.id === sketchDriveChangedId) {
-                        const newDrive = {...d};
-                        newDrive.implementsPreferences = (newDrive.implementsPreferences).filter(ord => ord !== preferenceIdToRemove)
+            sketchObj.NightSchedule = sketchObj.NightSchedule.map((n: NightScheduleModel) => {
+                if (n.id === sketchNightChangedId) {
+                    const newNight = {...n};
+                    newNight.guards = newNight.guards.filter(g => g !== preferenceIdToRemove)
+                    return newNight
+                } else {
 
-                        return newDrive
-                    } else {
-                        return d
-                    }
-                })
-            }
+                    return n
+                }
+            })
+
             let PreferenceToMoveToUnassinged: PreferenceModel | undefined = sketchObj.assignedPreferences.find(o => o.id === preferenceIdToRemove);
             if (PreferenceToMoveToUnassinged) {
                 sketchObj.assignedPreferences = sketchObj.assignedPreferences.filter(o => o.id !== preferenceIdToRemove);
                 sketchObj.unassignedPreferences = [...sketchObj.unassignedPreferences];
-                sketchObj.unassignedPreferences.push(PreferenceToMoveToUnassinged);
+                if (sketchObj.unassignedPreferences.map(un => un.id).includes(PreferenceToMoveToUnassinged.id)) {
+                    // do nothing the guard is there
+                } else {
+                    sketchObj.unassignedPreferences.push(PreferenceToMoveToUnassinged);
+                }
 
 
             }
