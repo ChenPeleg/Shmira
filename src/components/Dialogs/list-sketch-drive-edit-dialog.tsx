@@ -10,10 +10,8 @@ import {translations} from '../../services/translations';
 import {Box, Card, Typography} from '@mui/material';
 import {SxProps} from '@mui/system';
 import {Delete} from '@mui/icons-material';
-import {DriveModel, SketchModel} from '../../models/Sketch.model';
-import {VerticalHourField} from '../buttons/vertical-hour-field';
+import {NightScheduleModel, SketchModel} from '../../models/Sketch.model';
 import {useDispatch, useSelector} from 'react-redux';
-import {Utils} from '../../services/utils';
 import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
 import {ActionsTypes} from '../../store/types.actions';
 import {ShmiraListStore} from '../../store/store.types';
@@ -23,10 +21,9 @@ import {PreferenceModel} from '../../models/Preference.model';
 interface SketchDriveEditDialogProps {
 
     open: boolean;
-    sketchDriveData: { night: DriveModel, vehicleId: string };
-    vehicleId: string;
-    onDelete: (sketchDriveData: { night: DriveModel, vehicleId: string }) => void;
-    onClose: (vehicleUpdate: DriveModel | null) => void;
+    nightData: NightScheduleModel;
+    onDelete: (night: NightScheduleModel) => void;
+    onClose: (vehicleUpdate: NightScheduleModel | null) => void;
 }
 
 export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
@@ -34,17 +31,17 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
         onClose,
         onDelete,
         open,
-        sketchDriveData
+        nightData
     } = props;
-    const vehicleId = sketchDriveData.vehicleId
-    const driveData = sketchDriveData.night
+    // const vehicleId = sketchDriveData.vehicleId
+    const thisNightData = nightData
     const dispatch = useDispatch();
     const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
 
     const sketchPreferences = sketchInEdit?.assignedPreferences || [];
-    const [driveChangedData, setDriveChangedData] = useState<DriveModel>({...driveData});
+    const [driveChangedData, setDriveChangedData] = useState<NightScheduleModel>({...nightData});
 
 
     const descriptionValueRef: any = useRef('')
@@ -56,15 +53,15 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
     };
 
     const handleCloseEdit = (): void => {
-        const editedData: DriveModel | null = {...driveChangedData};
+        const editedData: NightScheduleModel | null = {...driveChangedData};
         if (descriptionValueRef?.current?.value) {
-            editedData.description = descriptionValueRef?.current?.value
+            // editedData.description = descriptionValueRef?.current?.value
         }
         onClose(editedData);
 
     };
     const handleCloseDelete = (): void => {
-        const sketchDriveDataForDelete = {...sketchDriveData}
+        const sketchDriveDataForDelete = {...nightData}
 
         onDelete(sketchDriveDataForDelete);
     };
@@ -74,11 +71,11 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
             type: ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE,
             payload: {
                 preferenceId,
-                sketchDriveId: driveData.id
+                sketchDriveId: thisNightData.id
             }
         })
         const newDrive = {...driveChangedData};
-        newDrive.implementsPreferences = newDrive.implementsPreferences.filter(o => o !== preferenceId);
+        // newDrive.implementsPreferences = newDrive.implementsPreferences.filter(o => o !== preferenceId);
         setDriveChangedData(newDrive)
     }
     const handleHourChange =
@@ -86,13 +83,13 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
 
 
             const newSketchData = {...driveChangedData};
-            newSketchData.optionalGuardDaysByDates = Utils.DecimalTimeToHourText(input[0]);
-            newSketchData.finishHour = Utils.DecimalTimeToHourText(input[1]);
+            //  newSketchData.optionalGuardDaysByDates = Utils.DecimalTimeToHourText(input[0]);
+            //   newSketchData.finishHour = Utils.DecimalTimeToHourText(input[1]);
             setDriveChangedData(newSketchData);
 
 
         }
-    const implementedPreferences = sketchPreferences.filter((o: PreferenceModel) => driveChangedData.implementsPreferences.includes(o.id))
+    const implementedPreferences = sketchPreferences.filter((o: PreferenceModel) => driveChangedData.guards.includes(o.id))
 
     return (
 
@@ -120,9 +117,9 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
                                     component="legend"><b>{translations.DriveTimes}</b>
                         </Typography>
 
-                        <VerticalHourField input={[driveData.optionalGuardDaysByDates, driveData.finishHour]}
-                                           onHoursChange={handleHourChange}
-                                           label={translations.Start}/>
+                        {/*<VerticalHourField input={[thisNightData.optionalGuardDaysByDates, thisNightData.finishHour]}*/}
+                        {/*                   onHoursChange={handleHourChange}*/}
+                        {/*                   label={translations.Start}/>*/}
 
                     </Box>
                     <Box sx={{
@@ -145,7 +142,7 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
                                 fullWidth
                                 multiline={true}
                                 variant="standard"
-                                defaultValue={(driveData?.description || '').replace('  ', ' ')}
+                                defaultValue={(thisNightData?.Comments || '').replace('  ', ' ')}
                                 inputRef={descriptionValueRef}
                                 onKeyUp={(event) => {
                                     if (event.key === 'Enter') {

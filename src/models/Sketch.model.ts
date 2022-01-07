@@ -1,7 +1,7 @@
 import {PreferenceType} from './PreferenceType.enum';
 import {PreferenceModel} from './Preference.model';
 
-export interface DriveModel extends PreferenceModel {
+export interface ExtendedPreferenceModel extends PreferenceModel {
     id: string,
     guardName: string,
     optionalGuardDaysByDates: string,
@@ -23,7 +23,7 @@ export interface DriveModel extends PreferenceModel {
 export interface NightScheduleModel {
     id: string
     date: string,
-    drivesToRemove: DriveModel[],
+    drivesToRemove: ExtendedPreferenceModel[],
     Comments: string,
     optionalGuards: string [],
     guards: string[]

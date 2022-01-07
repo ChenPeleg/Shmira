@@ -1,4 +1,4 @@
-import {DriveModel, NightScheduleModel, SketchModel} from '../models/Sketch.model';
+import {ExtendedPreferenceModel, NightScheduleModel, SketchModel} from '../models/Sketch.model';
 import {PreferenceModel} from '../models/Preference.model';
 import {ShmiraListRecord} from '../store/store.types';
 
@@ -13,8 +13,8 @@ export class CloneUtil {
         return cloned
     }
 
-    static deepCloneDrive(obj: DriveModel): DriveModel {
-        const cloned: DriveModel = {...obj}
+    static deepCloneDrive(obj: ExtendedPreferenceModel): ExtendedPreferenceModel {
+        const cloned: ExtendedPreferenceModel = {...obj}
         cloned.flexibilityByDays = [...cloned.flexibilityByDays]
         return cloned
     }

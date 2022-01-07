@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Card, Typography, Zoom} from '@mui/material';
-import {DriveModel, NightScheduleModel} from '../../models/Sketch.model';
+import {ExtendedPreferenceModel, NightScheduleModel} from '../../models/Sketch.model';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {Utils} from '../../services/utils';
@@ -18,8 +18,8 @@ interface nightsProps {
 }
 
 
-const timeText = (drive: DriveModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
-const driverAndLocation = (drive: DriveModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
+const timeText = (drive: ExtendedPreferenceModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
+const driverAndLocation = (drive: ExtendedPreferenceModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
 
 function ArrowUpwardIcon() {
     return null;

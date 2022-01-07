@@ -1,5 +1,5 @@
 import {hashFunction} from './hash-function';
-import {DriveModel, NightScheduleModel, SketchModel} from '../models/Sketch.model';
+import {ExtendedPreferenceModel, NightScheduleModel, SketchModel} from '../models/Sketch.model';
 import {PreferenceType} from '../models/PreferenceType.enum';
 
 const ExcelDifferenece = 25569.0;
@@ -30,7 +30,7 @@ export const Utils = {
     },
     defaultSketchMMock(): SketchModel {
         let ids: number = 1
-        const mkDrv = (driver: string, start: string, finish: string, location: string, TypeOfInfoPreference: PreferenceType = PreferenceType.CanGuardIn): DriveModel => {
+        const mkDrv = (driver: string, start: string, finish: string, location: string, TypeOfInfoPreference: PreferenceType = PreferenceType.CanGuardIn): ExtendedPreferenceModel => {
             ids++
             return {
                 id: ids.toString(),

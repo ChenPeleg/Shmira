@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Collapse, Divider} from '@mui/material';
-import {DriveModel, NightScheduleModel, SketchModel} from '../../models/Sketch.model';
+import {NightScheduleModel, SketchModel} from '../../models/Sketch.model';
 import {VehicleModel} from '../../models/Vehicle.model';
 import {SketchNight} from './sketch-night';
 import {ActionsTypes} from '../../store/types.actions';
@@ -11,6 +11,7 @@ import {SketchNoSketchMessage} from './sketch-no-sketch-message';
 
 import {TransitionGroup} from 'react-transition-group';
 import {SketchPendingPreferences} from './SketchPendeingOrders';
+import {ListSketchDriveEditDialog} from '../Dialogs/list-sketch-drive-edit-dialog';
 
 const MOckDrive = {
     'id': '0',
@@ -41,12 +42,12 @@ export const Sketch = () => {
     const [sketchDriveEditOpen, setSketchDriveEditOpen] = React.useState(false);
     const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
-    const [chosenDrive, setChosenDrive] = useState<{ drive: DriveModel, vehicleId: string } | null>(null);
+    const [chosenNight, setChosenNight] = useState<NightScheduleModel | null>(null);
     const [mock, setMock] = useState<boolean>(false)
-    const handleSketchDriveEditDelete = (sketchDriveData: { drive: DriveModel, vehicleId: string }) => {
+    const handleSketchDriveEditDelete = (night: NightScheduleModel) => {
         setSketchDriveEditOpen(false);
-        setChosenDrive(null);
-        const value = sketchDriveData.drive
+        setChosenNight(null);
+        const value = night
         dispatch({
             type: ActionsTypes.DELETE_SKETCH_DRIVE,
             payload: {
@@ -57,9 +58,9 @@ export const Sketch = () => {
     }
 
 
-    const handleSketchDriveEditClose = (value: DriveModel | null) => {
+    const handleSketchDriveEditClose = (value: NightScheduleModel | null) => {
         setSketchDriveEditOpen(false);
-        setChosenDrive(null);
+        setChosenNight(null);
         if (value) {
 
             dispatch({
@@ -79,11 +80,8 @@ export const Sketch = () => {
             }, 2000)
         }
     })
-    const sketchDriveClickHandler = (event: React.MouseEvent<HTMLElement>, drive: DriveModel, vehicleId: string) => {
-        setChosenDrive({
-            drive: drive,
-            vehicleId: vehicleId
-        })
+    const sketchNightClickHandler = (event: React.MouseEvent<HTMLElement>, night: NightScheduleModel) => {
+        setChosenNight(night)
         setSketchDriveEditOpen(true);
     };
 
@@ -134,7 +132,7 @@ export const Sketch = () => {
 
                                         <Collapse key={i}>
                                             <SketchNight
-                                                sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, night.id)}
+                                                sketchDriveClick={(event: React.MouseEvent<HTMLElement>, night: NightScheduleModel) => sketchNightClickHandler(event, night)}
                                                 key={i} night={night}/>
                                         </Collapse>
 
@@ -151,6 +149,9 @@ export const Sketch = () => {
 
                 </Box>
 
+                <ListSketchDriveEditDialog nightData={chosenNight as NightScheduleModel} onClose={handleSketchDriveEditClose}
+                                           onDelete={handleSketchDriveEditDelete} key={'2'}
+                                           open={sketchDriveEditOpen}></ListSketchDriveEditDialog>
 
             </Box>) : <SketchNoSketchMessage/>)
 

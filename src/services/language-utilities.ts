@@ -2,7 +2,7 @@ import {PreferenceType} from '../models/PreferenceType.enum';
 import {translations} from './translations';
 import {PreferenceModel} from '../models/Preference.model';
 import {LocationModel} from '../models/Location.model';
-import {DriveModel} from '../models/Sketch.model';
+import {ExtendedPreferenceModel} from '../models/Sketch.model';
 import {SketchEditActionEnum} from '../models/SketchEditAction.enum';
 import {Utils} from './utils';
 
@@ -50,7 +50,7 @@ export const LanguageUtilities = {
 
     },
 
-    buildBriefText(preferenceValues: PreferenceModel | DriveModel, locations: LocationModel[]): { timeText: string, driverAndLocation: string } {
+    buildBriefText(preferenceValues: PreferenceModel | ExtendedPreferenceModel, locations: LocationModel[]): { timeText: string, driverAndLocation: string } {
         const isWithName = preferenceValues.guardName.trim() !== '';
         if (!isWithName) {
             return {
