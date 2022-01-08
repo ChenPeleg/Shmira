@@ -73,7 +73,8 @@ export const ListSketchNightReducer: Record<SketchDriveReducerFunctions, (state:
 
             }
 
-
+            newState.nights =
+                [...sketchObj.NightSchedule]
         }
         StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);

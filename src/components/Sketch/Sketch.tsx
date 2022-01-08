@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Collapse, Divider} from '@mui/material';
@@ -39,8 +39,8 @@ export const Sketch = () => {
     const nights = useSelector((state: { nights: NightScheduleModel[] }) => state.nights);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const [sketchDriveEditOpen, setSketchDriveEditOpen] = React.useState(false);
-    const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
-        React.useState<null | HTMLElement>(null);
+    // const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
+    //     React.useState<null | HTMLElement>(null);
     const [chosenNight, setChosenNight] = useState<NightScheduleModel | null>(null);
     const [mock, setMock] = useState<boolean>(false)
     const handleSketchDriveEditDelete = (night: NightScheduleModel) => {
@@ -62,23 +62,17 @@ export const Sketch = () => {
         setChosenNight(null);
         if (value) {
 
-            dispatch({
-                type: ActionsTypes.UPDATE_SKETCH_NIGHT,
-                payload: {
-                    value
-                }
-            })
+            // dispatch({
+            //     type: ActionsTypes.UPDATE_SKETCH_NIGHT,
+            //     payload: {
+            //         value
+            //     }
+            // })
 
 
         }
     };
-    useEffect(() => {
-        if (!mock) {
-            setTimeout(_ => {
 
-            }, 2000)
-        }
-    })
     const sketchNightClickHandler = (event: React.MouseEvent<HTMLElement>, night: NightScheduleModel) => {
         setChosenNight(night)
         setSketchDriveEditOpen(true);

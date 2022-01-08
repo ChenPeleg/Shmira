@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -43,11 +43,7 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
         onClose(null);
         setDidDialogJustClosed(true)
     };
-    useEffect(() => {
-        // Update the document title using the browser API
 
-        // document.title = `You clicked ${count} times`;
-    });
     const handleCloseEdit = (): void => {
         let editedData: VehicleModel | null = null;
         if (vehicleData) {

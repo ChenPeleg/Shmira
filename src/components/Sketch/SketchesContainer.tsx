@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Select, SelectChangeEvent, Typography} from '@mui/material';
@@ -13,7 +13,6 @@ import IconButton from '@mui/material/IconButton';
 import {Sketch} from './Sketch';
 import MenuItem from '@mui/material/MenuItem';
 import {RenameDialog} from '../Dialogs/rename-dialog';
-import {ShmiraListBuilder} from '../../shmiraListBuilder/shmiraListBuilder.main';
 
 
 export const SketchesContainer = () => {
@@ -95,14 +94,14 @@ export const SketchesContainer = () => {
 
 
     }
-    useEffect(() => {
-        if (mock) {
-            setMock(false)
-            console.clear()
-            const listRes = ShmiraListBuilder(shmiraListSelected as ShmiraListRecord)
-
-        }
-    })
+    // useEffect(() => {
+    //     if (mock) {
+    //         setMock(false)
+    //         console.clear()
+    //         const listRes = ShmiraListBuilder(shmiraListSelected as ShmiraListRecord)
+    //
+    //     }
+    // })
     const handleCreateSketch = () => {
         dispatch({
             type: ActionsTypes.NEW_SKETCH,

@@ -33,7 +33,7 @@ export const SketchNight = (props: nightsProps) => {
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const sketchInEdit: SketchModel = sketches.find(s => s.id === SketchIdInEdit) as SketchModel;
 
-    const night = sketchInEdit.NightSchedule.find(n => n.id === props.night.id) as NightScheduleModel;
+    const night = props.night;// sketchInEdit.NightSchedule.find(n => n.id === props.night.id) as NightScheduleModel;
     const preferences = useSelector((state: { preferences: PreferenceModel[] }) => state.preferences);
 
     const [inHover, setInHover] = useState(false);
