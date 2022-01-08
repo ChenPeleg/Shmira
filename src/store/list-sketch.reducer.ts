@@ -36,6 +36,7 @@ export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraLis
                 newState.sketches = [];
             }
             newState.sketches.push(newSketch);
+            newState.nights = newSketch.NightSchedule;
             newState.SketchIdInEdit = newId;
         }
 
@@ -63,7 +64,7 @@ export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraLis
             if (thisShmiraListInCollection) {
                 thisShmiraListInCollection.chosenSketch = chosenSketchId;
             }
-
+            newState.nights = chosenSketchObj.NightSchedule;
 
         }
         return newState
@@ -106,9 +107,14 @@ export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraLis
             if (posOfDeletedSketch > 1) {
                 newState.SketchIdInEdit = sketchesIds [posOfDeletedSketch - 1]
             } else {
-                newState.SketchIdInEdit = sketchesIds [0]
+                newState.SketchIdInEdit = sketchesIds [0];
+
             }
+
+            const editedSketch = newState.sketches.find(s => s.id === newState.SketchIdInEdit) as SketchModel;
+            newState.nights = editedSketch.NightSchedule;
         } else {
+            newState.nights = [];
             newState.SketchIdInEdit = ''
         }
 
@@ -129,7 +135,7 @@ export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraLis
             newState.sketches = newState.sketches.map(c => c);
             newState.sketches.push(newSketch);
             newState.SketchIdInEdit = newSketchId;
-            // newState = setChosenShmiraList(newState, newSketch);
+            newState.nights = newSketch.NightSchedule;
         }
         newState = StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         return newState

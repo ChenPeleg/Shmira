@@ -1,6 +1,6 @@
 import {IAction, ShmiraListStore} from './store.types';
 import {ActionsTypes} from './types.actions';
-import {SketchModel} from '../models/Sketch.model';
+import {NightScheduleModel, SketchModel} from '../models/Sketch.model';
 import {StoreUtils} from './store-utils';
 import {PreferenceModel} from '../models/Preference.model';
 
@@ -31,20 +31,82 @@ export const PendingPreferencesReducer: Record<PendingPreferencesReducerFunction
     [ActionsTypes.CLICKED_CLOSE_PENDING_ORDER]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
 
         let newState = {...state}
-        console.log(newState.pendingPreferenceIdInEdit)
         newState.pendingPreferenceIdInEdit = null;
-
-
+        newState = StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
 
     [ActionsTypes.CLICKED_ASSIGN_GUARD_TO_DATE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
 
         let newState = {...state}
-        console.log(newState.pendingPreferenceIdInEdit)
-        newState.pendingPreferenceIdInEdit = null;
+        const preferenceToAssignId = action.payload.id
+        const nightDateToAssign = action.payload.date
+        const SketchIdInEdit = state.SketchIdInEdit
+
+        const sketchObj: SketchModel | undefined = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
+        if (sketchObj) {
+
+            const nightToAssign = sketchObj.NightSchedule.find(n => n.date === nightDateToAssign);
+            const preference: PreferenceModel | undefined = sketchObj.unassignedPreferences.find(p => p.id === preferenceToAssignId);
+            let halfOrFull = '1'
+            if (preference?.halfOrFull === '2') {
+                halfOrFull = '2'
+            }
+
+            if (nightToAssign && nightToAssign.guards?.length < 2) {
+                sketchObj.NightSchedule = sketchObj.NightSchedule.map((n: NightScheduleModel) => {
+                    if (n.id === nightToAssign.id) {
+                        const newNight = {...n}
+                        newNight.guards = newNight.guards ? [...newNight.guards] : [];
+                        newNight.guards.push(preferenceToAssignId);
+                        if (halfOrFull === '2') {
+                            newNight.guards.push(preferenceToAssignId);
+                        }
+                        return newNight
+                    } else {
+                        return n
+
+                    }
+
+                })
+
+                ;
+                const allGuardDutiesByPersonId: string [] = [];
+                sketchObj.NightSchedule.forEach(n => n.guards.forEach(g => {
+                    if (Number(g) > 0) {
+
+                        allGuardDutiesByPersonId.push(g)
+
+                    }
 
 
+                }));
+                const thisGuardAccurence = allGuardDutiesByPersonId.filter(id => id === preferenceToAssignId);
+                if (thisGuardAccurence.length >= 2) {
+                    sketchObj.unassignedPreferences = sketchObj.unassignedPreferences.filter(p => p.id != preferenceToAssignId);
+                    newState.pendingPreferenceIdInEdit = null;
+                }
+                // sketchObj.unassignedPreferences = [...sketchObj.unassignedPreferences];
+                // state.sketches = state.sketches.map((s: SketchModel) => {
+                //     if (s.id === sketchObj.id) {
+                //         return sketchObj
+                //     } else {
+                //         return s
+                //     }
+                //
+                // })
+
+
+            }
+            newState.nights = [...sketchObj.NightSchedule]
+
+        }
+        state.sketches = [...state.sketches]
+        newState = {...newState};
+
+        //   newState = StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
 

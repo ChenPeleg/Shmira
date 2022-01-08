@@ -30,8 +30,8 @@ export const SketchPendingPreferenceBrief = (props: sketchPendingPreferenceProps
                     width: '5px',
                     height: '10px'
                 }}/>
-                <Typography
-                    variant={'subtitle1'}>{timeText(preference) + ' ' + driverAndLocation(preference)}  </Typography>
+                <Typography fontWeight={props.isInEdit ? 'bold' : ''}
+                            variant={'subtitle1'}>{timeText(preference) + ' ' + driverAndLocation(preference)}  </Typography>
 
             </Box>
 

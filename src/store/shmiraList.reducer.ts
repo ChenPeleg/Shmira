@@ -259,6 +259,12 @@ const setChosenShmiraList = (state: ShmiraListStore, chosenShmiraList: ShmiraLis
     newState.daysBetweenGuardDuty = chosenShmiraList?.daysBetweenGuardDuty
     newState.deletedPreferences = chosenShmiraList?.deletedPreferences?.map(o => ({...o})) || [];
     newState.sketches = chosenShmiraList?.sketches?.map(o => ({...o})) || [];
+    if (newState.SketchIdInEdit) {
+        const sketchInEdit = newState.sketches.find(s => s.id === newState.SketchIdInEdit);
+        if (sketchInEdit) {
+            newState.nights = sketchInEdit.NightSchedule
+        }
+    }
     newState.preferenceIdInEdit = null;
     newState.dataHolderForCurrentPreferenceInEdit = null;
     return newState

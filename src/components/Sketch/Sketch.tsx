@@ -3,7 +3,6 @@ import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Collapse, Divider} from '@mui/material';
 import {NightScheduleModel, SketchModel} from '../../models/Sketch.model';
-import {VehicleModel} from '../../models/Vehicle.model';
 import {SketchNight} from './sketch-night';
 import {ActionsTypes} from '../../store/types.actions';
 import {ShmiraListStore} from '../../store/store.types';
@@ -37,7 +36,7 @@ export const Sketch = () => {
 
     const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
 
-    const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles);
+    const nights = useSelector((state: { nights: NightScheduleModel[] }) => state.nights);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const [sketchDriveEditOpen, setSketchDriveEditOpen] = React.useState(false);
     const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
@@ -85,9 +84,6 @@ export const Sketch = () => {
         setSketchDriveEditOpen(true);
     };
 
-    const getVehicleNameFromId = (vehicleId: string): string | null => {
-        return vehicles.find(v => v.id === vehicleId)?.vehicleName || vehicleId
-    }
 
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
 
@@ -126,7 +122,7 @@ export const Sketch = () => {
                 }}>
 
 
-                    {sketchInEdit.NightSchedule.map((night: NightScheduleModel, i: number) => {
+                    {nights.map((night: NightScheduleModel, i: number) => {
                         return (<Box key={i}>
                             <Box key={i} id={'vehicle-column'} sx={{
                                 display: 'flex',

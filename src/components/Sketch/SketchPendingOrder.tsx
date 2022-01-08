@@ -49,7 +49,7 @@ export const SketchPendingPreference = (props: sketchPendingPreferenceProps) => 
                     mb: '0.3em',
                     minHeight: '10vh',
                     minWidth: '20vw',
-                    maxWidth: '30vw',
+                    maxWidth: '20vw',
                     cursor: 'pointer',
                     display: 'flex',
                     flexDirection: 'row',

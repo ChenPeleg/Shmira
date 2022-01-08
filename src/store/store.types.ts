@@ -1,7 +1,7 @@
 import {ActionsTypes} from './types.actions'
 import {PreferenceModel} from '../models/Preference.model';
 import {PreferenceType, WeekDaysOrDates} from '../models/PreferenceType.enum';
-import {SketchModel} from '../models/Sketch.model';
+import {NightScheduleModel, SketchModel} from '../models/Sketch.model';
 import {LocationGroup} from '../models/Location.model';
 
 export type ActionType = string;
@@ -43,7 +43,7 @@ export interface ShmiraListStore {
     shmiraListCollection: ShmiraListRecord[];
     shmiraListArchive: ShmiraListRecord[];
     preferences: PreferenceModel[];
-    
+
     daysBetweenGuardDuty: string;
     deletedPreferences: PreferenceModel[];
     defaultPreferenceValues: PreferenceModel,
@@ -52,6 +52,7 @@ export interface ShmiraListStore {
     shmiraListId: string;
     LocationGroups: null | LocationGroup[];
     currentSessionState: SessionModel;
+    nights: NightScheduleModel[]
     // Move to Session state
     dataHolderForCurrentPreferenceInEdit: PreferenceModel | null;
     locationGroupInEdit: null | string;

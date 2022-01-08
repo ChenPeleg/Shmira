@@ -47,7 +47,7 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
     const handlePendingPreferenceMenuClick = (event: React.MouseEvent<HTMLElement>, date: string) => {
         const preferenceId = props.preference.id
         dispatch({
-            action: ActionsTypes.CLICKED_ASSIGN_GUARD_TO_DATE,
+            type: ActionsTypes.CLICKED_ASSIGN_GUARD_TO_DATE,
             payload: {
                 id: preferenceId,
                 date: date
@@ -97,22 +97,24 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
     })
     const noPotentialPlacesWereFound = datesForMenu.length === 0 ? ', ' + translations.noPotentialPlacesFound : '';
 
-    return ((<Box id={'pending-preference'}>
+    return ((<Box id={'pending-preference'} sx={{width: '95%'}}>
+
             <Box id={'pending-preference-data'} sx={{
                 display: 'flex',
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 alignItems: 'start',
                 justifyContent: 'start',
+                width: '100%',
                 p: '0.2em',
-                pl: '0.4em',
-                pr: '0.4em',
-                flexGrow: 4,
+                pl: '0.5em',
+                pr: '0.5em',
+                //      flexGrow: 4,
 
             }}>
 
-                <Typography
-                    variant={'subtitle1'}>{assignedText + ' ,' + LanguageUtilities.renderPassengerTextBrief(preference.halfOrFull) + noPotentialPlacesWereFound}  </Typography>
+                <Typography sx={{}}
+                            variant={'subtitle1'}>{assignedText + ' ,' + LanguageUtilities.renderPassengerTextBrief(preference.halfOrFull) + noPotentialPlacesWereFound}  </Typography>
 
             </Box>
 
@@ -125,7 +127,7 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
                 p: '0.2em',
                 pl: '0.4em',
                 pr: '0.4em',
-                flexGrow: 4,
+                //   flexGrow: 4,
 
             }}>
 

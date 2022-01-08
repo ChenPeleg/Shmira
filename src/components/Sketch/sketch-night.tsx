@@ -2,13 +2,14 @@ import React, {useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Card, Typography, Zoom} from '@mui/material';
-import {ExtendedPreferenceModel, NightScheduleModel} from '../../models/Sketch.model';
+import {ExtendedPreferenceModel, NightScheduleModel, SketchModel} from '../../models/Sketch.model';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {Utils} from '../../services/utils';
 import {translations} from '../../services/translations';
 import {LightTooltip} from '../Styled/styled-tool-tip';
 import {PreferenceModel} from '../../models/Preference.model';
+import {ShmiraListStore} from '../../store/store.types';
 
 
 interface nightsProps {
@@ -28,7 +29,11 @@ function ArrowUpwardIcon() {
 
 export const SketchNight = (props: nightsProps) => {
     const dispatch = useDispatch();
-    const night = props.night;
+    const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
+    const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
+    const sketchInEdit: SketchModel = sketches.find(s => s.id === SketchIdInEdit) as SketchModel;
+
+    const night = sketchInEdit.NightSchedule.find(n => n.id === props.night.id) as NightScheduleModel;
     const preferences = useSelector((state: { preferences: PreferenceModel[] }) => state.preferences);
 
     const [inHover, setInHover] = useState(false);
