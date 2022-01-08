@@ -8,7 +8,7 @@ import {ActionsTypes} from '../../store/types.actions';
 import {ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
 import {SketchActionType} from '../../models/SketchMenuClickActionType.enum';
 import {SketchMenu} from './sketch-menu';
-import {Edit} from '@mui/icons-material';
+import {Edit, GridOn} from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import {Sketch} from './Sketch';
 import MenuItem from '@mui/material/MenuItem';
@@ -111,6 +111,14 @@ export const SketchesContainer = () => {
             }
         })
     }
+    const handleDownloadSketch = () => {
+        dispatch({
+            type: ActionsTypes.DOWNLOAD_SKETCH,
+            payload: {
+                value: null,
+            }
+        })
+    }
 
 
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
@@ -166,6 +174,13 @@ export const SketchesContainer = () => {
                 >
                     <Edit/>
                 </IconButton>
+                <Box sx={{
+                    width: '100px',
+                    height: '12px'
+                }}/>
+
+                <Button variant={'contained'} id={'sketches-download-sketch'}
+                        onClick={handleDownloadSketch}><GridOn/> &nbsp; {translations.downloadAsCSV}</Button>
 
 
             </Box> : <Button variant={'contained'} id={'sketches-create-sketch'}

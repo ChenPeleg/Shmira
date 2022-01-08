@@ -1,20 +1,22 @@
 import {ActionsTypes} from './types.actions';
 
 
-import {IAction, ShmiraListRecord, ShmiraListStore} from './store.types';
+import {IAction, SaveDataModel, ShmiraListRecord, ShmiraListStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {Utils} from '../services/utils';
 import {SketchModel} from '../models/Sketch.model';
 import {CloneUtil} from '../services/clone-utility';
 import {translations} from '../services/translations';
 import {ShmiraListBuilder} from '../shmiraListBuilder/shmiraListBuilder.main';
+import {DownloadFile} from '../services/download-file';
 
 export type SketchReducerFunctions =
     | ActionsTypes.NEW_SKETCH
     | ActionsTypes.CHOOSE_SKETCH
     | ActionsTypes.RENAME_SKETCH
     | ActionsTypes.DELETE_SKETCH
-    | ActionsTypes.CLONE_SKETCH;
+    | ActionsTypes.CLONE_SKETCH
+    | ActionsTypes.DOWNLOAD_SKETCH;
 
 
 export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
@@ -87,6 +89,13 @@ export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraLis
             }
         });
         newState = StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
+        return newState
+    },
+    [ActionsTypes.DOWNLOAD_SKETCH]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+        let newState = {...state};
+        newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState);
+        const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(newState)
+        DownloadFile('shmiraList.json', JSON.stringify(saveObj))
         return newState
     },
     [ActionsTypes.DELETE_SKETCH]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {

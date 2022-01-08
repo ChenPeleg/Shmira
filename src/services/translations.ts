@@ -17,6 +17,7 @@ export const translations = {
     'Rename': 'שנה שם',
     'MyProfile': 'החשבון שלי',
     'ExportAllData': 'יצוא הכל',
+    'downloadAsCSV': 'הורדה כטבלה',
     'ImportAllData': 'יבוא הכל',
     'DeleteAndImportAllData': 'מחק הכל והחלף ביבוא הכל',
     'ImportPart': 'יבוא חלקי',
