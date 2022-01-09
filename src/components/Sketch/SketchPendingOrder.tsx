@@ -6,10 +6,12 @@ import {Box, Card, Collapse} from '@mui/material';
 import {SketchPendingPreferenceFull} from './SketchPendingOrderFull';
 import {SketchPendingPreferenceBrief} from './SketchPendingOrderBrief';
 import {PreferenceModel} from '../../models/Preference.model';
+import {RangeModel} from '../../shmiraListBuilder/models/shmiraList.models';
 
 interface sketchPendingPreferenceProps {
     preference: PreferenceModel,
-    isInEdit: boolean
+    isInEdit: boolean,
+    Range: RangeModel
 }
 
 export const SketchPendingPreference = (props: sketchPendingPreferenceProps) => {
@@ -82,7 +84,7 @@ export const SketchPendingPreference = (props: sketchPendingPreferenceProps) => 
 
                         <Collapse in={props.isInEdit} unmountOnExit>
 
-                            <SketchPendingPreferenceFull isInEdit={props.isInEdit} preference={preference}/>
+                            <SketchPendingPreferenceFull Range={props.Range} isInEdit={props.isInEdit} preference={preference}/>
 
                         </Collapse>
                     </Box>

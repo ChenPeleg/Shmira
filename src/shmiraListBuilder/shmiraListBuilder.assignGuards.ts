@@ -31,10 +31,25 @@ export const ShmiraListBuilderBuildNightsAndUnAssigned = (preferencesMeta: Prefe
             const unfilteredOptionalGuards: (PreferenceMetaDataModel | undefined)[] = n.optionalGuards.map(guardId => preferencesMeta.find(g => g.id === guardId));
             const optionalGuards: PreferenceMetaDataModel[] = unfilteredOptionalGuards.filter(g => g) as PreferenceMetaDataModel[];
             optionalGuards.forEach(guard => {
+
                 if (n.guards.length >= 2) {
                     return
                 }
-                if (ShmiraListBuilderTools.checkIfPersonCanGuard(guard, n.date, buildSettings.daysBetweenGuardDuty)) {
+                if (guard.preference.halfOrFull === '2') {
+                    
+                    if (!guard.datesYouCanGuard.includes(n.date) || n.guards.length > 0) {
+                        return false
+                    }
+                    if (guard.guardDates.length === 0) {
+                        // @ts-ignore
+                        guard.guardDates.push(n.date);
+                        // @ts-ignore
+                        guard.guardDates.push(n.date);
+                        n.guards.push(guard.id);
+                        n.guards.push(guard.id);
+                    }
+
+                } else if (ShmiraListBuilderTools.checkIfPersonCanGuard(guard, n.date, buildSettings.daysBetweenGuardDuty)) {
                     // @ts-ignore
                     guard.guardDates.push(n.date);
                     n.guards.push(guard.id)

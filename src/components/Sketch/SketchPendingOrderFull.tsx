@@ -14,11 +14,13 @@ import {ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
 import {NightScheduleModel, SketchModel} from '../../models/Sketch.model';
 import {ShmiraListBuilderTools} from '../../shmiraListBuilder/shmiraList.tools';
 import {Utils} from '../../services/utils';
+import {RangeModel} from '../../shmiraListBuilder/models/shmiraList.models';
 
 
 interface sketchPendingPreferenceProps {
     preference: PreferenceModel,
-    isInEdit: boolean
+    isInEdit: boolean,
+    Range: RangeModel
 }
 
 
@@ -96,7 +98,13 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
         }
     })
     const noPotentialPlacesWereFound = datesForMenu.length === 0 ? ', ' + translations.noPotentialPlacesFound : '';
+    let additionalDateInfo = '';
+    if (noPotentialPlacesWereFound) {
 
+        const Range = props.Range;
+        const datesYouCanGuard = ShmiraListBuilderTools.buildDaysYouCanGuard(preference, Range);
+        additionalDateInfo = translations.CanGuardInDays + ': ' + datesYouCanGuard.map(d => Utils.Date.simpleDateFromDateStamp(d)).join(', ')
+    }
     return ((<Box id={'pending-preference'} sx={{width: '95%'}}>
 
             <Box id={'pending-preference-data'} sx={{
@@ -114,7 +122,7 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
             }}>
 
                 <Typography sx={{}}
-                            variant={'subtitle1'}>{assignedText + ' ,' + LanguageUtilities.renderPassengerTextBrief(preference.halfOrFull) + noPotentialPlacesWereFound}  </Typography>
+                            variant={'subtitle1'}>{assignedText + ' ,' + LanguageUtilities.renderPassengerTextBrief(preference.halfOrFull) + noPotentialPlacesWereFound + ' ' + additionalDateInfo}  </Typography>
 
             </Box>
 
