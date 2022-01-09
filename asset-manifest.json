@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Shmira/static/css/main.4e0af957.chunk.css",
-    "main.js": "/Shmira/static/js/main.6aeccb6f.chunk.js",
-    "main.js.map": "/Shmira/static/js/main.6aeccb6f.chunk.js.map",
+    "main.js": "/Shmira/static/js/main.c26a5483.chunk.js",
+    "main.js.map": "/Shmira/static/js/main.c26a5483.chunk.js.map",
     "runtime-main.js": "/Shmira/static/js/runtime-main.7c7eb8c1.js",
     "runtime-main.js.map": "/Shmira/static/js/runtime-main.7c7eb8c1.js.map",
     "static/js/2.3f656be9.chunk.js": "/Shmira/static/js/2.3f656be9.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.7c7eb8c1.js",
     "static/js/2.3f656be9.chunk.js",
     "static/css/main.4e0af957.chunk.css",
-    "static/js/main.6aeccb6f.chunk.js"
+    "static/js/main.c26a5483.chunk.js"
   ]
 }
