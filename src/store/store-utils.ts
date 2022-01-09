@@ -13,7 +13,19 @@ import {CloneUtil} from '../services/clone-utility';
 import {Utils} from '../services/utils';
 import {defaultShmiraListEshbal} from './store-inital-state';
 import {PreferenceModel} from '../models/Preference.model';
+import {SketchModel} from '../models/Sketch.model';
+import {translations} from '../services/translations';
 
+
+interface CSVRow {
+    num: number,
+    timeStamp: string,
+    dateText: string,
+    dateDay: string,
+    guards: string,
+    comments: string
+
+}
 
 export const StoreUtils = {
     removeIdPrefix: (id: string): string => {
@@ -58,6 +70,40 @@ export const StoreUtils = {
             timeStamp: SaveLoadService.getTimeStampFromDate(),
             hash: hash.toString()
         }
+
+    },
+    buildCSVFileFromSketch(sketch: SketchModel, preferences: PreferenceModel[]): string {
+        let rows: CSVRow[] = [];
+        const GuardsDictionary: Record<string, string> = {};
+        preferences.forEach(p => {
+            GuardsDictionary[p.id] = p.guardName;
+        })
+        sketch.NightSchedule.forEach(night => {
+            const nightDateText = Utils.Date.simpleDateFromDateStamp(night.date)
+            const dayOfWeek = Utils.Date.getDatOfWeekTextFromTimeStamp(night.date);
+            const guards = night.guards.map(g => GuardsDictionary[g] || '');
+            const comments = night.guards?.length == 2 ? '' : translations.missingGuard
+            const row: CSVRow = {
+                dateDay: dayOfWeek,
+                dateText: nightDateText,
+                guards: guards.join(' + '),
+                num: Number(night.date),
+                timeStamp: night.date,
+                comments: comments
+
+            }
+            rows.push(row)
+        });
+        const sortedRows = [...rows].sort(r => r.num);
+        let finalText = translations.ShmiraList + ' ' + sketch.name + '\n';
+        finalText += translations.dateSingle + ',' + translations.daySingle + ',' + translations.guards + ',' + translations.Comments + ',\n';
+        sortedRows.forEach(row => {
+            const textRow = row.dateText + ',' + row.dateDay + ',' + row.guards + ',' + row.comments + ',' + '\n';
+            finalText += textRow
+
+        })
+
+        return finalText
 
     },
     updateShmiraListRecordWithSketchChanges(state: ShmiraListStore): ShmiraListStore {

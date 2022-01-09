@@ -84,6 +84,8 @@ export const translations = {
     'halfOrFull': 'נוסעים',
     'flexibilityByDays': 'גמישות',
     'byDates': 'תאריכים',
+    'dateSingle': 'תאריך',
+    'daySingle': 'יום',
     'byWeekDays': 'ימות השבוע',
     'missingDetails': 'מידע חלקי',
     'nameExist': 'השם נמצא יותר מפעם אחת ',
