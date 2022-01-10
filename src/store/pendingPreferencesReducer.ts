@@ -85,7 +85,9 @@ export const PendingPreferencesReducer: Record<PendingPreferencesReducerFunction
                 const thisGuardAccurence = allGuardDutiesByPersonId.filter(id => id === preferenceToAssignId);
                 if (thisGuardAccurence.length >= 2) {
                     sketchObj.unassignedPreferences = sketchObj.unassignedPreferences.filter(p => p.id != preferenceToAssignId);
+                    sketchObj.assignedPreferences.push(preference as PreferenceModel);
                     newState.pendingPreferenceIdInEdit = null;
+
                 }
                 // sketchObj.unassignedPreferences = [...sketchObj.unassignedPreferences];
                 // state.sketches = state.sketches.map((s: SketchModel) => {

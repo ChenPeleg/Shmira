@@ -36,7 +36,8 @@ export interface SessionModel {
     pendingPreferenceIdInEdit: null | string;
     SketchIdInEdit: null | string;
     LocationGroupTabOpen: null | string;
-    dataHolderForCurrentPreferenceInEdit: null | PreferenceModel
+    dataHolderForCurrentPreferenceInEdit: null | PreferenceModel,
+    isAnimationRunning: boolean;
 }
 
 export interface ShmiraListStore {

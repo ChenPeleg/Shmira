@@ -59,6 +59,8 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
             return VehicleReducer[action.type](newState, action)
         case ActionsTypes.CHANGE_VIEW:
         case ActionsTypes.CHANGE_USER_NAME:
+        case ActionsTypes.STOP_LOADING_ANIMATION:
+        case ActionsTypes.START_LOADING_ANIMATION:
             return DisplayReducer[action.type](newState, action)
 
 

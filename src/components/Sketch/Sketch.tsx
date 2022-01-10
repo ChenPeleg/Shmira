@@ -11,6 +11,7 @@ import {SketchNoSketchMessage} from './sketch-no-sketch-message';
 import {TransitionGroup} from 'react-transition-group';
 import {SketchPendingPreferences} from './SketchPendeingOrders';
 import {ListSketchDriveEditDialog} from '../Dialogs/list-sketch-drive-edit-dialog';
+import {PreferenceModel} from '../../models/Preference.model';
 
 const MOckDrive = {
     'id': '0',
@@ -35,6 +36,10 @@ export const Sketch = () => {
     const dispatch = useDispatch()
 
     const SketchIdInEdit = useSelector((state: ShmiraListStore) => state.SketchIdInEdit);
+    // const shmiraListId = useSelector((state: ShmiraListStore) => state.shmiraListId);
+    //   const shmiraListCollection = useSelector((state: ShmiraListStore) => state.shmiraListCollection);
+    //  const shmiraListSelected: ShmiraListRecord | undefined = shmiraListCollection.find((shmiraListRecord: ShmiraListRecord) => shmiraListRecord.id === shmiraListId) as ShmiraListRecord;
+    const allPreferences: PreferenceModel [] = useSelector((state: ShmiraListStore) => state.preferences);
 
     const nights = useSelector((state: { nights: NightScheduleModel[] }) => state.nights);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
@@ -74,7 +79,7 @@ export const Sketch = () => {
     };
 
     const sketchNightClickHandler = (event: React.MouseEvent<HTMLElement>, night: NightScheduleModel) => {
-        setChosenNight(night)
+        setChosenNight({...night})
         setSketchDriveEditOpen(true);
     };
 
@@ -149,7 +154,8 @@ export const Sketch = () => {
                 </Box>
 
                 {sketchDriveEditOpen && chosenNight ?
-                    <ListSketchDriveEditDialog nightData={chosenNight as NightScheduleModel} onClose={handleSketchDriveEditClose}
+                    <ListSketchDriveEditDialog nightData={chosenNight as NightScheduleModel}
+                                               onClose={handleSketchDriveEditClose}
                                                onDelete={handleSketchDriveEditDelete} key={'2'}
                                                open={sketchDriveEditOpen}/> : null}
 

@@ -25,6 +25,7 @@ import {PreferenceImportDialog} from '../Dialogs/orders-import-dialog';
 import {Styles} from '../../hoc/themes';
 import {LightTooltip} from '../Styled/styled-tool-tip';
 import {SessionUseSave} from '../Session/session-use-save';
+import {StoreUtils} from '../../store/store-utils';
 
 
 export const AppNavBar = () => {
@@ -124,10 +125,13 @@ export const AppNavBar = () => {
                 })
                 break;
             case ProfileMenuClickActionType.Export:
-                dispatch({
-                    type: ActionsTypes.EXPORT_ALL,
-                    payload: null
-                })
+                StoreUtils.shieldAnimationBeforeDispatch(() => {
+                    dispatch({
+                        type: ActionsTypes.EXPORT_ALL,
+                        payload: null
+                    })
+                }, dispatch)
+
                 break;
             case ProfileMenuClickActionType.Import:
                 setUploadOpen(true)

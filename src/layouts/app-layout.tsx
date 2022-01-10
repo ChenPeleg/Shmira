@@ -16,7 +16,7 @@ export const AppLayout = () => {
         <ThemeProvider theme={themeMain}>
             <div className="app-background" dir={'rtl'}>
                 <AppNavBar/>
-                {/*<Loading/>*/}
+                <Loading/>
 
                 <MainLayout/>
 

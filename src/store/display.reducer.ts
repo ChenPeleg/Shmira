@@ -1,9 +1,9 @@
-import {AppConstants, IAction, ShmiraListStore} from './store.types';
+import {IAction, ShmiraListStore} from './store.types';
 import {ActionsTypes} from './types.actions';
 import {StoreUtils} from './store-utils';
 
 export type DisplayReducerFunctions =
-    ActionsTypes.CHANGE_VIEW | ActionsTypes.CHANGE_USER_NAME
+    ActionsTypes.CHANGE_VIEW | ActionsTypes.CHANGE_USER_NAME | ActionsTypes.STOP_LOADING_ANIMATION | ActionsTypes.START_LOADING_ANIMATION
 
 
 export const DisplayReducer: Record<DisplayReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
@@ -11,6 +11,8 @@ export const DisplayReducer: Record<DisplayReducerFunctions, (state: ShmiraListS
         let newState = {...state}
         newState.displaySetting = {...newState.displaySetting}
         newState.displaySetting.view = action.payload.value;
+        newState.currentSessionState = {...newState.currentSessionState}
+
 
         StoreUtils.updateShmiraListRecordWithSketchChanges(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
@@ -25,30 +27,20 @@ export const DisplayReducer: Record<DisplayReducerFunctions, (state: ShmiraListS
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
-
-
-}
-const getAllPreferencesIDs = (state: ShmiraListStore): string[] => {
-    const preferencesIds = state.preferences.map(o => o.id);
-    const deletedIdsWithWords = state.deletedPreferences.map(o => o.id);
-    const replaceIdsNames: RegExp = new RegExp(AppConstants.ArchiveIdPrefix + '|' + AppConstants.deleteIdPrefix, 'g');
-    ;
-    const deletedIds = deletedIdsWithWords.map(o => o.replace(replaceIdsNames, ''))
-    return [...deletedIds, ...preferencesIds]
-}
-const updatePreferencesWithEditedPreference = (state: ShmiraListStore): ShmiraListStore => {
-    const currentPreferenceId = state?.dataHolderForCurrentPreferenceInEdit?.id
-    if (currentPreferenceId) {
-        state.preferences = state.preferences.map(preference => {
-            if ((currentPreferenceId === preference.id) && state.dataHolderForCurrentPreferenceInEdit) {
-                preference = state.dataHolderForCurrentPreferenceInEdit
-            }
-            return preference
-        });
+    [ActionsTypes.STOP_LOADING_ANIMATION]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+        let newState = {...state}
+        newState.currentSessionState = {...newState.currentSessionState};
+        newState.currentSessionState.isAnimationRunning = false
+        return newState
+    },
+    [ActionsTypes.START_LOADING_ANIMATION]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+        let newState = {...state}
+        newState.currentSessionState = {...newState.currentSessionState};
+        newState.currentSessionState.isAnimationRunning = true
+        return newState
     }
 
 
-    return state
 }
 
 

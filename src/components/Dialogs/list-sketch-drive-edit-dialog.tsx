@@ -46,10 +46,8 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
     const dayOfWeek = Utils.Date.getDatOfWeekTextFromTimeStamp(night.date);
     //const optionalGuardsArr = preferences.filter(g => night.optionalGuards.includes(g.id)).map(g => g.guardName);
     const guardsRaw: (PreferenceModel | undefined)[] = night.guards.map(guardId => preferences.find(p => p.id === guardId))
-    const guardNames = guardsRaw.map(g => g && g.guardName ? g.guardName : null).filter(g => g)
 
-
-    const sketchPreferences = sketchInEdit?.assignedPreferences || [];
+    const sketchPreferences = preferences;
     const [nightChangedData, setNightChangedData] = useState<NightScheduleModel>({...nightData});
 
 
@@ -64,7 +62,6 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
     const handleCloseEdit = (): void => {
         const editedData: NightScheduleModel | null = {...nightChangedData};
         if (descriptionValueRef?.current?.value) {
-            // editedData.description = descriptionValueRef?.current?.value
         }
         onClose(editedData);
 
@@ -79,9 +76,9 @@ export const ListSketchDriveEditDialog = (props: SketchDriveEditDialogProps) => 
                 sketchNightId: thisNightData.id
             }
         })
-        const newDrive = {...nightChangedData};
-        // newDrive.implementsPreferences = newDrive.implementsPreferences.filter(o => o !== preferenceId);
-        setNightChangedData(newDrive)
+        const newNight = {...nightChangedData};
+        newNight.guards = newNight.guards.filter(g => g !== preferenceId)
+        setNightChangedData(newNight)
     }
 
 

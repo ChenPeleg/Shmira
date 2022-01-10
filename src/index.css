@@ -33,3 +33,63 @@ body {
 }
 
 
+.svg-componenet-shadow {
+    filter: drop-shadow(3px 3px 15px rgba(58, 58, 55, 0.699));
+    /* animation: shadow 1s ease-in forwards */
+}
+
+.finish-animation {
+    stroke-dasharray: 10.66;
+    stroke-dashoffset: 32.66;
+    animation: dash-finish 2.5s linear infinite;
+    stroke: rgb(104, 71, 71);
+    fill: rgb(164, 255, 73);
+}
+
+@keyframes dash-finish {
+    0% {
+
+        stroke-dasharray: 32.66;
+        stroke-dashoffset: 62.66;
+        fill: rgb(164, 255, 73);
+
+
+    }
+
+    40% {
+
+        stroke-dasharray: 52.66;
+        stroke-dashoffset: 32.66;
+    }
+
+    45% {
+        stroke-dasharray: 58.66;
+        stroke-dashoffset: 15;
+        fill: rgb(196, 255, 137);
+
+
+    }
+
+    50% {
+
+        stroke-dasharray: 62.66;
+        stroke-dashoffset: 0;
+    }
+
+    60% {
+
+        stroke-dasharray: 62.66;
+        stroke-dashoffset: 0;
+
+
+    }
+
+    100% {
+
+        stroke-dasharray: 62.66;
+        stroke-dashoffset: 0;
+        fill: rgb(164, 255, 73);
+    }
+
+
+}

@@ -76,7 +76,8 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
                 dataHolderForCurrentPreferenceInEdit: null,
                 locationGroupInEdit: null,
                 preferenceIdInEdit: null,
-                pendingPreferenceIdInEdit: null
+                pendingPreferenceIdInEdit: null,
+                isAnimationRunning: false
             };
         }
         newState.currentSessionState = {...newState.currentSessionState};

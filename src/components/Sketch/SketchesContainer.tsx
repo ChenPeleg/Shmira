@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import {Sketch} from './Sketch';
 import MenuItem from '@mui/material/MenuItem';
 import {RenameDialog} from '../Dialogs/rename-dialog';
+import {StoreUtils} from '../../store/store-utils';
 
 
 export const SketchesContainer = () => {
@@ -80,10 +81,13 @@ export const SketchesContainer = () => {
 
         const chosenSketch = event.target.value as string;
         if (chosenSketch === 'NEW') {
-            dispatch({
-                type: ActionsTypes.NEW_SKETCH,
-                payload: null
-            });
+            StoreUtils.shieldAnimationBeforeDispatch(() => {
+                dispatch({
+                    type: ActionsTypes.NEW_SKETCH,
+                    payload: null
+                })
+            }, dispatch)
+
 
         } else {
             dispatch({
@@ -103,20 +107,22 @@ export const SketchesContainer = () => {
     //     }
     // })
     const handleCreateSketch = () => {
-        dispatch({
-            type: ActionsTypes.NEW_SKETCH,
-            payload: {
-                value: null,
-            }
-        })
+        StoreUtils.shieldAnimationBeforeDispatch(() => {
+            dispatch({
+                type: ActionsTypes.NEW_SKETCH,
+                payload: null
+            })
+        }, dispatch)
     }
     const handleDownloadSketch = () => {
-        dispatch({
-            type: ActionsTypes.DOWNLOAD_SKETCH,
-            payload: {
-                value: null,
-            }
-        })
+        StoreUtils.shieldAnimationBeforeDispatch(() => {
+            dispatch({
+                type: ActionsTypes.DOWNLOAD_SKETCH,
+                payload: {
+                    value: null,
+                }
+            })
+        }, dispatch)
     }
 
 
