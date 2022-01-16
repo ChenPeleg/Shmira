@@ -98,14 +98,7 @@ export const SketchesContainer = () => {
 
 
     }
-    // useEffect(() => {
-    //     if (mock) {
-    //         setMock(false)
-    //         console.clear()
-    //         const listRes = ShmiraListBuilder(shmiraListSelected as ShmiraListRecord)
-    //
-    //     }
-    // })
+
     const handleCreateSketch = () => {
         StoreUtils.shieldAnimationBeforeDispatch(() => {
             dispatch({
