@@ -84,6 +84,7 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
         DateFrom: shmiraListSelected.DateFrom
     })
 
+
     const nights: NightScheduleModel[] = sketchInEdit?.NightSchedule ? sketchInEdit.NightSchedule : [];
     const filteredDatesForHalfNight = nights.filter((n: NightScheduleModel) => baseDays.includes(n.date) && !(n.guards?.length === 2)).map(n => n.date)
     const filteredDatesForFullNight = nights.filter((n: NightScheduleModel) => baseDays.includes(n.date) && (!n.guards || n.guards.length == 0)).map(n => n.date)
@@ -96,8 +97,30 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
             timeStamp: d,
             name: Utils.Date.simpleDateFromDateStamp(d)
         }
+    });
+    const datesForMenuWithWarnings = datesForMenu.map(d => {
+        const mapedDay = {...d};
+        if (datesThatThisGuardIsAssignedTo.length) {
+            datesThatThisGuardIsAssignedTo.forEach((d: string) => {
+                const gap = Number(d) - Number(mapedDay.timeStamp)
+                if (Math.abs(gap) < 7) {
+                    let textToAdd = ' (' + translations.guardsAction + ' ' + Math.abs(gap).toString();
+
+                    if (gap < 0) {
+                        mapedDay.name += textToAdd + ' ' + translations.daysBefore + ')';
+                    } else if (gap > 0) {
+                        mapedDay.name += textToAdd + ' ' + translations.daysAfter + ')';
+                    } else if (d === mapedDay.timeStamp) {
+                        mapedDay.name += ' (' + translations.guardsTheSameNight + ')'
+                    }
+                }
+            })
+        }
+
+        return mapedDay
     })
-    const noPotentialPlacesWereFound = datesForMenu.length === 0 ? ', ' + translations.noPotentialPlacesFound : '';
+    console.log(datesThatThisGuardIsAssignedTo, datesForMenuWithWarnings)
+    const noPotentialPlacesWereFound = datesForMenuWithWarnings.length === 0 ? ', ' + translations.noPotentialPlacesFound : '';
     let additionalDateInfo = '';
     if (noPotentialPlacesWereFound) {
 
@@ -144,7 +167,7 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
                     <Box key={i} sx={{p: '0.5em'}}> <PreferenceActionButton key={n.action.toString()} text={n.name} actionType={n.action}
                                                                             actionClickHandler={actionClickHandler}/>
                     </Box>))}
-                {datesForMenu.length > 0 ?
+                {datesForMenuWithWarnings.length > 0 ?
                     <Box sx={{p: '0.5em'}}>
 
                         <Button sx={{
@@ -182,7 +205,7 @@ export const SketchPendingPreferenceFull = (props: sketchPendingPreferenceProps)
             <PendingPreferenceMenu PendingPreferenceMenuAnchor={pendingPreferenceAnchorEl} PendingPreferenceMenuId={pendingPreferenceMenuId}
                                    isPendingPreferenceMenuOpen={isShmiraListMenuOpen}
                                    handlePendingPreferenceMenuClick={handlePendingPreferenceMenuClick}
-                                   handlePendingPreferenceMenuClose={handleShmiraListMenuClose} dates={datesForMenu}/>
+                                   handlePendingPreferenceMenuClose={handleShmiraListMenuClose} dates={datesForMenuWithWarnings}/>
         </Box>)
 
     )

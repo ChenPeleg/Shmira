@@ -38,10 +38,10 @@ export const LoadingShield = () => {
 
 
             <svg id="svg-container " viewBox="0 0 24 24" className="svg-componenet-shadow">
-                <path className="path2" fill="transparent" stroke="grey" stroke-width="2"
+                <path className="path2" fill="transparent" stroke="grey" strokeWidth="2"
                       d="M 12 3 L 3 5 v 6 c 0 5.55 3.84 10.74 9 12 c 5.16 -1.26 9 -6.45 9 -12 V 5 l -9 -2 z"/>
                 <path id="svg-animated-path" className="finish-animation" fill="transparent" stroke="black"
-                      stroke-width="1"
+                      strokeWidth="1"
                       d="M 12 3 L 3 5 v 6 c 0 5.55 3.84 10.74 9 12 c 5.16 -1.26 9 -6.45 9 -12 V 5 l -9 -2 z"/>
 
             </svg>

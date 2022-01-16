@@ -42,8 +42,9 @@ export const PendingPreferenceMenu = (props: PendingPreferenceMenuProps) => {
             open={isPendingPreferenceMenuOpen}
             onClose={handlePendingPreferenceMenuClose}
         >
-         
-            {dates.map((date: { timeStamp: string, name: string }, i: number) => <MenuItem key={i}
+
+            {dates.map((date: { timeStamp: string, name: string }, i: number) => <MenuItem sx={{color: date.name.length > 5 ? 'red' : ''}}
+                                                                                           key={i}
                                                                                            onClick={(e) => handlePendingPreferenceMenuClick(e, date.timeStamp)}>
 
                 {date.name}

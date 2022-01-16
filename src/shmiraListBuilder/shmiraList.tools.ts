@@ -47,7 +47,7 @@ export const ShmiraListBuilderTools = {
         }
         return false
     },
-    buildDaysYouCanGuard(preference: PreferenceModel, range: RangeModel) {
+    buildDaysYouCanGuard(preference: PreferenceModel, range: RangeModel): string[] {
         const allDatesArray = Utils.Date.getTimestampArrayFromStartAndFinishDate(range.DateFrom, range.DateTo);
         let daysInputed: string[] = [];
         if (preference.weekDaysOrDates == WeekDaysOrDates.WeekDays) {

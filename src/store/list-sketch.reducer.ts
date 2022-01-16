@@ -96,10 +96,13 @@ export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraLis
         newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState);
         const SketchIdInEdit = newState.SketchIdInEdit;
         const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
+        //if (state.shmiraListId)
 
+        const chosenShmiraListObj: ShmiraListRecord | undefined = newState.shmiraListCollection.find((record: ShmiraListRecord) => record.id = newState.shmiraListId);
+        const shmiraListName = chosenShmiraListObj?.Name || translations.ShmiraList
         if (sketchObj !== undefined) {
             const saveObj: string = StoreUtils.buildCSVFileFromSketch(sketchObj, newState.preferences)
-            const name = sketchObj.name + '.csv'
+            const name = shmiraListName + ' ' + translations.Sketch + ' ' + sketchObj.name + '.csv'
             DownloadCSVFile(name, saveObj)
         }
         return newState
