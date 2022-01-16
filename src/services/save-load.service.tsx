@@ -2,7 +2,7 @@
 import {SaveDataModel} from '../store/store.types';
 
 
-const APPID = '$123AT6'
+const APPID = '$123SHMIRA'
 export const SaveLoadService = {
     saveToLocalStorage: (data: SaveDataModel): { success: boolean } => {
         const userId = data.userId || 'Chen123';

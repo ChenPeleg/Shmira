@@ -11,7 +11,7 @@ export const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({theme}) => ({
             // border: 0,
         },
         '&.Mui-selected': {
-            backgroundColor: 'rgb(187,185,249)',
+            backgroundColor: 'rgba(218,255,248,0.64)',
             // border: 0,
         },
         '&:not(:first-of-type)': {
