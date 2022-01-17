@@ -41,7 +41,7 @@ export const DaysBetween = () => {
             valueLabelDisplay="auto"
             sx={sliderSx}
             min={2}
-            max={12}
+            max={28}
 
             step={1}
             value={value}

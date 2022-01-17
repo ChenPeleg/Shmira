@@ -31,7 +31,7 @@ export const ListSketchReducer: Record<SketchReducerFunctions, (state: ShmiraLis
             const deconstructedShmiraList = {...chosenShmiraListObj};
             deconstructedShmiraList.preferences = newState.preferences;
             deconstructedShmiraList.sketches = newState.sketches;
-            deconstructedShmiraList.daysBetweenGuardDuty = '6';
+        
             const newSketch = ShmiraListBuilder(deconstructedShmiraList);
             newSketch.id = newId;
             if (!newState.sketches) {
