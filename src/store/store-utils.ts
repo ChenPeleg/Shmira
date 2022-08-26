@@ -159,7 +159,8 @@ export const StoreUtils = {
             preferenceIdInEdit: null,
             pendingPreferenceIdInEdit: null,
             dataHolderForCurrentPreferenceInEdit: null,
-            isAnimationRunning: false
+            isAnimationRunning: false,
+            isImportSheetModalOpen : false
 
         }
         try {

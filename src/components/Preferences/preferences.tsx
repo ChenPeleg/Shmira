@@ -7,6 +7,8 @@ import {ActionsTypes} from '../../store/types.actions';
 import {AddButton} from '../Icons/add-button';
 import {PreferenceModel} from '../../models/Preference.model';
 import {ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
+import {ImportFromSheetsButton} from "../Icons/import-from-sheets";
+import { Styles } from '../../hoc/themes';
 
 const TRL = translations;
 const useStyles = (() => ({
@@ -49,6 +51,13 @@ export const Preferences = () => {
             payload: {}
         })
     }
+    const importClickHandler = (event: any) => {
+        dispatch({
+            type: ActionsTypes.OPEN_IMPORT_SHEETS_MODAL,
+            payload: {}
+        })
+    }
+
 
     return (
         <Box>
@@ -80,9 +89,10 @@ export const Preferences = () => {
                     justifyContent: 'center',
                     minWidth: '15vw',
                 }}>
-
+                    <Box sx={{...Styles.divider}}></Box>
                     <AddButton addClickHandler={addClickHandler}/>
-
+                    <Box sx={{...Styles.divider}}></Box>
+                    <ImportFromSheetsButton importClickHandler={importClickHandler}/>
                 </Box>
             </Box>
             <Box>

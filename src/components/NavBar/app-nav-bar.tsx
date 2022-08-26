@@ -26,6 +26,7 @@ import {Styles} from '../../hoc/themes';
 import {LightTooltip} from '../Styled/styled-tool-tip';
 import {SessionUseSave} from '../Session/session-use-save';
 import {StoreUtils} from '../../store/store-utils';
+import {ImportSheetsDialog} from "../Dialogs/import-sheets-dialog";
 
 
 export const AppNavBar = () => {
@@ -40,6 +41,8 @@ export const AppNavBar = () => {
         React.useState<null | HTMLElement>(null);
     const shmiraListId = useSelector((state: ShmiraListStore) => state.shmiraListId);
     const shmiraListCollection = useSelector((state: ShmiraListStore) => state.shmiraListCollection);
+    const importSheetsDialogOpen = useSelector((state: ShmiraListStore) => state.currentSessionState.isImportSheetModalOpen);
+console.log (importSheetsDialogOpen)
     const shmiraListSelected = shmiraListCollection.find((shmiraListRecord: ShmiraListRecord) => shmiraListRecord.id === shmiraListId);
     const nextShmiraListId = Utils.getNextId(shmiraListCollection.map(c => c.id));
 
@@ -300,6 +303,8 @@ export const AppNavBar = () => {
             <PreferenceImportDialog open={importPreferencesOpen} onClose={() => {
                 setImportPreferencesOpen(false)
             }}/>
+            <ImportSheetsDialog open={importSheetsDialogOpen}   selectedValue={shmiraListName}/>
+
 
         </Box>
     );

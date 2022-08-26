@@ -10,7 +10,7 @@ import {PreferenceModel} from '../models/Preference.model';
 export type ImportReducerFunctions =
     ActionsTypes.EXPORT_ALL |
     ActionsTypes.IMPORT_FILE_UPLOADED |
-    ActionsTypes.IMPORT_ORDERS_AS_TEXT
+    ActionsTypes.IMPORT_ORDERS_AS_TEXT | ActionsTypes.OPEN_IMPORT_SHEETS_MODAL | ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL
 
 export const ImportExportReducer: Record<ImportReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
     [ActionsTypes.EXPORT_ALL]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
@@ -18,6 +18,20 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: ShmiraL
         newState.shmiraListCollection = StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState);
         const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(newState)
         DownloadFile('shmiraList.json', JSON.stringify(saveObj))
+        return newState
+
+    },
+    [ActionsTypes.OPEN_IMPORT_SHEETS_MODAL]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+        let newState = {...state}
+        newState.currentSessionState = {...newState.currentSessionState }
+        newState.currentSessionState.isImportSheetModalOpen = true;
+            return newState
+    },
+    [ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+        let newState = {...state}
+
+        newState.currentSessionState = {...newState.currentSessionState }
+        newState.currentSessionState.isImportSheetModalOpen = false;
         return newState
 
     },

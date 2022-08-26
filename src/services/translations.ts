@@ -19,6 +19,7 @@ export const translations = {
     'ExportAllData': 'יצוא הכל',
     'downloadAsCSV': 'הורדה כטבלה',
     'ImportAllData': 'יבוא הכל',
+    'ImportFromSheets' : 'יבוא מטופס שמירה',
     'DeleteAndImportAllData': 'מחק הכל והחלף ביבוא הכל',
     'ImportPart': 'יבוא חלקי',
     'NewName': 'שם חדש',

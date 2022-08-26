@@ -38,6 +38,7 @@ export interface SessionModel {
     LocationGroupTabOpen: null | string;
     dataHolderForCurrentPreferenceInEdit: null | PreferenceModel,
     isAnimationRunning: boolean;
+    isImportSheetModalOpen : boolean
 }
 
 export interface ShmiraListStore {

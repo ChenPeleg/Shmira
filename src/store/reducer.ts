@@ -46,6 +46,9 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
 
             return PreferenceReducer[action.type](newState, action)
 
+
+        case ActionsTypes.OPEN_IMPORT_SHEETS_MODAL:
+        case ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL:
         case ActionsTypes.EXPORT_ALL:
         case ActionsTypes.IMPORT_FILE_UPLOADED:
         case ActionsTypes.IMPORT_ORDERS_AS_TEXT:
