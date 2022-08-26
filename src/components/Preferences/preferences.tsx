@@ -92,8 +92,9 @@ export const Preferences = () => {
                     <Box sx={{...Styles.divider}}></Box>
                     <AddButton addClickHandler={addClickHandler}/>
                     <Box sx={{...Styles.divider}}></Box>
-                    <ImportFromSheetsButton importClickHandler={importClickHandler}/>
-                </Box>
+                    {preferences.length === 0 ? <ImportFromSheetsButton importClickHandler={importClickHandler}/> : null
+
+                    }</Box>
             </Box>
             <Box>
                 {preferences.map((o) => (
