@@ -199,6 +199,31 @@ export const Utils = {
             }
 
         },
+         dateStampFromSimpleDate(simpleDate: string): string {
+            const getYearFromMonths = (month : number) => {
+                let testCaseDate = new Date();
+                let year = testCaseDate.getFullYear();
+                let thisMonth = testCaseDate.getFullYear();
+                if (thisMonth > month + 6) {
+                    return year + 1;
+                }
+                return year;
+            }
+            let theDate = new Date();
+            const  simpleDateArr = simpleDate.split('.');
+            const month = Number( simpleDateArr[0]) - 1;
+            const year = getYearFromMonths(month);
+            const day = Number(simpleDateArr[1]);
+            // const date: Date | null = this.dateStampToDate(dateStamp)
+            //
+            // if (date) {
+            //     return date.getDate().toString() + '.' + (date.getMonth() + 1).toString()
+            // } else {
+            //     return ''
+            // }
+            return '';
+
+        },
         getTimestampArrayFromStartAndFinishDate(dateFrom: string, dateTo: string): string [] {
             const numberOfDays: number = Number(dateTo) - Number(dateFrom) + 1;
             const correctedNumberOfDays = numberOfDays < 100 && numberOfDays > 10 ? numberOfDays : 40

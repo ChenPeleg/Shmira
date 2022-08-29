@@ -26,10 +26,13 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: ShmiraL
         newState.currentSessionState = {...newState.currentSessionState }
         newState.currentSessionState.isImportSheetModalOpen = true;
         newState.currentSessionState.importSheetCheckStatus = false;
+        const modeledImportedPreferences: PreferenceModel[] = ImportPreferencesFromText('');
+        newState.preferences = newState.preferences.concat(modeledImportedPreferences)
             return newState
     },   [ActionsTypes.IMPORT_SHEETS_DATA_PASTE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         newState.currentSessionState = {...newState.currentSessionState }
+        console.log (action.payload)
         newState.currentSessionState.importSheetCheckStatus = 'FAIL';
             return newState
     },
