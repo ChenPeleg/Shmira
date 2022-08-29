@@ -211,17 +211,20 @@ export const Utils = {
             }
             let theDate = new Date();
             const  simpleDateArr = simpleDate.split('.');
-            const month = Number( simpleDateArr[0]) - 1;
+            if  (!(+simpleDateArr[0] > 0 && +simpleDateArr[1] > 0 )) {
+                return ''
+            }
+            const month = Number( simpleDateArr[1]) - 1;
             const year = getYearFromMonths(month);
-            const day = Number(simpleDateArr[1]);
-            // const date: Date | null = this.dateStampToDate(dateStamp)
-            //
-            // if (date) {
-            //     return date.getDate().toString() + '.' + (date.getMonth() + 1).toString()
-            // } else {
-            //     return ''
-            // }
-            return '';
+            const day = Number(simpleDateArr[0]);
+
+
+             theDate.setFullYear(year);
+             theDate.setMonth(month);
+             theDate.setFullYear(year);
+             theDate.setDate(day);
+
+            return this.dateToDateStamp (theDate);
 
         },
         getTimestampArrayFromStartAndFinishDate(dateFrom: string, dateTo: string): string [] {

@@ -5,10 +5,11 @@ import {locations} from './locations';
 import {LocationModel} from '../models/Location.model';
 import {translations} from './translations';
 import {fakeFileData} from "./fake-file-data";
+import {Utils} from "./utils";
 
 const NewRowToken = 'New_row_';
 
-interface SheetGuardPreference extends Partial<PreferenceModel >{
+interface SheetGuardPreference extends Partial<PreferenceModel> {
     name: string,
     hour: string,
     text: string
@@ -32,14 +33,14 @@ const rowsToEshbalPreferences = (rows: string [][]): SheetGuardPreference[] => {
                 if (row[c].length > 1) {
                     const newRide: SheetGuardPreference = {
                         name: name,
-                        hour : "",
-                        flexibilityByDays : [],
-                        weekDaysOrDates : WeekDaysOrDates.Dates,
-                        halfOrFull : '1',
+                        hour: "",
+                        flexibilityByDays: [],
+                        weekDaysOrDates: WeekDaysOrDates.Dates,
+                        halfOrFull: '1',
                         Comments: row[c],
                         text: row[c + 1],
                     }
-                    console.log (newRide);
+
                     Epreferences.push(newRide);
 
                 }
@@ -59,7 +60,7 @@ const preferencesToPreferenceModel = (preferences: SheetGuardPreference[]): Pref
             flexibilityByDates: [],
             halfOrFull: '1',
             location: '',
-            TypeOfInfoPreference: null,
+            TypeOfInfoPreference: PreferenceType.CanGuardIn,
             optionalGuardDaysByDates: convertTimeTo4Digits(ePreference.hour),
             Comments: ePreference.Comments || '',
             guardName: ePreference.name,
@@ -73,16 +74,17 @@ const preferencesToPreferenceModel = (preferences: SheetGuardPreference[]): Pref
 
     return PreferencesApp;
 }
-const GetDatesFromText = (datesString : string) : string [] => {
-    const dates : string[]= [];
+const GetDatesFromText = (datesString: string): string [] => {
+    const dates: string[] = [];
     const stringwithNumbersAndcomas = datesString.replace(/[^0-9.,]/g, " ");
     const withoutSpaces = stringwithNumbersAndcomas.replace(/[\n\s\r ]/g, "");
     const dateArr = withoutSpaces.split(',');
-
-    console.log (dateArr);
-
-
-
+    dateArr.forEach(strDate => {
+        const oneTimeStamp = Utils.Date.dateStampFromSimpleDate(strDate);
+        if (+oneTimeStamp > 3000) {
+            dates.push(oneTimeStamp)
+        }
+    })
 
     return dates;
 }
@@ -200,7 +202,7 @@ export const ImportPreferencesFromText = (text: string): PreferenceModel[] => {
     const preferences: SheetGuardPreference[] = rowsToEshbalPreferences(rowsWithColumns);
 
     let appPreferences: PreferenceModel[] = preferencesToPreferenceModel(preferences)
-    //TODO - AD 19 Ad 6
+
     return getLocationAndTypeFromComments(appPreferences);
 
 
