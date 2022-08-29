@@ -79,7 +79,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
                 pendingPreferenceIdInEdit: null,
                 isAnimationRunning: false,
                 isImportSheetModalOpen : false,
-                canImportSheetModalOpen : false
+                importSheetCheckStatus : false
             };
         }
         newState.currentSessionState = {...newState.currentSessionState};
