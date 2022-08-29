@@ -2,7 +2,7 @@ import {mount} from 'enzyme';
 
 import React from 'react';
 import {render} from '@testing-library/react';
-import {Slider} from '@mui/material';
+import {Slider, ToggleButton, ToggleButtonGroup} from '@mui/material';
 import {TextFieldPropertiesModel} from '../../../models/text-field-properties.model';
 import {RenderFlexibilityField} from '../flex-field';
 
@@ -43,16 +43,17 @@ describe('Form Flexibility field ', () => {
     it('component renders', async () => {
         expect(wrapper.children()).toHaveLength(1);
         expect(wrapper).toBeTruthy();
-        expect(_baseElement.innerHTML.toString()).toContain('MuiSlider');
+        expect(_baseElement.innerHTML.toString()).toContain('ToggleButton');
     });
 
 
     it('renders one slider', async () => {
-        expect(wrapper.find(Slider).length).toBeGreaterThan(0);
+        expect(wrapper.find(ToggleButton).length).toBeGreaterThan(0);
+
     });
     it('change event triggers bound input onChange function', async () => {
 
-        wrapper.find(Slider).props().onChange([-20, 30])
+        wrapper.find(ToggleButtonGroup).props().onChange([-20, 30])
         expect(onChangeStub).toHaveBeenCalledWith([-20, 30]);
 
 
