@@ -39,9 +39,9 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
         minWidth: "35vw",
         minHeight: '50vh'
     }
-    const handlePasting = (event: ChangeEvent) => {
-        // @ts-ignore
-        const data = event.target.value as string ;
+    const handlePasting = (event: ChangeEvent & {target: { value: string }}) => {
+
+        const data = event.target.value   ;
         dispatch({type: ActionsTypes.IMPORT_SHEETS_DATA_PAST, payload: data})
     }
     const headerText =  translations.ImportFromSheets  ;
