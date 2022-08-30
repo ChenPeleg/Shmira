@@ -153,7 +153,8 @@ export const AppNavBar = () => {
     const handleHelpClick = () => {
         const w = window;
         if (!(w == null)){
-            w.open('./Shmira_help.pdf', '_blank')  ;
+          const public_ =  process.env.PUBLIC_URL
+            w.open( public_ +'/Shmira_help.pdf', '_blank')  ;
         }
 
 
