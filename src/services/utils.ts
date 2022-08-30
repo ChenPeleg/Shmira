@@ -203,11 +203,12 @@ export const Utils = {
             const getYearFromMonths = (month : number) => {
                 let testCaseDate = new Date();
                 let year = testCaseDate.getFullYear();
-                let thisMonth = testCaseDate.getFullYear();
+                let thisMonth = testCaseDate.getMonth();
+
                 if (thisMonth > month + 6) {
                     return year + 1;
                 }
-                console.log (year)
+
                 return year;
             }
             let theDate = new Date();

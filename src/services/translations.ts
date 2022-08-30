@@ -59,6 +59,7 @@ export const translations = {
     'CantGuardInDays': 'לא יכול לשמור בימים',
     'CanAlwaysGuard': 'יכול לשמור בכל הימים',
     'CantGuardInDaysDates': 'לא יכול לשמור בתאריכים',
+    'CanGuardInDaysDates': 'יכול לשמור בתאריכים',
     'CanAlwaysGuardDates': 'יכול לשמור בכל בתאריכים',
 
     'CanGuardInDaysShort': 'רק בימים',

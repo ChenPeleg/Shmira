@@ -31,7 +31,7 @@ const getLabelByPreferenceType = (canOrCant: PreferenceType, weekDaysOrDates: We
             return ''
         case PreferenceType.CanGuardIn:
             return weekDaysOrDates === WeekDaysOrDates.WeekDays ?
-                translations.CanGuardInDays : translations.CantGuardInDaysDates
+                translations.CanGuardInDays : translations.CanGuardInDaysDates
 
         case PreferenceType.CantGuardIn:
             return weekDaysOrDates === WeekDaysOrDates.WeekDays ?

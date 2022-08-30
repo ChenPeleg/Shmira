@@ -76,16 +76,16 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: ShmiraL
 
         const dateRange = getDatesFromImportedPreferences(modeledImportedPreferences);
 
-        if (CurrentShmiraList  ) {
+        if (CurrentShmiraList) {
             const sheetsFrom = +dateRange[0];
             const sheetsTo = +dateRange[1];
             let from = +CurrentShmiraList.DateFrom;
             let to = +CurrentShmiraList.DateTo;
-            if (sheetsFrom < from) {
-                from = sheetsFrom;
+            if (sheetsFrom < from || true) {
+                from = sheetsFrom - 1;
             }
-            if (sheetsTo > to) {
-                to = sheetsTo;
+            if (sheetsTo > to || true) {
+                to = sheetsTo + 1;
             }
             CurrentShmiraList.DateFrom = from.toString();
             CurrentShmiraList.DateTo = to.toString();
