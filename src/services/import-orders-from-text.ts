@@ -173,24 +173,66 @@ const convert2DigitTimeTo4Digits = (time: string): string => {
         return time
     }
 }
-const getLocationAndTypeFromComments = (preferences: PreferenceModel[]): PreferenceModel[] => {
-    preferences.map(preference => {
-        const LocationSearchResult = searchLocationInText(preference.Comments);
-        if (LocationSearchResult.locationFound) {
-            preference.location = LocationSearchResult.locationFound.id
+// const getLocationAndTypeFromComments = (preferences: PreferenceModel[]): PreferenceModel[] => {
+//     preferences.map(preference => {
+//         const LocationSearchResult = searchLocationInText(preference.Comments);
+//         if (LocationSearchResult.locationFound) {
+//             preference.location = LocationSearchResult.locationFound.id
+//         }
+//         if (LocationSearchResult.typeOfDrive) {
+//             preference.TypeOfInfoPreference = LocationSearchResult.typeOfDrive
+//         }
+//         const anotherTimeSearchResults = searchAnotherTimeInText(preference);
+//         if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== preference.optionalGuardDaysByDates) {
+//             preference.finishHour = anotherTimeSearchResults.anotherTime
+//         }
+//         return preference
+//     })
+//     return preferences
+// }
+export const vlidateImportedData = (prefs : PreferenceModel[]) =>{
+    let errors = [];
+    const guardWithoutName = prefs.filter(p=> p.guardName?.trim() === ''  );
+    const guardWithoutDates= prefs.filter(p=> p.flexibilityByDates.length === 0 );
+    if (prefs.length < 5) {
+        errors.push('only ' + prefs.length + 'rows were found')
+    }
+    if (guardWithoutDates[0]){
+        errors.push ('Guard ' + guardWithoutDates[0].guardName  + ' has no dates'  )
+    }
+    if (guardWithoutName[0]){
+        errors.push ('Row ' + prefs.indexOf(guardWithoutName[0])  + ' has no name'  )
+    }
+    const guardWithError = prefs.filter(p=> p.guardName.toLowerCase().includes('error'));
+    if (guardWithError[0]){
+        errors.push ('Row ' + prefs.indexOf(guardWithError[0])  + ' has an error'  )
+    }
+    if (errors.length) {
+       const text = errors.join('; ');
+       throw {
+         message : text
         }
-        if (LocationSearchResult.typeOfDrive) {
-            preference.TypeOfInfoPreference = LocationSearchResult.typeOfDrive
-        }
-        const anotherTimeSearchResults = searchAnotherTimeInText(preference);
-        if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== preference.optionalGuardDaysByDates) {
-            preference.finishHour = anotherTimeSearchResults.anotherTime
-        }
-        return preference
-    })
-    return preferences
-}
+    }
 
+
+return true
+}
+export const getDatesFromImportedPreferences = ( prefs : PreferenceModel[] ) : [string, string] => {
+   const todayDate = new Date();
+   const todayNumber = +Utils.Date.dateToDateStamp(todayDate);
+   let from =  todayNumber - 5 ;
+   let to =  todayNumber + 30 ;
+    prefs.forEach(pref=>{
+        pref.flexibilityByDates.map (d=>+d).forEach(date=> {
+            if (date > to){
+                to = date;
+            } else if (date < from) {
+                from = date;
+            }
+        })
+    })
+   return [from.toString(),to.toString()]
+}
 export const ImportPreferencesFromText = (text: string): PreferenceModel[] => {
     if (!text) {
         text = fakeFileData;
@@ -203,7 +245,7 @@ export const ImportPreferencesFromText = (text: string): PreferenceModel[] => {
 
     let appPreferences: PreferenceModel[] = preferencesToPreferenceModel(preferences)
 
-    return getLocationAndTypeFromComments(appPreferences);
+    return  appPreferences ;
 
 
 }

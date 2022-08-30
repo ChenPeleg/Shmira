@@ -39,7 +39,7 @@ export interface SessionModel {
     dataHolderForCurrentPreferenceInEdit: null | PreferenceModel,
     isAnimationRunning: boolean;
     isImportSheetModalOpen : boolean,
-    importSheetCheckStatus : false | 'OK' | 'FAIL'
+    importSheetCheckStatus : false | 'OK' | string
 }
 
 export interface ShmiraListStore {

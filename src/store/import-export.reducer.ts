@@ -3,7 +3,11 @@ import {StoreUtils} from './store-utils';
 import {DownloadFile} from '../services/download-file';
 import {Utils} from '../services/utils';
 import {ActionsTypes} from './types.actions';
-import {ImportPreferencesFromText} from '../services/import-orders-from-text';
+import {
+    getDatesFromImportedPreferences,
+    ImportPreferencesFromText,
+    vlidateImportedData
+} from '../services/import-orders-from-text';
 import {PreferenceModel} from '../models/Preference.model';
 
 
@@ -26,14 +30,24 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: ShmiraL
         newState.currentSessionState = {...newState.currentSessionState }
         newState.currentSessionState.isImportSheetModalOpen = true;
         newState.currentSessionState.importSheetCheckStatus = false;
-        const modeledImportedPreferences: PreferenceModel[] = ImportPreferencesFromText('');
-        newState.preferences = newState.preferences.concat(modeledImportedPreferences)
+
             return newState
     },   [ActionsTypes.IMPORT_SHEETS_DATA_PASTE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
         newState.currentSessionState = {...newState.currentSessionState }
-        console.log (action.payload)
-        newState.currentSessionState.importSheetCheckStatus = 'FAIL';
+        const modeledImportedPreferences: PreferenceModel[] = ImportPreferencesFromText(action.payload);
+        try {
+            vlidateImportedData(modeledImportedPreferences)
+        } catch (err : any) {
+            console.log (err)
+            newState.currentSessionState.importSheetCheckStatus = "Error :" + err.message || "Error" ;
+            return newState
+        }
+
+        //const dateRange = getDatesFromImportedPreferences(modeledImportedPreferences);
+       // newState.preferences = newState.preferences.concat(modeledImportedPreferences);
+
+        newState.currentSessionState.importSheetCheckStatus = 'OK';
             return newState
     },
     [ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
@@ -79,14 +93,7 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: ShmiraL
         const importedPreferences: string = action.payload.importedPreferences;
         const modeledImportedPreferences: PreferenceModel[] = ImportPreferencesFromText(importedPreferences);
         newState.preferences = newState.preferences.concat(modeledImportedPreferences)
-        // try {
-        //
-        //
-        // } catch (e) {
-        //
-        // } finally {
-        //
-        // }
+
         return newState
 
 

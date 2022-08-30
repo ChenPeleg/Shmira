@@ -22,16 +22,22 @@ interface ImportSheetsProps {
     customType?: 'EnterUserName'
 }
 
+const formatErrorText = (txt: string): string [] => {
+    const splitTxt = txt.split(';')
+    console.log(splitTxt);
+
+    return splitTxt
+}
 export const ImportSheetsDialog = (props: ImportSheetsProps) => {
 
     const {
         selectedValue,
         open
     } = props;
-    const importSheetCheckStatus =    useSelector((state: ShmiraListStore ) => state.currentSessionState.importSheetCheckStatus );
+    const importSheetCheckStatus = useSelector((state: ShmiraListStore) => state.currentSessionState.importSheetCheckStatus);
 
     const dispatch = useDispatch();
-    const [isWaitingForValidation, setIsWaitingForValidation ] = useState( false)
+    const [isWaitingForValidation, setIsWaitingForValidation] = useState(false)
     const valueRef: any = useRef('')
     const handleCloseCancel = () => {
         setIsWaitingForValidation(false);
@@ -50,21 +56,21 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
         minWidth: "35vw",
         minHeight: '50vh'
     }
-    const handlePasting = (event: ChangeEvent & {target: { value: string }}) => {
+    const handlePasting = (event: ChangeEvent & { target: { value: string } }) => {
 
-        const data = event.target.value ;
+        const data = event.target.value;
         setIsWaitingForValidation(true);
-        setTimeout (()=> {
-        dispatch({type: ActionsTypes.IMPORT_SHEETS_DATA_PASTE, payload: data})
+        setTimeout(() => {
+            dispatch({type: ActionsTypes.IMPORT_SHEETS_DATA_PASTE, payload: data})
         }, 1000)
     }
-    const headerText =  translations.ImportFromSheets  ;
-    const inputLabel = translations.PastHereSheet  ;
-    const disableText = isWaitingForValidation   ;
+    const headerText = translations.ImportFromSheets;
+    const inputLabel = translations.PastHereSheet;
+    const disableText = isWaitingForValidation;
     return (
         <div>
 
-            <Dialog  open={open} onClose={handleCloseCancel}>
+            <Dialog open={open} onClose={handleCloseCancel}>
                 <DialogTitle> {headerText}</DialogTitle>
                 <DialogContent sx={dialogStyle}>
 
@@ -94,45 +100,59 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
                         disabled={disableText}
                     />
                     {(isWaitingForValidation && !importSheetCheckStatus) ? <Box id={'waiting-for-validation'}>
-                        <Box sx={{padding: '20px', ...Styles.flexRow }}>
+                        <Box sx={{padding: '20px', ...Styles.flexRow}}>
                             {translations.ImportFromSheetsPastValidating}
                         </Box>
 
                         <LinearLoading timeToFinish={200}/>
                     </Box> : null}
 
-                    {importSheetCheckStatus === 'OK' ?  <Box sx={{padding: '20px', ...Styles.flexColumn,
-                        justifyContent : 'center',
-                        alignItems : 'center'
+                    {importSheetCheckStatus === 'OK' ? <Box sx={{
+                        padding: '20px', ...Styles.flexColumn,
+                        justifyContent: 'center',
+                        alignItems: 'center'
                     }}>
-                        <Box sx={{   ...Styles.flexRow , marginBottom : '20px'}}>
+                        <Box sx={{...Styles.flexRow, marginBottom: '20px'}}>
                             <Box sx={{padding: '0 20px 0 20px '}}>
-                                <Check  sx={{fontSize: '30px', color : 'green'}} />
+                                <Check sx={{fontSize: '30px', color: 'green'}}/>
                             </Box>
                             {translations.ImportFromSheetsPastSuccess}
 
                         </Box>
 
-                        <Button disabled={!importSheetCheckStatus} id={'shmiraList-rename-approve-button'} variant={'contained'}
+                        <Button disabled={!importSheetCheckStatus} id={'shmiraList-rename-approve-button'}
+                                variant={'contained'}
                                 onClick={handleCloseRename}>{translations.ImportFromSheetsApprove}</Button>
-                    </Box>  : null}
+                    </Box> : null}
 
-                    {importSheetCheckStatus === 'FAIL' ?  <Box sx={{padding: '20px', ...Styles.flexColumn,
-                        justifyContent : 'center',
-                        alignItems : 'center'
+                    {importSheetCheckStatus && importSheetCheckStatus.includes('Error') ? <Box sx={{
+                        padding: '20px', ...Styles.flexColumn,
+                        justifyContent: 'center',
+                        alignItems: 'center'
                     }}>
-                        <Box sx={{   ...Styles.flexRow , marginBottom : '20px'}}>
+                        <Box sx={{...Styles.flexRow, marginBottom: '20px'}}>
                             <Box sx={{padding: '0 20px 0 20px '}}>
-                                <ErrorOutline  sx={{fontSize: '30px', color : 'red'}} />
+                                <ErrorOutline sx={{fontSize: '30px', color: 'red'}}/>
                             </Box>
+
                             {translations.ImportFromSheetsPastFail}
 
+
+
+                        </Box>
+                        <Box sx={{direction: 'ltr', padding: '15px', margin: '10px', borderRadius: '5px', backgroundColor: '#f29c9c'}}>
+                            {formatErrorText(importSheetCheckStatus).map((t, i) =>
+                                ( <Box>
+                                    <Box key={i} sx={{padding: '00px'}}>{t}</Box>
+
+                                </Box>)
+
+                            )}
                         </Box>
 
                         <Button disabled={!importSheetCheckStatus} id={'import-approve-btn'} variant={'contained'}
                                 onClick={handleClearData}>{translations.Approve}</Button>
-                    </Box>  : null}
-
+                    </Box> : null}
 
 
                 </DialogContent>
