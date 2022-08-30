@@ -11,7 +11,7 @@ const props: AddButtonProps = {
     addClickHandler: clickMock
 }
 const addButton = shallow(<AddButton addClickHandler={props.addClickHandler}/>);
-describe('Add Button', () => {
+describe('Add Button last', () => {
 
 
     it('only one button', () => {
