@@ -41,8 +41,8 @@ export const AppNavBar = () => {
         React.useState<null | HTMLElement>(null);
     const shmiraListId = useSelector((state: ShmiraListStore) => state.shmiraListId);
     const shmiraListCollection = useSelector((state: ShmiraListStore) => state.shmiraListCollection);
-    const importSheetsDialogOpen = useSelector((state: ShmiraListStore) => state.currentSessionState.isImportSheetModalOpen);
-console.log (importSheetsDialogOpen)
+    const importSheetsDialogOpen = useSelector((state: ShmiraListStore) => state.currentSessionState.isImportSheetModalOpen) || false;
+
     const shmiraListSelected = shmiraListCollection.find((shmiraListRecord: ShmiraListRecord) => shmiraListRecord.id === shmiraListId);
     const nextShmiraListId = Utils.getNextId(shmiraListCollection.map(c => c.id));
 

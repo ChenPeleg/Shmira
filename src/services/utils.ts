@@ -207,6 +207,7 @@ export const Utils = {
                 if (thisMonth > month + 6) {
                     return year + 1;
                 }
+                console.log (year)
                 return year;
             }
             let theDate = new Date();

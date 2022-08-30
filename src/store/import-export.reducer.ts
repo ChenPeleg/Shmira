@@ -1,4 +1,4 @@
-import {FileUploadType, IAction, SaveDataModel, ShmiraListStore} from './store.types';
+import {FileUploadType, IAction, SaveDataModel, ShmiraListRecord, ShmiraListStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {DownloadFile} from '../services/download-file';
 import {Utils} from '../services/utils';
@@ -12,9 +12,15 @@ import {PreferenceModel} from '../models/Preference.model';
 
 
 export type ImportReducerFunctions =
-    ActionsTypes.EXPORT_ALL |
-    ActionsTypes.IMPORT_FILE_UPLOADED |
-    ActionsTypes.IMPORT_ORDERS_AS_TEXT | ActionsTypes.OPEN_IMPORT_SHEETS_MODAL | ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL | ActionsTypes.IMPORT_SHEETS_DATA_PASTE
+    ActionsTypes.EXPORT_ALL
+    |
+    ActionsTypes.IMPORT_FILE_UPLOADED
+    |
+    ActionsTypes.IMPORT_ORDERS_AS_TEXT
+    | ActionsTypes.OPEN_IMPORT_SHEETS_MODAL
+    | ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL
+    | ActionsTypes.IMPORT_SHEETS_DATA_PASTE
+    | ActionsTypes.APPROVE_IMPORT_SHEETS_DATA
 
 export const ImportExportReducer: Record<ImportReducerFunctions, (state: ShmiraListStore, action: IAction) => ShmiraListStore> = {
     [ActionsTypes.EXPORT_ALL]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
@@ -27,33 +33,79 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: ShmiraL
     },
     [ActionsTypes.OPEN_IMPORT_SHEETS_MODAL]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
-        newState.currentSessionState = {...newState.currentSessionState }
+        newState.currentSessionState = {...newState.currentSessionState}
         newState.currentSessionState.isImportSheetModalOpen = true;
         newState.currentSessionState.importSheetCheckStatus = false;
 
-            return newState
-    },   [ActionsTypes.IMPORT_SHEETS_DATA_PASTE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+        return newState
+    }, [ActionsTypes.IMPORT_SHEETS_DATA_PASTE]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
-        newState.currentSessionState = {...newState.currentSessionState }
+        newState.currentSessionState = {...newState.currentSessionState}
         const modeledImportedPreferences: PreferenceModel[] = ImportPreferencesFromText(action.payload);
         try {
             vlidateImportedData(modeledImportedPreferences)
-        } catch (err : any) {
-            console.log (err)
-            newState.currentSessionState.importSheetCheckStatus = "Error :" + err.message || "Error" ;
+        } catch (err: any) {
+
+            newState.currentSessionState.importSheetCheckStatus = "Error: " + err.message || "Error";
             return newState
         }
 
-        //const dateRange = getDatesFromImportedPreferences(modeledImportedPreferences);
-       // newState.preferences = newState.preferences.concat(modeledImportedPreferences);
 
         newState.currentSessionState.importSheetCheckStatus = 'OK';
+        return newState
+    }, [ActionsTypes.APPROVE_IMPORT_SHEETS_DATA]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
+        let newState = {...state}
+        newState.currentSessionState = {...newState.currentSessionState}
+        const modeledImportedPreferences: PreferenceModel[] = ImportPreferencesFromText(action.payload);
+        try {
+            vlidateImportedData(modeledImportedPreferences)
+        } catch (err: any) {
+            newState.currentSessionState.importSheetCheckStatus = "Error: " + err.message || "Error";
             return newState
+        }
+
+
+        newState.preferences = newState.preferences.concat(modeledImportedPreferences);
+
+        newState.currentSessionState.importSheetCheckStatus = false;
+        newState.currentSessionState.isImportSheetModalOpen = false;
+
+
+        const currentShmiraId = newState.shmiraListId;
+        const CurrentShmiraList: ShmiraListRecord | undefined = newState.shmiraListCollection?.find(l => l.id === currentShmiraId);
+
+        const dateRange = getDatesFromImportedPreferences(modeledImportedPreferences);
+
+        if (CurrentShmiraList  ) {
+            const sheetsFrom = +dateRange[0];
+            const sheetsTo = +dateRange[1];
+            let from = +CurrentShmiraList.DateFrom;
+            let to = +CurrentShmiraList.DateTo;
+            if (sheetsFrom < from) {
+                from = sheetsFrom;
+            }
+            if (sheetsTo > to) {
+                to = sheetsTo;
+            }
+            CurrentShmiraList.DateFrom = from.toString();
+            CurrentShmiraList.DateTo = to.toString();
+            newState.shmiraListCollection = newState.shmiraListCollection.map(s => {
+                if (s.id === currentShmiraId) {
+                    return {...CurrentShmiraList}
+                } else {
+                    return s
+                }
+            })
+        }
+
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState;
     },
+
     [ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL]: (state: ShmiraListStore, action: IAction): ShmiraListStore => {
         let newState = {...state}
 
-        newState.currentSessionState = {...newState.currentSessionState }
+        newState.currentSessionState = {...newState.currentSessionState}
         newState.currentSessionState.isImportSheetModalOpen = false;
         newState.currentSessionState.importSheetCheckStatus = false;
         return newState

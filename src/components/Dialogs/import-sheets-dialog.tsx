@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ChangeEvent, useRef, useState} from 'react';
+import {ChangeEvent, MutableRefObject, useRef, useState} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -24,7 +24,6 @@ interface ImportSheetsProps {
 
 const formatErrorText = (txt: string): string [] => {
     const splitTxt = txt.split(';')
-    console.log(splitTxt);
 
     return splitTxt
 }
@@ -38,13 +37,15 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
 
     const dispatch = useDispatch();
     const [isWaitingForValidation, setIsWaitingForValidation] = useState(false)
-    const valueRef: any = useRef('')
+    const valueRef: MutableRefObject<any> = useRef<any>('')
     const handleCloseCancel = () => {
         setIsWaitingForValidation(false);
         dispatch({type: ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL})
     };
-    const handleCloseRename = () => {
-        // onClose(valueRef.current.value || selectedValue);
+    const handleApproveImport = () => {
+        const data = valueRef.current.value
+        dispatch({type: ActionsTypes.APPROVE_IMPORT_SHEETS_DATA, payload: data})
+
     };
     const handleClearData = () => {
         valueRef.current.value = '';
@@ -58,8 +59,22 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
     }
     const handlePasting = (event: ChangeEvent & { target: { value: string } }) => {
 
-        const data = event.target.value;
+        let data = event.target.value;
+
+        if (data.length < 30 && data !== '`') {
+            return;
+        } else if (data !== '`') {
+            data = ''
+        }
+
         setIsWaitingForValidation(true);
+
+        setTimeout(() => {
+            valueRef.current.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            }, 100);
+        })
         setTimeout(() => {
             dispatch({type: ActionsTypes.IMPORT_SHEETS_DATA_PASTE, payload: data})
         }, 1000)
@@ -94,7 +109,7 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
                         onChange={handlePasting}
                         onKeyUp={(event) => {
                             if (event.key === 'Enter') {
-                                handleCloseRename()
+                                handleApproveImport()
                             }
                         }}
                         disabled={disableText}
@@ -122,7 +137,7 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
 
                         <Button disabled={!importSheetCheckStatus} id={'shmiraList-rename-approve-button'}
                                 variant={'contained'}
-                                onClick={handleCloseRename}>{translations.ImportFromSheetsApprove}</Button>
+                                onClick={handleApproveImport}>{translations.ImportFromSheetsApprove}</Button>
                     </Box> : null}
 
                     {importSheetCheckStatus && importSheetCheckStatus.includes('Error') ? <Box sx={{
@@ -138,15 +153,19 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
                             {translations.ImportFromSheetsPastFail}
 
 
-
                         </Box>
-                        <Box sx={{direction: 'ltr', padding: '15px', margin: '10px', borderRadius: '5px', backgroundColor: '#f29c9c'}}>
+                        <Box sx={{
+                            direction: 'ltr',
+                            padding: '15px',
+                            margin: '10px',
+                            borderRadius: '5px',
+                            backgroundColor: '#f29c9c'
+                        }}>
                             {formatErrorText(importSheetCheckStatus).map((t, i) =>
-                                ( <Box>
+                                (<Box>
                                     <Box key={i} sx={{padding: '00px'}}>{t}</Box>
 
                                 </Box>)
-
                             )}
                         </Box>
 

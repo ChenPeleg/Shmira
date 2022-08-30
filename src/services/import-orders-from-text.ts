@@ -36,7 +36,6 @@ const rowsToEshbalPreferences = (rows: string [][]): SheetGuardPreference[] => {
                         hour: "",
                         flexibilityByDays: [],
                         weekDaysOrDates: WeekDaysOrDates.Dates,
-                        halfOrFull: '1',
                         Comments: row[c],
                         text: row[c + 1],
                     }
@@ -58,7 +57,7 @@ const preferencesToPreferenceModel = (preferences: SheetGuardPreference[]): Pref
             id: idNum.toString(),
             flexibilityByDays: defaultValues.flexibilityByDays,
             flexibilityByDates: [],
-            halfOrFull: '1',
+            halfOrFull: '2',
             location: '',
             TypeOfInfoPreference: PreferenceType.CanGuardIn,
             optionalGuardDaysByDates: convertTimeTo4Digits(ePreference.hour),
@@ -173,29 +172,14 @@ const convert2DigitTimeTo4Digits = (time: string): string => {
         return time
     }
 }
-// const getLocationAndTypeFromComments = (preferences: PreferenceModel[]): PreferenceModel[] => {
-//     preferences.map(preference => {
-//         const LocationSearchResult = searchLocationInText(preference.Comments);
-//         if (LocationSearchResult.locationFound) {
-//             preference.location = LocationSearchResult.locationFound.id
-//         }
-//         if (LocationSearchResult.typeOfDrive) {
-//             preference.TypeOfInfoPreference = LocationSearchResult.typeOfDrive
-//         }
-//         const anotherTimeSearchResults = searchAnotherTimeInText(preference);
-//         if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== preference.optionalGuardDaysByDates) {
-//             preference.finishHour = anotherTimeSearchResults.anotherTime
-//         }
-//         return preference
-//     })
-//     return preferences
-// }
+
 export const vlidateImportedData = (prefs : PreferenceModel[]) =>{
     let errors = [];
     const guardWithoutName = prefs.filter(p=> p.guardName?.trim() === ''  );
     const guardWithoutDates= prefs.filter(p=> p.flexibilityByDates.length === 0 );
     if (prefs.length < 5) {
-        errors.push('only ' + prefs.length + 'rows were found')
+
+        errors.push(prefs.length ? 'only ' + prefs.length + ' rows were found' : 'no guard duty google sheets rows were found')
     }
     if (guardWithoutDates[0]){
         errors.push ('Guard ' + guardWithoutDates[0].guardName  + ' has no dates'  )
@@ -238,14 +222,20 @@ export const ImportPreferencesFromText = (text: string): PreferenceModel[] => {
         text = fakeFileData;
     }
     // text = stringValue;
+
     const rowsWithoutUserLineBreaks = DetectFormRows(text)
     const rows = stringIntoRows(rowsWithoutUserLineBreaks);
     const rowsWithColumns = rows.map(r => r.split(/\t/g));
-    const preferences: SheetGuardPreference[] = rowsToEshbalPreferences(rowsWithColumns);
+    try {
+        const preferences: SheetGuardPreference[] = rowsToEshbalPreferences(rowsWithColumns);
+        let appPreferences: PreferenceModel[] = preferencesToPreferenceModel(preferences)
+        return  appPreferences ;
+    } catch (e) {
+        return []
+    }
 
-    let appPreferences: PreferenceModel[] = preferencesToPreferenceModel(preferences)
 
-    return  appPreferences ;
+
 
 
 }
