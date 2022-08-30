@@ -46,8 +46,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --silent=false",
-    "test:last": "react-scripts test -t last --silent=false",
+    "test": "react-scripts test --silent=false --watchAll=false",
+    "test:last": "react-scripts test -t last --silent=false --watchAll=false",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
   },

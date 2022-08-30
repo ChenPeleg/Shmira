@@ -7,6 +7,21 @@
         {
             "type": "pwa-node",
             "request": "launch",
+            "name": "run serve",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "runtimeExecutable": "${env:HOME}./AppData/Local/nvs/node/12.14.1/x64/node",
+            "runtimeArgs": [
+                "npm",
+                "run",
+                "start"
+            ],
+            "program": "${file}"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
             "name": "Launch Program",
             "skipFiles": [
                 "<node_internals>/**"
