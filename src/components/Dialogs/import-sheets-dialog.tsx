@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ChangeEvent, useRef} from 'react';
+import {ChangeEvent, MutableRefObject, useRef, useState} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -8,10 +8,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {translations} from '../../services/translations';
 import {useDispatch, useSelector} from "react-redux";
-import {types} from "util";
 import {ActionsTypes} from "../../store/types.actions";
 import {SxProps} from "@mui/system";
 import {ShmiraListStore} from "../../store/store.types";
+import {LinearLoading} from "../Loading/linear-loading";
+import {Box} from "@mui/material";
+import {Styles} from "../../hoc/themes";
+import {Check, ErrorOutline} from "@mui/icons-material";
 
 interface ImportSheetsProps {
     open: boolean;
@@ -19,37 +22,70 @@ interface ImportSheetsProps {
     customType?: 'EnterUserName'
 }
 
+const formatErrorText = (txt: string): string [] => {
+    const splitTxt = txt.split(';')
+
+    return splitTxt
+}
 export const ImportSheetsDialog = (props: ImportSheetsProps) => {
-    // const [open, setOpen] = React.useState(false);
+
     const {
         selectedValue,
         open
     } = props;
-    const canImportSheetModalOpen =    useSelector((state: ShmiraListStore ) => state.currentSessionState.canImportSheetModalOpen );
+    const importSheetCheckStatus = useSelector((state: ShmiraListStore) => state.currentSessionState.importSheetCheckStatus);
 
     const dispatch = useDispatch();
-    const valueRef: any = useRef('')
+    const [isWaitingForValidation, setIsWaitingForValidation] = useState(false)
+    const valueRef: MutableRefObject<any> = useRef<any>('')
     const handleCloseCancel = () => {
+        setIsWaitingForValidation(false);
         dispatch({type: ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL})
     };
-    const handleCloseRename = () => {
-        // onClose(valueRef.current.value || selectedValue);
+    const handleApproveImport = () => {
+        const data = valueRef.current.value
+        dispatch({type: ActionsTypes.APPROVE_IMPORT_SHEETS_DATA, payload: data})
+
+    };
+    const handleClearData = () => {
+        valueRef.current.value = '';
+        setIsWaitingForValidation(false);
+        dispatch({type: ActionsTypes.OPEN_IMPORT_SHEETS_MODAL})
+
     };
     const dialogStyle: SxProps = {
         minWidth: "35vw",
         minHeight: '50vh'
     }
-    const handlePasting = (event: ChangeEvent & {target: { value: string }}) => {
+    const handlePasting = (event: ChangeEvent & { target: { value: string } }) => {
 
-        const data = event.target.value   ;
-        dispatch({type: ActionsTypes.IMPORT_SHEETS_DATA_PAST, payload: data})
+        let data = event.target.value;
+
+        if (data.length < 30 && data !== '`') {
+            return;
+        } else if (data !== '`') {
+            data = ''
+        }
+
+        setIsWaitingForValidation(true);
+
+        setTimeout(() => {
+            valueRef.current.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            }, 100);
+        })
+        setTimeout(() => {
+            dispatch({type: ActionsTypes.IMPORT_SHEETS_DATA_PASTE, payload: data})
+        }, 1000)
     }
-    const headerText =  translations.ImportFromSheets  ;
-    const inputLabel = translations.PastHereSheet  ;
+    const headerText = translations.ImportFromSheets;
+    const inputLabel = translations.PastHereSheet;
+    const disableText = isWaitingForValidation;
     return (
         <div>
 
-            <Dialog  open={open} onClose={handleCloseCancel}>
+            <Dialog open={open} onClose={handleCloseCancel}>
                 <DialogTitle> {headerText}</DialogTitle>
                 <DialogContent sx={dialogStyle}>
 
@@ -63,8 +99,8 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
                         id={'shmiraList-rename-dialog-text-field'}
                         label={inputLabel}
                         type="text"
-                        minRows={canImportSheetModalOpen ? 2 : 7}
-                        maxRows={canImportSheetModalOpen ? 3 : 9}
+                        minRows={importSheetCheckStatus ? 2 : 7}
+                        maxRows={importSheetCheckStatus ? 3 : 9}
                         multiline
                         fullWidth
                         variant="outlined"
@@ -73,17 +109,76 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
                         onChange={handlePasting}
                         onKeyUp={(event) => {
                             if (event.key === 'Enter') {
-                                handleCloseRename()
+                                handleApproveImport()
                             }
                         }}
+                        disabled={disableText}
                     />
-                    {canImportSheetModalOpen ? translations.ImportFromSheetsPastSuccess : null}
+                    {(isWaitingForValidation && !importSheetCheckStatus) ? <Box id={'waiting-for-validation'}>
+                        <Box sx={{padding: '20px', ...Styles.flexRow}}>
+                            {translations.ImportFromSheetsPastValidating}
+                        </Box>
+
+                        <LinearLoading timeToFinish={200}/>
+                    </Box> : null}
+
+                    {importSheetCheckStatus === 'OK' ? <Box sx={{
+                        padding: '20px', ...Styles.flexColumn,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <Box sx={{...Styles.flexRow, marginBottom: '20px'}}>
+                            <Box sx={{padding: '0 20px 0 20px '}}>
+                                <Check sx={{fontSize: '30px', color: 'green'}}/>
+                            </Box>
+                            {translations.ImportFromSheetsPastSuccess}
+
+                        </Box>
+
+                        <Button disabled={!importSheetCheckStatus} id={'shmiraList-rename-approve-button'}
+                                variant={'contained'}
+                                onClick={handleApproveImport}>{translations.ImportFromSheetsApprove}</Button>
+                    </Box> : null}
+
+                    {importSheetCheckStatus && importSheetCheckStatus.includes('Error') ? <Box sx={{
+                        padding: '20px', ...Styles.flexColumn,
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <Box sx={{...Styles.flexRow, marginBottom: '20px'}}>
+                            <Box sx={{padding: '0 20px 0 20px '}}>
+                                <ErrorOutline sx={{fontSize: '30px', color: 'red'}}/>
+                            </Box>
+
+                            {translations.ImportFromSheetsPastFail}
+
+
+                        </Box>
+                        <Box sx={{
+                            direction: 'ltr',
+                            padding: '15px',
+                            margin: '10px',
+                            borderRadius: '5px',
+                            backgroundColor: '#f29c9c'
+                        }}>
+                            {formatErrorText(importSheetCheckStatus).map((t, i) =>
+                                (<Box>
+                                    <Box key={i} sx={{padding: '00px'}}>{t}</Box>
+
+                                </Box>)
+                            )}
+                        </Box>
+
+                        <Button disabled={!importSheetCheckStatus} id={'import-approve-btn'} variant={'contained'}
+                                onClick={handleClearData}>{translations.Approve}</Button>
+                    </Box> : null}
+
+
                 </DialogContent>
                 <DialogActions>
                     <Button id={'shmiraList-rename-cancel-button'}
                             onClick={handleCloseCancel}>{translations.Cancel}</Button>
-                    <Button disabled={!canImportSheetModalOpen} id={'shmiraList-rename-approve-button'} variant={'contained'}
-                            onClick={handleCloseRename}>{translations.Approve}</Button>
+
                 </DialogActions>
             </Dialog>
         </div>

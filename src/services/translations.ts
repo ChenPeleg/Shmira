@@ -20,7 +20,10 @@ export const translations = {
     'downloadAsCSV': 'הורדה כטבלה',
     'ImportAllData': 'יבוא הכל',
     'ImportFromSheets' : 'יבוא מטופס שמירה',
+    'ImportFromSheetsApprove' : 'יבוא נתונים ',
     'ImportFromSheetsPastSuccess' : 'נמצאו נתונים תקינים, האם ליבא את הנתונים לתוך רשימת השמירה החדשה ?',
+    'ImportFromSheetsPastFail' :  'לא ניתן ליבא את הנתונים, שימו לב שהנתונים בגליון תקינים, ושהעתקתם את כל הגליון',
+    'ImportFromSheetsPastValidating' :   'הנתונים נבדקים, נא להמתין...',
     'DeleteAndImportAllData': 'מחק הכל והחלף ביבוא הכל',
     'ImportPart': 'יבוא חלקי',
     'NewName': 'שם חדש',
@@ -56,6 +59,7 @@ export const translations = {
     'CantGuardInDays': 'לא יכול לשמור בימים',
     'CanAlwaysGuard': 'יכול לשמור בכל הימים',
     'CantGuardInDaysDates': 'לא יכול לשמור בתאריכים',
+    'CanGuardInDaysDates': 'יכול לשמור בתאריכים',
     'CanAlwaysGuardDates': 'יכול לשמור בכל בתאריכים',
 
     'CanGuardInDaysShort': 'רק בימים',

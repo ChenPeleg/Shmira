@@ -161,7 +161,7 @@ export const StoreUtils = {
             dataHolderForCurrentPreferenceInEdit: null,
             isAnimationRunning: false,
             isImportSheetModalOpen : false,
-            canImportSheetModalOpen : false
+            importSheetCheckStatus : false
 
         }
         try {

@@ -52,7 +52,8 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
         case ActionsTypes.EXPORT_ALL:
         case ActionsTypes.IMPORT_FILE_UPLOADED:
         case ActionsTypes.IMPORT_ORDERS_AS_TEXT:
-        case ActionsTypes.IMPORT_SHEETS_DATA_PAST:
+        case ActionsTypes.IMPORT_SHEETS_DATA_PASTE:
+        case ActionsTypes.APPROVE_IMPORT_SHEETS_DATA:
 
             return ImportExportReducer[action.type](newState, action);
 
