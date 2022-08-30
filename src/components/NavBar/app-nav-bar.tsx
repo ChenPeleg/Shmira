@@ -9,7 +9,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import {translations} from '../../services/translations';
 import {useDispatch, useSelector} from 'react-redux';
 import {Select, SelectChangeEvent} from '@mui/material';
-import {Edit, Save, Shield, UploadFile} from '@mui/icons-material';
+import {Edit, HelpOutline, Save, Shield, UploadFile} from '@mui/icons-material';
 import {ProfileMenu} from './profile-menu';
 import {ActionsTypes} from '../../store/types.actions';
 import {ShmiraListMenu} from './shmiraList-menu';
@@ -150,6 +150,15 @@ export const AppNavBar = () => {
     const handleShmiraListMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setShmiraListMoreAnchorEl(event.currentTarget);
     };
+    const handleHelpClick = () => {
+        const w = window;
+        if (!(w == null)){
+          const public_ =  process.env.PUBLIC_URL
+            w.open( public_ +'/Shmira_help.pdf', '_blank')  ;
+        }
+
+
+    }
     const handleShmiraListChanged = (event: any, child: React.ReactNode) => {
 
         const chosenShmiraList = event.target.value as string;
@@ -208,9 +217,11 @@ export const AppNavBar = () => {
                                     handleShmiraListChanged(event, child)
                                 }}>
                             <MenuItem key={'NEW'}
-                                      value={'NEW'}> &nbsp;&nbsp;<b>{translations.NewShmiraList}</b> &nbsp;&nbsp;</MenuItem>
-                            {shmiraListCollection.map((shmiraListRecord: ShmiraListRecord) => <MenuItem key={shmiraListRecord.id}
-                                                                                                        value={shmiraListRecord.id}> &nbsp;&nbsp;{shmiraListRecord.Name} &nbsp;&nbsp;</MenuItem>)}
+                                      value={'NEW'}> &nbsp;&nbsp;<b>{translations.NewShmiraList}</b> &nbsp;&nbsp;
+                            </MenuItem>
+                            {shmiraListCollection.map((shmiraListRecord: ShmiraListRecord) => <MenuItem
+                                key={shmiraListRecord.id}
+                                value={shmiraListRecord.id}> &nbsp;&nbsp;{shmiraListRecord.Name} &nbsp;&nbsp;</MenuItem>)}
                         </Select>
                     </Typography>
                     <IconButton
@@ -237,7 +248,25 @@ export const AppNavBar = () => {
                             md: 'flex'
                         }
                     }}>
-
+                        <LightTooltip title={translations.help}>
+                                 <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={() => handleHelpClick()}
+                                color="inherit"
+                            >
+                                <HelpOutline/>
+                            </IconButton>
+                        </LightTooltip>
+                        <Box sx={{
+                            ...
+                                Styles
+                                    .divider,
+                            width: '20px'
+                        }}/>
                         <LightTooltip title={translations.ImportFromFile}>
                             <IconButton
                                 size="large"
@@ -255,7 +284,7 @@ export const AppNavBar = () => {
                             ...
                                 Styles
                                     .divider,
-                            width: '30px'
+                            width: '20px'
                         }}/>
                         <LightTooltip title={translations.ExportToFile}>
                             <IconButton
@@ -293,8 +322,10 @@ export const AppNavBar = () => {
 
             <ShmiraListMenu shmiraListMoreAnchorEl={shmiraListMoreAnchorEl} shmiraListMenuId={shmiraListMenuId}
                             isShmiraListMenuOpen={isShmiraListMenuOpen}
-                            handleShmiraListMenuClick={handleShmiraListMenuClick} handleShmiraListMenuClose={handleShmiraListMenuClose}/>
-            <ProfileMenu menuId={menuId} anchorEl={anchorEl} handleMenuClose={handleProfileMenuClose} isMenuOpen={isProfileMenuOpen}/>
+                            handleShmiraListMenuClick={handleShmiraListMenuClick}
+                            handleShmiraListMenuClose={handleShmiraListMenuClose}/>
+            <ProfileMenu menuId={menuId} anchorEl={anchorEl} handleMenuClose={handleProfileMenuClose}
+                         isMenuOpen={isProfileMenuOpen}/>
             <RenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={shmiraListName}/>
             <FileUploadDialog open={UploadOpen} onClose={handleUploadClose} selectedValue={''}/>
             <ShmiraListManagementDialog open={ManageShmiraListimOpen} onClose={() => {
@@ -303,7 +334,7 @@ export const AppNavBar = () => {
             <PreferenceImportDialog open={importPreferencesOpen} onClose={() => {
                 setImportPreferencesOpen(false)
             }}/>
-            <ImportSheetsDialog open={importSheetsDialogOpen}   selectedValue={shmiraListName}/>
+            <ImportSheetsDialog open={importSheetsDialogOpen} selectedValue={shmiraListName}/>
 
 
         </Box>

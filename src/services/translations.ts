@@ -33,6 +33,7 @@ export const translations = {
     'ManageAllSidrurim': 'ניהול רשימות שמירה',
     'Delete': 'מחק',
     'ExportToFile': 'יצא לקובץ',
+    'help': 'עזרה',
     'ImportFromFile': 'יבא מקובץ',
     'ImportPreferences': 'יבוא העדפות שמירה',
     'ChooseFile': 'בחר קובץ',
