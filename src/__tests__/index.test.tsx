@@ -18,9 +18,11 @@ describe('Application root', () => {
             <App />
         </Root>, div);
     });
-    it('try custom matchers last', () => {
-        console.log('expect toBePowerOf:');
-        console.log(expect(9).toBePowerOf);
+    it('try custom matchers', () => {
+
         expect(9).toBePowerOf(9, 6);
+    })
+    it('try custom matchers with message last', () => {
+        expect(9).eq(9, '9 is not equal to 8');
     })
 });

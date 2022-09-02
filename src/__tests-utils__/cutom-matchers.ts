@@ -21,26 +21,28 @@ export const customMatcherRunner = () => {
             });
         },
 
-        /**@type {(received: any, message: any)=>void} */
+        /**@type {(received: any, message: any)=>void}
+         * @param received1
+         * @param received2
+         * @param message
+         * expect method*/
+        eq(received1, received2, message) {
 
-        eq(received, power) {
-            if (typeof power !== 'number') {
-                throw new Error('expected power to be a number');
+            if (!message) {
+                message = `Expected ${received1} to be equal to ${received2}`
             }
+            /**@type {boolean} */
+            let equal = false
 
-            if (typeof received !== 'number') {
-                throw new Error('expected value to be a number');
+            if (received1 == received2) {
+                equal = true;
             }
-
-            let receivedCopy = received;
-            while (receivedCopy % power === 0) receivedCopy = receivedCopy / power;
-
-            return receivedCopy === 1 ? ({
+            return equal ? ({
                 pass: true,
-                message: () => `Expected ${received} not to be a power of ${power}`
+                message: () => message
             }) : ({
                 pass: false,
-                message: () => `Expected ${received} to be a power of ${power}`
+                message: () => message
             });
         }
     });
