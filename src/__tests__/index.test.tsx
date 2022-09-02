@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../hoc/App';
 import { Root } from '../hoc/Root';
-import * as SetUp from "../jest.setup";
 import { customMatcherRunner } from '../__tests-utils__/cutom-matchers';
 
 jest.mock('react-dom', () => ({ render: jest.fn() }));
