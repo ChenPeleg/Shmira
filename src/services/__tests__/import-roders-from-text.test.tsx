@@ -10,7 +10,7 @@ jest.mock('react-dom', () => ({render: jest.fn()}));
 customMatcherRunner();
 
 describe('import-orders-from-text', () => {
-    it('creates prefernces properly form sheet input last', () => {
+    it('creates prefernces properly form sheet input ', () => {
         const input = mockSheetInput.basicInput;
         const preferences: PreferenceModel[] = ImportPreferencesFromText(input);
 
