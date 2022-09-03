@@ -22,11 +22,11 @@ describe("date utils ", () => {
         expect(dateStamp2).toEqual(new Date(2020, 12, 31));
         expect(dateStamp3).toEqual(new Date(1999, 7, 22));
     })
-    it('converts  DateStamp  to simple Date last', () => {
+    it('converts  DateStamp  to simple Date ', () => {
 
         const res1 = Utils.Date.simpleDateFromDateStamp('44603');
         const res2 = Utils.Date.simpleDateFromDateStamp('43649');
-        console.log('converts  DateStamp  to simple Date ', res1, res2)
+
         expect(res1).toBe('13.2')
         expect(res2).toBe('5.7')
     })
@@ -34,7 +34,7 @@ describe("date utils ", () => {
 
         const res1 = Utils.Date.getWeekDayNumberFromTimeStamps(['44673']);
         const res2 = Utils.Date.getWeekDayNumberFromTimeStamps(['43649']);
-        console.log('getDatOfWeekTextFromTimeStamp', res1[0], res2[0])
+
         expect(res1[0].dayNumber).toBe(1)
         expect(res2[0].dayNumber).toBe(6)
 
