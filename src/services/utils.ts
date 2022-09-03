@@ -151,18 +151,6 @@ export const Utils = {
         return Math.floor((minAsNumber / 100) * 60)
     },
     Date: {
-        // dateToTimeStamp(inDate: Date): string {
-        //
-        //     const returnDateTime = ((inDate.getTime() - 1) / (1000 * 60 * 60 * 24));
-        //     return returnDateTime.toString();
-        // },
-
-        // excelDateToJSDate(orgExcelDate: string | number): Date {
-        //     const excelDate = Number(orgExcelDate) | 0
-        //     const date = new Date(Math.round((excelDate - (25567 + 1)) * 86400 * 1000));
-        //     const converted_date = date.toISOString().split('T')[0];
-        //     return date;
-        // },
         dateStampToDate(dateStamp: string): Date | null {
             if (!dateStamp) {
                 return null;
@@ -199,8 +187,8 @@ export const Utils = {
             }
 
         },
-         dateStampFromSimpleDate(simpleDate: string): string {
-            const getYearFromMonths = (month : number) => {
+        dateStampFromSimpleDate(simpleDate: string): string {
+            const getYearFromMonths = (month: number) => {
                 let testCaseDate = new Date();
                 let year = testCaseDate.getFullYear();
                 let thisMonth = testCaseDate.getMonth();
@@ -212,21 +200,21 @@ export const Utils = {
                 return year;
             }
             let theDate = new Date();
-            const  simpleDateArr = simpleDate.split('.');
-            if  (!(+simpleDateArr[0] > 0 && +simpleDateArr[1] > 0 )) {
+            const simpleDateArr = simpleDate.split('.');
+            if (!(+simpleDateArr[0] > 0 && +simpleDateArr[1] > 0)) {
                 return ''
             }
-            const month = Number( simpleDateArr[1]) - 1;
+            const month = Number(simpleDateArr[1]) - 1;
             const year = getYearFromMonths(month);
             const day = Number(simpleDateArr[0]);
 
 
-             theDate.setFullYear(year);
-             theDate.setMonth(month);
-             theDate.setFullYear(year);
-             theDate.setDate(day);
+            theDate.setFullYear(year);
+            theDate.setMonth(month);
+            theDate.setFullYear(year);
+            theDate.setDate(day);
 
-            return this.dateToDateStamp (theDate);
+            return this.dateToDateStamp(theDate);
 
         },
         getTimestampArrayFromStartAndFinishDate(dateFrom: string, dateTo: string): string [] {

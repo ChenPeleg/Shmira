@@ -88,76 +88,7 @@ const GetDatesFromText = (datesString: string): string [] => {
     return dates;
 }
 
-/**
- * @description Searches for Time (number in hour pattern in the text, if the returned number is not equal to datesYouCanGuard hour, returns them
- * @param {PreferenceModel} preference
- * @returns {{anotherTime: string | null}}
- */
-const searchAnotherTimeInText = (preference: PreferenceModel): { anotherTime: string | null } => {
-    const text = preference.Comments;
-    const results: { anotherTime: string | null } = {anotherTime: null}
-    const matchingTime = text.matchAll(/(\d{1,2}:\d\d)/g);
-    const matchingArray = Array.from(matchingTime)
 
-    if (matchingArray && matchingArray[0]) {
-        matchingArray.forEach(t => {
-            const convertedTime = convertTimeTo4Digits(t.toString());
-            if (convertedTime !== preference.optionalGuardDaysByDates) {
-                results.anotherTime = convertedTime
-            }
-        })
-    }
-
-    if (!results.anotherTime) {
-        const matchingTime = text.matchAll(/(1\d|20|21|22|23)/g);
-        const matchingArray = Array.from(matchingTime)
-
-        if (matchingArray && matchingArray[0]) {
-            matchingArray.forEach(t => {
-                const convertedTime = convert2DigitTimeTo4Digits(t.toString());
-                if (convertedTime !== preference.optionalGuardDaysByDates) {
-                    results.anotherTime = convertedTime
-                }
-            })
-        }
-    }
-
-    return results
-}
-const searchLocationInText = (text: string): { locationFound: LocationModel | null, typeOfDrive: PreferenceType | null } => {
-    const allLocations: LocationModel[] = [...locations];
-    const results: { locationFound: LocationModel | null, typeOfDrive: PreferenceType | null } = {
-        locationFound: null,
-        typeOfDrive:
-            null
-    }
-    allLocations.forEach((location: LocationModel) => {
-        if (text.includes(location.name)) {
-            results.locationFound = location;
-        }
-    });
-
-    if (results.locationFound) {
-        const locName = results.locationFound.name;
-        const fromPrefixes = [translations.From, translations.fromLocationWithThe];
-        const toPrefixes = [translations.toLocation, translations.toLocationLe];
-        const tzamudPrefix = [translations.inLocation];
-        if (fromPrefixes.some(pre => text.includes(pre + locName))) {
-            results.typeOfDrive = PreferenceType.OneWayFrom
-        }
-        if (toPrefixes.some(pre => text.includes(pre + locName))) {
-            results.typeOfDrive = PreferenceType.CantGuardIn
-        }
-        if (tzamudPrefix.some(pre => text.includes(pre + locName))) {
-            results.typeOfDrive = PreferenceType.CanGuardIn
-        }
-    }
-    if (text.includes(translations.TsamudWord)) {
-        results.typeOfDrive = PreferenceType.CanGuardIn
-    }
-
-    return results
-}
 const convertTimeTo4Digits = (time: string): string => {
     if (time.match(/^\d:\d\d$/)) {
         return '0' + time
@@ -165,13 +96,7 @@ const convertTimeTo4Digits = (time: string): string => {
         return time
     }
 }
-const convert2DigitTimeTo4Digits = (time: string): string => {
-    if (time.match(/^\d\d$/)) {
-        return time + ':00'
-    } else {
-        return time
-    }
-}
+
 
 export const vlidateImportedData = (prefs : PreferenceModel[]) =>{
     let errors = [];
