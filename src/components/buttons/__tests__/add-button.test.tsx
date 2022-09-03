@@ -3,6 +3,7 @@ import '../../../setupTests'
 import { shallow } from 'enzyme';
 import { AddButton, AddButtonProps } from '../../Icons/add-button';
 import { translations } from '../../../services/translations';
+import {render, screen} from "@testing-library/react";
 
 
 const clickMock = jest.fn()
@@ -14,12 +15,13 @@ const addButton = shallow(<AddButton addClickHandler={props.addClickHandler} />)
 describe('Add Button', () => {
 
 
-    it('only one button', () => {
-        expect(addButton.children()).toHaveLength(1);
+    it('only one button last', () => {
+        render(<AddButton addClickHandler={props.addClickHandler} />)
+        expect(screen.getAllByRole('button') ).toHaveLength(1);
     });
     it('only have text  AddPreference', () => {
-        // expect(addButton.children()).toHaveLength(1);
-        expect(addButton.text().includes(translations.AddPreference)).toBe(true);
+        render(<AddButton addClickHandler={props.addClickHandler} />)
+        expect(screen .getAllByRole('button')[0].textContent  ).toContain(translations.AddPreference  );
     });
     it('click triggers click handler', () => {
 
