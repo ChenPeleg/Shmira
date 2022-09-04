@@ -3,6 +3,7 @@ export interface LocationModel {
     name: string,
     ETA: number,
     EnName: string
+
 }
 
 export interface LocationGroup {
