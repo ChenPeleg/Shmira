@@ -1,19 +1,19 @@
 import * as React from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
-import {translations} from '../../services/translations';
-import {Box, Typography} from '@mui/material';
-import {Colors, Styles} from '../../hoc/themes';
-import {useDispatch, useSelector} from 'react-redux';
-import {ShmiraListRecord, ShmiraListStore} from '../../store/store.types';
-import {Utils} from '../../services/utils';
-import {ActionsTypes} from '../../store/types.actions';
+import { translations } from '../../services/translations';
+import { Box, Typography } from '@mui/material';
+import { Colors, Styles } from '../../hoc/themes';
+import { useDispatch, useSelector } from 'react-redux';
+import { ShmiraListRecord, ShmiraListStore } from '../../store/store.types';
+import { Utils } from '../../services/utils';
+import { ActionsTypes } from '../../store/types.actions';
 
 type FromOrTo = 'From' | 'To';
-const textFieldSx = {bgcolor: 'rgba(240,240,240,0.2)'}
+const textFieldSx = { bgcolor: 'rgba(240,240,240,0.2)' }
 
 const validateDates = (DateFrom: number, DateTo: number): null | string => {
     if (!DateFrom || !DateTo) {
@@ -84,9 +84,9 @@ export const DataRange = () => {
                         // setValue(newValue);
                         handleDatesChange(newValue, 'From')
                     }}
-                    renderInput={(params) => <TextField sx={textFieldSx}  {...params} />}
+                    renderInput={(params: any) => <TextField sx={textFieldSx}  {...params} />}
                 />
-                <Box sx={Styles.divider}/>
+                <Box sx={Styles.divider} />
             </LocalizationProvider>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
@@ -96,10 +96,10 @@ export const DataRange = () => {
 
                         handleDatesChange(newValue, 'To')
                     }}
-                    renderInput={(params) => <TextField sx={textFieldSx} {...params} />}
+                    renderInput={(params: any) => <TextField sx={textFieldSx} {...params} />}
                 />
             </LocalizationProvider>
-            {dateError ? <Box sx={{m: '1em'}}> <Typography color={Colors.warningRed}> {dateError}</Typography></Box> : null}
+            {dateError ? <Box sx={{ m: '1em' }}> <Typography color={Colors.warningRed}> {dateError}</Typography></Box> : null}
         </Box>
     );
 }
