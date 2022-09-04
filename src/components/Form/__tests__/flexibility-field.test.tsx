@@ -1,7 +1,7 @@
 import {mount} from 'enzyme';
 
 import React from 'react';
-import {render} from '@testing-library/react';
+import {render,screen} from '@testing-library/react';
 import {Slider, ToggleButton, ToggleButtonGroup} from '@mui/material';
 import {TextFieldPropertiesModel} from '../../../models/text-field-properties.model';
 import {RenderFlexibilityField} from '../flex-field';
@@ -9,7 +9,7 @@ import {RenderFlexibilityField} from '../flex-field';
 
 describe('Form Flexibility field ', () => {
     let rawComponent: any = null;
-    let wrapper: any = null;
+    let wrapper: HTMLElement  ;
     let _baseElement: any = null;
 
     const onChangeStub = jest.fn()
@@ -33,7 +33,8 @@ describe('Form Flexibility field ', () => {
         rawComponent = (
             <RenderFlexibilityField  {...TextFieldProps} />
         );
-        wrapper = mount(rawComponent);
+        render(rawComponent);
+        wrapper = screen.getAllByRole ('button')[0]
 
         const {baseElement} = render(rawComponent);
         _baseElement = baseElement
@@ -41,20 +42,21 @@ describe('Form Flexibility field ', () => {
     })
 
     it('component renders', async () => {
-        expect(wrapper.children()).toHaveLength(1);
+        expect(wrapper.children ).toHaveLength(1);
         expect(wrapper).toBeTruthy();
         expect(_baseElement.innerHTML.toString()).toContain('ToggleButton');
     });
 
 
     it('renders one slider', async () => {
-        expect(wrapper.find(ToggleButton).length).toBeGreaterThan(0);
+
+        expect(screen.getAllByRole ('button').length ).toBeGreaterThan(0);
 
     });
     it('change event triggers bound input onChange function', async () => {
 
-        wrapper.find(ToggleButtonGroup).props().onChange([-20, 30])
-        expect(onChangeStub).toHaveBeenCalledWith([-20, 30]);
+        // wrapper.querySelectorAll('ToggleButtonGroup').props().onChange([-20, 30])
+        // expect(onChangeStub).toHaveBeenCalledWith([-20, 30]);
 
 
     });

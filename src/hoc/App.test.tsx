@@ -1,28 +1,30 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+
 import App from './App';
 import {Root} from './Root';
 import '../setupTests'
+import {render, screen} from "@testing-library/react";
 
-let wrapped: any;
+let component: HTMLElement;
 describe('basic app rendering', () => {
     beforeEach(() => {
-        wrapped = shallow(
+        render(
             <Root>
-                <App/>
-            </Root>
+                <App  />
+             </Root>
         );
+        component = screen.getByTestId('test-app-back-ground')
     });
 
     afterEach(() => {
-        if (wrapped) {
-            wrapped.unmount();
-        }
+        // if (wrapped) {
+        //     wrapped.unmount();
+        // }
     });
 
     it('renders correctly', () => {
 
-        expect(wrapped).toEqual({});
+        expect(component ).toBeTruthy( );
     });
 
 })
