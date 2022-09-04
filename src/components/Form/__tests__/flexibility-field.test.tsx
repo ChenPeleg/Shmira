@@ -1,8 +1,6 @@
-import {mount} from 'enzyme';
 
 import React from 'react';
 import {render,screen} from '@testing-library/react';
-import {Slider, ToggleButton, ToggleButtonGroup} from '@mui/material';
 import {TextFieldPropertiesModel} from '../../../models/text-field-properties.model';
 import {RenderFlexibilityField} from '../flex-field';
 

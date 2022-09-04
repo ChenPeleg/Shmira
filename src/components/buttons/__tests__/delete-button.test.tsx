@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../../setupTests'
-import {shallow} from 'enzyme';
 import {DeleteButton, DeleteButtonProps} from '../delete-button';
 import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
