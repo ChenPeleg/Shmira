@@ -58,8 +58,8 @@ export const RenameDialog = (props: RenameProps) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button id={'shmiraList-rename-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
-                    <Button id={'shmiraList-rename-approve-button'} onClick={handleCloseRename}>{translations.Approve}</Button>
+                    <Button data-testid={'shmiraList-rename-cancel-button'} id={'shmiraList-rename-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
+                    <Button data-testid={'shmiraList-rename-approve-button'} id={'shmiraList-rename-approve-button'} onClick={handleCloseRename}>{translations.Approve}</Button>
                 </DialogActions>
             </Dialog>
         </div>

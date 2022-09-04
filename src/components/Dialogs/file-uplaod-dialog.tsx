@@ -80,8 +80,8 @@ export const FileUploadDialog = (props: FileUploadProps) => {
 
     }
     return (
-        <div>
-            <Dialog open={open} onClose={handleCloseCancel}>
+        <div  >
+            <Dialog   open={open} onClose={handleCloseCancel}>
                 <DialogTitle> {translations.ImportFromFile}</DialogTitle>
                 <DialogContent>
                     <Box sx={{

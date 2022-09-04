@@ -1,8 +1,10 @@
 import React from 'react';
 import '../../../setupTests'
-import { shallow } from 'enzyme';
+
 import { AddButton, AddButtonProps } from '../../Icons/add-button';
 import { translations } from '../../../services/translations';
+import {render, screen} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 
 const clickMock = jest.fn()
@@ -10,20 +12,21 @@ const props: AddButtonProps = {
     sx: null,
     addClickHandler: clickMock
 }
-const addButton = shallow(<AddButton addClickHandler={props.addClickHandler} />);
 describe('Add Button', () => {
 
 
-    it('only one button', () => {
-        expect(addButton.children()).toHaveLength(1);
+    it('only one button last', () => {
+        render(<AddButton addClickHandler={props.addClickHandler} />)
+        expect(screen.getAllByRole('button') ).toHaveLength(1);
     });
     it('only have text  AddPreference', () => {
-        // expect(addButton.children()).toHaveLength(1);
-        expect(addButton.text().includes(translations.AddPreference)).toBe(true);
+        render(<AddButton addClickHandler={props.addClickHandler} />)
+        expect(screen .getAllByRole('button')[0].textContent  ).toContain(translations.AddPreference  );
     });
-    it('click triggers click handler', () => {
+    it('click triggers click handler', async () => {
 
-        addButton.find('#add-preference-button').simulate('click');
+        render(<AddButton addClickHandler={props.addClickHandler} />)
+        await userEvent.click(screen.getByRole('button') )
         expect(clickMock).toHaveBeenCalled()
     });
 

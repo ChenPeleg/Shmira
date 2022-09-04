@@ -1,23 +1,21 @@
-import {mount} from 'enzyme';
-
 import React from 'react';
-import {act, render} from '@testing-library/react';
+import {act, render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
 import configureStore from '../../../__tests-utils__/redux-mock-store';
-import {TextField} from '@mui/material';
+
 import {VehicleEditDialog} from '../vehicle-edit-dialog';
 import {VehicleModel} from '../../../models/Vehicle.model';
 import Mock = jest.Mock;
+import userEvent from "@testing-library/user-event";
 
 
 describe('Vehicle edit  Dialog', () => {
     let fileDialog: any = null;
-    let component: any = null;
+    let component: HTMLElement;
     let _baseElement: any = null;
     let store: any;
     let onClose: Mock = jest.fn();
     let onDelete: Mock = jest.fn();
-    const shmiraListDefaultName = 'Shilgia'
     const mockVehicleData: VehicleModel = {
         id: '1',
         vehicleName: '1',
@@ -29,51 +27,46 @@ describe('Vehicle edit  Dialog', () => {
     }
     beforeEach(async () => {
         onClose = jest.fn();
-        const mockVehiclData = {
-            id: '1',
-            vehicleName: '1',
-            seats: '7',
-            kmLimit: '1',
-            optionalGuardDaysByDates: '1',
-            endHour: '1',
-            Comments: '1'
-        }
+
         const middlewares: any = []
         const mockStore = configureStore(middlewares);
         store = mockStore({});
         fileDialog = (<Provider store={store}>
-            <VehicleEditDialog onDelete={onDelete} vehicleData={mockVehicleData} open={true} key={'1'} onClose={onClose}/>
+            <VehicleEditDialog onDelete={onDelete} vehicleData={mockVehicleData} open={true} key={'1'}
+                               onClose={onClose}/>
         </Provider>);
-        component = mount(fileDialog);
+        render(fileDialog);
+        component = screen.getByRole('dialog', {hidden: true})
 
-        const {baseElement} = render(fileDialog);
-        _baseElement = baseElement
 
     })
 
     it('component renders', async () => {
-        expect(component.children()).toHaveLength(1);
+        expect(component.children).toHaveLength(3);
         expect(component).toBeTruthy();
-        expect(_baseElement.innerHTML.toString()).toContain('MuiDialog');
+        expect(component.innerHTML.toString()).toContain('MuiDialog');
     });
     it('renders one text-field', async () => {
-        expect(component.find(TextField).length).toBeGreaterThan(0);
+        expect(component.querySelectorAll('input').length).toBeGreaterThan(0);
     });
     it('closes dialog on press cancel', async () => {
 
-        component.find('#vehicle-edit-cancel-button').hostNodes().first().simulate('click');
+        const cancelButton =
+            component.querySelector('#vehicle-edit-cancel-button') as HTMLElement;
+        await userEvent.click(cancelButton);
         expect(onClose).toHaveBeenCalledWith(null);
 
 
     });
     it('entering value and pressing approve triggers dispatch', async () => {
 
-        act(() => {
-            const inputName = component.find('input#vehicle-rename-dialog-text-field');
-            const inputComments = component.find('input#vehicle-comments-dialog-text-field');
-            inputName.instance().value = 'rename car';
-            inputComments.instance().value = 'car comments';
-            component.find('#vehicle-edit-approve-button').hostNodes().first().simulate('click');
+        await act(async () => {
+            const inputName = component.querySelector('input#vehicle-rename-dialog-text-field') as HTMLInputElement;
+            const inputComments = component.querySelector('input#vehicle-comments-dialog-text-field') as HTMLInputElement;
+            inputName.value = 'rename car';
+            inputComments.value = 'car comments';
+            const approveBtn = component.querySelector('#vehicle-edit-approve-button') as HTMLElement
+            await userEvent.click(approveBtn);
             expect(onClose).toHaveBeenCalledWith({
                     'Comments': 'car comments',
                     'endHour': '1',
