@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Slider, Theme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { ActionsTypes } from "../../store/types.actions";
+
 import { Styles } from "../../hoc/themes";
 import { translations } from "../../services/translations";
 

@@ -312,8 +312,10 @@ export const PreferenceRequestForm = (formProps: MuiFormPropsModel) => {
     (state: { preferences: PreferenceModel[] }) => state.preferences
   );
 
-  const initialValues = preferences.find((preference) => preference.id === id);
-  // @ts-ignore
+  const initialValues = preferences.find(
+    (preference) => preference.id === id
+  ) as PreferenceModel;
+
   const [_typeOfPreference, set_typeOfPreference] = useState<
     PreferenceType | undefined
   >(initialValues.TypeOfInfoPreference as PreferenceType);
