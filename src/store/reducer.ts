@@ -107,4 +107,5 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
 
   return newState;
 };
+// @ts-ignore
 export default reducer;
