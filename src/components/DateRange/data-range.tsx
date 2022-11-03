@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import { translations } from '../../services/translations';
@@ -11,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ShmiraListRecord, ShmiraListStore } from '../../store/store.types';
 import { Utils } from '../../services/utils';
 import { ActionsTypes } from '../../store/types.actions';
+import AdapterDayjs from "@mui/lab/AdapterDayjs";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 type FromOrTo = 'From' | 'To';
 const textFieldSx = { bgcolor: 'rgba(240,240,240,0.2)' }
@@ -68,6 +69,7 @@ export const DataRange = () => {
     }
 
 
+    // @ts-ignore
     return (
         <Box sx={{
             ...Styles
@@ -76,7 +78,7 @@ export const DataRange = () => {
             m: '1em',
             mt: 0
         }}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <LocalizationProvider dateAdapter={AdapterDateFns} >
                 <DatePicker
                     label={translations.FromDate}
                     value={DateFrom}
@@ -88,7 +90,7 @@ export const DataRange = () => {
                 />
                 <Box sx={Styles.divider} />
             </LocalizationProvider>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <LocalizationProvider dateAdapter={AdapterDateFns }   >
                 <DatePicker
                     label={translations.ToDate}
                     value={DateTo}
