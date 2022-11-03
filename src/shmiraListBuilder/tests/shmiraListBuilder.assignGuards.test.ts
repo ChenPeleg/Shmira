@@ -3,7 +3,7 @@ import { shmiraBuildFixtures } from "./shmiraBuildFixtures";
 import { PreferenceMetaDataModel } from "../models/shmiraList.models";
 
 const preferencesFixture: PreferenceMetaDataModel[] =
-  shmiraBuildFixtures.prefrences;
+  shmiraBuildFixtures.preferences;
 
 const settingsFixture = shmiraBuildFixtures.settings;
 

@@ -2,9 +2,23 @@ import {
   PreferenceType,
   WeekDaysOrDates,
 } from "../../models/PreferenceType.enum";
+import {
+  PreferenceMetaDataModel,
+  ShmiraListBuildSettings,
+} from "../models/shmiraList.models";
+import { NightScheduleModel } from "../../models/Sketch.model";
+import { PreferenceModel } from "../../models/Preference.model";
 
-export const shmiraBuildFixtures = {
-  prefrences: [
+export const shmiraBuildFixtures: {
+  preferences: PreferenceMetaDataModel[];
+  settings: ShmiraListBuildSettings;
+  result: {
+    nightSchedules: NightScheduleModel[];
+    unassignedPreferences: PreferenceModel[];
+    assignedPreferences: PreferenceModel[];
+  };
+} = {
+  preferences: [
     {
       datesYouCanGuard: [
         "44864",
@@ -155,7 +169,7 @@ export const shmiraBuildFixtures = {
     assignedPreferences: [
       {
         Comments: "",
-        TypeOfInfoPreference: "2",
+        TypeOfInfoPreference: PreferenceType.CanGuardIn,
         finishHour: "",
         flexibilityByDates: [],
         flexibilityByDays: ["1", "2", "3"],
@@ -164,11 +178,11 @@ export const shmiraBuildFixtures = {
         id: "1",
         location: "",
         optionalGuardDaysByDates: "",
-        weekDaysOrDates: "1",
+        weekDaysOrDates: WeekDaysOrDates.WeekDays,
       },
       {
         Comments: "",
-        TypeOfInfoPreference: "2",
+        TypeOfInfoPreference: PreferenceType.CanGuardIn,
         finishHour: "",
         flexibilityByDates: [],
         flexibilityByDays: ["1", "2", "3"],
@@ -177,11 +191,11 @@ export const shmiraBuildFixtures = {
         id: "4",
         location: "",
         optionalGuardDaysByDates: "",
-        weekDaysOrDates: "1",
+        weekDaysOrDates: WeekDaysOrDates.WeekDays,
       },
       {
         Comments: "",
-        TypeOfInfoPreference: "2",
+        TypeOfInfoPreference: PreferenceType.CanGuardIn,
         finishHour: "",
         flexibilityByDates: [],
         flexibilityByDays: ["1", "2", "3"],
@@ -190,11 +204,11 @@ export const shmiraBuildFixtures = {
         id: "3",
         location: "",
         optionalGuardDaysByDates: "",
-        weekDaysOrDates: "1",
+        weekDaysOrDates: WeekDaysOrDates.WeekDays,
       },
       {
         Comments: "",
-        TypeOfInfoPreference: "2",
+        TypeOfInfoPreference: PreferenceType.CanGuardIn,
         finishHour: "",
         flexibilityByDates: [],
         flexibilityByDays: ["1", "2", "3"],
@@ -203,7 +217,7 @@ export const shmiraBuildFixtures = {
         id: "2",
         location: "",
         optionalGuardDaysByDates: "",
-        weekDaysOrDates: "1",
+        weekDaysOrDates: WeekDaysOrDates.WeekDays,
       },
     ],
     nightSchedules: [
