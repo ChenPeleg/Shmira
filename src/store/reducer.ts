@@ -98,6 +98,7 @@ const reducer = (state: ShmiraListStore = initialState, action: IAction) => {
       return LocationGroupReducer[action.type](newState, action);
 
     case ActionsTypes.DATE_RANGES_UPDATE:
+    case ActionsTypes.UPDATE_ONE_OR_TWO_GUARDS:
       return DateRangesReducer[action.type](newState, action);
 
     default:
