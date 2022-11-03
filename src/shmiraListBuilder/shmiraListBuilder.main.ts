@@ -42,7 +42,7 @@ export const ShmiraListBuilder = (
     Comments: "",
     unassignedPreferences: BuildResult.unassignedPreferences,
     assignedPreferences: BuildResult.assignedPreferences,
-    isOneGuardForNight: false,
+    isOneGuardForNight: settings.isOneGuardForNight,
   };
 
   const newId = Utils.getNextId(ShmiraList.sketches.map((v) => v.id));

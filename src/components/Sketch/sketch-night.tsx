@@ -40,7 +40,7 @@ export const SketchNight = (props: nightsProps) => {
   const sketchInEdit: SketchModel = sketches.find(
     (s) => s.id === SketchIdInEdit
   ) as SketchModel;
-
+  const isOneGuardForNight = sketchInEdit.isOneGuardForNight;
   const night = props.night; // sketchInEdit.NightSchedule.find(n => n.id === props.night.id) as NightScheduleModel;
   const preferences = useSelector(
     (state: { preferences: PreferenceModel[] }) => state.preferences
@@ -65,7 +65,8 @@ export const SketchNight = (props: nightsProps) => {
   const guardNames = guardsRaw
     .map((g) => (g && g.guardName ? g.guardName : null))
     .filter((g) => g);
-  const isMissing = guardNames.length < 2;
+  console.log(isOneGuardForNight);
+  const isMissing = guardNames.length < 2 && !isOneGuardForNight;
   return (
     <Box>
       <LightTooltip
