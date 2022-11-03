@@ -88,6 +88,7 @@ export const Utils = {
       name: "סידור בשני רכבים",
       unassignedPreferences: [],
       assignedPreferences: [],
+      isOneGuardForNight: false,
     };
   },
   hourTextToDecimal(hourText: string): number {

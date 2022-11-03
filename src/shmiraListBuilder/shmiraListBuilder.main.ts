@@ -25,6 +25,7 @@ export const ShmiraListBuilder = (
       DateTo: ShmiraList.DateTo,
     },
     daysBetweenGuardDuty: ShmiraList.daysBetweenGuardDuty,
+    isOneGuardForNight: ShmiraList.isOneGuardForNight,
   };
   const preferencesMetaData: PreferenceMetaDataModel[] =
     ShmiraListBuilderBuildPreferencesMetaData(ShmiraList.preferences, settings);
@@ -41,6 +42,7 @@ export const ShmiraListBuilder = (
     Comments: "",
     unassignedPreferences: BuildResult.unassignedPreferences,
     assignedPreferences: BuildResult.assignedPreferences,
+    isOneGuardForNight: false,
   };
 
   const newId = Utils.getNextId(ShmiraList.sketches.map((v) => v.id));

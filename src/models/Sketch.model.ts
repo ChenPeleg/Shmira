@@ -35,5 +35,6 @@ export interface SketchModel {
   unassignedPreferences: PreferenceModel[];
   assignedPreferences: PreferenceModel[];
   Comments: string;
+  isOneGuardForNight: boolean;
   suggestions?: any;
 }

@@ -8,6 +8,7 @@ export interface ShmiraListBuildSettings {
   custom?: any;
   Range: RangeModel;
   daysBetweenGuardDuty: string;
+  isOneGuardForNight: boolean;
 }
 
 export enum PreferenceMetaStatus {
