@@ -65,7 +65,6 @@ export const SketchNight = (props: nightsProps) => {
   const guardNames = guardsRaw
     .map((g) => (g && g.guardName ? g.guardName : null))
     .filter((g) => g);
-  console.log(isOneGuardForNight);
   const isMissing = guardNames.length < 2 && !isOneGuardForNight;
   return (
     <Box>

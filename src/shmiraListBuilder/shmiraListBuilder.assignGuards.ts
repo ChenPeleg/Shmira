@@ -16,6 +16,7 @@ export const ShmiraListBuilderBuildNightsAndUnAssigned = (
   unassignedPreferences: PreferenceModel[];
   assignedPreferences: PreferenceModel[];
 } => {
+  const isOneGuardForNight = buildSettings.isOneGuardForNight;
   const range = buildSettings.Range;
   const allDatesArray = Utils.Date.getTimestampArrayFromStartAndFinishDate(
     range.DateFrom,
@@ -41,7 +42,7 @@ export const ShmiraListBuilderBuildNightsAndUnAssigned = (
   const sortedNights = [...nights].sort((n) => n.optionalGuards.length);
 
   sortedNights.forEach((n) => {
-    if (n.guards.length < 2) {
+    if (n.guards.length < 2 || (n.guards.length === 0 && isOneGuardForNight)) {
       const unfilteredOptionalGuards: (PreferenceMetaDataModel | undefined)[] =
         n.optionalGuards.map((guardId) =>
           preferencesMeta.find((g) => g.id === guardId)
