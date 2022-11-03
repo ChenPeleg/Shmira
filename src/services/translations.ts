@@ -127,6 +127,8 @@ export const translations = {
   inLocation: "ב",
   toLocationLe: "ל",
   Sketch: "סקיצה",
+  oneGuard: "שומר אחד",
+  twoGuards: "שני שומרים",
   LocationBase: "מיקום הסידור",
   ActiveShmiraListim: "סידורים פעילים",
   number: "מספר",

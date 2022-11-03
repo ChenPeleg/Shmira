@@ -32,7 +32,7 @@ const DefaultShmiraList: ShmiraListRecord = {
   sketches: [],
   chosenSketch: "",
   locationGroup: null,
-
+  isOneGuardForNight: false,
   DateFrom: Utils.Date.dateToDateStamp(new Date()),
   DateTo: (Number(Utils.Date.dateToDateStamp(new Date())) + 30).toString(),
 };
@@ -259,6 +259,7 @@ export const ShmiraListReducer: Record<
       locationGroup: null,
       DateFrom: Utils.Date.dateToDateStamp(new Date()),
       DateTo: (Number(Utils.Date.dateToDateStamp(new Date())) + 30).toString(),
+      isOneGuardForNight: false,
     };
     newState.shmiraListCollection = newState.shmiraListCollection.map((c) => c);
     newState.shmiraListCollection.push(newShmiraList);

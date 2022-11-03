@@ -8,6 +8,7 @@ import { Preferences } from "../components/Preferences/preferences";
 import { DataRange } from "../components/DateRange/data-range";
 import { DaysBetween } from "../components/DaysBetweenGuards/days-between";
 import { Styles } from "../hoc/themes";
+import { OneOrTwoToggleButtons } from "../components/buttons/one-or-two-toggle-button-group";
 
 export const MainLayout = () => {
   const displaySetting: DisplaySettings = useSelector(
@@ -65,6 +66,7 @@ export const MainLayout = () => {
             >
               <DataRange />
               <DaysBetween />
+              <OneOrTwoToggleButtons></OneOrTwoToggleButtons>
             </Box>
 
             <Preferences />

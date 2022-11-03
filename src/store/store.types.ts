@@ -23,6 +23,7 @@ export interface ShmiraListRecord {
   locationGroup: LocationGroup | null;
   DateFrom: string;
   DateTo: string;
+  isOneGuardForNight: boolean;
 }
 
 export interface DisplaySettings {
