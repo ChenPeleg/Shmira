@@ -42,7 +42,10 @@ export const ShmiraListBuilderBuildNightsAndUnAssigned = (
   const sortedNights = [...nights].sort((n) => n.optionalGuards.length);
 
   sortedNights.forEach((n) => {
-    if (n.guards.length < 2 || (n.guards.length === 0 && isOneGuardForNight)) {
+    if (
+      (n.guards.length < 2 && !isOneGuardForNight) ||
+      (n.guards.length === 0 && isOneGuardForNight)
+    ) {
       const unfilteredOptionalGuards: (PreferenceMetaDataModel | undefined)[] =
         n.optionalGuards.map((guardId) =>
           preferencesMeta.find((g) => g.id === guardId)
@@ -50,7 +53,10 @@ export const ShmiraListBuilderBuildNightsAndUnAssigned = (
       const optionalGuards: PreferenceMetaDataModel[] =
         unfilteredOptionalGuards.filter((g) => g) as PreferenceMetaDataModel[];
       optionalGuards.forEach((guard) => {
-        if (n.guards.length >= 2) {
+        if (
+          n.guards.length >= 2 ||
+          (n.guards.length === 1 && isOneGuardForNight)
+        ) {
           return;
         }
         if (guard.preference.halfOrFull === "2") {
