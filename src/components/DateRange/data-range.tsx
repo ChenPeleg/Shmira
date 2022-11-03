@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
+import {  DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { translations } from '../../services/translations';
 import { Box, Typography } from '@mui/material';
 import { Colors, Styles } from '../../hoc/themes';
@@ -10,8 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ShmiraListRecord, ShmiraListStore } from '../../store/store.types';
 import { Utils } from '../../services/utils';
 import { ActionsTypes } from '../../store/types.actions';
-import AdapterDayjs from "@mui/lab/AdapterDayjs";
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 type FromOrTo = 'From' | 'To';
 const textFieldSx = { bgcolor: 'rgba(240,240,240,0.2)' }
@@ -69,7 +67,7 @@ export const DataRange = () => {
     }
 
 
-    // @ts-ignore
+
     return (
         <Box sx={{
             ...Styles
