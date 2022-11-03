@@ -28,7 +28,7 @@ import {
   ShmiraListStore,
 } from "../../store/store.types";
 import { FileUploadDialog } from "../Dialogs/file-uplaod-dialog";
-import { ToggleButtons } from "../buttons/toggle-button-group";
+import { SketchOrPreferencesToggleButtons } from "../buttons/sketch-preference-toggle-button-group";
 import { RenameDialog } from "../Dialogs/rename-dialog";
 import { ShmiraListManagementDialog } from "../Dialogs/shmira-list-management-dialog";
 import { PreferenceImportDialog } from "../Dialogs/orders-import-dialog";
@@ -285,7 +285,7 @@ export const AppNavBar = () => {
               height: "5px",
             }}
           />
-          <ToggleButtons />
+          <SketchOrPreferencesToggleButtons />
 
           <Box sx={{ flexGrow: 1 }} />
           <SessionUseSave />

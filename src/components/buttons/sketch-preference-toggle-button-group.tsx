@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { ActionsTypes } from "../../store/types.actions";
 import { StyledToggleButtonGroup } from "./styled-toggle-button";
 
-export const ToggleButtons = () => {
+export const SketchOrPreferencesToggleButtons = () => {
   const [alignment, setAlignment] = React.useState("web");
   const dispatch = useDispatch();
   const handleChange = (
@@ -37,7 +37,6 @@ export const ToggleButtons = () => {
         {" "}
         {translations.Preferences}{" "}
       </ToggleButton>
-      {/*<ToggleButton sx={{color: 'white'}} value={'locationsView'}>{translations.Locations}</ToggleButton>*/}
     </StyledToggleButtonGroup>
   );
 };
