@@ -27,6 +27,7 @@ const timeText = (drive: PreferenceModel) =>
   LanguageUtilities.buildBriefText(drive, locations).timeText;
 const assingAtText = (drive: PreferenceModel, dates: string[]) =>
   LanguageUtilities.buildBriefAssignText(drive, dates);
+
 export const SketchPendingPreferenceFull = (
   props: sketchPendingPreferenceProps
 ) => {
@@ -52,10 +53,12 @@ export const SketchPendingPreferenceFull = (
   );
   const sketchInEdit = sketches.find((s) => s.id === SketchIdInEdit);
   let datesThatThisGuardIsAssignedTo: any = [];
+  let isOneGuardForNight = false;
   if (sketchInEdit) {
     datesThatThisGuardIsAssignedTo = sketchInEdit.NightSchedule.filter((n) =>
       n.guards.includes(props.preference.id)
     ).map((n) => n.date);
+    isOneGuardForNight = sketchInEdit.isOneGuardForNight;
   }
   const assignedText = assingAtText(
     props?.preference,
@@ -86,6 +89,7 @@ export const SketchPendingPreferenceFull = (
   ) => {
     setPendingPreferenceAnchorEl(event.currentTarget);
   };
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   const actionClickHandler = () => {};
   const handlePendingPreferenceClose = () => {
     dispatch({
@@ -109,12 +113,18 @@ export const SketchPendingPreferenceFull = (
   const nights: NightScheduleModel[] = sketchInEdit?.NightSchedule
     ? sketchInEdit.NightSchedule
     : [];
+  const nightsWithOneGuard = nights.filter(
+    (n: NightScheduleModel) =>
+      baseDays.includes(n.date) && n.guards?.length === 1
+  );
+
   const filteredDatesForHalfNight = nights
     .filter(
       (n: NightScheduleModel) =>
         baseDays.includes(n.date) && !(n.guards?.length === 2)
     )
     .map((n) => n.date);
+
   const filteredDatesForFullNight = nights
     .filter(
       (n: NightScheduleModel) =>
@@ -122,10 +132,17 @@ export const SketchPendingPreferenceFull = (
     )
     .map((n) => n.date);
 
-  const baseDaysFiltered =
+  let baseDaysFiltered =
     preference.halfOrFull === "2"
       ? filteredDatesForFullNight
       : filteredDatesForHalfNight;
+
+  if (isOneGuardForNight) {
+    const datesWithiOneGuard = nightsWithOneGuard.map((n) => n.date);
+    baseDaysFiltered = baseDaysFiltered.filter(
+      (d) => !datesWithiOneGuard.includes(d)
+    );
+  }
 
   const datesForMenu: { timeStamp: string; name: string }[] =
     baseDaysFiltered.map((d) => {
@@ -140,7 +157,7 @@ export const SketchPendingPreferenceFull = (
       datesThatThisGuardIsAssignedTo.forEach((d: string) => {
         const gap = Number(d) - Number(mapedDay.timeStamp);
         if (Math.abs(gap) < 7) {
-          let textToAdd =
+          const textToAdd =
             " (" + translations.guardsAction + " " + Math.abs(gap).toString();
 
           if (gap < 0) {
@@ -156,7 +173,6 @@ export const SketchPendingPreferenceFull = (
 
     return mapedDay;
   });
-  console.log(datesThatThisGuardIsAssignedTo, datesForMenuWithWarnings);
   const noPotentialPlacesWereFound =
     datesForMenuWithWarnings.length === 0
       ? ", " + translations.noPotentialPlacesFound
