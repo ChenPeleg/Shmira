@@ -14,7 +14,7 @@ import { ShmiraListStore } from "../../store/store.types";
 import { LinearLoading } from "../Loading/linear-loading";
 import { Box } from "@mui/material";
 import { Styles } from "../../hoc/themes";
-import { Check, ErrorOutline } from "@mui/icons-material";
+import { Check, ErrorOutline, HelpOutline } from "@mui/icons-material";
 
 interface ImportSheetsProps {
   open: boolean;
@@ -24,7 +24,6 @@ interface ImportSheetsProps {
 
 const formatErrorText = (txt: string): string[] => {
   const splitTxt = txt.split(";");
-
   return splitTxt;
 };
 export const ImportSheetsDialog = (props: ImportSheetsProps) => {
@@ -32,13 +31,16 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
   const importSheetCheckStatus = useSelector(
     (state: ShmiraListStore) => state.currentSessionState.importSheetCheckStatus
   );
-
   const dispatch = useDispatch();
   const [isWaitingForValidation, setIsWaitingForValidation] = useState(false);
   const valueRef: MutableRefObject<any> = useRef<any>("");
   const handleCloseCancel = () => {
     setIsWaitingForValidation(false);
     dispatch({ type: ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL });
+  };
+  const handleShowExample = () => {
+    // setIsWaitingForValidation(false);
+    // dispatch({ type: ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL });
   };
   const handleApproveImport = () => {
     const data = valueRef.current.value;
@@ -196,13 +198,28 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
         </DialogContent>
         <DialogActions>
           <Button
-            id={"shmiraList-rename-cancel-button"}
+            id={"import-sheets-explain-button"}
+            onClick={handleShowExample}
+          >
+            <HelpOutline />
+            &nbsp;
+            {translations.exampleVideo}
+          </Button>
+          <Button
+            id={"import-sheets-cancel-button"}
             onClick={handleCloseCancel}
           >
             {translations.Cancel}
           </Button>
         </DialogActions>
       </Dialog>
+      {/*<ExplainVideoDialog*/}
+      {/*  open={true}*/}
+      {/*  selectedValue={"asdf"}*/}
+      {/*  onClose={(ev) => {*/}
+      {/*    console.log(ev);*/}
+      {/*  }}*/}
+      {/*/>*/}
     </div>
   );
 };

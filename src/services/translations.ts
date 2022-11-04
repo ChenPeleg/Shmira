@@ -70,6 +70,7 @@ export const translations = {
   CanAlwaysGuardShort: " יכול לשמור בכל הימים",
   TsamudWord: "צמוד",
   OneWayTo: "הסעה",
+  exampleVideo: "הסבר כיצד ליבא",
   OneWayFrom: "איסוף",
   TwoWay: "הלוך חזור",
   Submit: "סיום ",
