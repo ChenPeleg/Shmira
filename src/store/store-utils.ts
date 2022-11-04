@@ -28,7 +28,7 @@ interface CSVRow {
 
 export const StoreUtils = {
   removeIdPrefix: (id: string): string => {
-    const replaceIdsNames: RegExp = new RegExp(
+    const replaceIdsNames = new RegExp(
       AppConstants.ArchiveIdPrefix + "|" + AppConstants.deleteIdPrefix,
       "g"
     );
@@ -47,7 +47,7 @@ export const StoreUtils = {
   shieldAnimationBeforeDispatch(
     dispatchingAction: () => void,
     dispatchFunct: any,
-    delay: number = 600
+    delay = 600
   ) {
     const callArguments = {
       type: ActionsTypes.START_LOADING_ANIMATION,
@@ -89,8 +89,8 @@ export const StoreUtils = {
   },
   buildSaveDataModel: (
     state: ShmiraListStore,
-    userName: string = "chen",
-    userId: string = "chen"
+    userName = "chen",
+    userId = "chen"
   ): SaveDataModel => {
     const hash = hashFunction(JSON.stringify(state));
     return {
@@ -105,17 +105,22 @@ export const StoreUtils = {
     sketch: SketchModel,
     preferences: PreferenceModel[]
   ): string {
-    let rows: CSVRow[] = [];
+    const rows: CSVRow[] = [];
     const GuardsDictionary: Record<string, string> = {};
     preferences.forEach((p) => {
       GuardsDictionary[p.id] = p.guardName;
     });
+    const isOneGuardForNight = sketch.isOneGuardForNight;
     sketch.NightSchedule.forEach((night) => {
       const nightDateText = Utils.Date.simpleDateFromDateStamp(night.date);
       const dayOfWeek = Utils.Date.getDatOfWeekTextFromTimeStamp(night.date);
       const guards = night.guards.map((g) => GuardsDictionary[g] || "");
-      const comments =
-        night.guards?.length == 2 ? "" : translations.missingGuard;
+
+      const isMissingAGuard = isOneGuardForNight
+        ? night.guards?.length === 0
+        : night.guards?.length < 2;
+
+      const comments = isMissingAGuard ? translations.missingGuard : "";
       const row: CSVRow = {
         dateDay: dayOfWeek,
         dateText: nightDateText,

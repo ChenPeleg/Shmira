@@ -24,11 +24,12 @@ const DetectFormRows = (completeText: string): string => {
 };
 const rowsToEshbalPreferences = (rows: string[][]): SheetGuardPreference[] => {
   const Epreferences: SheetGuardPreference[] = [];
+  const addRowsWithEmptyName = false;
   rows.forEach((row: string[], index: number) => {
     if (row[1].length > 1 && index > 0) {
       const name = row[1];
       for (let c = 2; c < 8; c += 2) {
-        if (row[c].length > 1) {
+        if (row[c].length > 1 || addRowsWithEmptyName) {
           const newGuard: SheetGuardPreference = {
             name: name,
             hour: "",
@@ -49,6 +50,7 @@ const rowsToEshbalPreferences = (rows: string[][]): SheetGuardPreference[] => {
 const preferencesToPreferenceModel = (
   preferences: SheetGuardPreference[]
 ): PreferenceModel[] => {
+  const defaultHalfOrFull = "1";
   let idNum = 99;
   const defaultValues: PreferenceModel = { ...defaultPreferenceValues };
   const PreferencesApp: PreferenceModel[] = preferences.map((ePreference) => {
@@ -56,7 +58,7 @@ const preferencesToPreferenceModel = (
       id: idNum.toString(),
       flexibilityByDays: defaultValues.flexibilityByDays,
       flexibilityByDates: [],
-      halfOrFull: "2",
+      halfOrFull: defaultHalfOrFull,
       location: "",
       TypeOfInfoPreference: PreferenceType.CanGuardIn,
       optionalGuardDaysByDates: convertTimeTo4Digits(ePreference.hour),
@@ -97,7 +99,14 @@ const convertTimeTo4Digits = (time: string): string => {
 
 export const validateImportedData = (prefs: PreferenceModel[]) => {
   const errors = [];
-  const guardWithoutName = prefs.filter((p) => p.guardName?.trim() === "");
+  const guardWithoutName = prefs
+    .map((p, i) => ({
+      guardName: p.guardName,
+      row: i + 1,
+    }))
+    .filter((g) => g.guardName?.trim() === "")
+    .map((g) => g.row.toString());
+
   const guardWithoutDates = prefs.filter(
     (p) => p.flexibilityByDates.length === 0
   );
@@ -112,7 +121,7 @@ export const validateImportedData = (prefs: PreferenceModel[]) => {
     errors.push("Guard " + guardWithoutDates[0].guardName + " has no dates");
   }
   if (guardWithoutName[0]) {
-    errors.push("Row " + prefs.indexOf(guardWithoutName[0]) + " has no name");
+    errors.push("Row " + guardWithoutName[0] + " has no name");
   }
   const guardWithError = prefs.filter((p) =>
     p.guardName.toLowerCase().includes("error")

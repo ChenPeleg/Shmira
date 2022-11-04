@@ -11,9 +11,14 @@ export const ShmiraListBuilderBuildPreferencesMetaData = (
   buildSettings: ShmiraListBuildSettings
 ): PreferenceMetaDataModel[] => {
   return preferences.map((p: PreferenceModel) => {
+    const preferences = { ...p };
+    if (buildSettings.isOneGuardForNight) {
+      preferences.halfOrFull = "1";
+    }
+
     const prefMeta: PreferenceMetaDataModel = {
       datesYouCanGuard: ShmiraListBuilderTools.buildDaysYouCanGuard(
-        p,
+        preferences,
         buildSettings.Range
       ),
       guardDates: [],
