@@ -210,8 +210,10 @@ export const SketchPendingPreferenceFull = (
       >
         <Typography sx={{}} variant={"subtitle1"}>
           {assignedText +
-            " ," +
-            LanguageUtilities.renderPassengerTextBrief(preference.halfOrFull) +
+            (isOneGuardForNight
+              ? ""
+              : " ," +
+                LanguageUtilities.renderGuardTextBrief(preference.halfOrFull)) +
             noPotentialPlacesWereFound +
             " " +
             additionalDateInfo}{" "}

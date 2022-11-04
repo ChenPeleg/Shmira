@@ -107,7 +107,7 @@ export const LanguageUtilities = {
       return translations.fullNight;
     }
   },
-  renderPassengerTextBrief(num: string): string {
+  renderGuardTextBrief(num: string): string {
     if (num === "1") {
       return translations.halfNightBrief;
     } else if (num === "2") {
@@ -116,7 +116,7 @@ export const LanguageUtilities = {
       return translations.halfNightBrief;
     }
   },
-  addLineBreaksToString(str: string, numberOfBR: number = 2): string {
+  addLineBreaksToString(str: string, numberOfBR = 2): string {
     const br = "\n   ";
     const arr = new Array(numberOfBR);
     return str + arr.map((s) => br).join("");
@@ -128,7 +128,7 @@ export const LanguageUtilities = {
   }[] {
     const ret: { action: SketchEditActionEnum; name: string; icon: string }[] =
       [];
-    for (let sketchEditActionEnumKey in SketchEditActionEnum) {
+    for (const sketchEditActionEnumKey in SketchEditActionEnum) {
       if (isNaN(Number(sketchEditActionEnumKey))) {
         continue;
       }
@@ -168,7 +168,7 @@ export const LanguageUtilities = {
     }
     return ret;
   },
-  trimText(name: string, maxNameLength: number = 30): string {
+  trimText(name: string, maxNameLength = 30): string {
     // let maxNameLength = 30;
     let threeDots = "";
     if (!name) {

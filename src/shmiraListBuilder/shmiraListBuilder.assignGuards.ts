@@ -66,10 +66,13 @@ export const ShmiraListBuilderBuildNightsAndUnAssigned = (
           if (guard.guardDates.length === 0) {
             // @ts-ignore
             guard.guardDates.push(n.date);
-            // @ts-ignore
-            guard.guardDates.push(n.date);
+
             n.guards.push(guard.id);
-            n.guards.push(guard.id);
+            if (!isOneGuardForNight) {
+              // @ts-ignore
+              guard.guardDates.push(n.date);
+              n.guards.push(guard.id);
+            }
           }
         } else if (
           ShmiraListBuilderTools.checkIfPersonCanGuard(
