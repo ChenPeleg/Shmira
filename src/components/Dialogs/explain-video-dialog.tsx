@@ -5,6 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { translations } from "../../services/translations";
+import { CardMedia } from "@mui/material";
 
 interface ExplainVideoDialogProps {
   open: boolean;
@@ -24,15 +25,21 @@ export const ExplainVideoDialog = (props: ExplainVideoDialogProps) => {
 
   return (
     <div>
-      <Dialog fullWidth open={open} onClose={handleCloseCancel}>
+      <Dialog maxWidth="md" fullWidth open={open} onClose={handleCloseCancel}>
         <DialogTitle> {translations.exampleVideo}</DialogTitle>
         <DialogContent>
-          <video>
-            <source
-              src={process.env.PUBLIC_URL + "/example-import.mp4"}
-              type="video/mp4"
-            />
-          </video>
+          <CardMedia
+            component="video"
+            src={process.env.PUBLIC_URL + "/example-import.mp4"}
+            autoPlay
+          >
+            {/*<video autoPlay={true} controls={true}>*/}
+            {/*  <source*/}
+            {/*    src={process.env.PUBLIC_URL + "/example-import.mp4"}*/}
+            {/*    type="video/mp4"*/}
+            {/*  />*/}
+            {/*</video>*/}
+          </CardMedia>
         </DialogContent>
         <DialogActions>
           <Button
