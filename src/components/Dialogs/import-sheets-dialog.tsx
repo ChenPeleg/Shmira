@@ -63,12 +63,12 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
   const handlePasting = (
     event: ChangeEvent & { target: { value: string } }
   ) => {
-    let data = event.target.value;
+    const data = event.target.value;
 
     if (data.length < 30 && data !== "`") {
       return;
     } else if (data !== "`") {
-      data = "";
+      // data = "";
     }
 
     setIsWaitingForValidation(true);

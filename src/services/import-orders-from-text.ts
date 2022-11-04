@@ -1,10 +1,6 @@
 import { PreferenceModel } from "../models/Preference.model";
 import { PreferenceType, WeekDaysOrDates } from "../models/PreferenceType.enum";
 import { defaultPreferenceValues } from "../store/store.types";
-import { locations } from "./locations";
-import { LocationModel } from "../models/Location.model";
-import { translations } from "./translations";
-import { fakeFileData } from "./fake-file-data";
 import { Utils } from "./utils";
 
 const NewRowToken = "New_row_";
@@ -20,20 +16,20 @@ const stringIntoRows = (str: string): string[] => {
 };
 
 const DetectFormRows = (completeText: string): string => {
-  let finalText = completeText.replace(
+  const finalText = completeText.replace(
     /\n((0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4})/g,
     NewRowToken + "$1"
   );
   return finalText;
 };
 const rowsToEshbalPreferences = (rows: string[][]): SheetGuardPreference[] => {
-  let Epreferences: SheetGuardPreference[] = [];
+  const Epreferences: SheetGuardPreference[] = [];
   rows.forEach((row: string[], index: number) => {
     if (row[1].length > 1 && index > 0) {
-      let name = row[1];
+      const name = row[1];
       for (let c = 2; c < 8; c += 2) {
         if (row[c].length > 1) {
-          const newRide: SheetGuardPreference = {
+          const newGuard: SheetGuardPreference = {
             name: name,
             hour: "",
             flexibilityByDays: [],
@@ -42,7 +38,7 @@ const rowsToEshbalPreferences = (rows: string[][]): SheetGuardPreference[] => {
             text: row[c + 1],
           };
 
-          Epreferences.push(newRide);
+          Epreferences.push(newGuard);
         }
       }
     }
@@ -55,7 +51,7 @@ const preferencesToPreferenceModel = (
 ): PreferenceModel[] => {
   let idNum = 99;
   const defaultValues: PreferenceModel = { ...defaultPreferenceValues };
-  let PreferencesApp: PreferenceModel[] = preferences.map((ePreference) => {
+  const PreferencesApp: PreferenceModel[] = preferences.map((ePreference) => {
     const appPreference: PreferenceModel = {
       id: idNum.toString(),
       flexibilityByDays: defaultValues.flexibilityByDays,
@@ -99,8 +95,8 @@ const convertTimeTo4Digits = (time: string): string => {
   }
 };
 
-export const vlidateImportedData = (prefs: PreferenceModel[]) => {
-  let errors = [];
+export const validateImportedData = (prefs: PreferenceModel[]) => {
+  const errors = [];
   const guardWithoutName = prefs.filter((p) => p.guardName?.trim() === "");
   const guardWithoutDates = prefs.filter(
     (p) => p.flexibilityByDates.length === 0
@@ -155,7 +151,7 @@ export const getDatesFromImportedPreferences = (
 };
 export const ImportPreferencesFromText = (text: string): PreferenceModel[] => {
   if (!text) {
-    text = fakeFileData;
+    //  text = fakeFileData;
   }
   // text = stringValue;
 
@@ -165,7 +161,7 @@ export const ImportPreferencesFromText = (text: string): PreferenceModel[] => {
   try {
     const preferences: SheetGuardPreference[] =
       rowsToEshbalPreferences(rowsWithColumns);
-    let appPreferences: PreferenceModel[] =
+    const appPreferences: PreferenceModel[] =
       preferencesToPreferenceModel(preferences);
     return appPreferences;
   } catch (e) {

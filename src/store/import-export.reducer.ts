@@ -12,7 +12,7 @@ import { ActionsTypes } from "./types.actions";
 import {
   getDatesFromImportedPreferences,
   ImportPreferencesFromText,
-  vlidateImportedData,
+  validateImportedData,
 } from "../services/import-orders-from-text";
 import { PreferenceModel } from "../models/Preference.model";
 
@@ -33,7 +33,7 @@ export const ImportExportReducer: Record<
     state: ShmiraListStore,
     action: IAction
   ): ShmiraListStore => {
-    let newState = { ...state };
+    const newState = { ...state };
     newState.shmiraListCollection =
       StoreUtils.UpdateShmiraListCollectionWithCurrenShmiraList(newState);
     const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(newState);
@@ -44,7 +44,7 @@ export const ImportExportReducer: Record<
     state: ShmiraListStore,
     action: IAction
   ): ShmiraListStore => {
-    let newState = { ...state };
+    const newState = { ...state };
     newState.currentSessionState = { ...newState.currentSessionState };
     newState.currentSessionState.isImportSheetModalOpen = true;
     newState.currentSessionState.importSheetCheckStatus = false;
@@ -55,12 +55,12 @@ export const ImportExportReducer: Record<
     state: ShmiraListStore,
     action: IAction
   ): ShmiraListStore => {
-    let newState = { ...state };
+    const newState = { ...state };
     newState.currentSessionState = { ...newState.currentSessionState };
     const modeledImportedPreferences: PreferenceModel[] =
       ImportPreferencesFromText(action.payload);
     try {
-      vlidateImportedData(modeledImportedPreferences);
+      validateImportedData(modeledImportedPreferences);
     } catch (err: any) {
       newState.currentSessionState.importSheetCheckStatus =
         "Error: " + err.message || "Error";
@@ -74,12 +74,12 @@ export const ImportExportReducer: Record<
     state: ShmiraListStore,
     action: IAction
   ): ShmiraListStore => {
-    let newState = { ...state };
+    const newState = { ...state };
     newState.currentSessionState = { ...newState.currentSessionState };
     const modeledImportedPreferences: PreferenceModel[] =
       ImportPreferencesFromText(action.payload);
     try {
-      vlidateImportedData(modeledImportedPreferences);
+      validateImportedData(modeledImportedPreferences);
     } catch (err: any) {
       newState.currentSessionState.importSheetCheckStatus =
         "Error: " + err.message || "Error";
@@ -131,7 +131,7 @@ export const ImportExportReducer: Record<
     state: ShmiraListStore,
     action: IAction
   ): ShmiraListStore => {
-    let newState = { ...state };
+    const newState = { ...state };
 
     newState.currentSessionState = { ...newState.currentSessionState };
     newState.currentSessionState.isImportSheetModalOpen = false;
@@ -167,7 +167,7 @@ export const ImportExportReducer: Record<
     state: ShmiraListStore,
     action: IAction
   ): ShmiraListStore => {
-    let newState = { ...state };
+    const newState = { ...state };
     const importedPreferences: string = action.payload.importedPreferences;
     const modeledImportedPreferences: PreferenceModel[] =
       ImportPreferencesFromText(importedPreferences);

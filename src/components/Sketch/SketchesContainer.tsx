@@ -14,6 +14,7 @@ import { Sketch } from "./Sketch";
 import MenuItem from "@mui/material/MenuItem";
 import { RenameDialog } from "../Dialogs/rename-dialog";
 import { StoreUtils } from "../../store/store-utils";
+import { SketchSingleGuardMessage } from "./sketch-single-guard-message";
 
 export const SketchesContainer = () => {
   const dispatch = useDispatch();
@@ -125,6 +126,8 @@ export const SketchesContainer = () => {
     sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) ||
     null;
 
+  const isOneGuardForNight = sketchInEdit?.isOneGuardForNight || false;
+
   const sketchName = sketchInEdit ? sketchInEdit.name : "";
 
   return (
@@ -183,7 +186,6 @@ export const SketchesContainer = () => {
               ))}
             </Select>
           </Typography>
-
           <IconButton
             size="small"
             aria-label="show more"
@@ -200,7 +202,6 @@ export const SketchesContainer = () => {
               height: "12px",
             }}
           />
-
           <Button
             variant={"contained"}
             id={"sketches-download-sketch"}
@@ -208,6 +209,9 @@ export const SketchesContainer = () => {
           >
             <GridOn /> &nbsp; {translations.downloadAsCSV}
           </Button>
+          {isOneGuardForNight ? (
+            <SketchSingleGuardMessage></SketchSingleGuardMessage>
+          ) : null}
         </Box>
       ) : (
         <Button

@@ -32,14 +32,7 @@ export const ExplainVideoDialog = (props: ExplainVideoDialogProps) => {
             component="video"
             src={process.env.PUBLIC_URL + "/example-import.mp4"}
             autoPlay
-          >
-            {/*<video autoPlay={true} controls={true}>*/}
-            {/*  <source*/}
-            {/*    src={process.env.PUBLIC_URL + "/example-import.mp4"}*/}
-            {/*    type="video/mp4"*/}
-            {/*  />*/}
-            {/*</video>*/}
-          </CardMedia>
+          ></CardMedia>
         </DialogContent>
         <DialogActions>
           <Button

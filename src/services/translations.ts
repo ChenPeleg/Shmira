@@ -83,6 +83,9 @@ export const translations = {
   CreateLocationGroup: "צור בסיס סידור חדש",
   NoSketchMessage:
     'לא קיימות סקיצות לרשימת השמירה, לאחר הזנת כל ההעדפות ניתן ללחוץ על "יצירת סקיצה חדשה"',
+  SingleGuardMessage: 'סקציה זו היא במצב "שומר אחד בלילה"',
+  SingleGuardMessageDetails:
+    'נעשה שיבוץ של שומר אחד בלבד ללילה. אם יש רק שומר אחד בלילה, הלילה לא מוגדר כ"חסר" ולא מופיעות הצעות לשבץ שומרים ללילות שיש בהן שומר',
   NewPreference: "שומרת חדשה",
   PendingPreferences: "הזמנות לטיפול",
   GuardsNoAssigned: "שומרים ללא שיבוץ",
@@ -158,6 +161,7 @@ export const translations = {
   minimumBetweenDates: "ימים לפחות בין שמירות",
   peopleWhoCanGuard: "יכולים לשמור",
   missingGuard: "חסר",
+  details: "פרטים",
 
   /* date errors  */
   dateErrStartBiggerthan: "על תאריך ההתחלה להיות לפני תאריך הסיום",
