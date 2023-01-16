@@ -58,6 +58,7 @@ describe("import-orders-from-text", () => {
   it("identify comments and puts them in the comment", () => {
     const input = mockSheetInput.inputWithComments;
     const preferences: PreferenceModel[] = ImportPreferencesFromText(input);
+    console.log(preferences);
     // expect()
   });
 });
