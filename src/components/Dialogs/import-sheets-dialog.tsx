@@ -182,7 +182,7 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
                 }}
               >
                 {formatErrorText(importSheetCheckStatus).map((t, i) => (
-                  <Box>
+                  <Box key={"container" + i}>
                     <Box key={i} sx={{ padding: "00px" }}>
                       {t}
                     </Box>

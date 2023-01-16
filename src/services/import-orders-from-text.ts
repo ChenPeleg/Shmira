@@ -1,6 +1,6 @@
 import { PreferenceModel } from "../models/Preference.model";
 import { PreferenceType, WeekDaysOrDates } from "../models/PreferenceType.enum";
-import { defaultPreferenceValues } from "../store/store.types";
+import { AppConstants, defaultPreferenceValues } from "../store/store.types";
 import { Utils } from "./utils";
 
 const NewRowToken = "New_row_";
@@ -25,23 +25,22 @@ const DetectFormRows = (completeText: string): string => {
 const rowsToEshbalPreferences = (rows: string[][]): SheetGuardPreference[] => {
   const Epreferences: SheetGuardPreference[] = [];
   const addRowsWithEmptyName = false;
-  rows.forEach((row: string[], index: number) => {
-    if (row[1].length > 1 && index > 0) {
-      const name = row[1];
-      for (let c = 2; c < 8; c += 2) {
-        if (row[c].length > 1 || addRowsWithEmptyName) {
-          const newGuard: SheetGuardPreference = {
-            name: name,
-            hour: "",
-            flexibilityByDays: [],
-            weekDaysOrDates: WeekDaysOrDates.Dates,
-            Comments: row[c],
-            text: row[c + 1],
-          };
 
-          Epreferences.push(newGuard);
-        }
-      }
+  rows.forEach((row: string[], index: number) => {
+    const name = row[AppConstants.NameColumn];
+    const Comments = row[AppConstants.CommentColumn];
+    const DaysAsText = row[AppConstants.DaysColumn];
+    if (name.length > 1 && index > 0) {
+      const newGuard: SheetGuardPreference = {
+        name: name,
+        hour: "",
+        flexibilityByDays: [],
+        weekDaysOrDates: WeekDaysOrDates.Dates,
+        Comments: Comments,
+        text: DaysAsText,
+      };
+
+      Epreferences.push(newGuard);
     }
   });
   return Epreferences;
