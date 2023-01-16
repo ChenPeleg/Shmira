@@ -15,7 +15,7 @@ describe("import-orders-from-text", () => {
     const preferences: PreferenceModel[] = ImportPreferencesFromText(input);
 
     const Yair = {
-      flexibilityByDates: ["44806", "44813", "44815", "44820"],
+      flexibilityByDates: ["45171", "45178", "45180", "45185"],
       halfOrFull: "2",
       TypeOfInfoPreference: "2",
       optionalGuardDaysByDates: "",
@@ -23,7 +23,7 @@ describe("import-orders-from-text", () => {
     };
     const Gilad = {
       flexibilityByDays: [],
-      flexibilityByDates: ["44834", "44843", "44846", "44873", "44876"],
+      flexibilityByDates: ["45199", "45208", "45211", "45238", "45241"],
       halfOrFull: "2",
       TypeOfInfoPreference: "2",
       optionalGuardDaysByDates: "",
@@ -48,12 +48,10 @@ describe("import-orders-from-text", () => {
     );
     expect(foundYair?.flexibilityByDates.join(",")).eq(
       Yair.flexibilityByDates.join(","),
-      "flexibility is not calculated properly"
+      "flexibility is not calculated properly - this functions needs to be updated every year"
     );
-    expect(foundGilad?.flexibilityByDates.join(",")).eq(
-      Gilad.flexibilityByDates.join(","),
-      "flexability is not calculated properly"
-    );
+
+    expect(foundGilad?.flexibilityByDates).toEqual(Gilad.flexibilityByDates);
   });
   it("identify comments and puts them in the comment", () => {
     const input = mockSheetInput.inputWithComments;
