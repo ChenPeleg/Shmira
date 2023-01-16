@@ -48,7 +48,7 @@ describe("import-orders-from-text", () => {
     );
     expect(foundYair?.flexibilityByDates.join(",")).eq(
       Yair.flexibilityByDates.join(","),
-      "flexability is not calculated properly"
+      "flexibility is not calculated properly"
     );
     expect(foundGilad?.flexibilityByDates.join(",")).eq(
       Gilad.flexibilityByDates.join(","),
@@ -58,7 +58,6 @@ describe("import-orders-from-text", () => {
   it("identify comments and puts them in the comment", () => {
     const input = mockSheetInput.inputWithComments;
     const preferences: PreferenceModel[] = ImportPreferencesFromText(input);
-    console.log(preferences);
-    // expect()
+    expect(preferences.length).toBe(5);
   });
 });

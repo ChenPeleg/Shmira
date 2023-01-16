@@ -82,6 +82,9 @@ export const defaultDaysBetweenGuardDuty = "6";
 export const AppConstants = {
   deleteIdPrefix: "Del",
   ArchiveIdPrefix: "Arch",
+  NameColumn: 1,
+  CommentColumn: 4,
+  DaysColumn: 3,
 };
 
 export enum FileUploadType {
