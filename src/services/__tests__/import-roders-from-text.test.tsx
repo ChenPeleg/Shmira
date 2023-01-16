@@ -55,4 +55,9 @@ describe("import-orders-from-text", () => {
       "flexability is not calculated properly"
     );
   });
+  it("identify comments and puts them in the comment", () => {
+    const input = mockSheetInput.inputWithComments;
+    const preferences: PreferenceModel[] = ImportPreferencesFromText(input);
+    // expect()
+  });
 });
