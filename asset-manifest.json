@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Shmira/static/css/main.f3bcc6f9.css",
-    "main.js": "/Shmira/static/js/main.d506011f.js",
+    "main.js": "/Shmira/static/js/main.b5b08988.js",
     "static/js/787.6de18f81.chunk.js": "/Shmira/static/js/787.6de18f81.chunk.js",
     "static/media/Assistant-Regular.ttf": "/Shmira/static/media/Assistant-Regular.e0bb8a20557f3925f263.ttf",
     "index.html": "/Shmira/index.html",
     "main.f3bcc6f9.css.map": "/Shmira/static/css/main.f3bcc6f9.css.map",
-    "main.d506011f.js.map": "/Shmira/static/js/main.d506011f.js.map",
+    "main.b5b08988.js.map": "/Shmira/static/js/main.b5b08988.js.map",
     "787.6de18f81.chunk.js.map": "/Shmira/static/js/787.6de18f81.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f3bcc6f9.css",
-    "static/js/main.d506011f.js"
+    "static/js/main.b5b08988.js"
   ]
 }
