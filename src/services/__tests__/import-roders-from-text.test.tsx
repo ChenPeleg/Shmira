@@ -1,5 +1,3 @@
-import React from "react";
-
 import { customMatcherRunner } from "../../__tests-utils__/cutom-matchers";
 import { mockSheetInput } from "../../__tests-utils__/mock-sheet-input";
 import { ImportPreferencesFromText } from "../import-orders-from-text";
@@ -15,7 +13,7 @@ describe("import-orders-from-text", () => {
     const preferences: PreferenceModel[] = ImportPreferencesFromText(input);
 
     const Yair = {
-      flexibilityByDates: ["45171", "45178", "45180", "45185"],
+      flexibilityByDates: ["45537", "45544", "45546", "45551"], //,,,
       halfOrFull: "2",
       TypeOfInfoPreference: "2",
       optionalGuardDaysByDates: "",
@@ -23,7 +21,7 @@ describe("import-orders-from-text", () => {
     };
     const Gilad = {
       flexibilityByDays: [],
-      flexibilityByDates: ["45199", "45208", "45211", "45238", "45241"],
+      flexibilityByDates: ["45565", "45574", "45577", "45604", "45607"],
       halfOrFull: "2",
       TypeOfInfoPreference: "2",
       optionalGuardDaysByDates: "",
@@ -46,9 +44,11 @@ describe("import-orders-from-text", () => {
       true,
       "guard is not weekDaysOrDates == 2"
     );
+
     expect(foundYair?.flexibilityByDates.join(",")).eq(
       Yair.flexibilityByDates.join(","),
-      "flexibility is not calculated properly - this functions needs to be updated every year"
+
+      "flexibility is not calculated properly - this functions needs to be updated every year: change the Yair and Gilad dates at the end of the file"
     );
 
     expect(foundGilad?.flexibilityByDates).toEqual(Gilad.flexibilityByDates);
