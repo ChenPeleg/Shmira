@@ -16,7 +16,5 @@ root.render(
     ,
   </React.StrictMode>
 );
-
 console.log("REACT_APP_ENV", process.env.REACT_APP_ENV);
-
 reportWebVitals();
