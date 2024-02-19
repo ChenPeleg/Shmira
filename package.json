@@ -31,13 +31,17 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --silent=false --watchAll=false",
-    "test:last": "react-scripts test -t last --silent=false --watchAll=false",
-    "test:watch": "react-scripts test",
+    "start": "cross-env REACT_APP_ENV=dev react-scripts start",
+    "build": "cross-env REACT_APP_ENV=prod-gen react-scripts build",
+    "build:gh-pages": "cross-env REACT_APP_ENV=prod-github react-scripts build",
+    "build:site": "cross-env REACT_APP_ENV=prod-firebase react-scripts build",
+    "build:prod": "cross-env REACT_APP_ENV=prod-firebase react-scripts build",
+    "postbuild:site": "mkdir temp && mkdir temp/Shmira && cp -rf build/* temp/Shmira && cp -rf temp/* build && rm -rf temp/Shmira",
+    "test": "cross-env REACT_APP_ENV=test react-scripts test --silent=false --watchAll=false",
+    "test:last": "cross-env REACT_APP_ENV=test react-scripts test -t last --silent=false --watchAll=false",
+    "test:watch": "cross-env REACT_APP_ENV=test react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "react-scripts build",
+    "predeploy": "cross-env REACT_APP_ENV=prod-github react-scripts build",
     "deploy": "gh-pages -d build",
     "format": "prettier --write ."
   },
