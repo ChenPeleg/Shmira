@@ -2,8 +2,9 @@ import { FileUploadDialog } from "../file-uplaod-dialog";
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Mock = jest.Mock;
+// @ts-ignore
 import userEvent, { TargetElement } from "@testing-library/user-event";
+import Mock = jest.Mock;
 
 describe("File Upload Dialog", () => {
   let fileDialog: any = null;
