@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
-import { Field, Form } from "react-final-form";
 import { MuiFormPropsModel } from "../../models/mui-form-props.model";
 import { useDispatch, useSelector } from "react-redux";
 import { RenderTextField } from "../Form/text-field";
@@ -13,8 +12,6 @@ import { Box, SxProps } from "@mui/system";
 import { Button, MenuItem } from "@mui/material";
 import { translations } from "../../services/translations";
 import { ActionsTypes } from "../../store/types.actions";
-import { LocationModel } from "../../models/Location.model";
-import { locations } from "../../services/locations";
 import { RenderFullNightField } from "../Form/full-night-field";
 import { RenderFlexibilityField } from "../Form/flex-field";
 import {
@@ -63,17 +60,7 @@ const fieldWrapperText = {
   padding: "10px",
   maxWidth: "150px",
 };
-const allLocations: LocationModel[] = locations.map((o) => ({ ...o }));
 const preferenceFields: PreferenceModel = new PreferenceFields();
-
-const Divider = () => (
-  <Box
-    sx={{
-      width: "10px",
-      height: "5px",
-    }}
-  />
-);
 
 const daysOfWeekMenuItem = Utils.Date.dateOfWeekObject;
 
@@ -93,15 +80,24 @@ const createItemsFromDateRange = (
     };
   });
 };
-const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
-  const {
-    handleSubmit,
-    pristine,
-    reset,
-    submitting,
-    typeOfPreference,
-    weekDaysOrDates,
-  } = muiFormProps;
+
+const emptyMeta = { touched: false, error: undefined };
+
+export const PreferenceRequestForm = (formProps: MuiFormPropsModel) => {
+  const dispatch = useDispatch();
+
+  const id = formProps.preferenceId;
+  const preferences = useSelector(
+    (state: { preferences: PreferenceModel[] }) => state.preferences
+  );
+
+  const initialValues = preferences.find(
+    (preference) => preference.id === id
+  ) as PreferenceModel;
+
+  const [values, setValues] = useState<PreferenceModel>(() => ({
+    ...initialValues,
+  }));
 
   const shmiraListCollection: ShmiraListRecord[] = useSelector(
     (state: { shmiraListCollection: ShmiraListRecord[] }) =>
@@ -120,17 +116,37 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
       currenList.DateTo
     );
   }
-  const [isAdvanced, setIsAdvanced] = useState(false);
-  const handleSetAdvanced = (value: boolean = true) => {
-    setIsAdvanced(value);
-  };
-  const advanceFieldWrapper: SxProps = {
-    ...fieldWrapper,
-    display: isAdvanced ? "initial" : "none",
-  };
+
+  const typeOfPreference = values.TypeOfInfoPreference ?? undefined;
+  const weekDaysOrDates = values.weekDaysOrDates ?? undefined;
+
+  const update = useCallback(
+    (name: keyof PreferenceModel, value: unknown) => {
+      setValues((prev) => ({ ...prev, [name]: value }));
+    },
+    []
+  );
+
+  const onSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!formProps.isInEdit) {
+        return;
+      }
+      dispatch({
+        type: ActionsTypes.UPDATE_ORDER_IN_EDIT,
+        payload: { ...values },
+      });
+      dispatch({
+        type: ActionsTypes.UPDATE_ORDER,
+        payload: { id },
+      });
+    },
+    [formProps.isInEdit, values, id, dispatch]
+  );
 
   return (
-    <form onSubmit={(...args) => submitting(...args)} dir={"rtl"}>
+    <form onSubmit={onSubmit} dir={"rtl"}>
       <Box
         id={"form-wrapper"}
         sx={{
@@ -140,17 +156,28 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         }}
       >
         <Box sx={fieldWrapperText}>
-          <Field
-            name={preferenceFields.guardName}
-            component={RenderTextField}
+          <RenderTextField
+            input={{
+              value: values.guardName,
+              onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                update("guardName", e.target.value),
+              name: preferenceFields.guardName,
+            }}
             label={TRL.Name}
+            meta={emptyMeta}
+            custom={{}}
           />
         </Box>
         <Box sx={selectFieldWrapper}>
-          <Field
+          <RenderSelectField
+            input={{
+              value: values.TypeOfInfoPreference ?? "",
+              onChange: (e: { target: { value: string } }) =>
+                update("TypeOfInfoPreference", e.target.value as PreferenceType),
+              name: "TypeOfInfoPreference",
+            }}
             label={TRL.TypeOfInfoPreference}
-            name={"TypeOfInfoPreference"}
-            component={RenderSelectField}
+            meta={emptyMeta}
           >
             <MenuItem value={PreferenceType.CanGuardIn.toString()}>
               {TRL.CanGuardIn}
@@ -162,84 +189,104 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
             <MenuItem value={PreferenceType.CantGuardIn.toString()}>
               {TRL.CantGuardIn}
             </MenuItem>
-          </Field>
+          </RenderSelectField>
         </Box>
-        {typeOfPreference === PreferenceType.CanGuardIn ||
-        typeOfPreference === PreferenceType.CantGuardIn ? (
+        {(typeOfPreference === PreferenceType.CanGuardIn ||
+          typeOfPreference === PreferenceType.CantGuardIn) && (
           <Box sx={selectFieldWrapper}>
-            {" "}
-            <Field
-              name={"weekDaysOrDates"}
-              component={RenderFlexibilityField}
+            <RenderFlexibilityField
+              input={{
+                value: values.weekDaysOrDates ?? "",
+                onChange: (_e: unknown, newVal: string | null) =>
+                  update("weekDaysOrDates", newVal as WeekDaysOrDates),
+                name: "weekDaysOrDates",
+              }}
               label={TRL.flexibilityByDays}
-              rows={2}
+              meta={emptyMeta}
+              custom={{ rows: 2 }}
             />
           </Box>
-        ) : null}
+        )}
         {(typeOfPreference === PreferenceType.CanGuardIn ||
           typeOfPreference === PreferenceType.CantGuardIn) &&
-        weekDaysOrDates == WeekDaysOrDates.WeekDays ? (
+        weekDaysOrDates === WeekDaysOrDates.WeekDays && (
           <Box
             sx={{
               ...selectFieldWrapper,
               minWidth: "20%",
             }}
           >
-            <Field
-              name={"flexibilityByDays"}
-              component={RenderSelectFieldDDays}
+            <RenderSelectFieldDDays
+              input={{
+                value: values.flexibilityByDays ?? [],
+                onChange: (e: { target: { value: unknown } }) => {
+                  const v = e.target.value;
+                  update(
+                    "flexibilityByDays",
+                    Array.isArray(v) ? v : typeof v === "string" ? [v] : []
+                  );
+                },
+                name: "flexibilityByDays",
+              }}
               label={getLabelByPreferenceType(
                 typeOfPreference,
                 WeekDaysOrDates.WeekDays
               )}
+              meta={emptyMeta}
             >
               {daysOfWeekMenuItem.map(
-                (day: { name: string; weekDayNumber: number }) => {
-                  return (
-                    <MenuItem
-                      key={day.weekDayNumber}
-                      value={day.weekDayNumber.toString()}
-                    >
-                      {day.name}
-                    </MenuItem>
-                  );
-                }
+                (day: { name: string; weekDayNumber: number }) => (
+                  <MenuItem
+                    key={day.weekDayNumber}
+                    value={day.weekDayNumber.toString()}
+                  >
+                    {day.name}
+                  </MenuItem>
+                )
               )}
-            </Field>
+            </RenderSelectFieldDDays>
           </Box>
-        ) : null}
+        )}
         {(typeOfPreference === PreferenceType.CanGuardIn ||
           typeOfPreference === PreferenceType.CantGuardIn) &&
-        weekDaysOrDates == WeekDaysOrDates.Dates ? (
+        weekDaysOrDates === WeekDaysOrDates.Dates && (
           <Box
             sx={{
               ...selectFieldWrapper,
               minWidth: "30%",
             }}
           >
-            <Field
-              name={"flexibilityByDates"}
-              component={RenderSelectFieldDDays}
+            <RenderSelectFieldDDays
+              input={{
+                value: values.flexibilityByDates ?? [],
+                onChange: (e: { target: { value: unknown } }) => {
+                  const v = e.target.value;
+                  update(
+                    "flexibilityByDates",
+                    Array.isArray(v) ? v : typeof v === "string" ? [v] : []
+                  );
+                },
+                name: "flexibilityByDates",
+              }}
               label={getLabelByPreferenceType(
                 typeOfPreference,
                 WeekDaysOrDates.Dates
               )}
+              meta={emptyMeta}
             >
               {dateRange.map(
-                (day: { dateInShort: string; timeStamp: string }) => {
-                  return (
-                    <MenuItem
-                      key={day.dateInShort}
-                      value={day.timeStamp.toString()}
-                    >
-                      {day.dateInShort}
-                    </MenuItem>
-                  );
-                }
+                (day: { dateInShort: string; timeStamp: string }) => (
+                  <MenuItem
+                    key={day.dateInShort}
+                    value={day.timeStamp.toString()}
+                  >
+                    {day.dateInShort}
+                  </MenuItem>
+                )
               )}
-            </Field>
+            </RenderSelectFieldDDays>
           </Box>
-        ) : null}
+        )}
 
         <Box
           sx={{
@@ -249,29 +296,29 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
           }}
         >
           <Box sx={fieldWrapper}>
-            {" "}
-            <Field
-              name={preferenceFields.Comments}
-              component={RenderTextField}
+            <RenderTextField
+              input={{
+                value: values.Comments,
+                onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                  update("Comments", e.target.value),
+                name: preferenceFields.Comments,
+              }}
               label={TRL.Comments}
-              // multiLine={true}
-              rows={2}
+              meta={emptyMeta}
+              custom={{ rows: 2 }}
             />
           </Box>
-          <Box
-            sx={{
-              ...fieldWrapper,
-              //alignSelf: 'flex-end',
-              //minWidth: '80%'
-            }}
-          >
-            {" "}
-            <Field
-              name={preferenceFields.halfOrFull}
-              component={RenderFullNightField}
+          <Box sx={fieldWrapper}>
+            <RenderFullNightField
+              input={{
+                value: values.halfOrFull,
+                onChange: (_e: unknown, newVal: number | null) =>
+                  update("halfOrFull", newVal != null ? String(newVal) : ""),
+                name: preferenceFields.halfOrFull,
+              }}
               label={TRL.halfOrFull}
-              type={"text"}
-              rows={2}
+              meta={emptyMeta}
+              custom={{ type: "text", rows: 2 }}
             />
           </Box>
 
@@ -292,8 +339,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
               }}
               variant="contained"
               color={"primary"}
-              type="button"
-              onClick={handleSubmit}
+              type="submit"
             >
               {TRL.Submit}
             </Button>
@@ -301,76 +347,5 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         </Box>
       </Box>
     </form>
-  );
-};
-
-export const PreferenceRequestForm = (formProps: MuiFormPropsModel) => {
-  const dispatch = useDispatch();
-
-  const id = formProps.preferenceId;
-  const preferences = useSelector(
-    (state: { preferences: PreferenceModel[] }) => state.preferences
-  );
-
-  const initialValues = preferences.find(
-    (preference) => preference.id === id
-  ) as PreferenceModel;
-
-  const [_typeOfPreference, set_typeOfPreference] = useState<
-    PreferenceType | undefined
-  >(initialValues.TypeOfInfoPreference as PreferenceType);
-  const [_weekDaysOrDays, set_weekDaysOrDays] = useState<
-    WeekDaysOrDates | undefined
-  >(initialValues?.weekDaysOrDates as WeekDaysOrDates);
-  let formValues = { ...initialValues };
-
-  return (
-    <Form
-      initialValues={initialValues}
-      onSubmit={(values: any) => {}}
-      validate={(values: any) => {
-        if (!formProps.isInEdit) {
-          return;
-        }
-        dispatch({
-          type: ActionsTypes.UPDATE_ORDER_IN_EDIT,
-          payload: {
-            ...values,
-          },
-        });
-        if (
-          values?.TypeOfInfoPreference &&
-          values?.TypeOfInfoPreference !== _typeOfPreference
-        ) {
-          set_typeOfPreference(values.TypeOfInfoPreference);
-        }
-        if (
-          values?.weekDaysOrDates &&
-          values?.weekDaysOrDates !== _weekDaysOrDays
-        ) {
-          set_weekDaysOrDays(values.weekDaysOrDates);
-        }
-        return {};
-      }}
-      handleSubmit={(event: Event, values: any) => {
-        if (!formProps.isInEdit) {
-          return;
-        }
-        dispatch({
-          type: ActionsTypes.UPDATE_ORDER,
-          payload: {
-            id: id,
-          },
-        });
-      }}
-      render={({ handleSubmit }: any) =>
-        MaterialUiForm({
-          ...formProps,
-          typeOfPreference: _typeOfPreference,
-          weekDaysOrDates: _weekDaysOrDays,
-          handleSubmit,
-        })
-      }
-    />
   );
 };
