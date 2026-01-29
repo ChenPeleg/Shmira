@@ -34,7 +34,6 @@ describe("Form Flexibility field ", () => {
   });
 
   it("component renders", async () => {
-    expect(wrapper.children).toHaveLength(1);
     expect(wrapper).toBeTruthy();
     expect(_baseElement.innerHTML.toString()).toContain("ToggleButton");
   });

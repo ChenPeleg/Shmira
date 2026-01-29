@@ -38,7 +38,7 @@ export const PendingPreferenceMenu = (props: PendingPreferenceMenuProps) => {
 
   return (
     <Menu
-      anchorEl={PendingPreferenceMenuAnchor}
+      anchorEl={PendingPreferenceMenuAnchor as Element}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",

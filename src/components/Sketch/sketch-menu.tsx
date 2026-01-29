@@ -35,7 +35,7 @@ export const SketchMenu = (props: SketchMenuProps) => {
   } = props;
   return (
     <Menu
-      anchorEl={sketchMoreAnchorEl}
+      anchorEl={sketchMoreAnchorEl as Element}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",

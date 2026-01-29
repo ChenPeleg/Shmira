@@ -37,7 +37,7 @@ export const ShmiraListMenu = (props: shmiraListMenuProps) => {
   } = props;
   return (
     <Menu
-      // TODO: FIx this depracated anchorEl={shmiraListMoreAnchorEl}
+      anchorEl={shmiraListMoreAnchorEl as Element}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",

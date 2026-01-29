@@ -91,10 +91,9 @@ export const DataRange = () => {
             // setValue(newValue);
             handleDatesChange(newValue, "From");
           }}
-          // TODO: fix this deprecated props
-          // renderInput={(params: any) => (
-          //   <TextField sx={textFieldSx} {...params} />
-          // )}
+          slotProps={{
+            textField: { sx: textFieldSx },
+          }}
         />
         <Box sx={Styles.divider} />
       </LocalizationProvider>
@@ -105,10 +104,9 @@ export const DataRange = () => {
           onChange={(newValue: Date | null) => {
             handleDatesChange(newValue, "To");
           }}
-          // TODO: fix this deprecated props
-          // renderInput={(params: any) => (
-          //   <TextField sx={textFieldSx} {...params} />
-          // )}
+          slotProps={{
+            textField: { sx: textFieldSx },
+          }}
         />
       </LocalizationProvider>
       {dateError ? (
