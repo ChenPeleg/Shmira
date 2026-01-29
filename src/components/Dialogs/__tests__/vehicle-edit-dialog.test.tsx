@@ -2,11 +2,10 @@ import React from "react";
 import { act, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "../../../__tests-utils__/redux-mock-store";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
 import { VehicleEditDialog } from "../vehicle-edit-dialog";
 import { VehicleModel } from "../../../models/Vehicle.model";
 import userEvent from "@testing-library/user-event";
-import Mock = jest.Mock;
 
 describe("Vehicle edit  Dialog", () => {
   let fileDialog: any = null;

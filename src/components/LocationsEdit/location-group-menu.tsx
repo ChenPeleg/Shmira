@@ -30,7 +30,7 @@ export const LocationGroupMenu = (props: LocationGroupMenuProps) => {
   } = props;
   return (
     <Menu
-      anchorEl={locationGroupMoreAnchorEl}
+      // TODO: FIx this depracated anchorEl={locationGroupMoreAnchorEl}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",

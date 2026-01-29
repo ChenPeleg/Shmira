@@ -2,10 +2,9 @@ import React from "react";
 import { act, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "../../../__tests-utils__/redux-mock-store";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
 import { RenameDialog } from "../rename-dialog";
 import userEvent from "@testing-library/user-event";
-import Mock = jest.Mock;
 
 describe("ShmiraList rename import Dialog", () => {
   let fileDialog: any = null;
