@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
         transformIndexHtml(html) {
           return html.replace(
             /%VITE_RELEASE_DATE%/g, // The placeholder in your HTML
-            JSON.stringify(new Date().toISOString()) // The actual value from your config
+            JSON.stringify(new Date().toLocaleDateString("")) // The actual value from your config
           );
         },
       },
