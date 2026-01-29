@@ -28,6 +28,7 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       "process.env.REACT_APP_ENV": JSON.stringify(env.VITE_APP_ENV || mode),
+      VITE_RELEASE_DATE: JSON.stringify(new Date().toISOString()),
     },
     test: {
       globals: true,
