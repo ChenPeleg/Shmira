@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import { MuiFormPropsModel } from "../../models/mui-form-props.model";
 import { useDispatch, useSelector } from "react-redux";
@@ -120,12 +120,9 @@ export const PreferenceRequestForm = (formProps: MuiFormPropsModel) => {
   const typeOfPreference = values.TypeOfInfoPreference ?? undefined;
   const weekDaysOrDates = values.weekDaysOrDates ?? undefined;
 
-  const update = useCallback(
-    (name: keyof PreferenceModel, value: unknown) => {
-      setValues((prev) => ({ ...prev, [name]: value }));
-    },
-    []
-  );
+  const update = useCallback((name: keyof PreferenceModel, value: unknown) => {
+    setValues((prev) => ({ ...prev, [name]: value }));
+  }, []);
 
   const onSubmit = useCallback(
     (e: React.FormEvent) => {
@@ -173,7 +170,10 @@ export const PreferenceRequestForm = (formProps: MuiFormPropsModel) => {
             input={{
               value: values.TypeOfInfoPreference ?? "",
               onChange: (e: { target: { value: string } }) =>
-                update("TypeOfInfoPreference", e.target.value as PreferenceType),
+                update(
+                  "TypeOfInfoPreference",
+                  e.target.value as PreferenceType
+                ),
               name: "TypeOfInfoPreference",
             }}
             label={TRL.TypeOfInfoPreference}
@@ -209,84 +209,84 @@ export const PreferenceRequestForm = (formProps: MuiFormPropsModel) => {
         )}
         {(typeOfPreference === PreferenceType.CanGuardIn ||
           typeOfPreference === PreferenceType.CantGuardIn) &&
-        weekDaysOrDates === WeekDaysOrDates.WeekDays && (
-          <Box
-            sx={{
-              ...selectFieldWrapper,
-              minWidth: "20%",
-            }}
-          >
-            <RenderSelectFieldDDays
-              input={{
-                value: values.flexibilityByDays ?? [],
-                onChange: (e: { target: { value: unknown } }) => {
-                  const v = e.target.value;
-                  update(
-                    "flexibilityByDays",
-                    Array.isArray(v) ? v : typeof v === "string" ? [v] : []
-                  );
-                },
-                name: "flexibilityByDays",
+          weekDaysOrDates === WeekDaysOrDates.WeekDays && (
+            <Box
+              sx={{
+                ...selectFieldWrapper,
+                minWidth: "20%",
               }}
-              label={getLabelByPreferenceType(
-                typeOfPreference,
-                WeekDaysOrDates.WeekDays
-              )}
-              meta={emptyMeta}
             >
-              {daysOfWeekMenuItem.map(
-                (day: { name: string; weekDayNumber: number }) => (
-                  <MenuItem
-                    key={day.weekDayNumber}
-                    value={day.weekDayNumber.toString()}
-                  >
-                    {day.name}
-                  </MenuItem>
-                )
-              )}
-            </RenderSelectFieldDDays>
-          </Box>
-        )}
+              <RenderSelectFieldDDays
+                input={{
+                  value: values.flexibilityByDays ?? [],
+                  onChange: (e: { target: { value: unknown } }) => {
+                    const v = e.target.value;
+                    update(
+                      "flexibilityByDays",
+                      Array.isArray(v) ? v : typeof v === "string" ? [v] : []
+                    );
+                  },
+                  name: "flexibilityByDays",
+                }}
+                label={getLabelByPreferenceType(
+                  typeOfPreference,
+                  WeekDaysOrDates.WeekDays
+                )}
+                meta={emptyMeta}
+              >
+                {daysOfWeekMenuItem.map(
+                  (day: { name: string; weekDayNumber: number }) => (
+                    <MenuItem
+                      key={day.weekDayNumber}
+                      value={day.weekDayNumber.toString()}
+                    >
+                      {day.name}
+                    </MenuItem>
+                  )
+                )}
+              </RenderSelectFieldDDays>
+            </Box>
+          )}
         {(typeOfPreference === PreferenceType.CanGuardIn ||
           typeOfPreference === PreferenceType.CantGuardIn) &&
-        weekDaysOrDates === WeekDaysOrDates.Dates && (
-          <Box
-            sx={{
-              ...selectFieldWrapper,
-              minWidth: "30%",
-            }}
-          >
-            <RenderSelectFieldDDays
-              input={{
-                value: values.flexibilityByDates ?? [],
-                onChange: (e: { target: { value: unknown } }) => {
-                  const v = e.target.value;
-                  update(
-                    "flexibilityByDates",
-                    Array.isArray(v) ? v : typeof v === "string" ? [v] : []
-                  );
-                },
-                name: "flexibilityByDates",
+          weekDaysOrDates === WeekDaysOrDates.Dates && (
+            <Box
+              sx={{
+                ...selectFieldWrapper,
+                minWidth: "30%",
               }}
-              label={getLabelByPreferenceType(
-                typeOfPreference,
-                WeekDaysOrDates.Dates
-              )}
-              meta={emptyMeta}
             >
-              {dateRange.map(
-                (day: { dateInShort: string; timeStamp: string }) => (
-                  <MenuItem
-                    key={day.dateInShort}
-                    value={day.timeStamp.toString()}
-                  >
-                    {day.dateInShort}
-                  </MenuItem>
-                )
-              )}
-            </RenderSelectFieldDDays>
-          </Box>
-        )}
+              <RenderSelectFieldDDays
+                input={{
+                  value: values.flexibilityByDates ?? [],
+                  onChange: (e: { target: { value: unknown } }) => {
+                    const v = e.target.value;
+                    update(
+                      "flexibilityByDates",
+                      Array.isArray(v) ? v : typeof v === "string" ? [v] : []
+                    );
+                  },
+                  name: "flexibilityByDates",
+                }}
+                label={getLabelByPreferenceType(
+                  typeOfPreference,
+                  WeekDaysOrDates.Dates
+                )}
+                meta={emptyMeta}
+              >
+                {dateRange.map(
+                  (day: { dateInShort: string; timeStamp: string }) => (
+                    <MenuItem
+                      key={day.dateInShort}
+                      value={day.timeStamp.toString()}
+                    >
+                      {day.dateInShort}
+                    </MenuItem>
+                  )
+                )}
+              </RenderSelectFieldDDays>
+            </Box>
+          )}
 
         <Box
           sx={{
