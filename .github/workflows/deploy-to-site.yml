@@ -3,7 +3,7 @@ name: Deploy ontent to Github Pages
 
 on:
   push:
-    branches: ["production"]
+    branches: ["main"]
 
   workflow_dispatch:
 
