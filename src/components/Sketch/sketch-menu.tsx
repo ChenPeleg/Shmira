@@ -35,7 +35,8 @@ export const SketchMenu = (props: SketchMenuProps) => {
   } = props;
   return (
     <Menu
-      anchorEl={sketchMoreAnchorEl}
+      // TODO: fix this deprecated props
+      // anchorEl={sketchMoreAnchorEl}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",
