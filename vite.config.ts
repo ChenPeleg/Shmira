@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   // Determine base path based on environment
   let base = "/";
   if (mode === "production-github") {
-    base = "/Sidur/";
+    base = "/Shmira/";
   }
 
   return {
