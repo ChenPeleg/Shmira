@@ -16,7 +16,7 @@ export const ProfileMenu = (props: profileMenuProps) => {
   const { anchorEl, menuId, isMenuOpen, handleMenuClose } = props;
   return (
     <Menu
-      // TODO: FIx this depracated anchorEl={anchorEl}
+      anchorEl={anchorEl as Element}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",
