@@ -1,9 +1,7 @@
-import React from "react";
 import { customMatcherRunner } from "../__tests-utils__/cutom-matchers";
-import App from "../hoc/App";
 //import { render  } from '@testing-library/react';
 
-jest.mock("react-dom", () => ({ render: jest.fn() }));
+vi.mock("react-dom", () => ({ render: vi.fn() }));
 
 customMatcherRunner();
 

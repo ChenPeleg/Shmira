@@ -2,20 +2,20 @@ import React from "react";
 import { act, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "../../../__tests-utils__/redux-mock-store";
-
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { RenameDialog } from "../rename-dialog";
-import Mock = jest.Mock;
 import userEvent from "@testing-library/user-event";
+import Mock = jest.Mock;
 
 describe("ShmiraList rename import Dialog", () => {
   let fileDialog: any = null;
   let component: HTMLElement;
   let _baseElement: any = null;
   let store: any;
-  let onClose: Mock = jest.fn();
+  let onClose: Mock = vi.fn();
   const shmiraListDefaultName = "name of shmiraList";
   beforeEach(async () => {
-    onClose = jest.fn();
+    onClose = vi.fn();
 
     const middlewares: any = [];
     const mockStore = configureStore(middlewares);

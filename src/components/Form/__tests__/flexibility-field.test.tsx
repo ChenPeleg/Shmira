@@ -8,7 +8,7 @@ describe("Form Flexibility field ", () => {
   let wrapper: HTMLElement;
   let _baseElement: any = null;
 
-  const onChangeStub = jest.fn();
+  const onChangeStub = vi.fn();
   const TextFieldProps: TextFieldPropertiesModel = {
     input: {
       value: [-10, 20],
