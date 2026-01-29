@@ -13,7 +13,18 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    plugins: [react()],
+    plugins: [
+      react(),
+      {
+        name: "html-transform",
+        transformIndexHtml(html) {
+          return html.replace(
+            /%VITE_RELEASE_DATE%/g, // The placeholder in your HTML
+            JSON.stringify(new Date().toISOString()) // The actual value from your config
+          );
+        },
+      },
+    ],
     base,
     build: {
       outDir: "build",
@@ -27,6 +38,14 @@ export default defineConfig(({ mode }) => {
       port: 3000,
     },
     define: {
+      define: {
+        "import.meta.env.VITE_BUILD_EPOC_DATE": JSON.stringify(
+          new Date().getTime()
+        ),
+        "import.meta.env.VITE_APP_VERSION": JSON.stringify(
+          process.env.npm_package_version
+        ),
+      },
       "process.env.REACT_APP_ENV": JSON.stringify(env.VITE_APP_ENV || mode),
       VITE_RELEASE_DATE: JSON.stringify(new Date().toISOString()),
     },
