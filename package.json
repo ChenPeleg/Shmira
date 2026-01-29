@@ -5,75 +5,52 @@
   "homepage": "https://chenpeleg.github.io/Shmira",
   "homepage-gh-pages": "https://chenpeleg.github.io/Shmira",
   "engines": {
-    "node": "18"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.10.9",
-    "@mui/lab": "^5.0.0-alpha.106",
-    "@mui/material": "^5.10.12",
-    "@mui/x-date-pickers": "^5.0.6",
-    "@redux-devtools/extension": "^3.2.3",
-    "@types/node": "^16.11.56",
-    "@types/react": "^18.0.18",
-    "@types/react-dom": "^18.0.6",
-    "cross-env": "^7.0.3",
-    "date-fns": "^2.29.3",
-    "final-form": "^4.20.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-final-form": "^6.5.9",
-    "react-redux": "^8.0.2",
-    "react-scripts": "5.0.1",
-    "redux": "^4.2.0",
-    "typescript": "^4.8.2",
-    "web-vitals": "^2.1.4"
+    "node": "24.x"
   },
   "scripts": {
-    "start": "cross-env REACT_APP_ENV=dev react-scripts start",
-    "build": "cross-env REACT_APP_ENV=prod-gen react-scripts build",
-    "build:gh-pages": "cross-env REACT_APP_ENV=prod-github react-scripts build",
-    "build:site": "cross-env REACT_APP_ENV=prod-firebase react-scripts build",
-    "build:prod": "cross-env REACT_APP_ENV=prod-firebase react-scripts build",
-    "postbuild:site": "mkdir temp && mkdir temp/Shmira && cp -rf build/* temp/Shmira && cp -rf temp/* build && rm -rf temp/Shmira",
-    "test": "cross-env REACT_APP_ENV=test react-scripts test --silent=false --watchAll=false",
-    "test:last": "cross-env REACT_APP_ENV=test react-scripts test -t last --silent=false --watchAll=false",
-    "test:watch": "cross-env REACT_APP_ENV=test react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "cross-env REACT_APP_ENV=prod-github react-scripts build",
+    "dev": "vite",
+    "start": "vite",
+    "build": "tsc && vite build",
+    "typecheck": "tsc",
+    "build:gh-pages": "tsc && vite build --mode production-github",
+    "build:site": "tsc && vite build --mode production-firebase",
+    "build:prod": "tsc && vite build --mode production-firebase",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "predeploy": "npm run build:gh-pages",
     "deploy": "gh-pages -d build",
     "format": "prettier --write ."
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@mui/icons-material": "^7.3.7",
+    "@mui/lab": "^7.0.1-beta.21",
+    "@mui/material": "^7.3.7",
+    "@mui/x-date-pickers": "^8.26.0",
+    "@redux-devtools/extension": "^3.3.0",
+    "@reduxjs/toolkit": "^2.11.2",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-redux": "^9.2.0",
+    "react-router": "^7.13.0",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^14.4.3",
-    "@types/jest": "^29.2.1",
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
-    "eslint": "^8.26.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "gh-pages": "^4.0.0",
-    "prettier": "^2.7.1"
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^25.1.0",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react": "^7.37.5",
+    "gh-pages": "^6.3.0",
+    "jsdom": "^27.4.0",
+    "prettier": "^3.8.1",
+    "typescript-eslint": "^8.54.0",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
   }
 }
