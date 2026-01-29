@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState } from "react";
-import TextField from "@mui/material/TextField";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { translations } from "../../services/translations";
 import { Box, Typography } from "@mui/material";
@@ -92,9 +91,10 @@ export const DataRange = () => {
             // setValue(newValue);
             handleDatesChange(newValue, "From");
           }}
-          renderInput={(params: any) => (
-            <TextField sx={textFieldSx} {...params} />
-          )}
+          // TODO: fix this deprecated props
+          // renderInput={(params: any) => (
+          //   <TextField sx={textFieldSx} {...params} />
+          // )}
         />
         <Box sx={Styles.divider} />
       </LocalizationProvider>
@@ -105,9 +105,10 @@ export const DataRange = () => {
           onChange={(newValue: Date | null) => {
             handleDatesChange(newValue, "To");
           }}
-          renderInput={(params: any) => (
-            <TextField sx={textFieldSx} {...params} />
-          )}
+          // TODO: fix this deprecated props
+          // renderInput={(params: any) => (
+          //   <TextField sx={textFieldSx} {...params} />
+          // )}
         />
       </LocalizationProvider>
       {dateError ? (

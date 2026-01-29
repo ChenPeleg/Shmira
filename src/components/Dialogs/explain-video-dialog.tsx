@@ -30,6 +30,7 @@ export const ExplainVideoDialog = (props: ExplainVideoDialogProps) => {
         <DialogContent>
           <CardMedia
             component="video"
+            //@ts-expect-error TS2322
             src={process.env.PUBLIC_URL + "/example-import.mp4"}
             autoPlay
           ></CardMedia>

@@ -1,12 +1,12 @@
+import { describe, expect, it, vi } from "vitest";
 import React from "react";
 import "../../../setupTests";
-
 import { AddButton, AddButtonProps } from "../../Icons/add-button";
 import { translations } from "../../../services/translations";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-const clickMock = jest.fn();
+const clickMock = vi.fn();
 const props: AddButtonProps = {
   sx: null,
   addClickHandler: clickMock,

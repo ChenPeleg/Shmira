@@ -64,8 +64,7 @@ export const AirbnbSlider = styled(Slider)(({ theme }) => ({
   },
 }));
 
-export interface AirbnbThumbComponentProps
-  extends React.HTMLAttributes<unknown> {}
+export interface AirbnbThumbComponentProps extends React.HTMLAttributes<unknown> {}
 
 export const AirbnbThumbComponent = (
   props: AirbnbThumbComponentProps,

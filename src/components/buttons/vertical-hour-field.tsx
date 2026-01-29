@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Theme } from "@mui/material";
 import { Utils } from "../../services/utils";
-import { AirbnbSlider, AirbnbThumbComponent } from "./air-bnb-slider";
+import { AirbnbSlider } from "./air-bnb-slider";
 
 const sliderSx = {
   direction: (theme: Theme) => theme.direction,
@@ -56,7 +56,7 @@ export const VerticalHourField = (props: VerticalHourFieldProps) => {
         }}
       >
         <AirbnbSlider
-          components={{ Thumb: AirbnbThumbComponent }}
+          // components={{ Thumb: AirbnbThumbComponent }}
           orientation="vertical"
           aria-labelledby="input-slider"
           valueLabelDisplay="on"

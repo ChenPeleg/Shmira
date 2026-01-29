@@ -181,6 +181,7 @@ export const AppNavBar = () => {
   const handleHelpClick = () => {
     const w = window;
     if (!(w == null)) {
+      //@ts-expect-error TS2554
       const public_ = process.env.PUBLIC_URL;
       w.open(public_ + "/Shmira_help.pdf", "_blank");
     }
