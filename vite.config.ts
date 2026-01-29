@@ -18,9 +18,15 @@ export default defineConfig(({ mode }) => {
       {
         name: "html-transform",
         transformIndexHtml(html) {
+          const date = new Date();
+          const israelDateTime = date.toLocaleString("he-IL", {
+            dateStyle: "short",
+            timeStyle: "short",
+            hour12: false,
+          });
           return html.replace(
-            /%VITE_RELEASE_DATE%/g, // The placeholder in your HTML
-            JSON.stringify(new Date().toLocaleDateString("")) // The actual value from your config
+            /%VITE_RELEASE_DATE%/g,
+            JSON.stringify(israelDateTime)
           );
         },
       },
