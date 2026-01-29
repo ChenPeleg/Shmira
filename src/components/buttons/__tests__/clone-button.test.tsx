@@ -1,8 +1,8 @@
+import { describe, expect, it, vi } from "vitest";
 import React from "react";
 import "../../../setupTests";
 import { CloneButton, CloneButtonProps } from "../clone-button";
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 const clickMock = vi.fn();

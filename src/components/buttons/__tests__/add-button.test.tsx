@@ -1,6 +1,6 @@
+import { describe, expect, it, vi } from "vitest";
 import React from "react";
 import "../../../setupTests";
-import { describe, expect, it, vi } from "vitest";
 import { AddButton, AddButtonProps } from "../../Icons/add-button";
 import { translations } from "../../../services/translations";
 import { render, screen } from "@testing-library/react";
